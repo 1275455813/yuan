@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappers>
+	<mapper>
+		<class>User</class>
+		<table>login</table>
+		<pk>username</pk>
+	</mapper>
+</mappers>

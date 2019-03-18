@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.my</groupId>
+  <artifactId>desion</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <!-- 公共spring-boot配置，下面依赖jar文件不用在写版本号 --> 
+<parent>
+ 	<groupId>org.springframework.boot</groupId>
+ 	<artifactId>spring-boot-starter-parent</artifactId> 	
+    <!-- spring boot 1.x最后稳定版本 --> 
+    <version>1.4.1.RELEASE</version> 	
+    <!-- 表示父模块pom的相对路径，这里没有值 --> 	
+    <relativePath /> </parent>
+ 
+ <properties>
+ 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 	<java.version>1.8</java.version> 	
+    <!-- set thymeleaf version -->
+ 	<thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
+ 	<thymeleaf-layout-dialect.version>2.0.0</thymeleaf-layout-dialect.version>
+ </properties>
+ 
+ <dependencies> 	
+ <!-- web --> 	
+ <dependency>
+ 		<groupId>org.springframework.boot</groupId>
+ 		<artifactId>spring-boot-starter-web</artifactId> 	
+ </dependency>
+ <!-- 测试 --> 	
+ <dependency>
+ 		<groupId>org.springframework.boot</groupId>
+ 		<artifactId>spring-boot-starter-test</artifactId> 		
+ <!-- 只在test测试里面运行 --> 		
+ <scope>test</scope> 	
+ </dependency> 	
+ <dependency>
+ 		<groupId>org.springframework.boot</groupId>
+ 		<artifactId>spring-boot-starter-thymeleaf</artifactId>
+ </dependency> 
+ <!-- mysql-jdbc -->
+ <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.15</version>
+</dependency>
+   <dependency>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-jdbc</artifactId>
+ </dependency>
+ </dependencies>
+</project>
