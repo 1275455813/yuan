@@ -22,8 +22,8 @@ public class Login {
 		User u = new User();
 		u.setUsername("wang");
 		u.setPassword("abc");
-		ud.updata(u);
-		List<User> lu = ud.query();
+		//ud.updata(u);
+		List<User> lu = ud.query("username = ?", new String[] {"wang"});
 		return lu;
 	}
 }

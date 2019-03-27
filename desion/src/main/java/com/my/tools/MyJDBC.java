@@ -47,7 +47,7 @@ public class MyJDBC<T> {
 	
 	public List<T> query(String where, Object[] args){
 		RowMapper<T> rowMapper=new BeanPropertyRowMapper<T>(_c);
-		List<T> data = jdbcTemplate.query("select * from " + table + where, args, rowMapper);
+		List<T> data = jdbcTemplate.query("select * from " + table + " where " +where, args, rowMapper);
 		return data;
 	}
 	
