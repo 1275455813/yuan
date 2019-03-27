@@ -21,6 +21,8 @@ public class MyJDBC<T> {
 	 */  
 	private Class<T> clz;  
 	
+	private Class<T> _c = getClz();
+	
 	private String table = getTable();
 	      
 	@SuppressWarnings("unchecked")  
@@ -38,9 +40,14 @@ public class MyJDBC<T> {
 	 * @return
 	 */
 	public List<T> query() {
-		Class<T> _c = getClz();
 		RowMapper<T> rowMapper=new BeanPropertyRowMapper<T>(_c);
 		List<T> data = jdbcTemplate.query("select * from " + table, rowMapper);
+		return data;
+	}
+	
+	public List<T> query(String where, Object[] args){
+		RowMapper<T> rowMapper=new BeanPropertyRowMapper<T>(_c);
+		List<T> data = jdbcTemplate.query("select * from " + table + where, args, rowMapper);
 		return data;
 	}
 	
