@@ -96,6 +96,33 @@ public class MyJDBC<T> {
 		return count;
 	}
 	
+	private HashMap<String,String> getClassPropertry(T po) {
+		HashMap<String,String> proper = new HashMap<String,String>();
+		java.lang.reflect.Field[] fields = po.getClass().getDeclaredFields();
+		
+		for(int i=0, len = fields.length; i < len; i++) {
+			java.lang.reflect.Field f = fields[i];
+			String name = f.getName();
+			String value = null;
+			try {
+				value = getValue(po, name);
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(value != null) {
+				proper.put(name, value);
+			}
+		}
+		return proper;
+	}
+	
 	private String getValue(T po, String name) throws NoSuchMethodException, SecurityException, Exception{
 		Method m = (Method) po.getClass().getMethod("get" + getMethodName(name));
 
