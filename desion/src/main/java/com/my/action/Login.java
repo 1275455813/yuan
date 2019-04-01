@@ -20,10 +20,12 @@ public class Login {
 	@RequestMapping("desion/login")
 	public List<User> getUsers() {
 		User u = new User();
-		u.setUsername("wang");
-		u.setPassword("abc");
+		u.setUsername("yuan");
+		u.setPassword("123456");
 		//ud.updata(u);
-		List<User> lu = ud.query("username = ?", new String[] {"wang"});
+		//ud.insert(u);
+		List<User> lu = ud.query("username = ?", new String[] {"wang"},1,2);
+		//List<User> lu = ud.query(1, 2);
 		return lu;
 	}
 }

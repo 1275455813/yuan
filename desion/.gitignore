@@ -3,3 +3,4 @@
 .gitignore
 /.settings/
 .project
+application.properties

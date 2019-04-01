@@ -5,6 +5,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -39,18 +40,72 @@ public class MyJDBC<T> {
 	 * @param sql
 	 * @return
 	 */
-	public List<T> query() {
+	public List<T> query(Integer page,  Integer size) {
 		RowMapper<T> rowMapper=new BeanPropertyRowMapper<T>(_c);
-		List<T> data = jdbcTemplate.query("select * from " + table, rowMapper);
+		String sql = "select * from " + table;
+		
+		List<T> data = jdbcTemplate.query(addLimit(sql, page, size), rowMapper);
 		return data;
 	}
 	
+	/**
+	 * 条件查询
+	 * 
+	 * @param where
+	 * @param args
+	 * @return
+	 */
 	public List<T> query(String where, Object[] args){
 		RowMapper<T> rowMapper=new BeanPropertyRowMapper<T>(_c);
-		List<T> data = jdbcTemplate.query("select * from " + table + " where " +where, args, rowMapper);
+		List<T> data = jdbcTemplate.query("select * from " + table + " where " + where, args, rowMapper);
 		return data;
 	}
 	
+	/**
+	 * 分页条件查询
+	 * @param where
+	 * @param args 
+	 * @param page 页码
+	 * @param size 分页大小
+	 * @return
+	 */
+	public List<T> query(String where, Object[] args, Integer page, Integer size){
+		RowMapper<T> rowMapper=new BeanPropertyRowMapper<T>(_c);
+		String sql = "select * from " + table + " where " + where;
+		
+		List<T> data = jdbcTemplate.query(addLimit(sql, page, size), args, rowMapper);
+		return data;
+	}
+	
+	/**
+	 * 插入数据
+	 * 
+	 * @param po
+	 * @return
+	 */
+	public int insert(T po) {
+		List<String> listValue = new ArrayList<String>();
+		String k = " (";
+		String v = " (";
+		HashMap<String, String> proper = getClassPropertry(po);
+		for(Map.Entry<String, String>  entry : proper.entrySet()) {
+			k = k +  entry.getKey() + ",";
+			v = v + "?,";
+			listValue.add(entry.getValue());
+		}
+		k = k.substring(0, k.length() - 1);
+		v = v.substring(0, v.length() - 1);
+		String sql  = "insert into " + table + k + ") values" + v + ")";
+		int count = jdbcTemplate.update(sql, listToArr(listValue));
+		return count;
+	}
+	
+	/**
+	 * 修改数据
+	 * 
+	 * @param po
+	 * @return
+	 */
 	public int updata(T po) {
 		String pk = getPk();
 		String set = "";
@@ -66,13 +121,10 @@ public class MyJDBC<T> {
 			try {
 				value = getValue(po, name);
 			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(value != null && !name.equals(pk)) {
@@ -86,14 +138,31 @@ public class MyJDBC<T> {
 		listValue.add(pkValue);
 		set = set.substring(0, set.length() - 1);
 		String sql = "update " + table + " set " + set + " where " + pk +"=?";
+		
+		int count = jdbcTemplate.update(sql, listToArr(listValue));
+		return count;
+	}
+	
+	private String addLimit(String sql, Integer page, Integer size) {
+		if(page !=  null && size  != null) {
+			if(page > 0 && size > 0) {
+				page = (page - 1) * size;
+				sql += " limit " + page + "," + size;
+			}
+			else {
+				//TODO
+			}
+		}
+		return sql;
+	}
+	
+	private Object[] listToArr(List<String> listValue) {
 		int size = listValue.size();
 		Object[] param = new Object[size];
 		for(int i=0;  i<size; i++) {
 			param[i] = listValue.get(i);
 		}
-		
-		int count = jdbcTemplate.update(sql, param);
-		return count;
+		return param;
 	}
 	
 	private HashMap<String,String> getClassPropertry(T po) {
@@ -107,13 +176,10 @@ public class MyJDBC<T> {
 			try {
 				value = getValue(po, name);
 			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(value != null) {
