@@ -1,0 +1,489 @@
+@charset "utf-8";
+
+//初始化面板
+.#{$eui}-panel {
+		position: absolute;
+		z-index: 9;
+		overflow: hidden;
+		background: $panel-container-bg;
+		box-shadow: $panel-container-shadow;
+		//面板内容区域
+		&-container {
+				position: relative;
+				width: 100%;
+				height: 100%;
+		}
+		//所有面板初始化 先隐藏dom
+		&-hide {
+				visibility: hidden !important;
+				top: -9999px !important;
+				left: -9999px !important;
+		}
+}
+
+//初始化面板灰色风格
+.#{$eui}-panel-gray {
+		position: absolute;
+		z-index: 102;
+		overflow: hidden;
+		background: $panel-container-graybg;
+		box-shadow: $panel-container-shadow-bottom;
+
+		//面板内容区域
+		&-container {
+				position: relative;
+				width: 100%;
+				height: 100%;
+		}
+}
+
+//下拉框面板
+.#{$eui}-panel-selectlist {
+		border: $panel-selectlist-container-border;
+		//全选、搜索区域
+		& &-check {
+				position: relative;
+				height: $panel-selectlist-check-y;
+				background: $panel-selectlist-check-bgcolor;
+				border-bottom: $panel-selectlist-check-borderbottom;
+				//全选
+				&-left {
+						float: left;
+						padding-left: $panel-selectlist-check-left-marginleft;
+						padding-right: $panel-selectlist-check-left-marginright;
+						height: 100%;
+						line-height: $panel-selectlist-check-y - 1;
+				}
+				//筛选
+				&-right {
+						//margin-left:   $panel-selectlist-check-right-marginleft;
+						//margin-right:  $panel-selectlist-check-right-marginright;
+						//padding-left:  $panel-selectlist-check-right-paddingleft;
+						padding-right: $panel-selectlist-check-right-marginright;
+						padding-left: $panel-selectlist-check-right-paddingleft + $panel-selectlist-check-right-marginleft;
+
+						height: 100%;
+						line-height: $panel-selectlist-check-y;
+						& label {
+								float: left;
+						}
+						& > div {
+								width: 100%;
+								//height: 100%;
+								padding-left: 35px;
+						}
+						& .#{$eui}-form-search {
+								//margin-left: $panel-selectlist-check-form-search-marginleft;
+								margin-left: 0;
+								top: $panel-selectlist-check-form-search-top;
+								& i {
+										background-color: #fff;
+										background-image: none;
+										-webkit-background-clip: border-box;
+								}
+						}
+				}
+		}
+		//列表区域
+		& &-content {
+				position: absolute;
+				top: $panel-selectlist-content-top;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				padding: $panel-selectlist-content-padding;
+		}
+		//列表
+		& .#{$eui}-elist-datatable {
+				width: 100% !important;
+				& td {
+						border: 0;
+				}
+		}
+}
+
+//显示边框和显示圆角-container
+%borderstyle-container {
+		width: 100%;
+		height: 100%;
+		padding: $panel-border-container-padding;
+		background-color: $panel-border-container-bg;
+}
+
+//内层
+%borderstyle-conter {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		border: $panel-border-content-border;
+		background-color: $panel-border-content-bg;
+}
+
+//边框显示 面板
+.#{$eui}-panel-borderstyle {
+		@extend %borderstyle-container;
+		& > ul {
+				@extend %borderstyle-conter;
+				//默认状态
+				& li {
+						position: absolute;
+						outline: $panel-border-content-item-outline;
+						border: $panel-border-content-item-border;
+						cursor: pointer;
+						//滑过状态
+						&:hover {
+								outline: $panel-border-content-item-hover-outline;
+								background-color: $panel-border-content-item-hover-bg;
+						}
+				}
+				//选中状态
+				& .#{$eui}-panel-border-active {
+						outline: $panel-border-content-item-hover-outline;
+						background-color: $panel-border-content-item-active-bg;
+				}
+				& .#{$eui}-panel-border-left,
+				& .#{$eui}-panel-border-right {
+						width: $panel-border-content-item-x;
+						top: $panel-border-container-padding;
+						bottom: $panel-border-container-padding;
+
+				}
+				//左border
+				& .#{$eui}-panel-border-left {
+						left: -($panel-border-content-item-x / 2);
+				}
+				//右border
+				& .#{$eui}-panel-border-right {
+						right: -($panel-border-content-item-x / 2);
+				}
+				& .#{$eui}-panel-border-top,
+				& .#{$eui}-panel-border-bottom {
+						height: $panel-border-content-item-y;
+						left: $panel-border-container-padding;
+						right: $panel-border-container-padding;
+				}
+				//上border
+				& .#{$eui}-panel-border-top {
+						top: -($panel-border-content-item-x / 2);
+				}
+				//下border
+				& .#{$eui}-panel-border-bottom {
+						bottom: -($panel-border-content-item-x / 2);
+				}
+		}
+}
+
+//边框圆角显示 面板
+.#{$eui}-panel-borderradius {
+		@extend %borderstyle-container;
+		& > ul {
+				@extend %borderstyle-conter;
+				border-radius: $panel-border-container-padding;
+				//默认状态
+				& li {
+						position: absolute;
+						width: $panel-borderradius-content-item-x;
+						height: $panel-borderradius-content-item-x;
+						outline: $panel-border-content-item-outline;
+						border: $panel-border-content-item-border;
+						cursor: pointer;
+						//滑过状态
+						&:hover {
+								outline: $panel-border-content-item-hover-outline;
+								background-color: $panel-border-content-item-hover-bg;
+						}
+				}
+				//选中状态
+				& .#{$eui}-panel-border-active {
+						outline: $panel-border-content-item-hover-outline;
+						background-color: $panel-border-content-item-active-bg;
+				}
+				/*左下*/
+				& .#{$eui}-panel-border-left {
+						left: -$panel-border-container-padding;
+						bottom: -$panel-border-container-padding;
+				}
+				/*右上*/
+				& .#{$eui}-panel-border-right {
+						right: -$panel-border-container-padding;
+						top: -$panel-border-container-padding;
+				}
+				/*左上*/
+				& .#{$eui}-panel-border-top {
+						left: -$panel-border-container-padding;
+						top: -$panel-border-container-padding;
+				}
+				/*右下*/
+				& .#{$eui}-panel-border-bottom {
+						bottom: -$panel-border-container-padding;
+						right: -$panel-border-container-padding;
+				}
+		}
+}
+
+//选择配色方案面板（内容放置在dialog中）
+.#{$eui}-panel-colorlist {
+		width: 100%;
+		height: 100%;
+		padding: $panel-colorlist-padding;
+		& > ul {
+				width: 100%;
+				& > li {
+						position: relative;
+						width: 100%;
+						margin-bottom: $panel-colorlist-marginbottom;
+						outline: $panel-colorlist-outline;
+						cursor: pointer;
+						& .#{$eui}-panel-colorlist-gradient {
+								height: $panel-colorlist-lineheight;
+								margin-right: $panel-colorlist-gradient-marginright;
+								& canvas {
+										width: 100%;
+										height: 100%;
+								}
+						}
+						& .#{$eui}-panel-colorlist-color {
+								height: 100%;
+								margin-right: $panel-colorlist-gradient-marginright;
+								& .#{$eui}-panel-colorlist-color-item {
+										display: $inline-block;
+										height: $panel-colorlist-lineheight;
+										vertical-align: top;
+								}
+						}
+						& .#{$eui}-panel-colorlist-del {
+								position: absolute;
+								right: 0;
+								top: 0;
+								width: $panel-colorlist-gradient-del-x;
+								height: 100%;
+								line-height: $line-height24;
+								text-align: center;
+								& .#{$eui}-icon {
+										color: $panel-colorlist-gradient-del-textcolor;
+										cursor: pointer;
+								}
+						}
+				}
+				& .#{$eui}-panel-colorlist-active {
+						outline: $panel-colorlist-outline-active;
+				}
+		}
+}
+
+//配色方案选择颜色（内容放置在dialog中）
+.#{$eui}-panel-customcolor {
+		width: 100%;
+		height: 100%;
+		padding-top: $panel-customcolor-padding;
+		padding-bottom: $panel-customcolor-padding;
+		& &-top {
+				margin-bottom: $panel-customcolor-top-marginbottom;
+		}
+		& &-center {
+				height: $panel-customcolor-center-y;
+				margin-bottom: $panel-customcolor-center-marginbottom;
+				& .#{$eui}-panel-customcolor-item {
+						display: $inline-block;
+						width: $panel-customcolor-item-xy;
+						height: $panel-customcolor-item-xy;
+						margin-right: $panel-customcolor-item-margin;
+						margin-bottom: $panel-customcolor-item-margin;
+						vertical-align: top;
+				}
+				& .#{$eui}-panel-customcolor-add {
+						display: $inline-block;
+						vertical-align: top;
+						& i {
+								width: $panel-customcolor-item-add-x;
+								padding: 0;
+						}
+				}
+		}
+		& &-bottom {
+				width: 100%;
+				height: $panel-customcolor-bottom-y;
+				& canvas {
+						width: 100%;
+						height: 100%;
+				}
+		}
+}
+
+.#{$eui}-color-container {
+		position: relative;
+		width: 256px;
+		& .#{$eui}-color-main {
+				position: relative;
+				width: 100%;
+				height: 146px;
+				& .#{$eui}-color-main-white,
+				& .#{$eui}-color-main-black {
+						position: absolute;
+						left: 0;
+						top: 0;
+						width: 100%;
+						height: 100%;
+				}
+				& .#{$eui}-color-main-white {
+						background: #ffffff#{"\\9"} \0
+				;
+						filter: alpha(opacity=100, finishopacity=0, style=1, startX=0, startY=0, finishX=246, finishY=0) #{"\\9"}
+				;
+						background: linear-gradient(90deg, #FFF, hsla(0, 0%, 100%, 0));
+				}
+				& .#{$eui}-color-main-black {
+						background: black#{"\\9"} \0
+				;
+						filter: alpha(opacity=100, finishopacity=0, style=1, startX=0, startY=146, finishX=0, finishY=0) #{"\\9"}
+				;
+						background: linear-gradient(0deg, #000, transparent);
+				}
+				& .#{$eui}-color-main-pointer {
+						position: absolute;
+						left: 0px;
+						top: 0px;
+						width: 10px;
+						height: 10px;
+						border: 1px solid #FFF;
+						border-radius: 50%;
+						transform: translateX(-50%) translateY(-50%);
+				}
+		}
+		& .#{$eui}-color-alphp {
+				position: relative;
+				width: 100%;
+				height: 52px;
+				margin-top: 5px;
+				& .#{$eui}-color-show {
+						position: absolute;
+						top: 7px;
+						width: 38px;
+						height: 38px;
+						margin: 0px 10px;
+						border-radius: 50%;
+						background-color: #0F0;
+						border-width: 1px;
+						border-style: solid;
+				}
+				& .#{$eui}-color-colorblock,
+				& .#{$eui}-color-alphpshow {
+						position: absolute;
+						left: 55px;
+						right: 5px;
+						height: 26px;
+						& .#{$eui}-form-range-path {
+								border-radius: 0px;
+								border-color: transparent;
+								background: transparent;
+								box-shadow: transparent 0px 0px 0px;
+						}
+						& .#{$eui}-form-range-area {
+								background-color: transparent !important;
+						}
+						& i {
+								background-color: #ffffff;
+								border-color: #ffffff;
+								box-shadow: #777777 0px 0px 2px;
+						}
+						& i:before {
+								background-color: #ffffff;
+						}
+				}
+				& .#{$eui}-color-colorblock {
+						top: 13px;
+						& .#{$eui}-color-colorshow-img {
+								position: absolute;
+								left: 10px;
+								right: 10px;
+								height: 12px;
+								top: 50%;
+								margin-top: -10px;
+						}
+
+				}
+				& .#{$eui}-color-alphpshow {
+						top: 26px;
+						& .#{$eui}-color-alphpshow-img {
+								position: absolute;
+								left: 10px;
+								right: 10px;
+								height: 12px;
+								top: 50%;
+								margin-top: -6px;
+								background: transparent url(../../../images/icon/transparent.png) repeat no-repeat;
+						}
+						& .#{$eui}-color-alphpshow-color {
+								position: relative;
+								width: 100%;
+								height: 100%;
+						}
+
+				}
+		}
+		& .#{$eui}-color-value {
+				position: relative;
+				width: 100%;
+				height: 34px;
+				margin-top: 5px;
+		}
+		& .#{$eui}-color-lately {
+				padding: 0 5px;
+				& .#{$eui}-tips-container {
+						padding: 0 5px;
+				}
+				& > ul {
+						position: relative;
+						display: block;
+						margin-right: 15px;
+						& li {
+								display: inline-block;
+								cursor: pointer;
+								width: 14px;
+								height: 14px;
+								border-radius: 3px;
+								margin: 2px 4px;
+						}
+						& .#{$eui}-color-item {
+								border-width: 1px;
+								border-style: solid;
+						}
+						& .#{$eui}-color-empty {
+								border: 1px dashed #dbdbdb;
+						}
+						& .#{$eui}-icon-primary {
+								position: absolute;
+								right: 0;
+								width: 10px;
+								height: 100%;
+								cursor: pointer;
+								&:before,
+								&:after {
+										position: absolute;
+										display: inline-block;
+										font-size: 12px;
+										line-height: 9px;
+										transform: scale(0.5);
+										-webkit-transform: scale(0.5);
+										-moz-transform: scale(0.5);
+										-ms-transform: scale(0.5);
+										-o-transform: scale(0.5);
+								}
+								&:before {
+										content: "\ef7e";
+										top: 1px;
+								}
+								&:after {
+										content: "\ef7f";
+										bottom: 4px;
+								}
+						}
+				}
+				& > .eui-color-empty-list {
+						margin-top: 5px;
+				}
+				& > .eui-color-item-list {
+						overflow: hidden;
+				}
+		}
+}

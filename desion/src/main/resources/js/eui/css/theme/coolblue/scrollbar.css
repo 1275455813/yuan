@@ -1,0 +1,60 @@
+/* 滚动条的样式单独放一个文件，给有需求的地方使用，如：富文本编辑器 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-resizer {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece,
+::-webkit-scrollbar-thumb {
+  visibility: hidden;
+}
+
+:hover::-webkit-scrollbar-track,
+:hover::-webkit-scrollbar-track-piece,
+:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+:root {
+  scrollbar-face-color: #c5c5c5;
+  scrollbar-base-color: #c5c5c5;
+  scrollbar-shadow-color: #c5c5c5;
+  scrollbar-3dlight-color: #f2f2f2;
+  scrollbar-darkshadow-color: #f2f2f2;
+  scrollbar-highlight-color: #f2f2f2;
+  scrollbar-track-color: #f2f2f2;
+  scrollbar-arrow-color: #c5c5c5;
+}
+
+.eui-scroll-show::-webkit-scrollbar-track, .eui-scroll-show ::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.eui-scroll-show::-webkit-scrollbar-track-piece, .eui-scroll-show ::-webkit-scrollbar-track-piece, .eui-scroll-show::-webkit-scrollbar-thumb, .eui-scroll-show ::-webkit-scrollbar-thumb {
+  visibility: visible;
+}

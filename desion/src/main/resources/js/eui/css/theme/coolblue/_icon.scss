@@ -1,0 +1,235 @@
+@charset "utf-8";
+
+@font-face {
+		font-family: '#{$icon-font}';
+		src: url('../../../images/font/iconfont.eot');
+		src: url('../../../images/font/iconfont.eot?#iefix') format('embedded-opentype'),
+		url('../../../images/font/iconfont.woff') format('woff'),
+		url('../../../images/font/iconfont.ttf') format('truetype'),
+		url('../../../images/font/iconfont.svg#iconfont') format('svg');
+}
+
+.#{$eui}-icon {
+		font-family: $icon-font !important;
+		font-size:   $font-size16;
+		font-style:  normal;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		@include gradient($font-icon-color);
+		-webkit-background-clip: text;
+		//-webkit-text-fill-color: transparent;
+		color: transparent;
+		color: #{$font-icon-colorIE}\0;
+		//图片图标
+		&-img {
+				display:             $inline-block;
+				width:               $font-size16;
+				height:              $font-size16;
+				background-position: center;
+				background-repeat:   no-repeat;
+				background-size:     100% auto;
+				-webkit-background-clip: border-box;
+		}
+		&-svg {
+				width: 1em;
+				height: 1em;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+		}
+}
+//大尺寸图标36px
+.#{$eui}-icon {
+		//大小40px
+		&-#{$xxl} {
+				font-size:       $font-icon-xxl !important;
+				line-height:     $font-icon-xxl + 10px;
+		}
+		&-#{$xxl}.#{$eui}-icon-img {
+				width:           $font-icon-xxl;
+				height:          $font-icon-xxl;
+				background-size: $font-icon-xxl;
+		}
+		//大小32px
+		&-#{$xl} {
+				font-size:       $font-icon-xl !important;
+				line-height:     $font-icon-xl + 10px;
+		}
+		&-#{$xl}.#{$eui}-icon-img {
+				width:           $font-icon-xl;
+				height:          $font-icon-xl;
+				background-size: $font-icon-xl;
+		}
+		//大小24px
+		&-#{$l} {
+				font-size:       $font-icon-l !important;
+		}
+		&-#{$l}.#{$eui}-icon-img {
+				width:           $font-icon-l;
+				height:          $font-icon-l;
+				background-size: $font-icon-l;
+		}
+		//大小20px
+		&-#{$m} {
+				font-size:       $font-icon-m !important;
+		}
+		&-#{$m}.#{$eui}-icon-img {
+				width:           $font-icon-m;
+				height:          $font-icon-m;
+				background-size: $font-icon-m;
+		}
+		//大小14px
+		&-#{$s} {
+				font-size:       $font-icon-s !important;
+		}
+		&-#{$s}.#{$eui}-icon-img {
+				width:           $font-icon-s;
+				height:          $font-icon-s;
+				background-size: $font-icon-s;
+		}
+		//大小12px
+		&-#{$xs} {
+				font-size:       $font-icon-xs !important;
+		}
+		&-#{$xs}.#{$eui}-icon-img {
+				width:           $font-icon-xs;
+				height:          $font-icon-xs;
+				background-size: $font-icon-xs;
+		}
+}
+
+//推荐图标颜色
+.#{$eui}-icon-primary {
+		color: 			 $font-icon-primary !important;
+}
+//二级推荐图标颜色
+.#{$eui}-icon-sub {
+		color: 			 $font-icon-sub !important;
+}
+//提醒注意图标颜色
+.#{$eui}-icon-warn {
+		color: 			 $font-icon-warn !important;
+}
+//警告危险图标颜色
+.#{$eui}-icon-danger {
+		color: 			 $font-icon-danger !important;
+}
+//灰蓝色
+.#{$eui}-icon-grayblue {
+		@include gradient($font-icon-grayblue);
+		-webkit-background-clip: text;
+		color: transparent;
+		color: #{$font-icon-grayblueIE}\0;
+}
+
+//内置字体图标
+.#{$eui}-icon {
+		//信息
+		&-info:before {
+				content: "\e752";
+		}
+		//最小化
+		&-min:before {
+				content: "\e7e4";
+		}
+		//最大化
+		&-max:before {
+				content: "\e7e3";
+		}
+		//关闭
+		&-close:before {
+				content: "\ef7b";
+		}
+		//折叠双箭头-左
+		&-arrow-left:before {
+			content: "\ef92";
+		}
+		//折叠双箭头-右
+		&-arrow-right:before {
+				content: "\ef93";
+		}
+		//折叠双箭头-下
+		&-arrow-down:before {
+			content: "\ef91";
+		}
+		//折叠双箭头-上
+		&-arrow-up:before {
+			content: "\ef90";
+		}
+		//下拉箭头
+		&-arrow2:before {
+				content: "\ef7f";
+		}
+		//圆圈箭头-上
+		&-arrow3-up:before {
+				content: "\ef95";
+		}
+		//圆圈箭头-下
+		&-arrow3-down:before {
+				content: "\ef96";
+		}
+		//圆圈箭头-左
+		&-arrow3-left:before {
+				content: "\ef97";
+		}
+		//圆圈箭头-右
+		&-arrow3-right:before {
+				content: "\ef98";
+		}
+		//单箭头-左
+		&-arrow4-left:before {
+				content: "\ef8e";
+		}
+		//单箭头-右
+		&-arrow4-right:before {
+				content: "\ef8f";
+		}
+		//单箭头-下
+		&-arrow4-down:before {
+				content: "\ef8d";
+		}
+		//单箭头-上
+		&-arrow4-up:before {
+				content: "\ef8c";
+		}
+		//浮起
+		&-float:before {
+				content: "\ef84";
+		}
+		//停靠
+		&-unfloat:before {
+				content: "\ef85";
+		}
+		//搜索
+		&-search:before {
+				content: "\ef86";
+		}
+		//固定
+		&-fixed:before {
+				content: "\ef85";
+		}
+		//悬浮
+		&-unfixed:before {
+				content: "\ef84";
+		}
+		//保存
+		&-save:before {
+				content: "\e76e";
+		}
+		//计算
+		&-calc:before {
+				content: "\ef81";
+		}
+		//撤销
+		&-undo:before {
+				content: "\e76f";
+		}
+		//重做
+		&-redo:before {
+				content: "\e770";
+		}
+		//加载
+		&-loading:before {
+				content: "\efa1";
+		}
+}

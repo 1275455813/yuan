@@ -28,4 +28,9 @@ public class Login {
 		//List<User> lu = ud.query(1, 2);
 		return lu;
 	}
+	
+	@RequestMapping("desion/index")
+	public String toIndex() {
+		return "login";
+	}
 }

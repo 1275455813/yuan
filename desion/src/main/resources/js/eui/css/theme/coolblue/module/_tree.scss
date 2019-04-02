@@ -1,0 +1,667 @@
+@charset "utf-8";
+
+
+//**************** 树组件默认样式 *****************//
+//公共选中后文字样式
+%tree-focus-color {
+		color: $tree-focus-text-color !important;
+}
+//展开、收起、占位、勾选、图标大小
+%tree-icon-x {
+		width: $tree-empty-icon-x;
+}
+
+.#{$eui}-tree-container{
+		width:    100%;
+		height:   100%;
+		position: relative;
+		overflow: auto;
+
+		//清除焦点边框
+		&,& * {
+				outline: 0;
+		}
+		//内部容器
+		& .#{$eui}-tree-content {
+				//ul
+				& .#{$eui}-tree-group {
+						list-style: none;
+						margin:     0;
+						padding:    0;
+						width:      100%;
+						height:     100%;
+				}
+		}
+}
+
+//每行内容
+.#{$eui}-tree-container {
+		//默认li
+		& .#{$eui}-tree-item {
+				position:    relative;
+				list-style:  none;
+				padding:     0;
+				cursor:      pointer;
+				white-space: nowrap;
+
+				//li > div 树形叶子节点
+				& .#{$eui}-tree-node {
+						width:  100%;
+						height: $tree-line-height;
+
+						//展开收起箭头、勾选、图表
+						& i {
+								vertical-align: middle;
+								display:      $inline-block;
+								line-height:  $tree-line-height;
+								text-align:   center;
+								margin-right: $tree-i-margin-right;
+						}
+						//菜单文字
+						& .#{$eui}-tree-text {
+								display:        $inline-block;
+								font-size:      $font-size;
+								line-height:    $tree-line-height;
+								vertical-align: middle;
+						}
+				}
+				//空图片-占位符
+				& .#{$eui}-tree-empty {
+						@extend %tree-icon-x;
+				}
+				//图标
+				& .#{$eui}-tree-icon {
+						margin-right: $tree-icon-margin-right;
+						color:        $tree-icon-color;
+						background-image: none;
+				}
+				//图片图标
+				& .#{$eui}-icon-img {
+						@extend %tree-icon-x;
+						height: $tree-empty-icon-x;
+				}
+				//展开收起
+				& .#{$eui}-tree-expand,
+				& .#{$eui}-tree-shrink {
+						@extend %tree-icon-x;
+						color:         $tree-icon-arrow-color;
+						&:before {
+								content:   "\ef81";
+								display:   $inline-block;
+								font-size: $font-size;
+								@include   transition(all 0.4s ease);
+						}
+				}
+				//展开
+				& .#{$eui}-tree-expand {
+						&:before {
+								@include transform(rotate(0deg) scale(0.7));
+						}
+				}
+				//收起
+				& .#{$eui}-tree-shrink {
+						&:before {
+								@include transform(rotate(90deg) scale(0.7));
+						}
+				}
+				//勾选框-默认
+				& .#{$eui}-form-checkbox {
+						@extend %tree-icon-x;
+				}
+				//勾选框-勾选
+				& .#{$eui}-form-checked {
+						@extend %tree-icon-x;
+				}
+				//勾选框-X 选中状态
+				& .#{$eui}-form-checkbox-on,
+				& .#{$eui}-form-checkbox-off { //勾选框-X默认状态
+						@extend %tree-icon-x;
+						cursor: not-allowed;
+				}
+		}
+		//选中效果
+		& .#{$eui}-tree-focus {
+				@extend %tree-focus-color;
+				background-color: $tree-focus-bg-color;
+				& .#{$eui}-icon {
+						@extend %tree-focus-color;
+						&:before {
+								@extend %tree-focus-color;
+						}
+				}
+		}
+		//第一级样式
+		& .#{$eui}-tree-content > .#{$eui}-tree-group {
+				& > .#{$eui}-tree-item {
+						& > .#{$eui}-tree-node {
+
+						}
+						& > ul {
+
+						}
+				}
+		}
+}
+
+//缩进距离
+// 缩进ul
+.#{$eui}-tree-container .#{$eui}-tree-content > ul .#{$eui}-tree-node {
+		margin: 0;
+		padding:0;
+}
+
+// 缩进div 第一级 div.ul.li.div*/
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x-default;
+}
+
+// 缩进div 第二级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x;
+}
+
+// 缩进div 第三级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 2;
+}
+
+// 缩进div 第四级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 3;
+}
+
+// 缩进div 第五级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 4;
+}
+
+// 缩进div 第六级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 5;
+}
+
+// 缩进div 第七级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 6;
+}
+
+// 缩进div 第八级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 7;
+}
+
+// 缩进div 第九级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 8;
+}
+
+// 缩进div 第十级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 9;
+}
+
+// 缩进div 第十一级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 10;
+}
+
+// 缩进div 第十二级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 11;
+}
+
+// 缩进div 第十三级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 12;
+}
+
+// 缩进div 第十四级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 13;
+}
+
+// 缩进div 第十五级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 14;
+}
+
+// 缩进div 第十六级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 15;
+}
+
+// 缩进div 第十七级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 16;
+}
+
+// 缩进div 第十八级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 17;
+}
+
+// 缩进div 第十九级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 18;
+}
+
+// 缩进div 第二十级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 19;
+}
+
+// 缩进div 第二十一级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 20;
+}
+
+// 缩进div 第二十二级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 21;
+}
+
+// 缩进div 第二十三级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 22;
+}
+
+// 缩进div 第二十四级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 23;
+}
+
+// 缩进div 第二十五级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 24;
+}
+
+// 缩进div 第二十六级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 25;
+}
+
+// 缩进div 第二十七级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 26;
+}
+
+// 缩进div 第二十八级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 27;
+}
+
+// 缩进div 第二十九级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 28;
+}
+
+// 缩进div 第三十级
+.#{$eui}-tree-container .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-empty-x * 29;
+}
+
+
+//**************** 树组件设计器中使用样式 *****************//
+//公共选中后文字样式
+%tree-design-focus-color {
+		color: $tree-focus-text-color !important;
+}
+
+.#{$eui}-tree-design{
+		//清除焦点边框
+		&,& * {
+		}
+		//内部容器
+		& .#{$eui}-tree-content {
+				//ul
+				& .#{$eui}-tree-group {
+
+				}
+		}
+}
+
+//每行内容
+.#{$eui}-tree-design {
+		//默认li
+		& .#{$eui}-tree-item {
+
+				//li > div 树形叶子节点
+				& .#{$eui}-tree-node {
+
+
+						//展开收起箭头、勾选、图表
+						& i {
+
+						}
+						//菜单文字
+						& .#{$eui}-tree-text {
+
+						}
+				}
+				//空图片-占位符
+				& .#{$eui}-tree-empty {
+
+				}
+				//图标
+				& .#{$eui}-tree-icon {
+						@include gradient($font-icon-grayblue);
+						-webkit-background-clip: text;
+						color: transparent;
+						color: #{$font-icon-grayblueIE}\0;
+				}
+				//图片图标
+				& .#{$eui}-icon-img {
+						-webkit-background-clip: border-box;
+				}
+				//展开收起
+				& .#{$eui}-tree-expand,
+				& .#{$eui}-tree-shrink {
+						&:before {
+
+						}
+				}
+				//展开
+				& .#{$eui}-tree-expand {
+						&:before {
+
+						}
+				}
+				//收起
+				& .#{$eui}-tree-shrink {
+						&:before {
+
+						}
+				}
+				//勾选框-默认
+				& .#{$eui}-form-checkbox {
+
+				}
+				//勾选框-勾选
+				& .#{$eui}-form-checked {
+
+				}
+				//勾选框-X 选中状态
+				& .#{$eui}-form-checkbox-on,
+				& .#{$eui}-form-checkbox-off { //勾选框-X默认状态
+
+				}
+		}
+		//选中效果
+		& .#{$eui}-tree-focus {
+				@extend %tree-focus-color;
+				background-color: $tree-focus-bg-color;
+				& .#{$eui}-icon {
+						@extend %tree-focus-color;
+						&:before {
+								@extend %tree-focus-color;
+						}
+				}
+		}
+		//第一级样式
+		& .#{$eui}-tree-content > .#{$eui}-tree-group {
+				& > .#{$eui}-tree-item {
+						& > .#{$eui}-tree-node {
+
+						}
+						& > ul {
+
+						}
+				}
+		}
+}
+
+//**************** 树组件- 手风琴样式 *****************//
+//公共选中后文字样式
+%tree-accordion-focus-color {
+		color: $tree-focus-text-color;
+}
+
+.#{$eui}-tree-accordion {
+		background-color: $tree-accordion-bgcolor;
+		//清除焦点边框
+		&,& * {
+
+		}
+		//内部容器
+		& .#{$eui}-tree-content {
+				//ul
+				& .#{$eui}-tree-group {
+
+				}
+		}
+		//树的滚动条
+		&::-webkit-scrollbar-thumb {
+				&,
+				&:hover {
+						background-color: rgba(90, 122, 171, 0.3);
+				}
+		}
+		//IE滚动条
+		// 滑动条的颜色
+		scrollbar-face-color:       #28426b;
+		scrollbar-base-color:       #28426b;
+		// 滑动条边框的颜色
+		scrollbar-shadow-color:     #28426b;
+		// IE11下没效果
+		scrollbar-3dlight-color:    #132a4f;
+		scrollbar-darkshadow-color: #132a4f;
+		// 槽的颜色
+		scrollbar-highlight-color:  #132a4f;
+		scrollbar-track-color:      #132a4f;
+		// 箭头的颜色
+		scrollbar-arrow-color:      #28426b;
+}
+
+//每行内容
+.#{$eui}-tree-accordion {
+		//默认li
+		& .#{$eui}-tree-item {
+
+				//li > div 树形叶子节点
+				& .#{$eui}-tree-node {
+						height: $tree-accordion-line-height;
+						color:  $tree-accordion-fontcolor;
+						//展开收起箭头、勾选
+						& i {
+								margin-right: $tree-accordion-i-margin-right;
+								line-height:  $tree-accordion-line-height;
+								color:        $tree-accordion-iconcolor;
+								background-image: none;
+						}
+						//图标
+						& .#{$eui}-tree-icon {
+								margin-right: $tree-accordion-icon-margin-right;
+								color:        $tree-accordion-tree-iconcolor;
+						}
+						//菜单文字
+						& .#{$eui}-tree-text {
+								line-height: $tree-accordion-line-height;
+						}
+						&:hover {
+								background-color: $tree-accordion-focus-bg-color;
+						}
+				}
+				//空图片-占位符
+				& .#{$eui}-tree-empty {
+
+				}
+				//图标
+				& .#{$eui}-tree-icon {
+						margin-right:    $tree-icon-margin-right;
+				}
+				//展开收起
+				& .#{$eui}-tree-expand,
+				& .#{$eui}-tree-shrink {
+						color: $tree-accordion-expandcolor !important;
+						&:before {
+								content: "\ef8f";
+								font-weight: bold;
+						}
+				}
+				//展开
+				& .#{$eui}-tree-expand {
+						&:before {
+
+						}
+				}
+				//收起
+				& .#{$eui}-tree-shrink {
+						&:before {
+
+						}
+				}
+				//勾选框-默认
+				& .#{$eui}-form-checkbox {
+
+				}
+				//勾选框-勾选
+				& .#{$eui}-form-checked {}
+				//勾选框-X默认状态
+				& .#{$eui}-form-checkbox-on,
+				& .#{$eui}-form-checkbox-off {
+						//勾选框-X选中状态
+
+				}
+		}
+		//选中效果
+		& .eui-tree-focus {
+				background-color: $tree-accordion-focus-bg-color;
+				& .#{$eui}-icon {
+						color: $tree-accordion-focus-fontcolor !important;
+						&:before {
+
+						}
+				}
+				& .#{$eui}-tree-text {
+						color: $tree-accordion-focus-fontcolor;
+				}
+		}
+		//第一级样式
+		& .#{$eui}-tree-content > .#{$eui}-tree-group {
+				& > .#{$eui}-tree-item {
+						& > .#{$eui}-tree-node {
+								height:         $tree-accordion-levelone-y;
+								//菜单文字
+								& .#{$eui}-tree-text {
+										line-height: $tree-accordion-line-height;
+										font-size:   $tree-accordion-levelone-fontsize;
+										color:       $tree-accordion-levelone-fontcolor;
+								}
+						}
+						& > ul {
+								padding-top:    $tree-accordion-levelone-padding;
+								padding-bottom: $tree-accordion-levelone-padding;
+						}
+						//第一级选中
+						& > .#{$eui}-tree-focus {
+								@extend %tree-accordion-focus-color;
+								& .#{$eui}-icon {
+										@extend %tree-accordion-focus-color;
+										&:before {
+												@extend %tree-accordion-focus-color;
+										}
+								}
+						}
+				}
+		}
+}
+
+// 缩进div 第一级 div.ul.li.div*/
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x-default;
+}
+
+// 缩进div 第二级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x;
+}
+
+// 缩进div 第三级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 2;
+}
+
+// 缩进div 第四级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 3;
+}
+
+// 缩进div 第五级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 4;
+}
+
+// 缩进div 第六级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 5;
+}
+
+// 缩进div 第七级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 6;
+}
+
+// 缩进div 第八级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 7;
+}
+
+// 缩进div 第九级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 8;
+}
+
+// 缩进div 第十级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 9;
+}
+
+// 缩进div 第十一级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 10;
+}
+
+// 缩进div 第十二级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 11;
+}
+
+// 缩进div 第十三级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 12;
+}
+
+// 缩进div 第十四级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 13;
+}
+
+// 缩进div 第十五级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 14;
+}
+
+// 缩进div 第十六级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 15;
+}
+
+// 缩进div 第十七级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 16;
+}
+
+// 缩进div 第十八级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 17;
+}
+
+// 缩进div 第十九级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 18;
+}
+
+// 缩进div 第二十级
+.#{$eui}-tree-accordion .#{$eui}-tree-content > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > .#{$eui}-tree-node {
+		padding-left: $tree-accordion-empty-x * 19;
+}

@@ -1,0 +1,503 @@
+@charset "utf-8";
+//<div class="eui-tabctrl-container eui-tabctrl-level2">
+//选项卡头部DOM
+//   <div class="eui-tabctrl-header" style="user-select: none;">
+//      <ul>
+//          <li class="eui-tabctrl-header-item">
+//              <i class="eui-icon" style="display: none;"></i>
+//              <span class="eui-tabctrl-header-text">选项0</span>
+//              <i class="eui-icon eui-icon-close" title="关闭" style="display: none"></i>
+//          </li>
+//          <li class="eui-tabctrl-header-item eui-tabctrl-header-active">
+//              <i class="eui-icon" style="display: none;"></i>
+//              <span class="eui-tabctrl-header-text">选项1</span>
+//              <i class="eui-icon eui-icon-close" title="关闭" style="display: none"></i>
+//          </li>
+//      </ul>
+//      <span class="eui-tabctrl-more">更多</span>
+//   </div>
+//选项卡主体部分DOM
+//   <div class="eui-tabctrl-body">
+//      <div style="width: 100%; height: 100%; border: medium none; display: none;" class="eui-tabctrl-body-content">这是0选项内容！</div>
+//      <div style="width: 100%; height: 100%; border: medium none;" class="eui-tabctrl-body-content">这是1选项内容！</div>
+//   </div>
+//</div>
+
+//****************标签页组件默认*****************//
+.#{$eui}-tabctrl-container {
+		position: relative;
+		width:    100%;
+		height:   100%;
+		//选项卡头部背景
+		& > .#{$eui}-tabctrl-header {
+				position:         absolute;
+				z-index:          1;
+				width:            100%;
+				height:           $tabctrl-header-y;
+				top:              0;
+				left:             0;
+				//border-bottom: $tabctrl-header-border-bottom;
+				&:before{
+						content:       "";
+						position:      absolute;
+						z-index:       -1;
+						width:         100%;
+						top:           0;
+						left:          0;
+						height:        $tabctrl-header-y - 1;
+						border-bottom: $tabctrl-header-border-bottom;
+				}
+        & > ul {
+		        overflow:      hidden;
+		        white-space:   nowrap;
+		        width:         100%;
+		        height:        100%;
+		        padding-left:  $tabctrl-header-paddingleft;
+		        //清除浮动
+		        &:after {
+				        @extend %eui-clear;
+		        }
+        }
+				//标签页显示不下出现更多
+				.#{$eui}-tabctrl-more {
+						position:       absolute;
+						top:            0;
+						right:          0;
+						padding-right:  $tabctrl-header-more-paddingleft;
+						cursor:         pointer;
+						&:before {
+								content:     "\ef93";
+								display:     $inline-block;
+								position:    absolute;
+								top:         0;
+								right:       0;
+								font-family: $icon-font;
+								font-size:   $font-size;
+								@include     transform(scale(0.75));
+						}
+						&:hover {
+								color: $tabctrl-active-color;
+						}
+				}
+		}
+		//标签页主体内容区
+		& > .#{$eui}-tabctrl-body {
+				position:   absolute;
+				top:        $tabctrl-header-y;
+				right:      0;
+				left:       0;
+				bottom:     0;
+				background-color: #fff;
+			  & .#{$eui}-tabctrl-body-content {
+					padding: $tabctrl-body-padding;
+			}
+		}
+}
+.#{$eui}-tabctrl-container {
+		//选项卡li浮动
+		& > .#{$eui}-tabctrl-header > ul > .#{$eui}-tabctrl-header-item {
+				float:         left;
+				margin-right:  $tabctrl-header-li-margin-right;
+				padding-left:  $tabctrl-header-li-padding-left;
+				padding-right: $tabctrl-header-li-padding-right;
+				line-height:   $tabctrl-header-li-lineheight;
+				line-height:   ($tabctrl-header-li-lineheight - 2)#{"\\9"} ;
+				border-color:  $tabctrl-header-li-border-color;
+				border-width:  $tabctrl-header-li-border-width;
+				border-style:  solid;
+				color:         $tabctrl-font-color;
+				cursor:        pointer;
+				//图标
+				& .#{$eui}-icon {
+						margin-right: 3px;
+						vertical-align: middle;
+				}
+				//图片图标
+				& .#{$eui}-icon-img {
+						width:  $tabctrl-header-icon-img-x;
+						height: $tabctrl-header-icon-img-x;
+				}
+				//标签页文字
+				& .#{$eui}-tabctrl-header-text {
+						vertical-align: middle;
+						font-size: $font-size14;
+				}
+				//关闭按钮
+				& .#{$eui}-icon-close {
+						vertical-align: top;
+						margin-top:     $tabctrl-icon-close-margin-top;
+						margin-left:    $tabctrl-icon-close-margin-left;
+						display:        $inline-block;
+						visibility:     hidden;
+						&:before {
+								display:    $inline-block;
+								font-size:  $tabctrl-icon-close-fontsize;
+								@include    transform(scale(0.75));
+								color:      $tabctrl-font-color;
+						}
+				}
+				&:hover {
+						& .#{$eui}-icon-close {
+								visibility: visible;
+						}
+				}
+		}
+		//选项卡选中状态
+		& > .#{$eui}-tabctrl-header > ul > .#{$eui}-tabctrl-header-active {
+				border-bottom:    $tabctrl-active-border-bottom;
+				color:            $tabctrl-active-color;
+				font-weight:      $tabctrl-active-font-weight;
+				//关闭按钮
+				& .#{$eui}-icon-close {
+						visibility:   visible;
+						display:      $inline-block;
+				}
+		}
+}
+
+//**************** 一级标签页（弹窗中使用） *****************//
+.#{$eui}-tabctrl-level1-mini {
+		//选项卡头部背景
+		& > .#{$eui}-tabctrl-header {
+				height:            $tabctrl-level1mini-header-y;
+				padding-top:       0;
+				background-color:  $tabctrl-level1mini-header-bg-color;
+				//border-bottom:     $tabctrl-level1mini-header-border-bottom;
+				&:before{
+						content:       "";
+						position:      absolute;
+						z-index:       -1;
+						width:         100%;
+						top:           0;
+						left:          0;
+						height:        $tabctrl-level1mini-header-y - 1;
+						border-bottom: $tabctrl-level1mini-header-border-bottom;
+				}
+				& > ul {
+						margin-top:    0;
+						padding-left:  $tabctrl-level1mini-header-paddingleft;
+						//清除浮动
+						&:after {
+								@extend %eui-clear;
+						}
+				}
+		}
+		//标签页主体内容区
+		& > .#{$eui}-tabctrl-body {
+				top:     $tabctrl-level1mini-header-y;
+				border:  none;
+		}
+}
+.#{$eui}-tabctrl-level1-mini {
+		//选项卡li浮动
+		& > .#{$eui}-tabctrl-header > ul > .#{$eui}-tabctrl-header-item {
+				border:        none;
+				margin-right:  0;
+				padding-left:  $tabctrl-level1mini-header-item-paddingleft;
+				padding-right: $tabctrl-level1mini-header-item-paddingright;
+				font-size:     $font-size;
+				line-height:   $tabctrl-level1mini-header-li-lineheight;
+				//关闭按钮
+				& .#{$eui}-icon-close {}
+				//标签页文字
+				& .#{$eui}-tabctrl-header-text {
+						font-size: $font-size;
+				}
+		}
+		//选项卡选中状态
+		& > .#{$eui}-tabctrl-header > ul > .#{$eui}-tabctrl-header-active {
+				color:            $tabctrl-level1mini-header-active-color;
+				border-bottom:    $tabctrl-level1mini-active-border-bottom;
+				background-color: $tabctrl-level1mini-header-bg-color;
+		}
+}
+
+//**************** 二级标签页 *****************//
+.#{$eui}-tabctrl-level2 {
+		//选项卡头部背景
+		& > .#{$eui}-tabctrl-header {
+				height:            $tabctrl-level2-header-y;
+				padding-top:       0;
+				background-color:  $tabctrl-level2-header-bg-color;
+				border-bottom:     0;
+				&:before{
+						content:       "";
+						border-bottom: 0;
+				}
+				& > ul {
+						overflow: hidden;
+						margin-top:    0;
+						padding-left:  $tabctrl-level2-header-paddingleft;
+						//清除浮动
+						&:after {
+								@extend %eui-clear;
+						}
+				}
+		}
+		//标签页主体内容区
+		& > .#{$eui}-tabctrl-body {
+				top:           $tabctrl-level2-header-y - 2;
+				border-color:  $tabctrl-level2-body-border-color;
+				border-width:  $tabctrl-level2-body-border-width;
+				border-style:  solid;
+		}
+}
+.#{$eui}-tabctrl-level2 {
+		//选项卡li浮动
+		& > .#{$eui}-tabctrl-header > ul > .#{$eui}-tabctrl-header-item {
+				height:       100%;
+				min-width:    $tabctrl-level2-header-li-min-width;
+				margin-right: 0;
+				border-width: $tabctrl-level2-header-li-border-width;
+				line-height:  $tabctrl-level2-header-li-lineheight;
+				text-align:   center;
+				color:        $tabctrl-level2-font-color;
+				//标签页文字
+				& .#{$eui}-tabctrl-header-text {
+						font-size: $font-size;
+				}
+				//关闭按钮
+				& .#{$eui}-icon-close {}
+		}
+		& > .#{$eui}-tabctrl-header > ul > .#{$eui}-tabctrl-header-btn{
+				min-width: 10px;
+		}
+		//选项卡选中状态
+		& > .#{$eui}-tabctrl-header > ul > .#{$eui}-tabctrl-header-active {
+				background-color: $tabctrl-level2-active-bg-color;
+				border-color:     $tabctrl-level2-active-border-color;
+				color:            $tabctrl-level2-active-color;
+		}
+}
+
+//**************** 设计器专用标签页 *****************//
+.#{$eui}-tabctrl-level3 {
+		//选项卡头部背景
+		& > .#{$eui}-tabctrl-header {
+				position:         absolute;
+				z-index:          1;
+				width:            100%;
+				height:           $tabctrl-level3-header-y;
+				top:              0;
+				left:             0;
+				padding-top:      $tabctrl-level3-header-paddingtop;
+				background-color: $tabctrl-level3-header-bg-color;
+				border-bottom:    $tabctrl-level3-header-border-bottom;
+				&:before{
+						content:       "";
+						border-bottom: 0;
+				}
+				& > ul {
+						white-space:  nowrap;
+						overflow:     hidden;
+						width:        100%;
+						height:       100%;
+						margin-top:   $tabctrl-level3-header-margintop;
+						padding-left: $tabctrl-level3-header-paddingleft;
+						//清除浮动
+						&:after {
+								@extend %eui-clear;
+						}
+				}
+				//标签页显示不下出现更多
+				.#{$eui}-tabctrl-more {
+						position:       absolute;
+						top:            0;
+						right:          0;
+						padding-right:  $tabctrl-level3-header-more-paddingleft;
+						cursor:         pointer;
+						&:before {
+								content:     "\ef93";
+								display:     $inline-block;
+								position:    absolute;
+								top:         0;
+								right:       0;
+								font-family: $icon-font;
+								font-size:   $font-size;
+								@include     transform(scale(0.75));
+						}
+						&:hover {
+								color: $tabctrl-level3-active-color;
+						}
+				}
+		}
+		//标签页主体内容区
+		& > .#{$eui}-tabctrl-body {
+				position:   absolute;
+				top:        $tabctrl-level3-header-y;
+				right:      0;
+				left:       0;
+				bottom:     0;
+				& .#{$eui}-tabctrl-body-content {
+
+				}
+		}
+}
+.#{$eui}-tabctrl-level3 {
+		//选项卡li浮动
+		& > .#{$eui}-tabctrl-header > ul > .#{$eui}-tabctrl-header-item {
+				float:         left;
+				margin-right:  0;
+				padding-left:  $tabctrl-level3-header-li-padding-left;
+				padding-right: $tabctrl-level3-header-li-padding-right;
+				line-height:   $tabctrl-level3-header-li-lineheight;
+				border-color:  $tabctrl-level3-header-li-border-color;
+				border-width:  $tabctrl-level3-header-li-border-width;
+				border-style:  solid;
+				color:         $tabctrl-level3-font-color;
+				cursor:        pointer;
+				& .#{$eui}-icon-img {
+						width:  $tabctrl-level3-header-icon-img-x;
+				}
+				//标签页文字
+				& .#{$eui}-tabctrl-header-text {
+						font-size: $font-size;
+				}
+				//关闭按钮
+				& .#{$eui}-icon-close {
+						display:        $inline-block;
+						visibility:     hidden;
+						vertical-align: top;
+						margin-top:     $tabctrl-icon-close-margin-top;
+						margin-left:    $tabctrl-icon-close-margin-left;
+						&:before {
+								display:    $inline-block;
+								font-size:  $tabctrl-icon-close-fontsize;
+								@include    transform(scale(0.7));
+						}
+				}
+				&:hover {
+						& .#{$eui}-icon-close {
+								visibility: visible;
+						}
+				}
+		}
+		//选项卡选中状态
+		& > .#{$eui}-tabctrl-header > ul > .#{$eui}-tabctrl-header-active {
+				background-color: $tabctrl-level3-active-background-color;
+				border-color:     $tabctrl-level3-active-border-color;
+				color:            $tabctrl-level3-active-color;
+				font-weight:      $tabctrl-level3-active-font-weight;
+				//关闭按钮
+				& .#{$eui}-icon-close {
+						visibility:   visible;
+						display:      $inline-block;
+				}
+		}
+}
+
+
+
+//**************** 三级标签页 *****************//
+.#{$eui}-tabctrl-level4 {
+		//选项卡头部背景
+		& > .#{$eui}-tabctrl-header {
+				height:            $tabctrl-level4-header-y;
+				padding-top:       0;
+				background-color:  $tabctrl-level4-header-bg-color;
+				border-bottom:     $tabctrl-level4-header-border-bottom;
+				&:before{
+						content:       "";
+						border-bottom: 0;
+				}
+				& > ul {
+						margin-top:    0;
+						padding-left:  $tabctrl-level4-header-paddingleft;
+						//清除浮动
+						&:after {
+								@extend %eui-clear;
+						}
+				}
+		}
+		//标签页主体内容区
+		& > .#{$eui}-tabctrl-body {
+				top:     $tabctrl-level4-header-y;
+				border:  none;
+				& .#{$eui}-tabctrl-body-content {
+						padding:     0;
+						padding-top: $tabctrl-level4-body-paddingtop;
+				}
+		}
+}
+.#{$eui}-tabctrl-level4 {
+		//选项卡li浮动
+		& > .#{$eui}-tabctrl-header > ul > .#{$eui}-tabctrl-header-item {
+				height:        100%;
+				border:        none;
+				margin-right:  0;
+				padding-left:  $tabctrl-level4-header-item-paddingleft;
+				padding-right: $tabctrl-level4-header-item-paddingright;
+				font-size:     $font-size;
+				color:         $tabctrl-level4-font-color;
+				line-height:   $tabctrl-level4-header-li-lineheight;
+				//关闭按钮
+				& .#{$eui}-icon-close {}
+				//标签页文字
+				& .#{$eui}-tabctrl-header-text {
+						font-size: $font-size;
+				}
+		}
+		//选项卡选中状态
+		& > .#{$eui}-tabctrl-header > ul > .#{$eui}-tabctrl-header-active {
+				color:            $tabctrl-level4-header-active-color;
+				background-color: $tabctrl-level4-header-active-bg-color;
+				//图标
+				& .#{$eui}-icon {
+						color:        $tabctrl-level4-header-active-color;
+				}
+				//关闭按钮
+				& .#{$eui}-icon-close {
+						&:before{
+								color:        $tabctrl-level4-header-active-color;
+						}
+				}
+		}
+}
+
+//设计器tab页
+.#{$eui}-tabctrl-designer{
+		& .#{$eui}-tabctrl-level1-mini{
+				& > .#{$eui}-tabctrl-header{
+						height: 41px;
+						background-color: #efeeef;
+						//border-bottom: 1px solid #d7d7d7;
+						&:before{
+								content:       "";
+								position:      absolute;
+								z-index:       -1;
+								width:         100%;
+								top:           0;
+								left:          0;
+								height:        40px;
+								border-bottom: 1px solid #d7d7d7;
+						}
+						& > ul{
+								& > .#{$eui}-tabctrl-header-item{
+										line-height: 37px;
+										padding-left: 6px;
+										padding-right: 6px;
+										padding-left: 6px\0;
+										padding-right: 6px\0;
+										& .#{$eui}-tabctrl-header-text{
+												font-size: 14px;
+												max-width: 160px;
+												text-overflow: ellipsis;
+												overflow: hidden;
+												white-space: nowrap;
+										}
+								}
+								& > .#{$eui}-tabctrl-header-active{
+										font-weight: 700;
+								}
+						}
+				}
+				& > .#{$eui}-tabctrl-body{
+						padding: 0px;
+						top: 40px;
+						background-color: #f7f7f7;
+						& .#{$eui}-tabctrl-body-content{
+								padding:0;
+						}
+				}
+		}
+}

@@ -1,0 +1,87 @@
+@charset "utf-8";
+
+//顶部背景（如：图标工具栏背景，当然也工具栏默认是不带背景色）因此我们提供公共背景类来实现
+.#{$eui}-bg-layout-top {
+		background-color: #efeeef;
+		border-bottom: 1px solid #d9d9d9;
+}
+
+.#{$eui}-bg-designer-top{
+		background-image: url("../../../images/icon/designer_top.png");
+		background-repeat: repeat-x;
+		background-size: auto 100%;
+		border-bottom: 1px solid #d9d9d9;
+}
+
+//页面搜索区域-默认
+.#{$eui}-filter-area {
+		overflow: hidden;
+		height:   33px;
+		padding-top: 5px;
+}
+
+//页面搜索区域-展开后
+.#{$eui}-filter-area-open {
+		padding-top: 5px;
+		height:   auto;
+		position: absolute;
+		z-index:  1;
+		background-color: #fff;
+		box-shadow: 0 6px 8px 0px rgba(136, 136, 136, 0.2);
+}
+
+//外发光样式
+.#{$eui}-filter-shadow {
+		box-shadow: 0 2px 6px 0px rgba(136, 136, 136, 0.2);
+}
+
+//高级搜索背景色
+.#{$eui}-bg-gray {
+		background-color: #fafafa;
+}
+
+//豌豆BI自定义分组树上禁用背景
+.#{$eui}-bg-lightgray {
+		background-color: #f4f4f4;
+}
+
+//弹出层遮罩
+.#{$eui}-shade {
+		position: absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom: 0;
+		background-color: rgba(0,0,0,.4);
+		//遮罩透明
+		&-transparent {
+				background-color: transparent;
+		}
+}
+
+//数据分析首页背景
+.#{$eui}-analysis-bg {
+		background-color: $analysis-bgcolor;
+		position: relative;
+		&:after,
+		&:before{
+				content: "";
+				position: absolute;
+				top:0;
+				left:0;
+				width: 100%;
+				height: 100%;
+		}
+		&:after{
+
+		}
+		&:before{
+				background: url($analysis-bg-left) left bottom no-repeat,
+										url($analysis-bg-right) right top no-repeat;
+		}
+}
+
+//右边内容区域背景色
+.#{$eui}-container-bgcolor{
+		background-color: $container-right-bgcolor;
+}

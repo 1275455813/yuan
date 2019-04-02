@@ -1,0 +1,341 @@
+@charset "utf-8";
+
+//**************** 按钮 *****************//
+//默认按钮
+.#{$eui}-btn {
+		display:          $inline-block;
+		height:           $btn-l-y;
+		line-height:      $btn-l-y - 2;
+		padding:          0 $btn-l-padding-x;
+		background-color: $btn-bg;
+		color:            $btn-color;
+		white-space:      nowrap;
+		text-align:       center;
+		font-size:        $btn-l-fontsize;
+		border:           1px solid $btn-border;
+		border-radius:    2px;
+		cursor:           pointer;
+		//点击后波纹
+		position:         relative;
+		overflow:         hidden;
+		overflow: visible\0; //去掉IE中点击后波纹
+		-webkit-transform: translate3d(0,0,0);
+		//点击后波纹
+		&:after {
+				content:             "";
+				display:             $block;
+				position:            absolute;
+				width:               100%;
+				height:              100%;
+				top:                 0;
+				left:                0;
+				pointer-events:      none;
+				background-image:    radial-gradient(circle,#000 10%,transparent 10.01%);
+				background-repeat:   no-repeat;
+				background-position: 50%;
+				opacity:             0;
+				@include             transform(scale(10,10));
+				@include             transition(transform .5s,opacity 1s);
+				display: none\0;     //去掉IE中点击后波纹
+		}
+		//滑过
+		&:hover{
+				@extend %hover;
+		}
+		//按下
+		&:active{
+				@extend %active;
+				//点击后波纹
+				&:after {
+						@include  transform(scale(0,0));
+						@include  transition(0s);
+						opacity:  .2;
+				}
+		}
+		//按钮间距
+		& + & {
+				margin-left: 10px
+		}
+		//按钮图标
+		& .#{$eui}-icon {
+				color:          $btn-border;
+				margin-right:   3px;
+				font-size:      $font-size18;
+				vertical-align: middle;
+				vertical-align: middle #{"\\9"};
+		}
+		//当文字按钮和尺寸同时存在修改边距
+		&.#{$eui}-btn-text {
+				padding: 0 $btn-text-padding-x;
+		}
+}
+
+
+//按钮容器
+.#{$eui}-btn-container {
+		font-size: 0;
+		//容器下的按钮
+		& .#{$eui}-btn {
+				margin-right: 10px;
+				margin-bottom: 10px;
+				//容器下的按钮间距
+				& + .#{$eui}-btn {
+						margin-left: 0;
+				}
+		}
+}
+
+//状态共用属性
+.#{$eui}-btn {
+		&-primary,
+		&-sub,
+		&-warn,
+		&-danger {
+				&,
+				&:hover,
+				& .#{$eui}-icon{
+						color:        $btn-primary-color;
+				}
+		}
+}
+
+
+//首选项
+.#{$eui}-btn-primary {
+		border-color:     $btn-primary-border;
+		background-color: $btn-primary-bg;
+		//滑过
+		&:hover {
+
+		}
+}
+
+//次选项
+.#{$eui}-btn-sub {
+		border-color: $btn-subprimary-border;
+		background-color: $btn-subprimary-bg;
+}
+
+//提醒注意
+.#{$eui}-btn-warn {
+		border-color: $btn-warn-border;
+		background-color: $btn-warn-bg;
+}
+
+//警告危险
+.#{$eui}-btn-danger {
+		border-color: $btn-danger-border;
+		background-color: $btn-danger-bg;
+}
+
+//禁用
+.#{$eui}-btn-disabled {
+		&,
+		&:active,
+		&:hover {
+				border-color: $btn-disabled-border;
+				background-color: $btn-disabled-bg;
+				color: $btn-disabled-color;
+				cursor: not-allowed;
+				opacity: 1;
+		}
+		&:active {
+				&:after {
+						opacity: 0;
+				}
+		}
+}
+
+//按钮尺寸
+//中
+.#{$eui}-btn-#{$m} {
+		height: $btn-m-y;
+		line-height: $btn-m-y - 2;
+		padding: 0 $btn-m-padding-x;
+		font-size: $btn-m-fontsize;
+		//图标
+		& .#{$eui}-icon {
+				font-size: $font-size16;
+		}
+		& .#{$eui}-icon-arrow2 {
+				font-size: $font-size !important;
+		}
+		//当文字按钮和尺寸同时存在修改边距
+		&.#{$eui}-btn-text {
+				padding: 0 $btn-text-padding-x;
+		}
+}
+
+//迷你
+.#{$eui}-btn-#{$s} {
+		height: $btn-s-y;
+		line-height: $btn-s-y - 2;
+		padding: 0 $btn-s-padding-x;
+		font-size: $btn-s-fontsize;
+		//图标
+		& .#{$eui}-icon  {
+				font-size: $font-size14;
+		}
+		& .#{$eui}-icon-arrow2 {
+				font-size: $font-size !important;
+		}
+		//当文字按钮和尺寸同时存在修改边距
+		&.#{$eui}-btn-text {
+				padding: 0 $btn-text-padding-x;
+		}
+}
+
+
+//按钮组
+.#{$eui}-btn-group {
+		display:        $inline-block;
+		vertical-align: middle;
+		font-size:      0;
+		& .#{$eui}-btn {
+				margin-left:   0 !important;
+				margin-right:  0 !important;
+				border-left:   1px solid rgba(255, 255, 255, .5);
+				border-radius: 0;
+				&:first-child {
+						border-left:   1px solid $btn-border;
+						border-radius: 2px 0 0 2px;
+				}
+				&:last-child {
+						border-radius: 0 2px 2px 0;
+				}
+				& + .#{$eui}-btn {
+						margin-left: 0
+				}
+		}
+		& .#{$eui}-btn-primary {
+				border-left: none;
+				&:hover {
+
+				}
+				&:first-child {
+						border-left: $btn-border;
+				}
+		}
+		& + & {
+				margin-left: 10px
+		}
+}
+
+//按钮下拉
+.#{$eui}-btn-menu {
+		//按钮下拉箭头
+		& .#{$eui}-icon-arrow2 {
+				display:      $inline-block;
+				margin-top:   -3px;
+				margin-left:  6px;
+				margin-right: 0;
+				font-size:    $font-size;
+				@include      transform(scale(0.7));
+				@include      transition(transform 0.4s ease);
+		}
+		&:focus {
+				border-color: $form-input-focus;
+				& .#{$eui}-icon-arrow2 {
+						@include  transform(scale(0.7) rotate(-180deg));
+				}
+		}
+}
+
+//按钮带下拉菜单
+.#{$eui}-btn-popmenu {
+		position: relative;
+		padding-right:   $form-select-icon-x;
+		& .#{$eui}-icon:first-child {
+				vertical-align: top;
+		}
+		//按钮下拉箭头
+		& .#{$eui}-icon-arrow2 {
+				display:     $inline-block;
+				position:    absolute;
+				top:         0;
+				right:       0;
+				bottom:      0;
+				width:       16px;
+				border-left: 1px solid $btn-border;
+				margin-right: 0;
+				&:before {
+						display:      $inline-block;
+						position:     absolute;
+						top:          50%;
+						left:         50%;
+						width:        12px;
+						height:       12px;
+						line-height:  100%;
+						margin-top:   -5px;
+						margin-left:  -6px;
+						font-size:    $font-size;
+						@include      transform(scale(0.7));
+						@include      transition(all 0.4s ease);
+				}
+				&:hover {
+						@extend %hover;
+				}
+				&:active {
+						@extend %active;
+				}
+
+		}
+		&:focus {
+				& .#{$eui}-icon-arrow2 {
+						&:before {
+								display:  $inline-block;
+								@include  transform(scale(0.7) rotate(-180deg));
+						}
+				}
+		}
+}
+
+//按钮关闭
+.#{$eui}-btn-close {
+		padding-right: $btn-l-padding-x + 10;
+		//按钮关闭图标
+		& .#{$eui}-icon-close {
+				position:     absolute;
+				display:      $inline-block;
+				margin-right: 0;
+				top:          2px;
+				right:        3px;
+				width:        12px;
+				height:       12px;
+				line-height:  12px;
+				text-align:   center;
+				font-size:    $font-size;
+				color:        $btn-color;   //9.26 说关闭按钮 x 不好点，加深颜色 transform(scale(0.7));  0.7改成0.8
+				@include      transition(all 0.4s ease);
+				&:before {
+						display:      $inline-block;
+						line-height:  100%;
+						@include      transform(scale(0.8));
+				}
+		}
+		&:focus {
+
+		}
+}
+
+//文字按钮
+.#{$eui}-btn-text {
+		background-color: transparent;
+		border-color:     transparent;
+		color:            $text-link;
+}
+
+//图标按钮
+.#{$eui}-btn-icon {
+		& .#{$eui}-icon {
+				display: $inline-block;
+				height:  100%;
+				margin-right: 0;
+				vertical-align: top;
+		}
+}
+
+// 按钮撑满
+.#{$eui}-btn-fluid {
+		width: 100%
+}

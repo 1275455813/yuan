@@ -1,0 +1,611 @@
+@charset "utf-8";
+
+%elist-text {
+		display:        $inline-block;
+		overflow:       hidden;
+		text-overflow:  ellipsis;
+		white-space:    nowrap;
+		vertical-align: middle;
+		word-wrap:      break-word;
+		word-wrap:      normal#{"\\9"};
+		word-break:     break-all;
+}
+
+//****************表格组件 默认形式*****************//
+.#{$eui}-elist-container {
+		position:   relative;
+		width:      100%;
+		height:     100%;
+		cursor:     default;
+		overflow: 	hidden;
+		& td{
+				padding:        $elist-td-paddingtb $elist-td-paddinglr;
+				border-bottom:  1px solid $elist-bordercolor;
+				color:          $elist-fontcolor;
+		}
+		& .#{$eui}-elist-col-resizeguide {
+				position: absolute;
+				width: 0;
+				top: $elist-header-y + $elist-header-bordertop-y + $elist-header-borderbottom-y;
+				bottom:0;
+				border-right: 1px dashed #777;
+		}
+		& .#{$eui}-elist-col-resize {
+				position: absolute;
+				cursor: col-resize;
+				z-index: 2;
+				width: 5px;
+				top: 0;
+				height: $elist-header-y + $elist-header-bordertop-y + $elist-header-borderbottom-y;
+				background-color: #AAB;
+		}
+		//表头
+		& .#{$eui}-elist-header {
+				position:       absolute;
+				& .#{$eui}-elist-headertable {
+						table-layout: fixed;
+						width: 1px;
+				}
+				& td {
+						position:      relative;
+						white-space:   nowrap;
+						overflow:      hidden;
+						text-overflow: ellipsis;
+						background:    $elist-header-bg;
+						border-top:    $elist-header-bordertop-y solid $elist-header-bordercolor;
+						border-bottom: $elist-header-borderbottom-y solid $elist-header-bordercolor;
+				}
+				//表头排序
+				& .#{$eui}-elist-sort{
+						position: relative;
+						display: $inline-block;
+						vertical-align: middle;
+						width:      16px;
+						height:      $elist-header-y - ($elist-td-paddingtb * 2) - ($elist-header-bordertop-y * 2);
+						line-height: $elist-header-y - ($elist-td-paddingtb * 2) - ($elist-header-bordertop-y * 2);
+						margin-left: 2px;
+						& .#{$eui}-icon {
+								position:    absolute;
+								left:        0;
+								margin-left: 0;
+								width:       16px;
+								height:      50%;
+								text-align:  center;
+								color:       #aeaeae;
+								cursor:      pointer;
+								&:hover {
+
+								}
+								&:before {
+										position:    absolute;
+										left:        50%;
+										margin-left: -6.5px;
+										display:     $inline-block;
+										font-size:   $font-size + 1;
+										line-height: 9px;
+										@include     transform(scale(0.75));
+								}
+						}
+						//默认 升序
+						& .#{$eui}-elist-asc {
+								top:0;
+								&:before {
+										content: "\ef7e";
+										bottom:0;
+								}
+						}
+						//默认 降序
+						& .#{$eui}-elist-desc {
+								bottom:0;
+								&:before {
+										content: "\ef7f";
+										top:0;
+								}
+						}
+						//选中
+						& .#{$eui}-elist-sort-active {
+								color: $elist-header-sort-active;
+						}
+				}
+				& .#{$eui}-icon {
+						vertical-align: middle;
+						margin-left:    $elist-header-icon-marginleft;
+				}
+		}
+		//表头文字
+		& .#{$eui}-elist-caption {
+				font-size:      $elist-header-fontsize;
+				color:          $elist-header-fontcolor;
+				height:         $elist-header-y - ($elist-td-paddingtb * 2) - ($elist-header-bordertop-y * 2);
+				line-height:    $elist-header-y - ($elist-td-paddingtb * 2) - ($elist-header-bordertop-y * 2);
+				vertical-align: middle;
+				word-wrap:      break-word;
+				word-break:     break-all;
+				font-weight:    normal;
+		}
+		//表体
+		& .#{$eui}-elist-data {
+				position:   absolute;
+				top:        $elist-header-y + ($elist-header-bordertop-y + $elist-header-borderbottom-y);
+				bottom:     0;
+				left: 		  0;
+				right:		  0;
+				overflow:   auto;
+				& .eui-elist-datatable {
+						table-layout: fixed;
+						width: 1px;
+				}
+				& td {
+
+				}
+				& tr:hover td{
+						background-color: $elist-hover-bg;
+				}
+				//默认无数据提示
+				& .#{$eui}-elist-tips {
+						position:    relative;
+						margin-top:  $elist-tips-margin-top;
+						text-align:  center;
+						& span {
+								position:         relative;
+								display:          $inline-block;
+								padding-left:     10px;
+								padding-right:    10px;
+								color:            $elist-tips-font-color;
+								&:before {
+										content:        "\efa8";
+										font-family:    $icon-font;
+										font-size:      $font-icon-m;
+										vertical-align: middle;
+										margin-right:   5px;
+								}
+						}
+				}
+		}
+		//选中状态,勾选后状态
+		& .#{$eui}-elist-active,
+		& .#{$eui}-elist-checkbox-active {
+				//选中后滑过不变色
+				& td,
+				&:hover td {
+						background-color: $elist-active-bg !important;
+				}
+		}
+		//匹配搜索结果行
+		& .#{$eui}-elist-matchrow {
+				& td {
+						background-color: $bg-search !important;
+				}
+		}
+		//匹配搜索结果，定位行
+		& .#{$eui}-elist-activerow {
+				& td {
+						background-color: $datalist-selectbg-current !important;
+				}
+		}
+		//表体文字
+		& .#{$eui}-elist-text {
+				@extend        %elist-text;
+				display:       $block;
+				height:        $elist-header-y - ($elist-td-paddingtb * 2);
+				line-height:   $elist-header-y - ($elist-td-paddingtb * 2);
+				& .#{$eui}-icon {
+						margin-right: $elist-header-icon-marginleft;
+						color:        $elist-icon-color;
+						background-image: none;
+				}
+				& .#{$eui}-elist-text-ie9{
+						@extend %elist-text;
+						width: 100%;
+						margin-left: -26px;
+						padding-left: 26px;
+						vertical-align: top;
+				}
+
+		}
+		//图片图标
+		& .#{$eui}-icon-img {
+
+		}
+		//表格带勾选时 列宽度
+		& .#{$eui}-elist-checkbox {
+				width: $elist-td-checkbox-x;
+				text-align: center;
+				& .#{$eui}-icon {
+						margin-left: 0;
+						height:      $elist-header-y - ($elist-td-paddingtb * 2);
+						line-height: $elist-header-y - ($elist-td-paddingtb * 2);
+				}
+		}
+		//表格序号 列宽度
+		& .#{$eui}-elist-number {
+				width: $elist-td-number-x;
+		}
+		& .#{$eui}-elist-index {
+				width: $elist-td-number-x;
+		}
+}
+
+
+//表格中按钮
+.#{$eui}-elist-container {
+		& .#{$eui}-btn {
+				padding:          0 $btn-text-padding-x;
+				height:           $elist-header-y - ($elist-td-paddingtb * 2);
+				line-height:      $elist-header-y - ($elist-td-paddingtb * 2);
+				border:           none;
+				background-color: transparent;
+				color:            $elist-btn-fontcolor;
+				position: static\0;
+		}
+		& .#{$eui}-btn + .#{$eui}-btn {
+				margin-left:  $btn-text-padding-x;
+		}
+		//按钮禁用
+		& .#{$eui}-btn-disabled {
+				&,
+				&:active,
+				&:hover {
+						border-color:     transparent;
+						background-color: transparent;
+						color:            $btn-disabled-color;
+						cursor:           not-allowed;
+						opacity: 1;
+				}
+				&:active {
+						&:after {
+								opacity: 0;
+						}
+				}
+		}
+}
+
+//****************表格组件 小间距*****************//
+.#{$eui}-elist-mini {
+		& td{
+				padding: 0 $elist-td-paddinglr;
+		}
+		& .#{$eui}-elist-col-resizeguide {
+				top: $elist-minheight-header-y + $elist-header-bordertop-y + $elist-header-borderbottom-y;
+		}
+		& .#{$eui}-elist-col-resize {
+				height: $elist-minheight-header-y + $elist-header-bordertop-y + $elist-header-borderbottom-y;
+		}
+		//表头
+		& .#{$eui}-elist-header {
+				& .#{$eui}-elist-headertable {
+				}
+				& td {
+
+				}
+				//表头排序
+				& .#{$eui}-elist-sort{
+						height:      $elist-minheight-header-y;
+						line-height: $elist-minheight-header-y;
+						& .#{$eui}-icon {
+								&:hover {
+
+								}
+						}
+						//默认 升序
+						& .#{$eui}-elist-asc {
+
+								&:before {
+
+								}
+						}
+						//默认 降序
+						& .#{$eui}-elist-desc {
+
+								&:before {
+
+								}
+						}
+						//选中
+						& .#{$eui}-elist-sort-active {
+
+						}
+				}
+		}
+		//表头文字
+		& .#{$eui}-elist-caption {
+				height:      $elist-minheight-header-y;
+				line-height: $elist-minheight-header-y;
+				font-size:   $font-size;
+		}
+		//表体
+		& .#{$eui}-elist-data {
+				top: $elist-minheight-header-y;
+				& .eui-elist-datatable {
+
+				}
+				& td{
+
+				}
+				& tr:hover td{
+
+				}
+		}
+		//选中状态
+		& .#{$eui}-elist-active {
+				& td {
+
+				}
+		}
+		//表体文字
+		& .#{$eui}-elist-text {
+				&,
+				& .#{$eui}-btn {
+						height:      $elist-minheight-td-y;
+						line-height: $elist-minheight-td-y;
+				}
+		}
+		//表格带勾选时 列宽度
+		& .#{$eui}-elist-checkbox {
+				& .#{$eui}-icon {
+						height:      $elist-minheight-td-y;
+						line-height: $elist-minheight-td-y;
+				}
+		}
+		//表格序号 列宽度
+		& .#{$eui}-elist-number {
+
+		}
+}
+
+//****************表格组件 奇偶行风格*****************//
+.#{$eui}-elist-parity {
+		& td{
+
+		}
+		//表头
+		& .#{$eui}-elist-header {
+				& .#{$eui}-elist-headertable {
+
+				}
+				& td {
+
+				}
+				& td:first-child {
+
+				}
+		}
+		//表头文字
+		& .#{$eui}-elist-caption {
+
+		}
+		//表体
+		& .#{$eui}-elist-data {
+				& .eui-elist-datatable {
+
+				}
+				& td{
+
+				}
+				& tr:nth-child(odd) td{
+						background-color: $elist-parity-odd-bg;
+				}
+				& tr:nth-child(even) td{
+						background-color: $elist-parity-even-bg;
+				}
+				& tr:hover td{
+
+				}
+		}
+		//选中状态
+		& .#{$eui}-elist-active {
+				& td {
+
+				}
+		}
+		//表体文字
+		& .#{$eui}-elist-text {
+
+		}
+		//表格带勾选时 列宽度
+		& .#{$eui}-elist-checkbox {
+
+		}
+		//表格序号 列宽度
+		& .#{$eui}-elist-number {
+
+		}
+}
+
+//****************表格组件 奇偶行风格（2行奇偶使用场景：元数据）*****************//
+.#{$eui}-elist-parity-2 {
+		& td{
+
+		}
+		//表头
+		& .#{$eui}-elist-header {
+				& .#{$eui}-elist-headertable {
+
+				}
+				& td {
+
+				}
+				& td:first-child {
+
+				}
+		}
+		//表头文字
+		& .#{$eui}-elist-caption {
+
+		}
+		//表体
+		& .#{$eui}-elist-data {
+				& .eui-elist-datatable {
+
+				}
+				& td{
+
+				}
+				//奇数行
+				& tr:nth-child(2n + 0) td{
+						background-color: $elist-parity-odd-bg;
+				}
+				& tr:nth-child(2n + 1) td{
+						background-color: $elist-parity-odd-bg;
+						border-bottom:    none;
+				}
+				//偶数行
+				& tr:nth-child(4n + 0) td{
+						background-color: $elist-parity-even-bg;
+				}
+				& tr:nth-child(4n + 3) td{
+						background-color: $elist-parity-even-bg;
+						border-bottom:    none;
+				}
+				& tr:hover td{
+
+				}
+		}
+		//选中状态
+		& .#{$eui}-elist-active {
+				& td {
+
+				}
+		}
+		//表体文字
+		& .#{$eui}-elist-text {
+
+		}
+		//表格带勾选时 列宽度
+		& .#{$eui}-elist-checkbox {
+
+		}
+		//表格序号 列宽度
+		& .#{$eui}-elist-number {
+
+		}
+}
+
+//****************表格组件 流式靠内容自动撑高风格*****************//
+.#{$eui}-elist-flow {
+		height: auto;
+		& td{
+
+		}
+		//表头
+		& .#{$eui}-elist-header {
+				position: relative;
+				& .#{$eui}-elist-headertable {
+
+				}
+				& td {
+
+				}
+				& td:first-child {
+
+				}
+		}
+		//表头文字
+		& .#{$eui}-elist-caption {
+
+		}
+		//表体
+		& .#{$eui}-elist-data {
+				position: relative;
+				top:      0;
+				overflow-y: hidden;
+				overflow-x: auto;
+				& .eui-elist-datatable {
+
+				}
+				& td{
+
+				}
+				& tr:nth-child(even) td{
+
+				}
+				& tr:hover td{
+
+				}
+		}
+		//选中状态
+		& .#{$eui}-elist-active {
+				& td {
+
+				}
+		}
+		//表体文字
+		& .#{$eui}-elist-text {
+
+		}
+		//表格带勾选时 列宽度
+		& .#{$eui}-elist-checkbox {
+
+		}
+		//表格序号 列宽度
+		& .#{$eui}-elist-number {
+
+		}
+}
+
+
+//****************表格组件 边框风格*****************//
+.#{$eui}-elist-border {
+		& td{
+				border-bottom: 1px solid $elist-border-bordercolor;
+		}
+		//表头
+		& .#{$eui}-elist-header {
+
+				& .#{$eui}-elist-headertable {
+						border-top:       1px solid $elist-border-bordercolor;
+						border-left:      1px solid $elist-border-bordercolor;
+						border-right:     1px solid $elist-border-bordercolor;
+				}
+				& td {
+						border-left:      1px solid $elist-border-bordercolor;
+						background-color: $elist-border-header-bg;
+						border-top:       0;
+						border-bottom:    1px solid $elist-border-bordercolor;
+				}
+				& td:first-child {
+						border-left: none;
+				}
+		}
+		//表头文字
+		& .#{$eui}-elist-caption {
+				color: $link-color;
+		}
+		//表体
+		& .#{$eui}-elist-data {
+				& .eui-elist-datatable {
+						border-right:     1px solid $elist-border-bordercolor;
+				}
+				& td{
+						border-left:      1px solid $elist-border-bordercolor;
+						border-bottom:    1px solid $elist-border-bordercolor;
+				}
+				& tr:nth-child(odd) td{
+						background-color: $elist-border-odd-bg;
+				}
+				& tr:nth-child(even) td{
+						background-color: $elist-border-even-bg;
+				}
+				& tr:hover td{
+
+				}
+		}
+		//选中状态
+		& .#{$eui}-elist-active {
+				& td {
+
+				}
+		}
+		//表体文字
+		& .#{$eui}-elist-text {
+
+		}
+		//表格带勾选时 列宽度
+		& .#{$eui}-elist-checkbox {
+
+		}
+		//表格序号 列宽度
+		& .#{$eui}-elist-number {
+
+		}
+}

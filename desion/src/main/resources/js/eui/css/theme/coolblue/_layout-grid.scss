@@ -1,0 +1,78 @@
+@charset "utf-8";
+
+//layout-grid 适用场景：流式布局（非全屏）
+
+.#{$eui}-container {
+		position: relative;
+		padding: 0 15px;
+}
+
+.#{$eui}-row{
+		&:after {
+				@extend %eui-clear;
+		}
+}
+
+
+//栅格通用属性
+%grid {
+		position: relative;
+		display:  $block;
+		@extend   %float-left;
+}
+
+@mixin grid($width:100%) {
+		@extend %grid;
+		width: $width;
+}
+
+@mixin offset($margin-left:100%) {
+		margin-left: $margin-left;
+}
+
+//栅格宽度
+@for $col from 1 through $columns {
+		.#{$eui}-col-#{$xl}-#{$col} {
+				@include grid((100% / $columns) * $col);
+		}
+}
+
+//栅格偏移宽度
+@for $offset from 1 through $columns {
+		.#{$eui}-col-#{$xl}-offset-#{$offset} {
+				@include offset((100% / $columns) * $offset);
+		}
+}
+
+.#{$eui}-hide- {
+		&#{$xl} {
+				display: none !important;
+		}
+}
+
+.#{$eui}-show- {
+		&#{$xl}-block {
+				display: block !important;
+		}
+}
+
+.#{$eui}-show- {
+		&#{$xl}-inline {
+				display: inline !important;
+		}
+}
+
+.#{$eui}-show- {
+		&#{$xl}-inline-block {
+				display: inline-block !important;
+		}
+}
+
+//栅格间距
+@while $space-num > 0 {
+		.#{$eui}-col-space-#{$space-num} { margin: -($space-num / 2)#{"px"}; }
+		.#{$eui}-col-space-#{$space-num} > * { padding: ($space-num / 2)#{"px"}; }
+		$space-num: $space-num - 5;
+}
+
+

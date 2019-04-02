@@ -1,0 +1,1381 @@
+@charset "utf-8";
+
+%form-element {
+		width:            100%;
+		height:           $form-input-y;
+		border-width:     1px;
+		border-style:     solid;
+		border-color:     $form-input-border-color;
+		background-color: $form-input-bg-color;
+		line-height:      1.1;
+		//line-height:      $form-input-y - 2 #{"\\9"};
+		color:            $form-input-color;
+}
+//焦点
+%form-focus {
+		border-color: $form-input-focus;
+}
+
+//单选、复选、开关 公共属性
+%form-radio-icon {
+		display:        $inline-block;
+		vertical-align: middle;
+		color:          $form-radio-icon-color;
+		font-weight:    normal;
+		cursor:         pointer;
+}
+
+%form-radio-text {
+		margin-left:  5px;
+		margin-right: 5px;
+}
+
+
+//表单元素
+.#{$eui}-form {
+		//输入框 文本域 下拉框
+		&-input,
+		&-password,
+		&-select,
+		&-textarea {
+				@extend %form-element;
+		}
+		//输入框 文本域
+		&-input,
+		&-password,
+		&-textarea {
+				display:      $block;
+				padding-left: 5px;
+				&:focus {
+						@extend %form-focus;
+				}
+		}
+		//文本域
+		&-textarea {
+				min-height:  100px;
+				height:      auto;
+				line-height: 20px;
+				padding:     5px;
+				resize:      none;
+		}
+		//带行号文本域
+		&-texteditor {
+				position:         relative;
+				border:           1px solid $form-input-border-color;
+				background-color: $form-input-bg-color;
+				//文本域
+				&-textarea {
+						position:     absolute;
+						top:          0;
+						right:        0;
+						left:         36px;
+						height:       100%;
+						& textarea {
+								resize:      none;
+								font-size:   $font-size;
+								line-height: $font-size18;
+								margin:      0;
+								padding:     0 4px;
+								width:       100%;
+								height:      100%;
+								border:      0;
+								overflow:    auto;
+						}
+				}
+				//行号区域
+				&-listnumber {
+						position: absolute;
+						top:      0;
+						left:     0;
+						width:    36px;
+						height:   100%;
+						overflow: hidden;
+						border-right:  1px solid $form-texteditor-border-color;
+						background: $form-texteditor-bg;
+						&-container {
+								width: 100%;
+								height: 100%;
+								//行号
+								& .#{$eui}-form-texteditor-number {
+										width:       100%;
+										height:      $font-size18;
+										line-height: $font-size18;
+										text-align:  right;
+										font-size:   $font-size;
+										color:       $text-weaken;
+										padding:     0 5px;
+										white-space: nowrap;
+								}
+						}
+
+				}
+		}
+		//下拉框（包括日期、搜索都可以认为是一类，只是后面的图标不一样）
+		&-select {
+				position:     relative;
+				height:       $form-input-y;
+				line-height:  $form-input-y;
+				line-height:  ($form-input-y - 2)#{"\\0"};
+				border-width: 0;
+				padding-right:    $form-select-icon-x;
+				& > input:first-child {
+						@extend             %form-element;
+						border-right-width: 0;
+						height:             100%;
+						background-color:   transparent;
+						padding-left:       $form-input-padding-left;
+						font-size:          $font-size;
+						cursor:             text;
+						//下拉框获取焦点
+						&:focus {
+								@extend %form-focus;
+						}
+						//获取input焦点后 下拉三角的样式
+						&:focus + .#{$eui}-form-select-icon {
+								border:      1px solid $form-input-focus;
+						}
+				}
+				//下拉框-箭头
+				& .#{$eui}-form-select-icon {
+						display:     $inline-block;
+						position:    absolute;
+						right:       0;
+						top:         0;
+						width:       $form-select-icon-x;
+						height:      100%;
+						line-height: 100%;
+						border:      1px solid $form-input-border-color;
+						cursor:      pointer;
+						color:       $form-select-icon-color;
+						background-image: none;
+						&:before {
+								content:     "\ef7f";
+								display:     $block;
+								position:    absolute;
+								width:       12px;
+								height:      12px;
+								top:         50%;
+								left:        50%;
+								margin-left: -6px;
+								margin-top:  -6px;
+								font-size:   12px;
+								@include     transform(scale(0.75));
+								@include     transition(all 0.4s ease);
+						}
+						//下拉箭头区域滑过、选中
+						&:hover,
+						&:active {
+								background: $bg-hover;
+								border: 1px solid $form-input-focus;
+								&:before {
+
+								}
+						}
+						&:hover {
+								@extend %hover;
+						}
+						&:active {
+								@extend %active;
+						}
+				}
+				&.#{$eui}-picker-color{
+						& div .#{$eui}-picker-color-content{
+								top: 0px;
+								background-size: 20px 100%;
+						}
+				}
+		}
+
+		//下拉框获取焦点时
+		&-select-focus {
+				& > input:first-child {
+						@extend %form-focus;
+						border-right-width: 0;
+						//下拉框获取焦点
+						&:focus {
+								@extend %form-focus;
+						}
+				}
+				//下拉框-箭头
+				& .#{$eui}-form-select-icon {
+						color: $form-input-focus;
+						border: 1px solid $form-input-focus;
+						&:before {
+								@include     transform(scale(0.75) rotate(-180deg));
+						}
+						//下拉箭头区域滑过、选中
+						&:hover,
+						&:active {
+								&:before {
+								}
+						}
+						&:hover {
+						}
+						&:active {
+						}
+				}
+		}
+		//日期框(年、月，季度，日期，时分秒, 起止日期)
+		&-almanac,
+		&-quarter,
+		&-month,
+		&-date,
+		&-timer,
+		&-sedate{
+				& > input:first-child {
+						//下拉框获取焦点
+						&:focus {
+
+						}
+						//获取input焦点后 下拉三角的样式
+						&:focus + .#{$eui}-form-select-icon {
+
+						}
+				}
+				//下拉框-箭头
+				& .#{$eui}-form-select-icon {
+						&:before {
+								content:     "\ef87";
+								display:     $block;
+								position:    absolute;
+								width:       14px;
+								height:      14px;
+								top:         50%;
+								left:        50%;
+								margin-left: -7px;
+								margin-top:  -7px;
+								font-size:   14px;
+								@include     transform(scale(1));
+								@include     transition(all 0.4s ease);
+						}
+						//下拉箭头区域滑过、选中
+						&:hover,
+						&:active {
+								background: $bg-hover;
+								border:     1px solid $form-input-focus;
+								&:before {
+
+								}
+						}
+						&:hover {
+								@extend %hover;
+						}
+						&:active {
+								@extend %active;
+						}
+				}
+		}
+		&-timer{
+				//下拉框-时间
+				& .#{$eui}-form-select-icon {
+						&:before {
+								content: "\efd6";
+						}
+				}
+		}
+		//单选
+		&-radio {
+				display: $inline-block;
+				cursor: pointer;
+				& i {
+						@extend %form-radio-icon;
+						&:before {
+								display: $inline-block;
+						}
+				}
+				//默认状态
+				& .#{$eui}-form-checkbox {
+						&:before {
+								content: "\ef75";
+						}
+				}
+				//选中状态
+				& .#{$eui}-form-checked {
+						&:before {
+								content: "\ef76";
+								color: $form-input-focus;
+						}
+				}
+				//文字
+				& > span {
+						@extend %form-radio-text;
+						vertical-align: middle;
+				}
+		}
+		//复选
+		&-checkbox {
+				display: $inline-block;
+				cursor: pointer;
+				& i {
+						@extend %form-radio-icon;
+						&:before {
+								display: $inline-block;
+						}
+				}
+				& .#{$eui}-icon-img {
+
+				}
+				//默认状态
+				& .#{$eui}-form-checkbox {
+						&:before {
+
+						}
+				}
+				//选中状态
+				& .#{$eui}-form-checked {
+						&:before {
+
+						}
+				}
+				//文字
+				& > span {
+						@extend %form-radio-text;
+						vertical-align: middle;
+				}
+		}
+		//单选组 复选组
+		&-radio + &-radio,
+		&-checkbox + &-checkbox {
+				margin-left: 10px;
+		}
+		//单选组 复选组(垂直排列)
+		&-radio.#{$eui}-block + &-radio.#{$eui}-block,
+		&-checkbox.#{$eui}-block + &-checkbox.#{$eui}-block {
+				margin-left: 0;
+		}
+		&-radio.#{$eui}-block,
+		&-checkbox.#{$eui}-block {
+				margin-bottom: 5px;
+		}
+		//开关默认
+		&-switch {
+				display: inline-block;
+				vertical-align: middle;
+				position: relative;
+				height: 22px;
+				line-height: 22px;
+				padding: 0 5px;
+				cursor: pointer;
+				//控制区域
+				& i {
+						@extend           %form-radio-icon;
+						position:         relative;
+						width:            42px;
+						height:           100%;
+						border-radius:    20px;
+						background-color: #c4d0de;
+						-webkit-background-clip: border-box;
+						background-image: none;
+						@include          transition(all 0.1s linear);
+						//选中的圆粑粑
+						&:before {
+								content:          "";
+								position:         absolute;
+								left:             5px;
+								top:              3px;
+								width:            16px;
+								height:           16px;
+								border-radius:    20px;
+								background-color: #fff;
+								@include          transition(all 0.1s linear);
+						}
+				}
+				//文字区域
+				& span {
+						@extend %form-radio-text;
+				}
+		}
+		//开关选中
+		&-onswitch {
+				//控制区域
+				& i {
+						background-color: $form-onswitch-bgcolor;
+						&:before {
+								left: 21px;
+								background-color: #fff;
+						}
+				}
+				//文字
+				& span {
+
+				}
+		}
+		//数字输入框 微调
+		&-spinner {
+				position:     relative;
+				height:       $form-input-y;
+				line-height:  $form-input-y;
+				& > input {
+						@extend        %form-element;
+						height:        100%;
+						padding-left:  $form-input-padding-left;
+						padding-right: $form-select-icon-x;
+						//焦点
+						&:focus {
+								@extend %form-focus;
+						}
+						&:focus + .#{$eui}-form-spinner-btn {
+								border-left: 1px solid $form-input-focus;
+						}
+				}
+				& &-btn {
+						position:    absolute;
+						right:       1px;
+						top:         1px;
+						bottom:      1px;
+						width:       $form-select-icon-x;
+						border-left: 1px solid $form-input-border-color;
+				}
+				//箭头
+				&-up,
+				&-down {
+						position: absolute;
+						left:0;
+						height:50%;
+						width: 100%;
+						cursor: pointer;
+						&:before {
+								position:    absolute;
+								height:      100%;
+								top:         50%;
+								left:        50%;
+								margin-top:  -($font-size / 2);
+								margin-left: -($font-size / 2);
+								line-height: 100%;
+								text-align:  center;
+								font-size:   $font-size;
+								color:       $form-select-icon-color;
+								@include     transform(scale(0.75));
+						}
+						//滑过、选中
+						&:hover,
+						&:active {
+								background-color: $bg-hover;
+						}
+						&:hover {
+								@extend %hover;
+						}
+						&:active {
+								@extend %active;
+						}
+				}
+				//向上
+				&-up {
+						top:0;
+						&:before {
+								content: "\ef7e";
+						}
+				}
+				//向下
+				&-down {
+						bottom:0;
+						&:before {
+								content: "\ef7f";
+						}
+				}
+		}
+		//搜索框
+		&-search {
+				position:    relative;
+				height:      $form-input-y;
+				line-height: $form-input-y;
+				padding-right: $form-select-icon-x;
+				//搜索文字
+				& > input,
+				& > textarea {
+						@extend        %form-element;
+						height:        100%;
+						padding-left:  $form-input-padding-left;
+						border-right: 0;
+						//下拉框获取焦点
+						&:focus {
+								@extend %form-focus;
+						}
+				}
+				& > textarea {
+						resize:      none;
+						overflow:    hidden;
+						line-height: $form-input-y - 2;
+				}
+				//搜索按钮
+				& i {
+						position:    absolute;
+						right:       0;
+						top:         0;
+						width:       $form-select-icon-x;
+						height:      100% !important;
+						text-align:  center;
+						color:       $form-select-icon-color;
+						cursor:      pointer;
+						border-top:      1px solid $form-input-border-color;
+						border-bottom:      1px solid $form-input-border-color;
+						&:before {
+								position: absolute;
+								top:      50%;
+								left:     50%;
+								width:    16px;
+								height:   16px;
+								margin-top:  -8px;
+								margin-left: -8px;
+								line-height: 100%;
+						}
+						&:hover {
+
+						}
+						&:last-child{
+								border-right: 1px solid $form-input-border-color;
+						}
+				}
+				//清空搜索文字
+				& .#{$eui}-icon-cleartext {
+						right: $form-select-icon-x;
+						color: $text-color;
+				}
+		}
+		//搜索框
+		&-search-radius {
+				height:      $form-search-radius-y;
+				line-height: $form-search-radius-y;
+				//搜索文字
+				& > input,
+				& > textarea {
+						border-color:  transparent;
+						border-top-left-radius: 4px;
+						border-bottom-left-radius: 4px;
+						background-color: #f2f4f5;
+						height:        100%;
+						padding-left:  $form-search-radius-input-padding-left;
+						padding-right: 10px;
+						//@include       transition(all 0.4s ease);    //带动画
+						//下拉框获取焦点
+						&:focus {
+
+						}
+				}
+				& > textarea {
+						resize:      none;
+						overflow:    hidden;
+						line-height: $form-input-y;
+				}
+				//搜索按钮
+				& i {
+						position:    absolute;
+						right:       10px;
+						top:         0;
+						width:       $form-search-radius-icon-x;
+						height:      100% !important;
+						text-align:  center;
+						color:       #52585c;
+						cursor:      pointer;
+						//去掉渐变背景给纯色
+						background-color: #f2f4f5;
+						border: 0;
+						background-image: none;
+						-webkit-background-clip: border-box;
+
+						&:before {
+								position: absolute;
+								top:      50%;
+								left:     50%;
+								width:    14px;
+								height:   14px;
+								margin-top:  -7px;
+								margin-left: -7px;
+								line-height: 100%;
+								font-size:   $font-size14;
+						}
+						&:hover {
+
+						}
+						&:last-child{
+								width: $form-search-radius-icon-x ;
+								border-right: 0;
+								border-top-right-radius: 4px;
+								border-bottom-right-radius: 4px;
+						 }
+				}
+				//清空搜索文字
+				& .#{$eui}-icon-cleartext {
+						right:     $form-select-icon-x + 10;
+						color:     $text-color;
+						font-size: $font-size !important;
+				}
+		}
+		//搜索焦点状态
+		&-search-focus {
+				padding-right: $form-select-icon-x * 2;
+				//搜索文字
+				& > input,
+				& > textarea {
+						background-color: #fff;
+						//下拉框获取焦点
+						&:focus {
+
+						}
+				}
+				& > textarea {
+
+				}
+				//搜索按钮
+				& i {
+						color: $form-input-focus;
+						border-top:      1px solid $form-input-focus;
+						border-bottom:     1px solid $form-input-focus;
+						background-color: #fff;
+						&:before {
+
+						}
+						&:hover {
+
+						}
+						&:last-child{
+								border-right:      1px solid $form-input-focus;
+						}
+				}
+				//清空搜索文字
+				& .#{$eui}-icon-cleartext {
+
+				}
+		}
+		//去掉X后搜索焦点状态
+		&-nosearch-focus {
+				padding-right: $form-select-icon-x;
+				//搜索文字
+				& > input,
+				& > textarea {
+						//下拉框获取焦点
+						&:focus {
+
+						}
+				}
+				& > textarea {
+				}
+				//搜索按钮
+				& i {
+
+						&:before {
+
+						}
+						&:hover {
+
+						}
+				}
+				//清空搜索文字
+				& .#{$eui}-icon-cleartext {
+
+				}
+		}
+		//针对textarea设置样式
+		&-search-textarea.eui-form-nosearch-focus{
+				padding-right: 0;
+				border: 1px solid $form-input-border-color;
+				overflow: hidden;
+				& > textarea{
+						overflow: auto;
+						line-height: $form-s-input-y;
+						border-color: transparent;
+						&::-webkit-scrollbar{
+								display: none;
+						}
+				}
+				& i{
+						border-top: 1px solid transparent;
+						border-bottom: 1px solid transparent;
+				}
+				& i:last-child{
+						background: #fff;
+						border-right: 1px solid transparent;
+				}
+		}
+		//针对textarea设置样式 获取光标时
+		&-search-textarea.eui-form-search-focus{
+				padding-right: 0;
+				border: 1px solid $form-input-focus;
+				& > textarea{
+						overflow: auto;
+						border-color: transparent;
+						&::-webkit-scrollbar{
+								display: none;
+						}
+				}
+				& i{
+						border-top: 1px solid transparent;
+						border-bottom: 1px solid transparent;
+				}
+				& i:last-child{
+						background: #fff;
+						border-right: 1px solid transparent;
+				}
+		}
+
+		//搜索界面-大搜索
+		&-search-big {
+				height:      $form-search-big-y;
+				line-height: $form-search-big-y;
+				//搜索文字
+				& > input,
+				& > textarea {
+						padding-right: 10px;
+						font-size:     $font-size16;
+						//下拉框获取焦点
+						&:focus {
+								@extend %form-focus;
+								padding-right: $form-search-big-icon-x + $form-input-padding-left - $form-select-icon-x;
+						}
+				}
+				& > textarea {
+						resize:      none;
+						overflow:    hidden;
+						line-height: $form-search-big-y;
+				}
+				//搜索按钮
+				& i {
+						right:            0;
+						top:              0;
+						width:            $form-search-big-icon-x;
+						background-color: $btn-primary-bg;
+						background-image: none;
+						color:            $btn-primary-color;
+						-webkit-background-clip: border-box;
+						border-top:       1px solid $btn-primary-bg;
+						border-bottom:    1px solid $btn-primary-bg;
+						&:before {
+
+						}
+						&:hover {
+
+						}
+				}
+				//搜索按钮
+				& i:last-child {
+						border-right: 1px solid $btn-primary-bg;
+						//font-family:      $font-family !important;  //支持文字
+				}
+				//清空搜索文字
+				& .#{$eui}-icon-cleartext {
+						width:            $form-select-icon-x;
+						right:            $form-search-big-icon-x + $form-input-padding-left;
+						background-color: transparent;
+						color:            $text-color;
+						background-image: none;
+				}
+		}
+		//搜索加载
+		&-search-loading {
+				& > input,
+				& > textarea {
+						padding-right: $form-select-icon-x * 2;
+						//下拉框获取焦点
+						&:focus {
+								padding-right: $form-select-icon-x * 3;
+						}
+				}
+				//搜索加载
+				& .#{$eui}-icon-cleartext {
+						right: $form-select-icon-x * 2;
+						&:before {
+
+						}
+				}
+				//点击搜索后出现停止按钮
+				& .#{$eui}-icon-search {
+						width: $form-select-icon-x * 2;
+						&:before {
+								content: "\efae";
+								color: $text-error;
+								left: 75%;
+						}
+						&:after {
+								content:  "\efab";
+								position: absolute;
+								right:    $form-select-icon-x;
+								display:  $inline-block;
+								@include  animation(#{$eui}-rotate 1s linear infinite);
+						}
+				}
+		}
+		//国际税收管理平台左边导航栏 搜索框
+		&-search-tax {
+				position:    relative;
+				height:      $form-input-y;
+				line-height: $form-input-y;
+
+				padding-right: $form-select-icon-x;
+
+				//搜索文字
+				& > input,
+				& > textarea {
+						@extend        %form-element;
+						height:        100%;
+						padding-left:  $form-input-padding-left;
+
+						border-right: 0;
+						background-color: rgba(255, 255, 255, 0.5);
+						border-color: transparent;
+						//下拉框获取焦点
+						&:focus {
+								@extend %form-focus;
+						}
+				}
+				& > textarea {
+						resize:      none;
+						overflow:    hidden;
+						line-height: $form-input-y;
+				}
+				//搜索按钮
+				& i {
+						position:    absolute;
+						right:       0;
+						top:         0;
+						width:       $form-select-icon-x;
+						height:      100% !important;
+						text-align:  center;
+						color:       $form-select-icon-color;
+						cursor:      pointer;
+
+						border-top:      1px solid transparent;
+						border-bottom:      1px solid transparent;
+						background-color: rgba(255, 255, 255, 0.5);
+						background-image: none;
+						-webkit-background-clip: border-box;
+
+						&:before {
+								position: absolute;
+								top:      50%;
+								left:     50%;
+								width:    16px;
+								height:   16px;
+								margin-top:  -8px;
+								margin-left: -8px;
+								line-height: 100%;
+						}
+						&:hover {
+
+						}
+						&:last-child{
+								border-right:      1px solid transparent;
+						}
+				}
+				//清空搜索文字
+				& .#{$eui}-icon-cleartext {
+						right: $form-select-icon-x;
+						color: $text-color;
+				}
+				&.eui-form-search-focus{
+						//搜索文字
+						& > input,
+						& > textarea {
+								border-color: transparent;
+								background-color: rgba(255, 255, 255, 1);
+						}
+						& i {
+								background-color: rgba(255, 255, 255, 1) ;
+						}
+				}
+		}
+		// 待定功能，先注释
+		//带动画的搜索框(开始只显示搜索按钮，点击后出现搜索框)
+//		&-search-anim {
+//				position: relative;
+//				text-align: right;
+//				& > input {
+//						position: relative;
+//						z-index: 2;
+//						width: 0;
+//						border-width: 0;
+//						@include transition(all 0.3s linear);
+//						background-color: transparent;
+//						&:focus {
+//								width: 100%;
+//								z-index: 1;
+//								border-width: 1px;
+//						}
+//						&:focus + .#{$eui}-icon-close {
+//								visibility: visible;
+//								display: inline-block;
+//								right: -30px;
+//								@include transform(rotate(360deg));
+//						}
+//				}
+//				& i {}
+				//关闭按钮
+//				& .#{$eui}-icon-close {
+//						visibility: hidden;
+//						@include transition(all 0.3s linear);
+//						@include transform(rotate(0deg));
+//				}
+//		}
+
+		//datalist搜索框
+		&-datasearch {
+				position:    relative;
+				height:      $form-input-y;
+				line-height: $form-input-y;
+				//搜索文字
+				& > input {
+						@extend        %form-element;
+						padding-left:  $form-input-padding-left;
+						padding-right: ($form-select-icon-x * 2) + $form-datasearch-tip-x;
+						//下拉框获取焦点
+						&:focus {
+								@extend %form-focus;
+						}
+				}
+				//搜索提示
+				& &-tip {
+						position:      absolute;
+						right:         $form-select-icon-x * 2;
+						width:         $form-datasearch-tip-x;
+						padding-right: 4px;
+						text-align:    right;
+						color:         $text-weaken;
+				}
+				//搜索按钮
+				& i {
+						position:    absolute;
+						right:       1px;
+						top:         1px;
+						width:       $form-select-icon-x;
+						height:      $form-select-icon-x;
+						line-height: 100%;
+						text-align:  center;
+						cursor:      pointer;
+						border-left: 1px solid $form-input-border-color;
+						color:       $form-select-icon-color;
+						background-image: none;
+						&:before {
+								content:     "\ef7f";
+								display:     $block;
+								position:    absolute;
+								width:       14px;
+								height:      14px;
+								top:         50%;
+								left:        50%;
+								margin-left: -7px;
+								margin-top:  -7px;
+								font-size:   12px;
+						}
+						&:hover {
+								@extend %hover;
+						}
+						&:active {
+								@extend %active;
+						}
+				}
+				& &-previous {
+						right:25px;
+						&:before {
+								@include     transform(scale(0.75) rotate(180deg));
+						}
+				}
+				& &-next {
+						&:before {
+								@include     transform(scale(0.75) rotate(0deg));
+						}
+				}
+		}
+		//滑块
+		&-range {
+				position: relative;
+				height:   $form-input-y;
+				& &-path {
+						position:         absolute;
+						top:              50%;
+						left:             10px;
+						right:            10px;
+						margin-top:       -6px;
+						height:           12px;
+						border:           1px solid $form-range-border;
+						border-radius:    20px;
+						background-color: $form-range-bg;
+						box-shadow:       $form-range-shadow;
+						//滑块推拽区域
+						& i {
+								display:       $inline-block;
+								position:      absolute;
+								z-index:       2;
+								top:           -5px;
+								width:         20px;
+								height:        20px;
+								background:    $form-range-operating-bg;
+								border:        1px solid $form-range-operating-border;
+								border-radius: 20px;
+								transform: translateX(-50%);
+								box-shadow:    $form-range-operating-shadow;
+								&:before {
+										content:  "";
+										position: absolute;
+										top: 50%;
+										left:50%;
+										margin-top:  -2px;
+										margin-left: -2px;
+										width:  4px;
+										height: 4px;
+										background-color: $form-range-operating-border;
+										border-radius: 20px;
+								}
+								//按住滑块后
+								&:active {
+										background:  $form-range-operating-active-bg;
+										border-color:      $form-range-operating-active-border;
+										&:before {
+												background-color: #ffffff;
+										}
+								}
+						}
+				}
+				//滑块，值域显示区
+				& &-area {
+						position: absolute;
+						height: 100%;
+						background: $form-range-bg-arae;
+						border-radius: 20px 0 0 20px;
+				}
+				//输入区域
+				& > input {
+						position: absolute;
+						right:0;
+						top:0;
+						width: 30px;
+						height: 26px;
+						border-width:     1px;
+						border-style:     solid;
+						border-color:     $form-input-border-color;
+						background-color: $form-input-bg-color;
+						&:focus {
+								@extend %form-focus;
+						}
+				}
+				//显示输入框时候样式
+				&-value {
+						& .#{$eui}-form-range-path {
+								margin-right: 40px;
+						}
+				}
+		}
+		//滑块（垂直模式）
+		&-range-vertical {
+				width: 30px;
+				& .#{$eui}-form-range-path {
+						position:         absolute;
+						top:              10px;
+						bottom:           10px;
+						left:             50%;
+						width:            12px;
+						height:           auto;
+						margin-left:      -6px;
+						//滑块推拽区域
+						& i {
+								top:           -5px;
+								left:          -5px;
+
+								transform: translateX(0) translateY(-50%);
+								&:before {
+
+								}
+								//按住滑块后
+								&:active {
+
+										&:before {
+
+										}
+								}
+						}
+				}
+				//滑块，值域显示区
+				& .#{$eui}-form-range-area {
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						border-radius: 20px 20px 0 0;
+				}
+				//输入区域
+				& > input {
+						right:    auto;
+						left:     0;
+						top:      0;
+						height:   22px;
+				}
+				//显示输入框时候样式
+				&.#{$eui}-form-range-value {
+						& .#{$eui}-form-range-path {
+								top: 40px;
+								margin-right: 0;
+						}
+				}
+		}
+		//上传组件
+		&-upload {
+				position: relative;
+				height:      $form-input-y;
+				line-height: $form-input-y;
+				//输入框
+				& &-input {
+						@extend %form-element;
+						height:        100%;
+						padding-left:  $form-input-padding-left;
+						padding-right: $form-select-icon-x;
+				}
+				//上传按钮
+				& > div {
+						position: absolute;
+						width:    $form-select-icon-x;
+						height:   100%;
+						right:    0;
+						top:      0;
+						overflow: hidden;
+						//上传
+						& .#{$eui}-form-upload-file {
+								position: absolute;
+								z-index:  2;
+								width:    100%;
+								height:   100%;
+								opacity:  0;
+								//解决小手无法显示（通过padding将元素撑开）
+								padding-top: $form-input-y;
+								padding-top: 0\0;   //IE9 IE10不需要padding
+								cursor:      pointer;
+						}
+						//图标
+						& .#{$eui}-form-upload-icon {
+								position:   absolute;
+								top:        1px;
+								right:      1px;
+								bottom:     1px;
+								width:      $form-select-icon-x;
+								text-align: center;
+								background-color: #fff\0; //IE9 中用白色背景遮盖住上传文件路径
+								&:before {
+										content: "\ef9a";
+										color:   $form-select-icon-color;
+								}
+						}
+				}
+		}
+		//锁定宽高比
+		&-locking-container {
+				position: relative;
+				//默认锁定
+				& .#{$eui}-form-locking {
+						position: absolute;
+						top:      0;
+						right:    $locking-right;
+						width:    $locking-x;
+						height:   ($form-input-y * 2) + $form-item-margin;
+						//连接线
+						&:before {
+								content: "";
+								position: absolute;
+								top:      50%;
+								right:    0;
+								margin-top: -(($form-input-y * 2) - $form-item-margin) / 2;
+								width:      $locking-x;
+								height:     ($form-input-y * 2) - $form-item-margin;
+								border-top:    $locking-border;
+								border-right:  $locking-border;
+								border-bottom: $locking-border;
+						}
+						//图标
+						& .#{$eui}-icon {
+								display:          $inline-block;
+								position:         absolute;
+								top:              50%;
+								right:            -($locking-x / 2);
+								width:            $locking-icon-x;
+								height:           $locking-icon-y;
+								margin-top:       -($locking-icon-y / 2);
+								background-color: $locking-icon-bg;
+								border:           $locking-icon-border;
+								outline:          $locking-icon-outline;
+								line-height:      $locking-icon-y;
+								font-size:        $font-size;
+								text-align:       center;
+								cursor:           pointer;
+								//滑过
+								&:hover {
+										color: $text-link;
+								}
+						}
+				}
+				//不锁定
+				& .#{$eui}-form-locking-active {
+						&:before {
+								content: "";
+								border: none;
+						}
+						& .#{$eui}-icon {
+								background-color: $locking-off-bg;
+								border:           $locking-off-border;
+								outline:          $locking-off-outline;
+								//滑过
+								&:hover {
+										background-color: $locking-icon-bg;
+										border:           $locking-icon-border;
+										color:            $text-link;
+								}
+						}
+				}
+		}
+}
+
+//表单默认文字
+input,textarea {
+		&::-webkit-input-placeholder {
+				color:    $text-disabled;
+		}
+		&::-moz-placeholder {
+				color:    $text-disabled;
+		}
+		&:-moz-placeholder {
+				color:    $text-disabled;
+		}
+		&:-ms-input-placeholder {
+				color:    $text-disabled !important;
+		}
+}
+
+//只读
+.#{$eui}-form-readonly {}
+
+%form-disabled {
+		color:  $form-input-text-disabled;
+		cursor: not-allowed;
+}
+
+//禁用
+.#{$eui}-disabled {
+		&.#{$eui}-form-input,
+		&.#{$eui}-form-password,
+		&.#{$eui}-form-select,
+		&.#{$eui}-form-textarea,
+		&.#{$eui}-form-almanac,
+		&.#{$eui}-form-quarter,
+		&.#{$eui}-form-month,
+		&.#{$eui}-form-date,
+		&.#{$eui}-form-timer,
+		&.#{$eui}-form-spinner,
+		&.#{$eui}-form-search,
+		&:focus {
+				background-color: $form-input-bg-disabled;
+				border-color:     $form-input-border-disabled;
+				@extend %form-disabled;
+		}
+		//下拉框、日期框 显示文字区域
+		& > input:first-child {
+				background-color: $form-input-bg-disabled;
+				border-color:     $form-input-border-disabled;
+				@extend           %form-disabled;
+				//取消焦点边框
+				&:focus + .#{$eui}-form-select-icon {
+						border-color: $form-input-border-disabled;
+				}
+		}
+		& input,
+		& textarea {
+				border-color:     transparent;
+				background-color: transparent;
+				color:            $form-input-text-disabled;
+		}
+		& .#{$eui}-form-select-icon {
+				@extend       %form-disabled;
+				border-color: $form-input-border-disabled;
+				&:hover,
+				&:active {
+						background: none;
+						border:     1px solid $form-input-border-disabled;
+				}
+		}
+		//复选框、单选框（单独使用）
+		&.#{$eui}-form-checkbox,
+		&.#{$eui}-form-checked {
+				@extend           %form-disabled;
+				&:before {
+						color:  $form-input-text-disabled;
+				}
+		}
+		//复选框、单选框（组件使用）
+		&.#{$eui}-form-checkbox,
+		&.#{$eui}-form-radio {
+				&:focus {
+						background-color: transparent;
+						border:           none;
+				}
+				& i,
+				& .#{$eui}-form-checkbox,
+				& .#{$eui}-form-checked {
+						@extend           %form-disabled;
+						&:before {
+								@extend       %form-disabled;
+						}
+				}
+		}
+		& .#{$eui}-form-spinner-up,
+		  .#{$eui}-form-spinner-down {
+				cursor: not-allowed;
+				&:before{
+						color:  $form-input-text-disabled;
+				}
+		}
+}
+
+//效验
+.#{$eui}-form-verification {}
+
+//取消单选组 复选组间距（小空间使用）
+.#{$eui}-form-nomargin {
+		& .#{$eui}-form-radio + .#{$eui}-form-radio,
+		& .#{$eui}-form-checkbox + .#{$eui}-form-checkbox {
+				margin-left: 0;
+		}
+}
+
+//单独使用复选框 例如：表格、树中用到
+//默认状态
+i.#{$eui}-form-checkbox {
+		@extend %form-radio-icon;
+		&:before {
+				content: "\ef77";
+		}
+}
+//选中状态
+i.#{$eui}-form-checked {
+		@extend %form-radio-icon;
+		&:before {
+				content: "\ef78";
+				color: $form-input-focus;
+		}
+}
+//灰色选中状态
+i.#{$eui}-form-checked-off {
+		@extend %form-radio-icon;
+		&:before {
+				content: "\ef78";
+				color: $form-radio-icon-partial-color;
+		}
+}
+//选择部分状态（半选）
+i.#{$eui}-form-checkbox-partial {
+		@extend %form-radio-icon;
+		&:before {
+				content: "\efa5";
+				color: $form-radio-icon-partial-color;
+		}
+}
+//反选 默认
+i.#{$eui}-form-checkbox-off {
+		@extend %form-radio-icon;
+		&:before {
+				content: "\efa6";
+				color: $form-radio-icon-partial-color;
+		}
+}
+//反选 选中状态
+i.#{$eui}-form-checkbox-on {
+		@extend %form-radio-icon;
+		&:before {
+				content: "\efa7";
+				color: $form-radio-icon-on-color;
+		}
+}
+
+

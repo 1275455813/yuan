@@ -1,0 +1,241 @@
+@charset "utf-8";
+
+//layout-admin 适用场景：全屏布局
+
+//body 禁用滚动条
+.#{$eui}-layout-body {
+		overflow: hidden;
+}
+
+//系统布局容器
+.#{$eui}-layout-container {
+		position: relative;
+		@extend %width-height100;
+}
+
+.#{$eui}-layout {
+		&-header,
+		&-logo,
+		&-header-right,
+		&-main,
+		&-left,
+		&-left-tab,
+		&-left-max,
+		&-content,
+		&-content-tab {
+				position: absolute;
+		}
+}
+
+//头部
+.#{$eui}-layout-header {
+		height: $layout-header;
+		top: 0;
+		right: 0;
+		left: 0;
+		background-color: $layout-header-bg-color;
+		.#{$eui}-layout-logo {
+				top: 0;
+				left: 0;
+				width: $layout-logo-x;
+				height: $layout-header;
+				@include responsive($screens-l) {
+						width: $layout-logo-x;
+				}
+				@include responsive($screens-m) {
+						width: $layout-logo-x - 20;
+				}
+				@include responsive($screens-s) {
+						width: $layout-logo-x - 80;
+				}
+
+		}
+		&-left{
+				margin-left: $layout-logo-x;
+				margin-right: $layout-header-right-x;
+				height: $layout-header;
+				@include responsive($screens-l) {
+						margin-left: $layout-logo-x;
+				}
+				@include responsive($screens-m) {
+						margin-left: $layout-logo-x - 20;
+				}
+				@include responsive($screens-s) {
+						margin-left: $layout-logo-x - 80;
+				}
+		}
+}
+
+//主体
+.#{$eui}-layout-main {
+		top:    $layout-header;
+		right:  0;
+		bottom: 0;
+		left:   0;
+}
+
+//左侧树菜单
+.#{$eui}-layout-left {
+		top:    0;
+		bottom: 0;
+		left:   0;
+		width:  $layout-left-tree-x;
+
+		//.eui-layout-left > .eui-layout-left-tab{}
+		//左侧有树、切换按钮、导航栏
+		& > &-tab, & > &-max{
+				top:    0;
+				bottom: $layout-left-navbar-y;
+				left:   0;
+		}
+		//左侧只有树
+		& > &-max {
+				width:        100%;
+				border-top:   1px solid $layout-left-tree-border-color;
+		}
+		//左侧切换按钮
+		&-tab {
+				top:    0;
+				bottom: 0;
+				left:   0;
+				width:  $layout-left-tab-x;
+		}
+		//左侧树形收起后状态
+		&-seize {
+				position:     absolute;
+				top:          0;
+				left:         0;
+				width:        $layout-left-seize;
+				height:       100%;
+				background:   $layout-left-tree-seize-bg;
+				text-align:   center;
+				cursor:       pointer;
+				&:before {
+						content:     "\ef93";
+						position:    absolute;
+						//top:         0;
+						bottom:      0;
+						left:        0;
+						width:       100%;
+						height:      $layout-left-navbar-y;
+						line-height: $layout-left-navbar-y;
+						background:  $layout-left-navbar-bg-color;
+						font-family: $icon-font;
+						color:       $layout-left-navbar-iconcolor;
+				}
+		}
+		//左侧树形收起后状态
+		&-design {
+				position:     absolute;
+				top:          0;
+				left:         0;
+				width:        $layout-left-seize;
+				height:       100%;
+				//background:   $layout-left-tree-seize-bg;
+				text-align:   center;
+				cursor:       pointer;
+				&:before {
+						content:     "\ef93";
+						position:    absolute;
+						top:         0;
+						bottom:      0;
+						left:        0;
+						width:       100%;
+						height:      $layout-left-navbar-y;
+						line-height: $layout-left-navbar-y;
+						//background:  $layout-left-navbar-bg-color;
+						font-family: $icon-font;
+						//color:       $layout-left-navbar-iconcolor;
+
+						background-image: linear-gradient(132deg, #6684a2 21%, #4e6a88 75%);
+						background-image: none\0;
+						-webkit-background-clip: text;
+						color: transparent;
+						color: #557290#{"\\0"};
+				}
+		}
+}
+
+//左侧树形导航栏操作区
+.#{$eui}-layout-left-navbar{
+		position:    absolute;
+		bottom:      0;
+		width:       100%;
+		height:      $layout-left-navbar-y;
+		line-height: $layout-left-navbar-y;
+		background:  $layout-left-navbar-bg-color;
+		& .#{$eui}-icon {
+				color: $layout-left-navbar-iconcolor;
+				background: none ;
+		}
+}
+
+
+//右侧内容区域(左侧树菜单)
+.#{$eui}-layout-content{
+		top:    0;
+		right:  0;
+		bottom: 0;
+		left:   $layout-left-tree-x;
+		//右侧内容区域(左侧切换按钮)
+		&-tab {
+				top:    0;
+				right:  0;
+				bottom: 0;
+				left:   $layout-left-tab-x;
+		}
+}
+
+//内容区域布局情况 必须嵌套在.eui-layout-container
+//默认将页面分成5等份，需要时改变1-5值得到你想要的布局
+//系统栅格通用属性
+%layout-grid {
+		position: absolute;
+		right:    0;
+		left:     0;
+		display:  $block;
+}
+
+.#{$eui}-layout-row-3 {
+		@extend %layout-grid;
+}
+
+.#{$eui}-layout-row-2 {
+		@extend %layout-grid;
+		height: $layout-grid-minheight * 2;
+}
+.#{$eui}-layout-row-1 {
+		@extend %layout-grid;
+		height: $layout-grid-minheight;
+}
+
+//第一行
+.#{$eui}-layout-row-first {
+		@extend %layout-grid;
+		top:0;
+}
+//最后一行
+.#{$eui}-layout-row-last{
+		@extend %layout-grid;
+		bottom:0;
+}
+//偏移 默认top
+.#{$eui}-layout-row-offset-1 {
+		top: $layout-grid-minheight;
+}
+
+.#{$eui}-layout-row-offset-2 {
+		top: $layout-grid-minheight * 2;
+}
+
+.#{$eui}-layout-row-offset-3 {
+		top: $layout-grid-minheight * 3;
+}
+
+.#{$eui}-layout-row-offset-4 {
+		top: $layout-grid-minheight * 4;
+}
+//偏移 向下
+.#{$eui}-layout-row-offsetbottom-1 {
+		bottom: $layout-grid-minheight;
+}

@@ -1,0 +1,557 @@
+@charset "utf-8";
+
+//**************** datalist列表默认样式 ****************//
+.#{$eui}-datalist-container {
+		position: relative;
+		//表头
+    & .#{$eui}-datalist-header {
+		    position:      relative;
+		    overflow:      hidden;
+		    height:           $datalist-header-height;
+		    padding:          $datalist-header-padding;
+		    border-top:       $datalist-header-border-top;
+		    border-bottom:    $datalist-header-border-bottom;
+		    background-color: $datalist-header-bgcolor;
+		    font-weight:      $datalist-header-font-weight;
+		    & table {
+				    height:           100%;
+				    width:            1px;
+				    table-layout:     fixed;
+				    border-collapse:  seperate;
+				    *border-collapse: collapse;
+		    }
+		    & td {
+				    color:            $datalist-header-color;
+				    height:           100%;
+				    padding:          $datalist-header-col-padding;
+				    text-align:       left;
+				    white-space:      nowrap;
+				    overflow:         hidden;
+				    text-overflow:    ellipsis;
+				    font-size:        $datalist-header-font-size;
+				    position: relative;
+				    //头部筛选图标
+				    & .#{$eui}-icon {
+						    font-weight: normal;
+				    }
+		    }
+		    //可编辑列，表头标识
+		    & .#{$eui}-datalist-edit {
+
+		    }
+    }
+		.#{$eui}-datalist-body {
+				position: absolute;
+				left:     0;
+				right:    0;
+				top:      $datalist-body-top;
+				bottom:   0;
+				overflow: auto;
+				padding:  $datalist-body-padding;
+		}
+		& .#{$eui}-elist-col-resizeguide {
+				position: absolute;
+				width: 0;
+				top: $elist-header-y + $elist-header-bordertop-y + $elist-header-borderbottom-y;
+				bottom:0;
+				border-right: 1px dashed #777;
+		}
+		& .#{$eui}-elist-col-resize {
+				position: absolute;
+				cursor: col-resize;
+				z-index: 2;
+				width: 5px;
+				top: 0;
+				height: $elist-header-y + $elist-header-bordertop-y + $elist-header-borderbottom-y;
+				background-color: #AAB;
+		}
+}
+//表体
+.#{$eui}-datalist-container {
+    & .#{$eui}-datalist-body {
+		//表体table
+				& table {
+						width:            1px;
+						table-layout:     fixed;
+						border-collapse:  seperate;
+						*border-collapse: collapse;
+				}
+				//表格奇偶行背景
+		    & tr:nth-child(odd) td{
+
+		    }
+		    & tr:nth-child(even) td{
+
+		    }
+				//划过行背景
+				& tr:hover td {
+						background-color: $datalist-body-row-hover;
+				}
+				//列的样式
+				& .#{$eui}-datalist-data-col {
+						padding:        $datalist-body-col-paddingtb $datalist-body-col-paddinglr;
+						text-align:     left;
+						vertical-align: middle;
+						white-space:    nowrap;
+						overflow:       hidden;
+						text-overflow:  ellipsis;
+						border-bottom:  $datalist-body-col-border-bottom;
+						//编辑时的输入框
+						& .#{$eui}-datalist-edittext {
+								background-color: transparent;
+								height:           $datalist-body-col-height - ($datalist-body-col-paddingtb * 2);
+								line-height:      $datalist-body-col-height - ($datalist-body-col-paddingtb * 2);
+								width:            100%;
+								overflow:         hidden;
+								text-overflow:    ellipsis;
+						}
+						//勾选+序号
+						& .#{$eui}-form-checkbox {
+								line-height: 26px\0;
+						}
+						& .#{$eui}-form-checkbox + span {
+								vertical-align: middle;
+								line-height:    26px\0;
+						}
+						&:first-child {
+								.#{$eui}-icon {
+										display: $inline-block;
+										width:   $datalist-body-col-check-x;
+								}
+						}
+				}
+				//选中行
+				& .#{$eui}-datalist-row-select {
+						& .#{$eui}-datalist-data-col {
+								background-color: $datalist-body-row-select;
+						}
+						//选中后的第一列
+						& .#{$eui}-datalist-select-first {}
+						//选中后的最后一列
+						& .#{$eui}-datalist-select-last {}
+						//选中状态下文字颜色
+						& div,
+						& span {
+								color: $text-color;
+						}
+						//选中状态下的不可编辑字段
+						& .#{$eui}-disable{
+								color: $datalist-select-disable-color;
+						}
+				}
+		    //搜索样式颜色
+		    & .#{$eui}-datalist-matchrow {
+				    & .#{$eui}-datalist-data-col {
+						    background-color: $bg-search;
+				    }
+				    //选中后的第一列
+				    & .#{$eui}-datalist-select-first {}
+				    //选中后的最后一列
+				    & .#{$eui}-datalist-select-last {}
+				    //选中状态下文字颜色
+				    & div,
+				    & span {
+
+				    }
+				    //搜索样式-不可编辑字段
+				    & .#{$eui}-disable{
+						    color: $text-weaken;
+				    }
+		    }
+		    //搜索当前样式颜色
+		    & .#{$eui}-datalist-activerow {
+				    & .#{$eui}-datalist-data-col {
+						    background-color: $datalist-selectbg-current;
+				    }
+				    //选中后的第一列
+				    & .#{$eui}-datalist-select-first {}
+				    //选中后的最后一列
+				    & .#{$eui}-datalist-select-last {}
+				    //选中状态下文字颜色
+				    & div,
+				    & span {
+
+				    }
+						//搜索当前样式-不可编辑字段
+				    & .#{$eui}-disable{
+						    color: $text-weaken;
+				    }
+		    }
+		    //标红样式
+		    & .#{$eui}-datalist-red-tips {
+				    padding-left: $datalist-body-red-padding-left;
+				    position:     relative;
+				    &:before {
+						    content: "";
+						    position:     absolute;
+						    top:          $datalist-body-red-margin-top;
+						    left:         $datalist-body-red-margin-left;
+						    border-width: 5px;
+						    border-style: solid;
+						    border-color: transparent red transparent transparent;
+						    @include      transform(rotate(45deg));
+				    }
+		    }
+		    /* 不可编辑字段  */
+		    & .#{$eui}-disable{
+				    color: $text-weaken;
+		    }
+    }
+}
+//默认编辑框编辑器、默认下拉框编辑器
+.#{$eui}-datalist-container{
+		& .#{$eui}-form-input,
+		& .#{$eui}-form-password,
+		& .#{$eui}-form-select,
+		& .#{$eui}-form-textarea
+		& .#{$eui}-form-almanac,
+		& .#{$eui}-form-quarter,
+		& .#{$eui}-form-month,
+		& .#{$eui}-form-date,
+		& .#{$eui}-form-timer,
+		& .#{$eui}-form-spinner,
+		& .#{$eui}-form-search,
+		& .#{$eui}-form-upload {
+
+		}
+}
+
+//空的提示，bottom设置成17，放置下方有滚动条之后，拖动不了
+.#{$eui}-datalist-container {
+		& .#{$eui}-datalist-tips {
+				position:       absolute;
+				left:           0;
+				right:          0;
+				top:            50%;
+				margin-top:     -($datalist-null-tips-margin-top / 3);
+				//bottom:         $datalist-null-tips-margin-bottom;
+				overflow:       hidden;
+				padding:        $datalist-null-tips-padding;
+				font-size:      $font-size14;
+				color:          $datalist-null-tips-textcolor;
+				text-align:     center;
+				vertical-align: middle;
+				//空页面文字
+				& span {
+						display: inline-block;
+				}
+		}
+}
+
+
+
+
+//**************** datalist列表第二套紧凑风格样式 ****************//
+.#{$eui}-datalist-mini {
+		//表头
+		& .#{$eui}-datalist-header {
+				height:        $datalist-mini-header-col-y;
+				& table {
+
+				}
+				& td {
+						font-size: $datalist-mini-header-font-size;
+				}
+		}
+		.#{$eui}-datalist-body {
+				top: $datalist-mini-header-col-y;
+		}
+		& .#{$eui}-elist-col-resizeguide {
+				top: $datalist-mini-header-col-y;
+		}
+		& .#{$eui}-elist-col-resize {
+				height: $datalist-mini-header-col-y;
+		}
+}
+//表体
+.#{$eui}-datalist-mini {
+		& .#{$eui}-datalist-body {
+				//表体table
+				& table {
+
+				}
+				//表格奇偶行背景
+				& tr:nth-child(odd) td {
+
+				}
+				& tr:nth-child(even) td {
+
+				}
+				//划过行背景
+				& tr:hover td {
+
+				}
+				//列的样式
+				& .#{$eui}-datalist-data-col {
+						padding: 0 $datalist-body-col-paddinglr;
+						//编辑时的输入框
+						& .#{$eui}-datalist-edittext {
+								height:           $datalist-mini-body-col-y;
+								line-height:      $datalist-mini-body-col-y;
+						}
+				}
+				//选中行
+				& .#{$eui}-datalist-row-select {
+						& .#{$eui}-datalist-data-col {
+
+						}
+						//选中后的第一列
+						& .#{$eui}-datalist-select-first {}
+						//选中后的最后一列
+						& .#{$eui}-datalist-select-last {}
+						//选中状态下文字颜色
+						& div,
+						& span {
+
+						}
+						//选中状态下的不可编辑字段
+						& .#{$eui}-disable{
+
+						}
+				}
+				//搜索样式颜色
+				& .#{$eui}-datalist-matchrow {
+						background-color: $bg-search;
+						//搜索样式-不可编辑字段
+						& .#{$eui}-disable{
+								color: $text-weaken;
+						}
+				}
+				//搜索当前样式颜色
+				& .#{$eui}-datalist-activerow {
+						background-color: $datalist-selectbg-current;
+						//搜索当前样式-不可编辑字段
+						& .#{$eui}-disable{
+								color: $text-weaken;
+						}
+				}
+				//标红样式
+				& .#{$eui}-datalist-red-tips {
+						padding-left: $datalist-body-red-padding-left;
+						position: relative;
+						&:before {
+								content:      "";
+								position:     absolute;
+								top:          $datalist-body-red-margin-top;
+								left:         $datalist-body-red-margin-left;
+								border-width: 5px;
+								border-style: solid;
+								border-color: transparent red transparent transparent;
+								@include      transform(rotate(45deg));
+						}
+				}
+				/* 不可编辑字段  */
+				& .#{$eui}-disable{
+						color:$text-weaken;
+				}
+		}
+}
+//默认编辑框编辑器、默认下拉框编辑器
+.#{$eui}-datalist-mini {
+		& .#{$eui}-form-input,
+		& .#{$eui}-form-password,
+		& .#{$eui}-form-select,
+		& .#{$eui}-form-textarea
+		& .#{$eui}-form-almanac,
+		& .#{$eui}-form-quarter,
+		& .#{$eui}-form-month,
+		& .#{$eui}-form-date,
+		& .#{$eui}-form-timer,
+		& .#{$eui}-form-spinner,
+		& .#{$eui}-form-search,
+		& .#{$eui}-form-upload {
+				margin-top:  2px;
+				height:      $form-s-input-y;
+				line-height: $form-s-input-y;
+		}
+		& .#{$eui}-form-search > textarea{
+				line-height: $form-s-input-y - 2 ;
+		}
+}
+//空的提示，bottom设置成17，放置下方有滚动条之后，拖动不了
+.#{$eui}-datalist-mini {
+		& .#{$eui}-datalist-tips {
+
+				//空页面文字
+				& span {
+
+				}
+		}
+}
+
+//**************** 奇偶行风格样式 ****************//
+.#{$eui}-datalist-parity {
+		//表头
+		& .#{$eui}-datalist-header {
+
+				& table {
+
+				}
+				& td {
+
+				}
+		}
+		.#{$eui}-datalist-body {
+
+		}
+}
+//表体
+.#{$eui}-datalist-parity {
+		& .#{$eui}-datalist-body {
+				//表体table
+				& table {
+
+				}
+				//表格奇偶行背景
+				& tr:nth-child(odd) td {
+						background-color: $datalist-body-row-odd;
+				}
+				& tr:nth-child(even) td {
+						background-color: $datalist-body-row-even;
+				}
+				//划过行背景
+				& tr:hover td {
+
+				}
+				//列的样式
+				& .#{$eui}-datalist-data-col {
+
+						//编辑时的输入框
+						& .#{$eui}-datalist-edittext {
+
+						}
+				}
+				//选中行
+				& .#{$eui}-datalist-row-select {
+						& .#{$eui}-datalist-data-col {
+
+						}
+						//选中后的第一列
+						& .#{$eui}-datalist-select-first {}
+						//选中后的最后一列
+						& .#{$eui}-datalist-select-last {}
+						//选中状态下文字颜色
+						& div,
+						& span {
+
+						}
+						//选中状态下的不可编辑字段
+						& .#{$eui}-disable{
+
+						}
+				}
+				//搜索样式颜色
+				& .#{$eui}-datalist-matchrow {
+
+						//搜索样式-不可编辑字段
+						& .#{$eui}-disable{
+
+						}
+				}
+				//搜索当前样式颜色
+				& .#{$eui}-datalist-activerow {
+
+						//搜索当前样式-不可编辑字段
+						& .#{$eui}-disable{
+
+						}
+				}
+				//标红样式
+				& .#{$eui}-datalist-red-tips {
+
+						&:before {
+
+						}
+				}
+				//不可编辑字段
+				& .#{$eui}-disable{
+
+				}
+		}
+}
+//默认编辑框编辑器、默认下拉框编辑器
+.#{$eui}-datalist-parity {
+		& .#{$eui}-form-input,
+		& .#{$eui}-form-password,
+		& .#{$eui}-form-select,
+		& .#{$eui}-form-textarea
+		& .#{$eui}-form-almanac,
+		& .#{$eui}-form-quarter,
+		& .#{$eui}-form-month,
+		& .#{$eui}-form-date,
+		& .#{$eui}-form-timer,
+		& .#{$eui}-form-spinner,
+		& .#{$eui}-form-search,
+		& .#{$eui}-form-upload {
+
+		}
+}
+//空的提示，bottom设置成17，放置下方有滚动条之后，拖动不了
+.#{$eui}-datalist-parity {
+		& .#{$eui}-datalist-tips {
+
+				//空页面文字
+				& span {
+
+				}
+		}
+}
+
+
+//**************** datalist组件 边框风格 ****************//
+.#{$eui}-datalist-border {
+		position: relative;
+		//表头
+		& .#{$eui}-datalist-header {
+				/*border-top: 0;
+				background: transparent;
+				border-bottom: 1px solid transparent;*/
+				border: 1px solid $elist-border-bordercolor;
+				background-color: $elist-border-header-bg;
+				& table {
+						/*border-top:       1px solid $elist-border-bordercolor;
+						border-left:      1px solid $elist-border-bordercolor;
+						border-right:     1px solid $elist-border-bordercolor;
+						border-bottom: 1px solid $elist-border-bordercolor;*/
+						border: 0;
+				}
+				& td {
+						border-left:      1px solid $elist-border-bordercolor;
+						/*background-color: $elist-border-header-bg;*/
+						background-color: transparent;
+						color:            $link-color;
+				}
+				& td:first-child {
+						border-left: none;
+				}
+		}
+		//表体
+		.#{$eui}-datalist-body {
+				//top: $datalist-header-height;
+				border-left: 1px solid $elist-border-bordercolor;
+				border-right: 1px solid $elist-border-bordercolor;
+				border-bottom: 1px solid $elist-border-bordercolor;
+
+				//表体table
+				& table {
+						/*border-right:     1px solid $elist-border-bordercolor;*/ 
+						border-right:     0;
+				}
+				& td{
+						border-left:      1px solid $elist-border-bordercolor;
+						border-bottom:    1px solid $elist-border-bordercolor;
+				}
+				& td:first-child {
+						border-left: none;
+				}
+				& tr:nth-child(odd) td{
+						background-color: $elist-border-odd-bg;
+				}
+				& tr:nth-child(even) td{
+						background-color: $elist-border-even-bg;
+				}
+				& tr:hover td{
+
+				}
+		}
+}

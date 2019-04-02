@@ -1,0 +1,388 @@
+@charset "utf-8";
+
+//<div class="eui-accordionpanel-container">
+//  <div class="eui-accordionpanel-item">
+//    <div class="eui-accordionpanel-head">
+//      <i title="折叠箭头" class="eui-icon eui-icon-arrow-right"></i>
+//      <span class="eui-accordionpanel-text"></span>
+//      <i title="关闭" class="eui-icon eui-icon-close"></i>
+//      <i title="最大化" class="eui-icon eui-icon-max"></i>
+//      <i title="浮起" class="eui-icon eui-icon-float"></i>
+//    </div>
+//    <div class="eui-accordionpanel-body"></div>
+//  </div>
+//*****展开状态更换图标：head那层添加样式eui-accordionpanel-unfold
+//*****面板浮起后，eui-icon-float样式名改成eui-icon-unfloat
+//*****折叠时高度样式eui-accordionpanel-item-fold
+
+
+//****************折叠面板组件默认*****************//
+
+//右侧图标浮动
+%accordionpanel-icon{
+    float:     right;
+    cursor:    pointer;
+    font-size: $font-size;
+    width:     $font-size16;
+ }
+.#{$eui}-accordionpanel-container{
+    width:    100%;
+    height:   100%;
+    overflow: auto;
+    & .#{$eui}-accordionpanel-item{
+        position: relative;
+        min-height: $accordionpanel-head-y;
+        overflow: hidden;
+        //head样式
+        & .#{$eui}-accordionpanel-head{
+            padding-left:     $accordionpanel-head-paddingleft;
+            padding-right:    $accordionpanel-head-paddingright;
+            height:           $accordionpanel-head-y;
+            line-height:      $accordionpanel-head-y - 2px;
+            background-color: $accordionpanel-head-bgcolor;
+            overflow: hidden;
+            //border-top:       $accordionpanel-head-bordertop;
+            //border-bottom:    $accordionpael-head-borderbottom;        //设计器中使用  要去掉边框
+        }
+        //body样式
+        & .#{$eui}-accordionpanel-body{
+            position: absolute;
+            top:      $accordionpanel-head-y;
+            bottom:   0;
+            right:    0;
+            left:     0;
+            padding-left:     $accordionpanel-head-paddingleft;
+            padding-right:    $accordionpanel-head-paddingright;
+        }
+        // 属性面板中，在ie9中超出部分打点显示右对齐会重叠，故而在ie9 给单独样式
+        & .#{$eui}-form-layout-s .#{$eui}-form-item{
+            & .#{$eui}-form-label{
+                //text-align: left#{"\\9"};/* ie 9*/
+            }
+        }
+    }
+}
+//图标及标题样式
+.#{$eui}-accordionpanel-container{
+    & .#{$eui}-accordionpanel-head{
+        //折叠箭头图标
+        & .#{$eui}-icon-arrow-right{
+            float:     left;
+            font-size: $font-size;
+            width:     $font-size16;
+            color:     $accordionpanel-head-textcolor;
+            cursor:    pointer;
+            &:before{
+                display: $inline-block;
+                @include  transition(all 0.4s ease);
+            }
+
+
+        }
+        //标题样式
+        & .#{$eui}-accordionpanel-text{
+            font-weight:   $text-strong;
+            font-size:     $font-size14;
+            display:       $inline-block;
+            float:         left;
+            width:         calc(100% - 74px);
+            //超出部分打点
+            @extend %elip;
+        }
+        //关闭图标
+        & .#{$eui}-icon-close{
+            @extend %accordionpanel-icon;
+        }
+        //最大化图标
+        & .#{$eui}-icon-max{
+            @extend %accordionpanel-icon;
+        }
+        //浮起图标
+        & .#{$eui}-icon-float{
+            @extend %accordionpanel-icon;
+        }
+        //停靠图标
+        & .#{$eui}-icon-unfloat{
+            @extend %accordionpanel-icon;
+        }
+        //清除浮动
+        &:after{
+            @extend %eui-clear;
+        }
+
+    }
+}
+//展开状态更换箭头图标
+.#{$eui}-accordionpanel-container{
+    & .#{$eui}-accordionpanel-unfold{
+        //border-bottom:    $accordionpanel-head-borderbottom;  //设计器中使用  要去掉边框
+        //折叠箭头图标
+        & .#{$eui}-icon-arrow-right{
+            &:before{
+                @include transform(rotate(90deg));
+                cursor:    pointer;
+            }
+
+        }
+    }
+}
+
+
+
+//****************折叠面板组件深色风格*****************//
+.#{$eui}-accordionpanel-dark{
+    background-color: $accordionpanel-dark-bgcolor;
+    & .#{$eui}-accordionpanel-item{
+        & .#{$eui}-accordionpanel-head{
+            padding-left:     $accordionpanel-head-paddingleft + 10;
+            padding-right:    $accordionpanel-head-paddingright  + 10 ;
+            background-color: $accordionpanel-dark-title-bgcolor;
+            //折叠箭头图标
+            & .#{$eui}-icon-arrow-right{
+                float:     right;
+                font-size: $font-size;
+                width:     $font-size16;
+                cursor:    pointer;
+                &:before{
+                    display: $inline-block;
+                    @include  transition(all 0.4s ease);
+
+                    @include gradient($font-icon-color);
+                    -webkit-background-clip: text;
+                    color: rgba(255, 255, 255, 0.3);
+                }
+
+
+            }
+            //标题样式
+            & .#{$eui}-accordionpanel-text{
+                color: rgba(255, 255, 255, 0.8);
+                font-weight:   $text-strong;
+                font-size:     $font-size14;
+                display:       $inline-block;
+                float:         left;
+                width:         calc(100% - 74px);
+                //超出部分打点
+                @extend %elip;
+            }
+            & .#{$eui}-icon-close,
+            & .#{$eui}-icon-max,
+            & .#{$eui}-icon-float{
+                display: none;
+            }
+            //关闭图标
+            & .#{$eui}-icon-close{
+                @extend %accordionpanel-icon;
+            }
+            //最大化图标
+            & .#{$eui}-icon-max{
+                @extend %accordionpanel-icon;
+            }
+            //浮起图标
+            & .#{$eui}-icon-float{
+                @extend %accordionpanel-icon;
+            }
+            //停靠图标
+            & .#{$eui}-icon-unfloat{
+                @extend %accordionpanel-icon;
+            }
+            //清除浮动
+            &:after{
+                @extend %eui-clear;
+            }
+
+        }
+        & .#{$eui}-accordionpanel-body{
+            color: rgba(255, 255, 255, 0.8);
+        }
+    }
+
+}
+
+//****************折叠面板组件无边框风格-应用在维表编辑界面*****************//
+
+//右侧图标浮动
+%accordionpanel-icon{
+
+}
+.#{$eui}-accordionpanel-noborder{
+
+    & .#{$eui}-accordionpanel-item{
+        position: relative;
+        margin-top: 0px;
+        min-height: $accordionpanel-level2-head-y;
+        //head样式
+        & .#{$eui}-accordionpanel-head{
+            height:           $accordionpanel-level2-head-y;
+            line-height:      $accordionpanel-level2-head-y;
+            border-top:       $accordionpanel-level2-head-bordertop;
+            //border-bottom:    $accordionpael-head-borderbottom;
+        }
+        //body样式
+        & .#{$eui}-accordionpanel-body{
+            position: absolute;
+            top:      $accordionpanel-level2-head-y;
+            bottom:   0;
+            right:    0;
+            left:     0;
+        }
+    }
+}
+//图标及标题样式
+.#{$eui}-accordionpanel-noborder{
+    & .#{$eui}-accordionpanel-head{
+        //折叠箭头图标
+        & .#{$eui}-icon-arrow-right{
+            &:before {
+                @include transform(rotate(-90deg));
+            }
+        }
+        //标题样式
+        & .#{$eui}-accordionpanel-text{
+            font-weight: normal;
+        }
+        //关闭图标
+        & .#{$eui}-icon-close{
+        }
+        //最大化图标
+        & .#{$eui}-icon-max{
+        }
+        //浮起图标
+        & .#{$eui}-icon-float{
+        }
+        //停靠图标
+        & .#{$eui}-icon-unfloat{
+        }
+        //清除浮动
+        &:after{
+            @extend %eui-clear;
+        }
+
+    }
+}
+//展开状态更换箭头图标
+.#{$eui}-accordionpanel-noborder{
+    & .#{$eui}-accordionpanel-unfold{
+        border-bottom:    $accordionpanel-level2-head-borderbottom;
+        //折叠箭头图标
+        & .#{$eui}-icon-arrow-right{
+            &:before{
+                @include transform(rotate(90deg));
+            }
+        }
+    }
+}
+
+//****************折叠面板组件第三套风格--直线分隔*****************//
+
+//右侧图标浮动
+%accordionpanel-line-icon{
+
+}
+
+.#{$eui}-accordionpanel-line{
+
+    & .#{$eui}-accordionpanel-item{
+        position: relative;
+        margin-top: 0px;
+        min-height: $accordionpanel-level2-head-y;
+        //head样式
+        & .#{$eui}-accordionpanel-head{
+            padding-left:     0;
+            padding-right:    0;
+            height:           $accordionpanel-level2-head-y;
+            line-height:      $accordionpanel-level2-head-y;
+            border-top:       $accordionpanel-level2-head-bordertop;
+            background:       transparent;
+            //border-bottom:    $accordionpael-head-borderbottom;
+        }
+        //body样式
+        & .#{$eui}-accordionpanel-body{
+            position: absolute;
+            top:      $accordionpanel-level2-head-y;
+            bottom:   0;
+            right:    0;
+            left:     0;
+        }
+    }
+}
+//图标及标题样式
+.#{$eui}-accordionpanel-line{
+    & .#{$eui}-accordionpanel-head{
+        //标题下的背景线
+        &::before{
+            content:    "";
+            height:     1px;
+            background: $accordionpanel-level3-line-bg;
+            position:   absolute;
+            top:        $accordionpanel-level3-line-top;
+            right:      0;
+            left:       0;
+        }
+        //折叠箭头图标
+        & .#{$eui}-icon-arrow-right{
+            &:before {
+                @include transform(rotate(-90deg));
+                background: $accordionpanel-level3-text-bg;
+            }
+        }
+        //标题样式
+        & .#{$eui}-accordionpanel-text{
+            float:         none;
+            position:      relative;
+            width:         auto;
+            padding-right: $accordionpanel-level3-text-padding-right;
+            background:    $accordionpanel-level3-text-bg;
+        }
+        //关闭图标
+        & .#{$eui}-icon-close{
+            &:before {
+                background: $accordionpanel-level3-text-bg;
+                position: relative;
+                padding-left: 5px;
+            }
+        }
+        //最大化图标
+        & .#{$eui}-icon-max{
+            &:before {
+                background: $accordionpanel-level3-text-bg;
+                position: relative;
+                padding-left: 5px;
+            }
+        }
+        //浮起图标
+        & .#{$eui}-icon-float{
+            &:before {
+                background: $accordionpanel-level3-text-bg;
+                position: relative;
+                padding-left: 5px;
+            }
+        }
+        //停靠图标
+        & .#{$eui}-icon-unfloat{
+            &:before {
+                background: $accordionpanel-level3-text-bg;
+                position: relative;
+                padding-left: 5px;
+            }
+        }
+        //清除浮动
+        &:after{
+            @extend %eui-clear;
+        }
+
+    }
+}
+//展开状态更换箭头图标
+.#{$eui}-accordionpanel-line{
+    & .#{$eui}-accordionpanel-unfold{
+        border-bottom:    $accordionpanel-level2-head-borderbottom;
+        //折叠箭头图标
+        & .#{$eui}-icon-arrow-right{
+            &:before{
+                @include transform(rotate(90deg));
+                background: $accordionpanel-level3-text-bg;
+            }
+        }
+    }
+}

@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+
+.#{$eui}-nodate{
+		//灰色背景
+		&-bg{
+				position: absolute;
+				top:      0;
+				bottom:   0;
+				left:     0;
+				right:    0;
+				background-color: $nodate-bg;
+		}
+		//上下左右居中 内容部分
+		&-container{
+				width:      $nodate-container-x;
+				height:     $nodate-container-y;
+				text-align: center;
+
+				position:    absolute;
+				left:        50%;
+				top:         50%;
+				margin-left: -$nodate-container-x/2;
+				margin-top:  -$nodate-container-y/2;
+				& .#{$eui}-nodate-imgbg{
+						display:    $block;
+						width:      207px;
+						height:     88px;
+						margin:     0 auto;
+						background: url("../../../images/icon/nonedata.png");
+				}
+				& .#{$eui}-nodate-text{
+						display:    $block;
+						margin-top: $nodate-text-top;
+						color:      $nodate-text-color;
+				}
+		}
+}

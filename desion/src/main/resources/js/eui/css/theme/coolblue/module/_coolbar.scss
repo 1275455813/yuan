@@ -1,0 +1,1855 @@
+@charset "utf-8";
+
+//****************工具栏组件默认*****************//
+%item {
+		display:       $inline-block;
+		padding-left:  $coolbar-item-padding-x;
+		padding-right: $coolbar-item-padding-x;
+		color:         $coolbar-textcolor;
+		font-size:     $coolbar-textsize;
+		font-weight:   700;
+		height:        $coolbar-y;
+		line-height:   $coolbar-y;
+		cursor:        pointer;
+		vertical-align: top;
+		@include       transition(all 0.4s ease);
+		transition:    none\0;
+}
+
+.#{$eui}-coolbar-container {
+		position: relative;
+		padding-right: 15px;
+		height:        $coolbar-y;
+		@extend        %clear;
+		//工具栏分组
+		& .#{$eui}-coolbar-group {
+				position:  relative;
+				height:    $coolbar-y;
+				//清除浮动
+				&:after {
+						@extend %eui-clear;
+				}
+				//当工具栏中有几个菜单组合起来使用时，每一个菜单组合后面都会有一个分割线，然而最后1个分割线隐藏
+				& li:nth-last-child(2).#{$eui}-coolbar-line {
+						display: none;
+				}
+		}
+}
+//li 的各种状态
+.#{$eui}-coolbar-container {
+		//工具栏默认
+		& .#{$eui}-coolbar-item {
+				@extend      %item;
+				//滑过
+				&:hover{
+						color:       $coolbar-textcolor-hover;
+						background:  $coolbar-hover-bg;
+						background:  #{$coolbar-hover-bg-ie}\0;
+						@extend      %hover;
+				}
+		}
+
+		//禁用
+		& .#{$eui}-disabled{
+				opacity: 					1;
+				//滑过
+				&,
+				&:hover,
+				& .eui-coolbar-more{
+						color: 						$form-input-text-disabled !important;
+						cursor: 					not-allowed !important;
+				}
+		}
+
+		//选中
+		& .#{$eui}-coolbar-active{
+				color:       $coolbar-textcolor-hover;
+				background:  $coolbar-hover-bg;
+				background:  #{$coolbar-hover-bg-ie}\0;
+				@extend      %active;
+		}
+
+		//菜单组合
+		//分组
+		& .#{$eui}-coolbar-item-group {
+				margin-right: 0;
+				border-radius: 0;
+				//分组
+				& + .#{$eui}-coolbar-item-group {
+						margin-left: -1px;
+				}
+		}
+		//组里面的第一个
+		& .#{$eui}-coolbar-item-group-first {
+
+		}
+		//组里面的最后一个
+		& .#{$eui}-coolbar-item-group-last {
+				//如果全部组隐藏，则分割线也隐藏
+				&.#{$eui}-hide + .#{$eui}-coolbar-line {
+						display: none;
+				}
+		}
+		//分组-分割线
+		& .#{$eui}-coolbar-line {
+				display:       $inline-block;
+				height:        $coolbar-y;
+				line-height:   $coolbar-y;
+				margin-right:  $coolbar-line-marginright;
+		}
+}
+
+//工具栏图标
+.#{$eui}-coolbar-container li {
+		& .#{$eui}-icon {
+				width:           $coolbar-icon-xy;
+				height:          $coolbar-icon-xy;
+				margin-right:    $coolbar-icon-marignright;
+				vertical-align:  top;
+				font-weight:     normal;
+				font-size:       $coolbar-icon-xy;
+				color:           $coolbar-textcolor;
+				@extend          %gradient-none;
+		}
+		& .#{$eui}-icon-img {
+				vertical-align: middle;
+		}
+}
+
+//选中、滑过图标
+.#{$eui}-coolbar-container .#{$eui}-coolbar-active .#{$eui}-icon,
+.#{$eui}-coolbar-container .#{$eui}-coolbar-item:hover .#{$eui}-icon {
+
+}
+
+//工具栏文字
+.#{$eui}-coolbar-container li .#{$eui}-coolbar-item-text {
+
+}
+
+//有2级菜单时候显示
+.#{$eui}-coolbar-container li .#{$eui}-coolbar-more {
+		display:        $inline-block;
+		margin-left:    $coolbar-more-marignleft;
+		font-family:    $icon-font;
+		font-weight:    normal;
+		font-style:     normal;
+		font-size:      $font-size;
+		vertical-align: top;
+		cursor:         pointer;
+		//插入字体图标
+		&:before {
+				content:    "\ef7f";
+				display:    $inline-block;
+				@include    transform(scale(0.75));
+		}
+}
+
+//滑过状态下的 更多按钮
+.#{$eui}-coolbar-container .#{$eui}-coolbar-item:hover .#{$eui}-coolbar-more {
+
+}
+
+//工具栏显示不下出现更多
+.#{$eui}-coolbar-container > .#{$eui}-coolbar-more {
+		position:       absolute;
+		top:            0;
+		right:          0;
+		color:          $coolbar-min-textcolor;
+		cursor:         pointer;
+		padding-right:  $font-size;
+		line-height:    $font-size + 4;
+		&:before {
+				content:     "\ef93";
+				display:     $inline-block;
+				position:    absolute;
+				top:         0;
+				right:       0;
+				font-family: $icon-font;
+				font-size:   $font-size;
+				@include     transform(scale(0.75));
+		}
+		&:hover {
+				color: $coolbar-hover-bg;
+		}
+}
+
+//顶部导航栏 右侧扩展风格 仅支持li上
+.#{$eui}-coolbar-container .#{$eui}-coolbar-item-min {
+		padding-left:  5px;
+		padding-right: 5px;
+		font-weight:   normal;
+		font-size:     $font-size;
+		color:         $coolbar-min-textcolor;
+		& .#{$eui}-coolbar-more {
+				&:before {
+						content: "\ef8d";
+						color: $coolbar-min-textcolor;
+				}
+		}
+}
+
+//顶部导航栏 右侧扩展风格-用户名
+.#{$eui}-coolbar-container .#{$eui}-coolbar-item-user {
+		&:hover {
+				background: none;
+		}
+		& * {
+				vertical-align: middle;
+		}
+		& .#{$eui}-icon {
+				position:         relative;
+				display:          $inline-block;
+				vertical-align:   middle;
+				width:            $coolbar-icon-xy;
+				height:           $coolbar-icon-xy;
+				line-height:      $coolbar-icon-xy;
+				text-align:       center;
+				font-size:        $font-size14;
+				color:            #e6e6e6;
+				//background-color: #4b5f83;
+				border-radius:    100%;
+		}
+}
+
+//顶部导航栏 右侧扩展风格-论坛
+.#{$eui}-coolbar-container .#{$eui}-coolbar-item-mail {
+		&:hover {
+				background: none;
+		}
+		& .#{$eui}-icon {
+				font-size: $font-size16;
+				color: $coolbar-mail-icon-color;
+		}
+}
+
+//顶部导航栏 右侧扩展风格-关于
+.#{$eui}-coolbar-container .#{$eui}-coolbar-item-about {
+		&:hover {
+				background: none;
+		}
+		& .#{$eui}-icon {
+				font-size: $font-size18;
+				color: $coolbar-about-icon-color;
+		}
+}
+
+//工具栏添加 表单组件后替换li 样式
+.#{$eui}-coolbar-container .#{$eui}-coolbar-item-form {
+		display:       $inline-block;
+		padding-top:   7px;
+		padding-left:  $coolbar-item-padding-x;
+		padding-right: $coolbar-item-padding-x;
+		&:hover {
+				background: none;
+		}
+		& .#{$eui}-icon {
+
+		}
+
+}
+
+//****************工具栏组件 垂直排列*****************//
+%verticaltab-item {
+		display:        block;
+		position:       relative;
+		padding-top:    $coolbar-verticaltab-item-paddingy;
+		padding-right:  $coolbar-verticaltab-item-paddingx;
+		padding-bottom: $coolbar-verticaltab-item-paddingy;
+		padding-left:   $coolbar-verticaltab-item-paddingx;
+		color:          $coolbar-verticaltab-textcolor;
+		font-size:      $coolbar-verticaltab-textsize;
+		font-weight:    400;
+		height:         auto;
+		line-height:    $coolbar-verticaltab-item-lineheight;
+		text-align:     center;
+		cursor:         pointer;
+}
+
+.#{$eui}-coolbar-verticaltab {
+		width:          $coolbar-verticaltab-x;
+		height:         100%;
+		background:     $coolbar-verticaltab-bg;
+		//工具栏分组
+		.#{$eui}-coolbar-group {
+				position:   relative;
+				width:      $coolbar-verticaltab-x;
+				height:     100%;
+				//清除浮动
+				&:after {
+						@extend %eui-clear;
+				}
+		}
+}
+//li 的各种状态
+.#{$eui}-coolbar-verticaltab {
+		//工具栏默认
+		& .#{$eui}-coolbar-item {
+				@extend      %verticaltab-item;
+				//滑过
+				&:hover{
+						background:  $coolbar-verticaltab-hover-bg;
+						color:       $coolbar-verticaltab-textcolor-hover;
+						@extend      %hover;
+				}
+		}
+		//按下
+		& .#{$eui}-coolbar-active,
+		& .#{$eui}-coolbar-active:hover {
+				background:  $coolbar-verticaltab-hover-bg;
+				color:       $coolbar-verticaltab-textcolor-hover;
+				@extend      %active;
+		}
+}
+
+//工具栏图标
+.#{$eui}-coolbar-verticaltab li {
+		& .#{$eui}-icon {
+				display:       block;
+				margin-right:  0;
+				margin-bottom: $coolbar-verticaltab-icon-marginbottom;
+				width:         100%;
+				height:        $coolbar-verticaltab-icon-xy;
+				font-size:     $coolbar-verticaltab-icon-xy;
+				line-height:   $coolbar-verticaltab-icon-xy;
+				font-weight:   normal;
+				color:         $coolbar-verticaltab-iconcolor;
+		}
+		& .#{$eui}-icon-img {
+
+		}
+}
+
+//选中、滑过图标
+.#{$eui}-coolbar-verticaltab .#{$eui}-coolbar-active .#{$eui}-icon,
+.#{$eui}-coolbar-verticaltab .#{$eui}-coolbar-item:hover .#{$eui}-icon {
+		color: $coolbar-verticaltab-textcolor-hover;
+}
+
+//工具栏文字
+.#{$eui}-coolbar-verticaltab li .#{$eui}-coolbar-item-text{
+
+}
+
+//有2级菜单时候显示
+.#{$eui}-coolbar-verticaltab li .#{$eui}-coolbar-more {
+		display:     none;
+		margin-top:  $coolbar-verticaltab-more-marigntop;
+		margin-left: 0;
+		font-family: $icon-font;
+		cursor:      pointer;
+		//插入字体图标
+		&:before {
+				content: "\ef7f";
+		}
+}
+
+//滑过状态下的 更多按钮
+.#{$eui}-coolbar-verticaltab .#{$eui}-coolbar-item:hover .#{$eui}-coolbar-more {
+		display: none;
+}
+
+//工具栏显示不下出现更多
+.#{$eui}-coolbar-verticaltab .#{$eui}-coolbar-group > .#{$eui}-coolbar-more {
+		position: absolute;
+		top:      auto;
+		right:    0;
+		bottom:   0;
+		color:    #fff;
+		cursor:   pointer;
+}
+
+
+
+//****************工具栏组件 按钮形式*****************//
+%btn-item {
+		display:        $inline-block;
+		padding-left:   $coolbar-btn-item-padding-x;
+		padding-right:  $coolbar-btn-item-padding-x;
+		margin-right:   5px;
+		border:         1px solid $coolbar-btn-bordercolor;
+		border-radius:  3px;
+		background:     $coolbar-btn-bg;
+		color:          $coolbar-btn-textcolor;
+		font-size:      $coolbar-btn-textsize;
+		font-weight:    normal;
+		height:         $coolbar-btn-y - ($coolbar-btn-padding-top * 2);
+		line-height:    $coolbar-btn-y - ($coolbar-btn-padding-top * 2) - 2;
+		vertical-align: top;
+		cursor:         pointer;
+}
+
+.#{$eui}-coolbar-btn {
+		height:         $coolbar-btn-y;
+		padding:        $coolbar-btn-padding-top $coolbar-btn-padding-left;
+		//工具栏分组
+		.#{$eui}-coolbar-group {
+				position:   relative;
+				height:     100%;
+				//清除浮动
+				&:after {
+						@extend %eui-clear;
+				}
+		}
+}
+//li 的各种状态
+.#{$eui}-coolbar-btn {
+		//工具栏默认
+		& .#{$eui}-coolbar-item {
+				@extend       %btn-item;
+				//滑过
+				&:hover{
+						background:   $coolbar-btn-hover-bg;
+						border-color: $coolbar-btn-bordercolor-hover;
+						@extend       %hover;
+						&,
+						& .#{$eui}-icon {
+								color:        $coolbar-btn-textcolor-hover;
+						}
+
+				}
+		}
+		//禁用
+		& .#{$eui}-disabled{
+			opacity: 					1;
+			//滑过
+			&,
+			&:hover,
+			& .#{$eui}-icon,
+			& .#{$eui}-coolbar-more{
+				color: 						$form-input-text-disabled !important;
+				background-color: $form-input-bg-disabled;
+				border-color:     $form-input-border-disabled;
+				cursor: 					not-allowed !important;
+			}
+		}
+
+		//按下
+		& .#{$eui}-coolbar-active {
+				background:   $coolbar-btn-hover-bg;
+				border-color: $coolbar-btn-bordercolor-hover;
+				@extend       %active;
+				&,
+				& .#{$eui}-icon {
+						color:        $coolbar-btn-textcolor-hover;
+				}
+		}
+
+		//菜单组合
+		//分组
+		& .#{$eui}-coolbar-item-group {
+				margin-right: 0;
+				border-radius: 0;
+				//分组之间去掉间距
+				& + .#{$eui}-coolbar-item-group {
+						margin-left: -1px;
+						//分组选中
+						&.#{$eui}-coolbar-active {
+								border-left-color: rgba(255,255,255,0.5);
+						}
+				}
+		}
+		//组里面的第一个
+		& .#{$eui}-coolbar-item-group-first {
+				border-left-color: $coolbar-btn-bordercolor;
+				border-top-left-radius: 3px;
+				border-bottom-left-radius: 3px;
+		}
+		//组里面的最后一个
+		& .#{$eui}-coolbar-item-group-last {
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+		}
+		//分组-分割线
+		& .#{$eui}-coolbar-line {
+				margin-right:   $coolbar-line-marginright;
+				height:         $coolbar-btn-y - ($coolbar-btn-padding-top * 2);
+				line-height:    $coolbar-btn-y - ($coolbar-btn-padding-top * 2) - 2;
+		}
+}
+
+//工具栏图标
+.#{$eui}-coolbar-btn li {
+		& .#{$eui}-icon {
+				width:            $coolbar-btn-icon-xy;
+				height:           $coolbar-btn-icon-xy;
+				margin-right:     2px;
+				font-weight:      normal;
+				font-size:        $coolbar-btn-icon-xy;
+				color:            $coolbar-btn-textcolor;
+		}
+		& .#{$eui}-icon-img {
+
+		}
+}
+
+
+//选中、滑过图标
+.#{$eui}-coolbar-btn .#{$eui}-coolbar-active .#{$eui}-icon,
+.#{$eui}-coolbar-btn .#{$eui}-coolbar-item:hover .#{$eui}-icon {
+
+}
+
+//工具栏文字
+.#{$eui}-coolbar-btn li .#{$eui}-coolbar-item-text{
+
+}
+
+//有2级菜单时候显示
+.#{$eui}-coolbar-btn li .#{$eui}-coolbar-more {
+		display:          inline-block;
+		margin-left:      $coolbar-more-marignleft;
+		font-family:      $icon-font;
+		font-weight:      normal;
+		font-size:        $font-size;
+		color:            $font-icon-primary;
+		vertical-align:   top;
+		cursor:           pointer;
+		//插入字体图标
+		&:before {
+				content:      "\ef7f";
+		}
+}
+
+//滑过状态下的 更多按钮
+.#{$eui}-coolbar-btn .#{$eui}-coolbar-active .#{$eui}-coolbar-more,
+.#{$eui}-coolbar-btn .#{$eui}-coolbar-item:hover .#{$eui}-coolbar-more {
+		color:    $coolbar-btn-textcolor-hover;
+}
+
+//工具栏显示不下出现更多
+.#{$eui}-coolbar-btn .#{$eui}-coolbar-group > .#{$eui}-coolbar-more {
+		position: absolute;
+		top:      0;
+		right:    0;
+		color:    $text-color;
+		cursor:   pointer;
+}
+
+//工具栏添加 表单组件后替换li 样式
+.#{$eui}-coolbar-btn .#{$eui}-coolbar-item-form {
+		position:      relative;
+		display:       $inline-block;
+		padding-top:   7px;
+		padding-left:  $coolbar-btn-item-padding-x;
+		padding-right: $coolbar-btn-item-padding-x;
+		&:hover {
+				background: none;
+		}
+		& .#{$eui}-icon {
+				margin-right: 0;
+				height: 100%;
+		}
+		& .#{$eui}-picker > div .#{$eui}-icon {
+				height: auto;
+				line-height: $form-input-y;
+		}
+		& .#{$eui}-picker > .#{$eui}-form-select-icon {
+
+		}
+		& .#{$eui}-form-datasearch .#{$eui}-icon {
+				width:  $form-select-icon-x;
+				height: $form-select-icon-x;
+		}
+		& > .#{$eui}-form-checkbox {
+				display:    $block;
+				margin-top: -7px;
+				& .#{$eui}-form-checkbox,
+				& .#{$eui}-form-checked{
+						line-height: $coolbar-btn-y - ($coolbar-btn-padding-top * 2);
+				}
+				& .#{$eui}-form-checkbox {
+						color:       $form-radio-icon-color;
+				}
+		}
+}
+
+//****************工具栏组件 按钮蓝色小风格 （主要用于弹窗中）*****************//
+%btngray-item{
+		display:       $inline-block;
+	padding-left:   6px;
+	padding-right:  6px;
+	margin-right:   5px;
+	border:         1px solid $coolbar-btn-bordercolor;
+	border-radius:  3px;
+	background:     $coolbar-btn-bg;
+	color:          $coolbar-btn-textcolor;
+	font-size:      $coolbar-btn-textsize;
+	font-weight:    normal;
+	height:         $coolbar-btngray-y - ($coolbar-btn-padding-top * 2);
+	line-height:    $coolbar-btngray-y - ($coolbar-btn-padding-top * 2) - 2;
+	vertical-align: top;
+	cursor:         pointer;
+}
+
+.#{$eui}-coolbar-btngray {
+	height:         $coolbar-btn-y;
+	padding:        $coolbar-btn-padding-top $coolbar-btngray-padding-left;
+	//工具栏分组
+	.#{$eui}-coolbar-group {
+		position:   relative;
+		height:     100%;
+		//清除浮动
+		&:after {
+			@extend %eui-clear;
+		}
+	}
+}
+//li 的各种状态
+.#{$eui}-coolbar-btngray {
+		//工具栏默认
+		& .#{$eui}-coolbar-item {
+				@extend       %btngray-item;
+		//滑过
+		&:hover {
+				background:   $coolbar-btn-hover-bg;
+				border-color: $coolbar-btn-bordercolor-hover;
+				color:        $coolbar-btn-textcolor-hover;
+				@extend       %hover;
+				}
+		}
+		//禁用
+		& .#{$eui}-disabled {
+				opacity: 					1;
+				//滑过
+				&,
+				&:hover {
+						color: 						$form-input-text-disabled !important;
+						background-color: $form-input-bg-disabled !important;
+						border-color:     $form-input-border-disabled !important;
+						cursor: 					not-allowed !important;
+				}
+				& .eui-icon{
+						color: 						$form-input-text-disabled !important;
+						cursor: 					not-allowed !important;
+				}
+		}
+
+		//按下
+		& .#{$eui}-coolbar-active{
+				background:   $coolbar-btn-hover-bg;
+				border-color: $coolbar-btn-bordercolor-hover;
+				color:        $coolbar-btn-textcolor-hover;
+				@extend       %active;
+		}
+
+		//菜单组合
+		//分组
+		& .#{$eui}-coolbar-item-group {
+				margin-right: 0;
+				border-radius: 0;
+				//分组之间去掉间距
+				& + .#{$eui}-coolbar-item-group {
+						margin-left: -1px;
+						//分组选中
+						&.#{$eui}-coolbar-active {
+								border-left-color: rgba(255,255,255,0.5);
+						}
+				}
+		}
+		//组里面的第一个
+		& .#{$eui}-coolbar-item-group-first {
+				border-left-color: $coolbar-btn-bordercolor;
+				border-top-left-radius: 3px;
+				border-bottom-left-radius: 3px;
+		}
+		//组里面的最后一个
+		& .#{$eui}-coolbar-item-group-last {
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+		}
+		//分组-分割线
+		& .#{$eui}-coolbar-line {
+				margin-right:   $coolbar-line-marginright;
+				height:         $coolbar-btngray-y - ($coolbar-btn-padding-top * 2);
+				line-height:    $coolbar-btngray-y - ($coolbar-btn-padding-top * 2) - 2;
+		}
+}
+
+//工具栏图标
+.#{$eui}-coolbar-btngray li {
+	& .#{$eui}-icon {
+		width:            $coolbar-btn-icon-xy;
+		height:           $coolbar-btn-icon-xy;
+		margin-right:     2px;
+		font-weight:      normal;
+		font-size:        $coolbar-btn-icon-xy;
+		color:            $coolbar-btn-textcolor;
+	}
+	& .#{$eui}-icon-img {
+
+	}
+}
+
+//选中、滑过图标
+.#{$eui}-coolbar-btngray .#{$eui}-coolbar-active .#{$eui}-icon,
+.#{$eui}-coolbar-btngray .#{$eui}-coolbar-item:hover .#{$eui}-icon {
+	color:        $coolbar-btn-textcolor-hover;
+}
+
+//工具栏文字
+.#{$eui}-coolbar-btngray li .#{$eui}-coolbar-item-text{
+
+}
+
+//有2级菜单时候显示
+.#{$eui}-coolbar-btngray li .#{$eui}-coolbar-more {
+	display:          inline-block;
+	margin-left:      $coolbar-more-marignleft;
+	font-family:      $icon-font;
+	font-weight:      normal;
+	font-size:        $font-size;
+	color:            $font-icon-color;
+	vertical-align:   top;
+	cursor:           pointer;
+	//插入字体图标
+	&:before {
+		content:      "\ef7f";
+	}
+}
+
+//滑过状态下的 更多按钮
+.#{$eui}-coolbar-btngray .#{$eui}-coolbar-active .#{$eui}-coolbar-more,
+.#{$eui}-coolbar-btngray .#{$eui}-coolbar-item:hover .#{$eui}-coolbar-more {
+	color:    $coolbar-btn-textcolor-hover;
+}
+
+//工具栏显示不下出现更多
+.#{$eui}-coolbar-btngray .#{$eui}-coolbar-group > .#{$eui}-coolbar-more {
+	position: absolute;
+	top:      0;
+	right:    0;
+	color:    $text-color;
+	cursor:   pointer;
+}
+
+//工具栏添加 表单组件后替换li 样式
+.#{$eui}-coolbar-btngray .#{$eui}-coolbar-item-form {
+		display:       $inline-block;
+		padding-top:   7px;
+		padding-left:  $coolbar-btn-item-padding-x;
+		padding-right: $coolbar-btn-item-padding-x;
+		&:hover {
+				background: none;
+		}
+		& .#{$eui}-icon {
+
+		}
+}
+
+
+//****************工具栏组件 传统图标型*****************//
+%tradition-item{
+		display:        $inline-block;
+		padding-left:   $coolbar-tradition-item-padding-x;
+		padding-right:  $coolbar-tradition-item-padding-x;
+		border:         1px solid $coolbar-tradition-bg;
+		background:     $coolbar-tradition-bg;
+		color:          $coolbar-tradition-textcolor;
+		font-size:      $coolbar-tradition-textsize;
+		font-weight:    normal;
+		height:         $coolbar-tradition-item-y;
+		line-height:    $coolbar-tradition-item-y;
+		vertical-align: top;
+		cursor:         pointer;
+}
+
+.#{$eui}-coolbar-tradition {
+		height:        $coolbar-tradition-y;
+		padding-top:   ($coolbar-tradition-y - $coolbar-tradition-item-y) / 2;
+		//工具栏分组
+		.#{$eui}-coolbar-group {
+				position:  relative;
+				height:    $coolbar-tradition-item-y;
+				//清除浮动
+				&:after {
+						@extend %eui-clear;
+				}
+		}
+}
+//li 的各种状态
+.#{$eui}-coolbar-tradition {
+		//工具栏默认
+		& .#{$eui}-coolbar-item {
+				@extend     %tradition-item;
+				//滑过
+				&:hover {
+						background: $coolbar-tradition-hover-bg;
+						color:      $coolbar-tradition-textcolor-hover;
+						@extend     %hover;
+				}
+		}
+		//禁用
+		& .#{$eui}-disabled{
+				opacity: 					1;
+				//滑过
+				&,
+				&:hover,
+				& .#{$eui}-icon,
+				& .#{$eui}-coolbar-more{
+						color: 						$form-input-text-disabled !important;
+						cursor: 					not-allowed !important;
+				}
+				& .#{$eui}-picker-color-content{
+						opacity: 0.2;
+						cursor:  not-allowed !important;
+				}
+		}
+		//按下
+		& .#{$eui}-coolbar-active {
+				background:    $coolbar-tradition-active-bg;
+				border:        1px solid $coolbar-tradition-active-border;
+				color:         $coolbar-tradition-textcolor-hover;
+				@extend        %active;
+		}
+		& .#{$eui}-coolbar-active + .#{$eui}-coolbar-active {
+				margin-left:   -1px;
+		}
+
+		//菜单组合
+		//分组
+		& .#{$eui}-coolbar-item-group {
+				margin-right: 0;
+				border-radius: 0;
+				border:         1px solid $coolbar-group-bordercolor;
+				background:     transparent;
+				color:          $coolbar-btn-textcolor;
+				//分组之间去掉间距
+				& + .#{$eui}-coolbar-item-group {
+						margin-left: -1px;
+						&.#{$eui}-coolbar-active {
+						}
+				}
+				//分组选中
+				&.#{$eui}-coolbar-active {
+						background:   $coolbar-group-hover-bg;
+						border-color: $coolbar-group-bordercolor-hover;
+						&:hover {
+								& .#{$eui}-icon,
+								& .#{$eui}-coolbar-item-text {
+
+								}
+						}
+						& .#{$eui}-icon,
+						& .#{$eui}-coolbar-item-text {
+
+						}
+						& + .#{$eui}-coolbar-item-group{
+								border-left-color: $coolbar-group-bordercolor-hover;
+						}
+				}
+				&:hover{
+						border-color: $coolbar-group-bordercolor-hover;
+				}
+		}
+		//组里面的第一个
+		& .#{$eui}-coolbar-item-group-first {
+		}
+		//组里面的最后一个
+		& .#{$eui}-coolbar-item-group-last {
+		}
+		//分组-分割线
+		& .#{$eui}-coolbar-line {
+				margin-right:   $coolbar-line-marginright;
+				height:         $coolbar-tradition-item-y;
+				line-height:    $coolbar-tradition-item-y;
+		}
+		& .#{$eui}-coolbar-line + .eui-coolbar-line{
+				margin-right: 0;
+		}
+}
+
+//工具栏图标
+.#{$eui}-coolbar-tradition li {
+		& .#{$eui}-icon {
+				width:          $coolbar-tradition-icon-xy;
+				height:         $coolbar-tradition-icon-xy;
+				margin-left:    2px;
+				margin-right:   2px;
+				font-weight:    normal;
+				font-size:      $coolbar-tradition-icon-xy;
+				//图标渐变
+				@include gradient($font-icon-color);
+				color: transparent;
+				color:          #{$coolbar-tradition-icon-color}\0;
+		}
+		.#{$eui}-icon-grayblue {
+				@include gradient($font-icon-grayblue);
+				-webkit-background-clip: text;
+				color: transparent;
+				color: #{$font-icon-grayblueIE}\0;
+		}
+		& .#{$eui}-icon-img {
+				vertical-align: text-top;
+		}
+}
+
+//选中、滑过图标
+.#{$eui}-coolbar-tradition .#{$eui}-coolbar-active .#{$eui}-icon,
+.#{$eui}-coolbar-tradition .#{$eui}-coolbar-item:hover .#{$eui}-icon {
+		color:          $coolbar-tradition-textcolor-hover;
+}
+
+//工具栏文字
+.#{$eui}-coolbar-tradition li .#{$eui}-coolbar-item-text{
+
+}
+
+//有2级菜单时候显示
+.#{$eui}-coolbar-tradition li .#{$eui}-coolbar-more {
+		display:        $inline-block;
+		margin-left:    $coolbar-more-marignleft;
+		font-family:    $icon-font;
+		font-weight:    normal;
+		font-size:      $font-size;
+		color:          $coolbar-tradition-more-color;
+		vertical-align: top;
+		cursor:         pointer;
+		//插入字体图标
+		&:before {
+				content: "\ef7f";
+		}
+}
+
+//滑过状态下的 更多按钮
+.#{$eui}-coolbar-tradition .#{$eui}-coolbar-active .#{$eui}-coolbar-more,
+.#{$eui}-coolbar-tradition .#{$eui}-coolbar-item:hover .#{$eui}-coolbar-more {
+		color:         $coolbar-tradition-textcolor-hover;
+}
+
+//工具栏显示不下出现更多
+.#{$eui}-coolbar-tradition .#{$eui}-coolbar-group > .#{$eui}-coolbar-more {
+		position:      absolute;
+		top:           0;
+		right:         0;
+		color:         #333;
+		cursor:        pointer;
+}
+
+//工具栏添加 表单组件后替换li 样式
+.#{$eui}-coolbar-tradition .#{$eui}-coolbar-item-form {
+		display:       $inline-block;
+		padding-top:   0;
+		padding-left:  $coolbar-tradition-item-padding-x;
+		padding-right: $coolbar-tradition-item-padding-x;
+		vertical-align: top;
+		&:hover {
+				background: none;
+		}
+		& .#{$eui}-icon {
+				margin-left:  0;
+				margin-right: 0;
+				height:       100%;
+		}
+		& .#{$eui}-form-search {
+				& .#{$eui}-icon {
+						width:  $form-select-icon-x;
+						height: $form-select-icon-x;
+						color:  $form-select-icon-color;
+				}
+				& .eui-icon-cleartext {
+						color: $text-color;
+				}
+		}
+		& .#{$eui}-form-select {
+				padding-right: $coolbar-tradition-icon-xy;
+				& > input:first-child {
+
+				}
+				& > .#{$eui}-form-select-icon {
+						color: $coolbar-tradition-more-color;
+				}
+		}
+		& .#{$eui}-picker > div .#{$eui}-icon {
+				height:      auto;
+				color:       $coolbar-tradition-icon-color;
+				line-height: $form-input-y;
+		}
+		& .#{$eui}-picker > .#{$eui}-form-select-icon {
+
+		}
+		& .#{$eui}-form-datasearch .#{$eui}-icon {
+				width:  $form-select-icon-x;
+				height: $form-select-icon-x;
+				background-image: none;
+				color:  $form-select-icon-color;
+		}
+		//嵌套开关组件
+		& .#{$eui}-form-switch {
+				& i {
+						width:  42px;
+						height: 100%;
+						background-image: none;
+				}
+		}
+		//离拾取的小三角太远，所以把右边外边距去掉
+		& .#{$eui}-picker-tool > div{
+				margin-right: 0;
+		}
+}
+
+//****************工具栏组件 传统图标型-黑色、使用范围（悬浮工具条）*****************//
+%traditionblack-item{
+		display:        $inline-block;
+		padding-left:   $coolbar-traditionblack-item-padding-x;
+		padding-right:  $coolbar-traditionblack-item-padding-x;
+		border:         1px solid $coolbar-traditionblack-bg;
+		background:     $coolbar-traditionblack-bg;
+		color:          $coolbar-traditionblack-textcolor;
+		font-size:      $coolbar-traditionblack-textsize;
+		font-weight:    normal;
+		height:         $coolbar-traditionblack-item-y;
+		line-height:    $coolbar-traditionblack-item-y;
+		vertical-align: top;
+		cursor:         pointer;
+}
+
+.#{$eui}-coolbar-traditionblack {
+		height:        $coolbar-traditionblack-y;
+		padding-top:   ($coolbar-traditionblack-y - $coolbar-traditionblack-item-y) / 2;
+		//工具栏分组
+		.#{$eui}-coolbar-group {
+				position:  relative;
+				height:    $coolbar-traditionblack-item-y;
+				//清除浮动
+				&:after {
+						@extend %eui-clear;
+				}
+		}
+}
+//li 的各种状态
+.#{$eui}-coolbar-traditionblack {
+		//工具栏默认
+		& .#{$eui}-coolbar-item {
+				@extend     %traditionblack-item;
+				//滑过
+				&:hover {
+						background: $coolbar-traditionblack-hover-bg;
+						color:      $coolbar-traditionblack-textcolor-hover;
+						@extend     %hover;
+				}
+		}
+		//按下
+		& .#{$eui}-coolbar-active {
+				background:    $coolbar-traditionblack-active-bg;
+				border:        1px solid $coolbar-traditionblack-active-border;
+				color:         $coolbar-traditionblack-textcolor-hover;
+				@extend        %active;
+		}
+		& .#{$eui}-coolbar-active + .#{$eui}-coolbar-active {
+				margin-left:   -1px;
+		}
+
+		//菜单组合
+		//分组
+		& .#{$eui}-coolbar-item-group {
+
+				//分组
+				& + .#{$eui}-coolbar-item-group {
+
+				}
+		}
+		//组里面的第一个
+		& .#{$eui}-coolbar-item-group-first {
+
+		}
+		//组里面的最后一个
+		& .#{$eui}-coolbar-item-group-last {
+
+		}
+		//分组-分割线
+		& .#{$eui}-coolbar-line {
+				height:         $coolbar-btngray-y - ($coolbar-btn-padding-top * 2);
+				line-height:    $coolbar-btngray-y - ($coolbar-btn-padding-top * 2) - 2;
+		}
+}
+
+//工具栏图标
+.#{$eui}-coolbar-traditionblack li {
+		& .#{$eui}-icon {
+				width:          $coolbar-traditionblack-icon-xy;
+				height:         $coolbar-traditionblack-icon-xy;
+				margin-left:    2px;
+				margin-right:   2px;
+				font-weight:    normal;
+				color:          $coolbar-traditionblack-icon-color;
+				font-size:      $coolbar-traditionblack-icon-xy;
+		}
+		& .#{$eui}-icon-img {
+				vertical-align: text-top;
+		}
+}
+
+//选中、滑过图标
+.#{$eui}-coolbar-traditionblack .#{$eui}-coolbar-active .#{$eui}-icon,
+.#{$eui}-coolbar-traditionblack .#{$eui}-coolbar-item:hover .#{$eui}-icon {
+		color:          $coolbar-traditionblack-textcolor-hover;
+}
+
+//工具栏文字
+.#{$eui}-coolbar-traditionblack li .#{$eui}-coolbar-item-text{
+
+}
+
+//有2级菜单时候显示
+.#{$eui}-coolbar-traditionblack li .#{$eui}-coolbar-more {
+		display:        $inline-block;
+		margin-left:    0;
+		font-family:    $icon-font;
+		font-weight:    normal;
+		font-size:      $font-size;
+		color:          $coolbar-traditionblack-more-color;
+		vertical-align: top;
+		cursor:         pointer;
+		//插入字体图标
+		&:before {
+				content: "\ef7f";
+		}
+}
+
+//滑过状态下的 更多按钮
+.#{$eui}-coolbar-traditionblack .#{$eui}-coolbar-active .#{$eui}-coolbar-more,
+.#{$eui}-coolbar-traditionblack .#{$eui}-coolbar-item:hover .#{$eui}-coolbar-more {
+		color:         $coolbar-traditionblack-textcolor-hover;
+}
+
+//工具栏显示不下出现更多
+.#{$eui}-coolbar-traditionblack .#{$eui}-coolbar-group > .#{$eui}-coolbar-more {
+		position:      absolute;
+		top:           0;
+		right:         0;
+		color:         #333;
+		cursor:        pointer;
+}
+
+//工具栏添加 表单组件后替换li 样式
+.#{$eui}-coolbar-traditionblack .#{$eui}-coolbar-item-form {
+		display:       $inline-block;
+		padding-top:   0;
+		padding-left:  $coolbar-traditionblack-item-padding-x;
+		padding-right: $coolbar-traditionblack-item-padding-x;
+		vertical-align: top;
+		&:hover {
+				background: none;
+		}
+		& .#{$eui}-icon {
+				margin-left:  0;
+				margin-right: 0;
+				height:       100%;
+		}
+		& .#{$eui}-form-search {
+				& .#{$eui}-icon {
+						width:  $form-select-icon-x;
+						height: $form-select-icon-x;
+				}
+				& .eui-icon-cleartext {
+						color: $text-color;
+				}
+		}
+		& .#{$eui}-form-select {
+				padding-right: $coolbar-tradition-icon-xy;
+				& > input:first-child {
+
+				}
+		}
+		& .#{$eui}-picker > div .#{$eui}-icon {
+				height:      auto;
+				color:       $coolbar-traditionblack-icon-color;
+				line-height: $form-input-y;
+		}
+		& .#{$eui}-picker > .#{$eui}-form-select-icon {
+				color: $coolbar-traditionblack-more-color;
+		}
+		& .#{$eui}-form-datasearch .#{$eui}-icon {
+				width:  $form-select-icon-x;
+				height: $form-select-icon-x;
+		}
+		//离拾取的小三角太远，所以把右边外边距去掉
+		& .#{$eui}-picker-tool > div{
+				margin-right: 0;
+		}
+}
+
+//****************工具栏组件 传统图标型-黑色mini、使用范围（公式定义向导）*****************//
+%traditionblackmini-item {
+		display:        $inline-block;
+		padding-left:   $coolbar-traditionblackmini-item-padding-x;
+		padding-right:  $coolbar-traditionblackmini-item-padding-x;
+		border:         $coolbar-traditionblackmini-border;
+		background:     $coolbar-traditionblackmini-bg;
+		color:          $coolbar-traditionblackmini-textcolor;
+		font-size:      $coolbar-traditionblackmini-textsize;
+		font-family:    $coolbar-traditionblackmini-font-family;
+		font-weight:    normal;
+		height:         $coolbar-traditionblackmini-item-y;
+		line-height:    $coolbar-traditionblackmini-item-y;
+		vertical-align: top;
+		cursor:         pointer;
+}
+
+.#{$eui}-coolbar-traditionblackmini {
+		height:        $coolbar-traditionblackmini-y;
+		padding-top:   ($coolbar-traditionblackmini-y - $coolbar-traditionblackmini-item-y) / 2;
+		padding-left:  $coolbar-traditionblackmini-padding-x;
+		padding-right: $coolbar-traditionblackmini-padding-x;
+		//工具栏分组
+		.#{$eui}-coolbar-group {
+				position:  relative;
+				height:    $coolbar-traditionblackmini-item-y;
+				//清除浮动
+				&:after {
+						@extend %eui-clear;
+				}
+		}
+}
+//li 的各种状态
+.#{$eui}-coolbar-traditionblackmini {
+		//工具栏默认
+		& .#{$eui}-coolbar-item {
+				margin-left:   -1px;
+				@extend     %traditionblackmini-item;
+				//滑过
+				&:hover {
+						background: $coolbar-traditionblackmini-hover-bg;
+						border:     $coolbar-traditionblackmini-hover-border;
+						color:      $coolbar-traditionblackmini-textcolor-hover;
+						@extend     %hover;
+				}
+		}
+		//按下
+		& .#{$eui}-coolbar-active {
+				background:    $coolbar-traditionblackmini-active-bg;
+				border:        $coolbar-traditionblackmini-active-border;
+				color:         $coolbar-traditionblackmini-textcolor-hover;
+				@extend        %active;
+		}
+		& .#{$eui}-coolbar-active + .#{$eui}-coolbar-active {
+
+		}
+
+		//菜单组合
+		//分组
+		& .#{$eui}-coolbar-item-group {
+
+				//分组
+				& + .#{$eui}-coolbar-item-group {
+
+				}
+		}
+		//组里面的第一个
+		& .#{$eui}-coolbar-item-group-first {
+
+		}
+		//组里面的最后一个
+		& .#{$eui}-coolbar-item-group-last {
+
+		}
+		//分组-分割线
+		& .#{$eui}-coolbar-line {
+				height:         $coolbar-traditionblackmini-item-y;
+				line-height:    $coolbar-traditionblackmini-item-y;
+		}
+}
+
+//工具栏图标
+.#{$eui}-coolbar-traditionblackmini li {
+		& .#{$eui}-icon {
+				width:          $coolbar-traditionblackmini-icon-xy;
+				height:         $coolbar-traditionblackmini-icon-xy;
+				margin-left:    2px;
+				margin-right:   2px;
+				font-weight:    normal;
+				color:          $coolbar-traditionblackmini-icon-color;
+				font-size:      $coolbar-traditionblackmini-icon-xy;
+		}
+		& .#{$eui}-icon-img {
+				vertical-align: text-top;
+		}
+}
+
+//选中、滑过图标
+.#{$eui}-coolbar-traditionblackmini .#{$eui}-coolbar-active .#{$eui}-icon,
+.#{$eui}-coolbar-traditionblackmini .#{$eui}-coolbar-item:hover .#{$eui}-icon {
+		color:          $coolbar-traditionblackmini-textcolor-hover;
+}
+
+//工具栏文字
+.#{$eui}-coolbar-traditionblackmini li .#{$eui}-coolbar-item-text{
+
+}
+
+//有2级菜单时候显示
+.#{$eui}-coolbar-traditionblackmini li .#{$eui}-coolbar-more {
+		display:        $inline-block;
+		margin-left:    0;
+		font-family:    $icon-font;
+		font-weight:    normal;
+		font-size:      $font-size;
+		color:          $coolbar-traditionblackmini-more-color;
+		vertical-align: top;
+		cursor:         pointer;
+		//插入字体图标
+		&:before {
+				content: "\ef7f";
+		}
+}
+
+//滑过状态下的 更多按钮
+.#{$eui}-coolbar-traditionblackmini .#{$eui}-coolbar-active .#{$eui}-coolbar-more,
+.#{$eui}-coolbar-traditionblackmini .#{$eui}-coolbar-item:hover .#{$eui}-coolbar-more {
+		color:         $coolbar-traditionblackmini-textcolor-hover;
+}
+
+//工具栏显示不下出现更多
+.#{$eui}-coolbar-traditionblackmini .#{$eui}-coolbar-group > .#{$eui}-coolbar-more {
+		position:      absolute;
+		top:           0;
+		right:         0;
+		color:         #333;
+		cursor:        pointer;
+}
+
+//工具栏添加 表单组件后替换li 样式
+.#{$eui}-coolbar-traditionblackmini .#{$eui}-coolbar-item-form {
+		display:       $inline-block;
+		padding-top:   0;
+		padding-left:  $coolbar-traditionblackmini-item-padding-x - 2;
+		padding-right: $coolbar-traditionblackmini-item-padding-x - 2;
+		vertical-align: top;
+		&:hover {
+				background: none;
+		}
+		& .#{$eui}-icon {
+				margin-left:  0;
+				margin-right: 0;
+				height:       100%;
+		}
+		& .#{$eui}-form-search {
+				& .#{$eui}-icon {
+						width:  $form-select-icon-x;
+						height: $form-select-icon-x;
+				}
+				& .eui-icon-cleartext {
+						color: $text-color;
+				}
+		}
+		& .#{$eui}-form-select {
+				height:      $coolbar-traditionblackmini-item-y;
+				line-height: $coolbar-traditionblackmini-item-y;
+				& > input:first-child {
+						height:     100%;
+						border:     $coolbar-iconmini-border;
+						background: $coolbar-iconmini-bg;
+				}
+		}
+		& .#{$eui}-picker > div .#{$eui}-icon {
+				height:      auto;
+				color:       $coolbar-traditionblackmini-icon-color;
+				line-height: $form-s-input-y;
+		}
+		& .#{$eui}-picker > .#{$eui}-form-select-icon {
+				color: $coolbar-traditionblackmini-more-color;
+		}
+		& .#{$eui}-form-datasearch .#{$eui}-icon {
+				width:  $form-select-icon-x;
+				height: $form-select-icon-x;
+		}
+		.#{$eui}-picker-color {
+
+				& > div .#{$eui}-picker-color-content {
+						& .#{$eui}-picker-color-show{
+								bottom: -2px;
+						}
+				}
+		}
+}
+
+
+//****************工具栏组件 传统黑色(ppt)图标型*****************//
+%traditionppt-item{
+		display:        $inline-block;
+		padding-top:    ($coolbar-traditionppt-y - $coolbar-traditionppt-item-y) / 2;
+		padding-bottom: ($coolbar-traditionppt-y - $coolbar-traditionppt-item-y) / 2;
+		padding-left:   $coolbar-traditionppt-item-padding-x;
+		padding-right:  $coolbar-traditionppt-item-padding-x;
+		color:          $coolbar-traditionppt-textcolor;
+		font-size:      $coolbar-traditionppt-textsize;
+		font-weight:    normal;
+		height:         $coolbar-traditionppt-y;
+		line-height:    $coolbar-traditionppt-item-y;
+		vertical-align: top;
+		cursor:         pointer;
+}
+
+.#{$eui}-coolbar-traditionppt {
+		height:        $coolbar-traditionppt-y;
+
+		//工具栏分组
+		.#{$eui}-coolbar-group {
+				position:  relative;
+				height:    $coolbar-traditionppt-item-y;
+				//清除浮动
+				&:after {
+						@extend %eui-clear;
+				}
+		}
+}
+//li 的各种状态
+.#{$eui}-coolbar-traditionppt {
+		//工具栏默认
+		& .#{$eui}-coolbar-item {
+				@extend     %traditionppt-item;
+				//滑过
+				&:hover {
+						background: $coolbar-traditionppt-hover-bg;
+						color:      $coolbar-traditionppt-textcolor-hover;
+						/*@extend     %hover;*/
+				}
+				& .#{$eui}-icon{
+						@include gradient($font-icon-color);
+						-webkit-background-clip: text;
+						//-webkit-text-fill-color: transparent;
+						color: transparent;
+						color: #{$font-icon-colorIE}\0;
+				}
+		}
+		//禁用
+		& .#{$eui}-disabled{
+				opacity: 1;
+
+				//滑过
+				&,
+				&:hover,
+				& .#{$eui}-icon,
+				& .#{$eui}-coolbar-more{
+						color:  $form-input-text-disabled !important;
+						cursor: not-allowed !important;
+				}
+		}
+		//按下
+		& .#{$eui}-coolbar-active {
+				background:    $coolbar-traditionppt-active-bg;
+				border-left:   1px solid $coolbar-traditionppt-active-border;
+				border-right:  1px solid $coolbar-traditionppt-active-border;
+				color:         $coolbar-traditionppt-textcolor-hover;
+				@extend        %active;
+		}
+		& .#{$eui}-coolbar-active + .#{$eui}-coolbar-active {
+				margin-left:   -1px;
+		}
+
+		//菜单组合
+		//分组
+		& .#{$eui}-coolbar-item-group {
+
+				//分组
+				& + .#{$eui}-coolbar-item-group {
+
+				}
+		}
+		//组里面的第一个
+		& .#{$eui}-coolbar-item-group-first {
+
+		}
+		//组里面的最后一个
+		& .#{$eui}-coolbar-item-group-last {
+
+		}
+		//分组-分割线
+		& .#{$eui}-coolbar-line {
+				height:         $coolbar-traditionppt-y;
+				line-height:    $coolbar-traditionppt-item-y;
+		}
+}
+
+//工具栏图标
+.#{$eui}-coolbar-traditionppt li {
+		& .#{$eui}-icon {
+				width:          $coolbar-traditionppt-icon-xy;
+				height:         $coolbar-traditionppt-icon-xy;
+				margin-left:    2px;
+				margin-right:   2px;
+				font-weight:    normal;
+				color:          $coolbar-traditionppt-icon-color;
+				font-size:      $coolbar-traditionppt-icon-xy;
+				@include gradient($font-icon-color);
+		}
+		& .#{$eui}-icon-img {
+				vertical-align: text-top;
+		}
+}
+
+//选中、滑过图标
+.#{$eui}-coolbar-traditionppt .#{$eui}-coolbar-active .#{$eui}-icon,
+.#{$eui}-coolbar-traditionppt .#{$eui}-coolbar-item:hover .#{$eui}-icon {
+		color:          $coolbar-traditionppt-textcolor-hover;
+}
+
+//工具栏文字
+.#{$eui}-coolbar-traditionppt li .#{$eui}-coolbar-item-text{
+
+}
+
+//有2级菜单时候显示
+.#{$eui}-coolbar-traditionppt li .#{$eui}-coolbar-more {
+		display:        $inline-block;
+		margin-left:    $coolbar-more-marignleft;
+		font-family:    $icon-font;
+		font-weight:    normal;
+		font-size:      $font-size;
+		color:          $coolbar-traditionppt-more-color;
+		vertical-align: top;
+		cursor:         pointer;
+		//插入字体图标
+		&:before {
+				content: "\ef7f";
+		}
+}
+
+//滑过状态下的 更多按钮
+.#{$eui}-coolbar-traditionppt .#{$eui}-coolbar-active .#{$eui}-coolbar-more,
+.#{$eui}-coolbar-traditionppt .#{$eui}-coolbar-item:hover .#{$eui}-coolbar-more {
+		color:         $coolbar-traditionppt-textcolor-hover;
+}
+
+//工具栏显示不下出现更多
+.#{$eui}-coolbar-traditionppt .#{$eui}-coolbar-group > .#{$eui}-coolbar-more {
+		position:      absolute;
+		top:           0;
+		right:         0;
+		color:         #333;
+		cursor:        pointer;
+}
+
+//工具栏添加 表单组件后替换li 样式
+.#{$eui}-coolbar-traditionppt .#{$eui}-coolbar-item-form {
+		display:       $inline-block;
+		padding-top:   ($coolbar-traditionppt-y - $coolbar-traditionppt-item-y) / 2;
+		padding-left:  $coolbar-traditionppt-item-padding-x;
+		padding-right: $coolbar-traditionppt-item-padding-x;
+		vertical-align: top;
+		&:hover {
+				background: none;
+		}
+		& .#{$eui}-icon {
+				margin-left:  0;
+				margin-right: 0;
+				height:       100%;
+		}
+		& .#{$eui}-form-search {
+				& .#{$eui}-icon {
+						width:  $form-select-icon-x;
+						height: $form-select-icon-x;
+				}
+				& .eui-icon-cleartext {
+						color: $text-color;
+				}
+		}
+		& .#{$eui}-picker > div .#{$eui}-icon {
+				height:      auto;
+				color:       $coolbar-traditionppt-icon-color;
+				line-height: $form-input-y;
+		}
+		& .#{$eui}-picker > .#{$eui}-form-select-icon {
+				color: $coolbar-traditionppt-more-color;
+		}
+		& .#{$eui}-form-datasearch .#{$eui}-icon {
+				width:  $form-select-icon-x;
+				height: $form-select-icon-x;
+		}
+		//文字和字号 和小三角断开，所以改小
+		& .#{$eui}-form-select{
+				padding-right: 16px;
+		}
+		//离拾取的小三角太远，所以把右边外边距去掉
+		& .#{$eui}-picker-tool > div{
+				margin-right: 0;
+		}
+}
+
+//****************工具栏组件 属性面板专用小型*****************//
+%icon-mini-item {
+		display:       $inline-block;
+		padding-left:   $coolbar-iconmini-item-padding-x;
+		padding-right:  $coolbar-iconmini-item-padding-x;
+		border:         $coolbar-iconmini-border;
+		background:     $coolbar-iconmini-bg;
+		color:          $coolbar-iconmini-textcolor;
+		font-size:      $coolbar-iconmini-textsize;
+		font-weight:    normal;
+		height:         $coolbar-iconmini-item-y;
+		line-height:    $coolbar-iconmini-item-y;
+		vertical-align: top;
+		cursor:         pointer;
+}
+
+.#{$eui}-coolbar-iconmini {
+		height:        $coolbar-iconmini-y;
+		padding-top:   ($coolbar-iconmini-y - $coolbar-iconmini-item-y) / 2;
+		//工具栏分组
+		.#{$eui}-coolbar-group {
+				position:  relative;
+				height:    $coolbar-iconmini-item-y;
+				//清除浮动
+				&:after {
+						@extend %eui-clear;
+				}
+		}
+}
+//li 的各种状态
+.#{$eui}-coolbar-iconmini {
+		//工具栏默认
+		& .#{$eui}-coolbar-item {
+				@extend %icon-mini-item;
+				//滑过
+				&:hover {
+						border:     $coolbar-iconmini-active-border;
+						background: $coolbar-iconmini-hover-bg;
+						color:      $coolbar-iconmini-textcolor-hover;
+						@extend     %hover;
+				}
+		}
+		//按下
+		& .#{$eui}-coolbar-active {
+				position:      relative;
+				background:    $coolbar-iconmini-active-bg;
+				border:        $coolbar-iconmini-active-border;
+				color:         $coolbar-iconmini-textcolor-hover;
+				@extend        %active;
+		}
+		& .#{$eui}-coolbar-active + .#{$eui}-coolbar-active {
+
+		}
+
+		//菜单组合
+		//分组
+		& .#{$eui}-coolbar-item-group {
+
+				//分组
+				& + .#{$eui}-coolbar-item-group {
+
+				}
+		}
+		//组里面的第一个
+		& .#{$eui}-coolbar-item-group-first {
+
+		}
+		//组里面的最后一个
+		& .#{$eui}-coolbar-item-group-last {
+
+		}
+		//分组-分割线
+		& .#{$eui}-coolbar-line {
+				height:         $coolbar-iconmini-item-y;
+				line-height:    $coolbar-iconmini-item-y;
+		}
+}
+
+//工具栏图标
+.#{$eui}-coolbar-iconmini li {
+		& .#{$eui}-icon {
+				width:          $coolbar-iconmini-icon-xy;
+				height:         $coolbar-iconmini-icon-xy;
+				margin-left:    2px;
+				margin-right:   2px;
+				font-weight:    normal;
+				color:          $coolbar-iconmini-icon-color;
+				font-size:      $coolbar-iconmini-icon-xy;
+		}
+		& .#{$eui}-icon-img {
+				vertical-align: text-top;
+		}
+}
+
+//选中、滑过图标
+.#{$eui}-coolbar-iconmini .#{$eui}-coolbar-active .#{$eui}-icon,
+.#{$eui}-coolbar-iconmini .#{$eui}-coolbar-item:hover .#{$eui}-icon {
+		color:          $coolbar-iconmini-textcolor-hover;
+}
+
+//工具栏文字
+.#{$eui}-coolbar-iconmini li .#{$eui}-coolbar-item-text{
+
+}
+
+//有2级菜单时候显示
+.#{$eui}-coolbar-iconmini li .#{$eui}-coolbar-more {
+		display:        $inline-block;
+		margin-left:    $coolbar-more-marignleft;
+		font-family:    $icon-font;
+		font-weight:    normal;
+		font-size:      $font-size;
+		color:          $coolbar-iconmini-more-color;
+		vertical-align: top;
+		cursor:         pointer;
+		//插入字体图标
+		&:before {
+				content: "\ef7f";
+		}
+}
+
+//滑过状态下的 更多按钮
+.#{$eui}-coolbar-iconmini .#{$eui}-coolbar-active .#{$eui}-coolbar-more,
+.#{$eui}-coolbar-iconmini .#{$eui}-coolbar-item:hover .#{$eui}-coolbar-more {
+		color:         $coolbar-iconmini-textcolor-hover;
+}
+
+//工具栏显示不下出现更多
+.#{$eui}-coolbar-iconmini .#{$eui}-coolbar-group > .#{$eui}-coolbar-more {
+		position:      absolute;
+		top:           0;
+		right:         0;
+		color:         #333;
+		cursor:        pointer;
+}
+
+//工具栏添加 表单组件后替换li 样式
+.#{$eui}-coolbar-iconmini {
+		& .#{$eui}-coolbar-item-form {
+				display:       $inline-block;
+				padding-top:   0;
+				padding-left:  $coolbar-iconmini-item-padding-x;
+				padding-right: $coolbar-iconmini-item-padding-x;
+				vertical-align: top;
+				&:first-child {
+						padding-left: 0;
+				}
+				&:hover {
+						background: none;
+				}
+				& .#{$eui}-icon {
+						margin-left:  0;
+						margin-right: 0;
+						height:       100%;
+				}
+				& .#{$eui}-form-search {
+						& .#{$eui}-icon {
+								width:  $form-select-icon-x;
+								height: $form-select-icon-x;
+						}
+						& .eui-icon-cleartext {
+								color: $text-color;
+						}
+				}
+				& .#{$eui}-form-select {
+						height:        $coolbar-iconmini-item-y;
+						line-height:   $coolbar-iconmini-item-y;
+						padding-right: $coolbar-iconmini-icon-xy;
+						background:    $coolbar-iconmini-bg;
+						& > input:first-child {
+								height:     100%;
+								border-right-width: 0;
+						}
+						& > .#{$eui}-form-select-icon {
+								border-left: none;
+						}
+				}
+				& .#{$eui}-picker {
+						height:     $coolbar-iconmini-item-y;
+						border:     $coolbar-iconmini-border;
+						background: $coolbar-iconmini-bg;
+						& > .#{$eui}-form-select-icon {
+								color: $coolbar-tradition-more-color;
+						}
+				}
+				& .#{$eui}-picker > div .#{$eui}-icon {
+						height:      auto;
+						color:       $coolbar-iconmini-icon-color;
+						line-height: $coolbar-iconmini-item-y;
+				}
+				& .#{$eui}-form-datasearch .#{$eui}-icon {
+						width:  $form-select-icon-x;
+						height: $form-select-icon-x;
+				}
+
+				& .#{$eui}-picker-color > div {
+						& .#{$eui}-picker-color-content{
+								left: 1px;
+								right: 0;
+								top: 1px;
+								bottom: 1px;
+								background-size: 100% 100%;
+								& .#{$eui}-picker-color-show{
+										left: 0;
+										right: 0;
+								}
+						}
+				}
+		}
+		//每组之间间距问题处理
+		& .#{$eui}-coolbar-line{
+				margin-right: $coolbar-iconmini-item-padding-x * 2;
+		}
+		& .#{$eui}-coolbar-item-group.#{$eui}-coolbar-item-group-first{
+				margin-left:  $coolbar-iconmini-item-padding-x;
+		}
+		& li:first-child.#{$eui}-coolbar-item-group-first {
+				margin-left: 0;
+		}
+		& .#{$eui}-coolbar-item-group-last{
+				margin-right: $coolbar-iconmini-item-padding-x;
+		}
+		& .#{$eui}-coolbar-item-group-last + .#{$eui}-coolbar-line{
+				margin-left: -$coolbar-iconmini-item-padding-x;
+		}
+		& .#{$eui}-coolbar-line + .#{$eui}-coolbar-item-group-first{
+				margin-left:0;
+		}
+		& .#{$eui}-coolbar-line + .#{$eui}-coolbar-item-form{
+				padding-left: 0;
+		}
+}
+
+
+.#{$eui}-coolbar-coolone{
+		//分组
+		& .#{$eui}-coolbar-item-group {
+				margin-right: 0;
+				border-radius: 0;
+				border:         1px solid $coolbar-btn-bordercolor;
+				background:     $coolbar-btn-bg;
+				color:          $coolbar-btn-textcolor;
+				//分组之间去掉间距
+				& + .#{$eui}-coolbar-item-group {
+						margin-left: -1px;
+						&.#{$eui}-coolbar-active {
+								border-left-color: rgba(255,255,255,0.5);
+						}
+				}
+				//分组选中
+				&.#{$eui}-coolbar-active {
+						background:   $coolbar-btn-hover-bg;
+						border-color: $coolbar-btn-bordercolor-hover;
+						&:hover {
+								& .#{$eui}-icon,
+								& .#{$eui}-coolbar-item-text {
+										color:    $coolbar-btn-textcolor-hover;
+								}
+						}
+						& .#{$eui}-icon,
+						& .#{$eui}-coolbar-item-text {
+								color:    $coolbar-btn-textcolor-hover;
+						}
+				}
+		}
+		//组里面的第一个
+		& .#{$eui}-coolbar-item-group-first {
+				border-left-color: $coolbar-btn-bordercolor;
+				border-top-left-radius: 3px;
+				border-bottom-left-radius: 3px;
+		}
+		//组里面的最后一个
+		& .#{$eui}-coolbar-item-group-last {
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+		}
+		//分组-分割线
+		& .#{$eui}-coolbar-line {
+				margin-right:   $coolbar-line-marginright;
+				height:         $coolbar-tradition-item-y;
+				line-height:    $coolbar-tradition-item-y;
+		}
+		& .#{$eui}-coolbar-line + .eui-coolbar-line{
+				margin-right: 0;
+		}
+}

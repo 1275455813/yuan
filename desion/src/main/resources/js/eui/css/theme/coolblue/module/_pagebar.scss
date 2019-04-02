@@ -1,0 +1,221 @@
+@charset "utf-8";
+
+//<div class="eui-pagebar-container">
+//  <i class="eui-icon eui-pagebar-first">首页</a>
+//  <i class="eui-icon eui-pagebar-previous">上一页</i>
+//  <span class="eui-pagebar-main">
+//    第
+//    <input class="eui-form-input"></input>
+//    页/10页
+//  </span>
+//  <i class="eui-icon eui-pagebar-next">下一页</i>
+//  <i class="eui-icon eui-pagebar-last">末页</i>
+//  <i class="eui-icon eui-pagebar-total">每页30条 共344715条</i>
+//</div>
+
+
+//各部分间距及文字样式
+%pagebar-style{
+    margin-left:  $pagebar-marginleft;
+    margin-right: $pagebar-marginleft;
+    font-size:    $font-size;
+    font-style:   normal;
+}
+
+%pagebar-number-btn-hover {
+		border-color: $btn-primary-border;
+		background-color: $btn-primary-bg;
+		color: $btn-primary-color;
+}
+
+//****************分页条组件默认*****************//
+.#{$eui}-pagebar-container {
+		background-color: #fff;
+		margin: 0 20px;
+    & i{
+        @extend %pagebar-style;
+    }
+    & span{
+        @extend %pagebar-style;
+    }
+    //鼠标移上去出现小手
+    & .#{$eui}-pagebar-first,
+    & .#{$eui}-pagebar-previous,
+    & .#{$eui}-pagebar-next,
+    & .#{$eui}-pagebar-last {
+        cursor: pointer;
+        //鼠标划过文字显示蓝色
+        &:hover{
+            color: $text-link;
+        }
+    }
+		& .#{$eui}-pagebar-main {
+				line-height: ($line-height - 2)#{"\\9"};
+		}
+    //输入框宽度及左右间距
+    & .#{$eui}-form-input {
+        width:        $pagebar-input-x;
+        height:       $pagebar-input-y;
+        display:      $inline-block;
+        margin-left:  $pagebar-main-marginleft;
+        margin-right: $pagebar-main-marginright;
+		    line-height:  ($line-height - 4)#{"\\9"};
+    }
+}
+
+//****************分页条 显示数字分页*****************//
+.#{$eui}-pagebar-list {
+		& i{
+
+		}
+		& span{
+
+		}
+		//鼠标移上去出现小手
+		& .#{$eui}-pagebar-first,
+		& .#{$eui}-pagebar-previous,
+		& .#{$eui}-pagebar-next,
+		& .#{$eui}-pagebar-last {
+
+				//鼠标划过文字显示蓝色
+				&:hover{
+
+				}
+		}
+
+		//输入框宽度及左右间距
+		& .#{$eui}-form-input {
+
+		}
+
+		//数字分页
+		& ul {
+				display: $inline-block;
+				& li {
+						@extend     %pagebar-style;
+						display:    $inline-block;
+						width:      $pagebar-list-num-x;
+						text-align: center;
+						border:     1px solid $btn-border;
+						cursor:     pointer;
+						&:hover {
+								@extend %pagebar-number-btn-hover;
+						}
+				}
+				//选中当前分页数
+				& .#{$eui}-pagebar-active {
+						@extend %pagebar-number-btn-hover;
+				}
+		}
+}
+
+//****************分页条组件文字形式简化*****************//
+.#{$eui}-pagebar-textmin {
+    & i{
+    }
+    & span{
+    }
+    //鼠标移上去出现小手
+    & .#{$eui}-pagebar-first,
+    & .#{$eui}-pagebar-previous,
+    & .#{$eui}-pagebar-next,
+    & .#{$eui}-pagebar-last {
+        //鼠标划过文字显示蓝色
+        &:hover{
+        }
+    }
+
+    //输入框宽度及左右间距
+    & .#{$eui}-form-input{
+    }
+}
+
+//****************分页条组件图标形式全面*****************//
+.#{$eui}-pagebar-iconmax {
+    & i{
+    }
+    & span{
+    }
+    //鼠标移上去出现小手
+    & .#{$eui}-pagebar-first,
+    & .#{$eui}-pagebar-previous,
+    & .#{$eui}-pagebar-next,
+    & .#{$eui}-pagebar-last {
+        //font-size: $font-size14;
+        //鼠标划过文字显示蓝色
+        &:hover{
+        }
+    }
+    //首页图标
+    & .#{$eui}-pagebar-first {
+        &:before {
+            content: "\ef82";
+        }
+    }
+    //上一页图标
+    & .#{$eui}-pagebar-previous {
+        &:before {
+            content: "\ef8e";
+        }
+    }
+    //下一页图标
+    & .#{$eui}-pagebar-next {
+        &:before {
+            content: "\ef8f";
+        }
+    }
+    //末页图标
+    & .#{$eui}-pagebar-last {
+        &:before {
+            content: "\ef83";
+        }
+    }
+    //输入框宽度及左右间距
+    & .#{$eui}-form-input{
+    }
+}
+
+//****************分页条组件图标形式全面*****************//
+.#{$eui}-pagebar-iconmin {
+    & i{
+    }
+    & span{
+    }
+    //鼠标移上去出现小手
+    & .#{$eui}-pagebar-first,
+    & .#{$eui}-pagebar-previous,
+    & .#{$eui}-pagebar-next,
+    & .#{$eui}-pagebar-last {
+        font-size: $font-size14;
+        //鼠标划过文字显示蓝色
+        &:hover{
+        }
+    }
+    //首页图标
+    & .#{$eui}-pagebar-first {
+        &:before {
+            content: "\ef82";
+        }
+    }
+    //上一页图标
+    & .#{$eui}-pagebar-previous {
+        &:before {
+            content: "\ef8e";
+        }
+    }
+    //下一页图标
+    & .#{$eui}-pagebar-next {
+        &:before {
+            content: "\ef8f";
+        }
+    }
+    //末页图标
+    & .#{$eui}-pagebar-last {
+        &:before {
+            content: "\ef83";
+        }
+    }
+    //输入框宽度及左右间距
+    & .#{$eui}-form-input{
+    }
+}

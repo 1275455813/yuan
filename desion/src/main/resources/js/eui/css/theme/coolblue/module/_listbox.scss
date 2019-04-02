@@ -1,0 +1,1556 @@
+@charset "utf-8";
+
+@mixin clear-zoom {
+		clear: $clear;
+		*zoom: 1;
+}
+
+@mixin clear-both {
+		content: '\20';
+		@include clear-zoom;
+		display: $block;
+		height: 0;
+}
+
+
+//列表容器 默认横排
+.#{$eui}-listbox-container {
+		width: 100%;
+		outline: 0;
+		padding: $elistbox-padding;
+		overflow-x: hidden !important;
+		overflow-y: auto;
+		//列表分组
+		& .#{$eui}-listbox-group {
+				@include clear-zoom;
+				margin: $elistbox-group-margin;
+				//清除浮动
+				&:after {
+						@include clear-both;
+				}
+
+				//列表容器间距
+				& > li {
+						padding: $elistbox-group-li-padding;
+						@include transition(all 0.3s ease);
+				}
+
+				//列表容器
+				& > li,
+				& .#{$eui}-listbox-item {
+						float: left;
+				}
+
+				//滑过 选中
+				& .#{$eui}-listbox-item:hover,
+				& .#{$eui}-listbox-item-check {
+
+						// 基础listbox不提供选中后样式，选中后样式内置在eui-link-box内
+						& .#{$eui}-link-box {
+								box-shadow: 0 0 0 1px $elistbox-group-link-border-check;
+								background-color: $elistbox-group-link-bg-check;
+						}
+				}
+
+				//分组标题
+				& .#{$eui}-listbox-caption {
+						float: none;
+						width: 100%;
+						display: $block;
+						height: $elistbox-title-y;
+						line-height: $elistbox-title-y;
+						padding: 0;
+						margin-bottom: $elistbox-title-marginbottom;
+						border-bottom: $elistbox-title-borderbottom;
+						font-size: $font-size14;
+						font-weight: 700;
+						color: $elistbox-title-color;
+
+				}
+				//未开发与未购买
+				& .#{$eui}-develop,
+				& .#{$eui}-nomay{
+						display: $inline-block;
+						color: #fff;
+						font-size: 12px;
+						padding: 0 5px;
+						border-radius: 5px;
+						font-style: inherit;
+						margin-left: 10px;
+						position: relative;
+						height: 24px;
+						line-height: 24px;
+				}
+				& .#{$eui}-develop:after,
+				& .#{$eui}-nomay:after{
+						content: "";
+						position: absolute;
+						width: 10px;
+						height: 10px;
+						left: -10px;
+						top: 50%;
+						margin-top: -5px;
+						border-width: 5px;
+						border-style: solid;
+				}
+				& .#{$eui}-develop:after{
+						border-color: transparent $elistbox-nolink-developcolor transparent transparent;
+				}
+				& .#{$eui}-nomay:after{
+						border-color: transparent $elistbox-nolink-nomaycolor transparent transparent;
+				}
+				& .#{$eui}-develop{
+						display: none;
+						background-color: $elistbox-nolink-developcolor;
+				}
+				& .#{$eui}-nomay{
+						display: none;
+						background-color: $elistbox-nolink-nomaycolor;
+				}
+				//未开发与未购买 完结
+
+				//添加样式-未开发与未购买
+				&.#{$eui}-group-nodevelop,
+				&.#{$eui}-group-nomay{
+						& .#{$eui}-listbox-caption{
+								color: $elistbox-nolink-btn-textcolor;
+								cursor: not-allowed;
+								//未开发未购买
+								& .#{$eui}-develop,
+								& .#{$eui}-nomay{
+										background-color: #e1e1e1;
+										color: #777;
+										transform: scale(0.8);
+										margin-left: 5px;
+								}
+								& .#{$eui}-develop:after,
+								& .#{$eui}-nomay:after{
+										border-color: transparent #e1e1e1 transparent transparent;
+								}
+						}
+						& .#{$eui}-listbox-item,
+						& .#{$eui}-listbox-item:hover,
+						& .#{$eui}-listbox-item-check{
+								.#{$eui}-link-box {
+										box-shadow: 0 0 0 1px transparent;
+										background-color: transparent;
+										cursor: not-allowed;
+										opacity: 0.6;
+								}
+						}
+				}
+				&.#{$eui}-group-nodevelop{
+						& .#{$eui}-develop{
+								display: $inline-block;
+						}
+						& .#{$eui}-nomay{
+						}
+				}
+				&.#{$eui}-group-nomay{
+						& .#{$eui}-develop{
+						}
+						& .#{$eui}-nomay{
+								display: $inline-block;
+						}
+				}
+		}
+}
+
+
+//新建连接池 上下结构 图片在上 文字在下
+.#{$eui}-listbox-sqlbox {
+		outline: 0;
+		padding: 0;
+		//列表分组
+		& .#{$eui}-listbox-group {
+				margin: 0;
+				//清除浮动
+				&:after {
+
+				}
+
+				//列表容器间距
+				& > li {
+						padding: 0;
+						margin-left: $elistbox-sqlbox-li-margin-left;
+						margin-right: $elistbox-sqlbox-li-margin-right;
+				}
+
+				//列表容器
+				& > li,
+				& .#{$eui}-listbox-item {
+
+				}
+
+				//滑过 选中
+				& .#{$eui}-listbox-item:hover,
+				& .#{$eui}-listbox-item-check {
+
+						// 基础listbox不提供选中后样式，选中后样式内置在eui-link-box内
+						& .#{$eui}-link-box {
+								box-shadow: none;
+								background-color: transparent;
+
+								& .#{$eui}-icon {
+										background-color: $elistbox-group-link-bg-check;
+								}
+						}
+				}
+
+				//分组标题
+				& .#{$eui}-listbox-caption {
+
+				}
+		}
+
+		//列表内容
+		.#{$eui}-link-box {
+				position: relative;
+				display: $inline-block;
+				width: $sqlbox-link-box-x;
+				height: $sqlbox-link-box-y;
+				padding: $link-padding;
+				background-color: $link-bg;
+				color: $link-color;
+				white-space: nowrap;
+				font-size: $link-fontsize;
+				cursor: pointer;
+				clear: $clear;
+				@include transition(all 0.3s ease);
+
+				& > span {
+						display: $block;
+						margin-top: $sqlbox-link-box-title-margintop;
+						text-overflow: ellipsis;
+						overflow: hidden;
+						font-weight: normal;
+						text-align: center;
+				}
+
+				& .sub {
+						display: none;
+						position: absolute;
+						top: $sqlbox-link-box-sub-top;
+						right: $sqlbox-link-box-sub-right;
+						left: $link-iconsize + 10;
+						font-size: $link-sub-fontsize;
+						font-weight: normal;
+						color: $link-sub-color;
+				}
+
+				//滑过
+				&:hover {
+
+				}
+
+				//按下
+				&:active {
+
+				}
+
+				//间距
+				& + & {
+						margin-left: $sqlbox-link-box-marginleft;
+				}
+
+				//图标
+				& .#{$eui}-icon {
+						display: $block;
+						width: 100%;
+						height: $sqlbox-link-iconsize;
+						float: none;
+						margin-right: 0;
+						border: 1px solid $sqlbox-link-icon-bordercolor;
+						color: $link-iconcolor;
+						font-size: $sqlbox-link-box-icon-fontsize;
+						line-height: $sqlbox-link-iconsize;
+						text-align: center;
+						vertical-align: bottom;
+						vertical-align: middle#{"\\9"}
+				}
+		}
+}
+
+//新建规则
+.#{$eui}-listbox-rulebox {
+		outline: 0;
+		padding: 0;
+		//列表分组
+		& .#{$eui}-listbox-group {
+				margin: 10px 0;
+				//清除浮动
+				&:after {
+
+				}
+
+				//列表容器间距
+				& > li {
+						padding: 0;
+						margin-left: $elistbox-rulebox-li-margin-left;
+						margin-right: $elistbox-rulebox-li-margin-right;
+						margin-bottom: $elistbox-rulebox-li-margin-bottom;
+				}
+
+				//列表容器
+				& > li,
+				& .#{$eui}-listbox-item {
+
+				}
+
+				//滑过 选中
+				& .#{$eui}-listbox-item:hover,
+				& .#{$eui}-listbox-item-check {
+
+						// 基础listbox不提供选中后样式，选中后样式内置在eui-link-box内
+						& .#{$eui}-link-box {
+								box-shadow: 0 0 8px #d0d8e0;
+								border: $elistbox-group-link-border-check 2px solid;
+								background-color: transparent;
+
+								& .#{$eui}-icon {
+										background-color: $elistbox-group-link-bg-check;
+								}
+						}
+				}
+		}
+
+		//列表内容
+		.#{$eui}-link-box {
+				position: relative;
+				display: $inline-block;
+				width: 226px;
+				height: 144px;
+				border: #e5e5e5 1px solid;
+				padding: $link-padding;
+				background-color: $link-bg;
+				color: $link-color;
+				white-space: nowrap;
+				font-size: $link-fontsize;
+				cursor: pointer;
+				clear: $clear;
+				@include transition(all 0.3s ease);
+
+				& > span {
+						display: $block;
+						margin-top: $sqlbox-link-box-title-margintop;
+						text-overflow: ellipsis;
+						overflow: hidden;
+						font-weight: normal;
+						text-align: center;
+				}
+
+				//滑过
+				&:hover {
+
+				}
+
+				//按下
+				&:active {
+
+				}
+
+				//图标
+				& .#{$eui}-icon {
+						display: $block;
+						width: 100%;
+						height: $rulebox-link-iconsize;
+						float: none;
+						margin-right: 0;
+						color: $link-iconcolor;
+						font-size: $sqlbox-link-box-icon-fontsize;
+						line-height: $sqlbox-link-iconsize;
+						text-align: center;
+						vertical-align: bottom;
+						vertical-align: middle #{"\\9"}
+				;
+
+						& .#{$eui}-icon-svg {
+								width: 1.75em;
+								height: 1.75em;
+						}
+				}
+		}
+}
+
+//列表容器 竖排小图标
+.#{$eui}-listbox-vertical {
+		width: 100%;
+		outline: 0;
+		padding: $elistbox-vertical-padding;
+		//列表分组
+		& .#{$eui}-listbox-group {
+				@include clear-zoom;
+				margin: $elistbox-vertical-group-margin;
+				//清除浮动
+				&:after {
+						@include clear-both;
+				}
+
+				//列表容器间距
+				& > li {
+						padding: 0;
+				}
+
+				//列表容器
+				& > li,
+				& .#{$eui}-listbox-item {
+						height: $elistbox-vertical-item-y;
+						margin-bottom: $elistbox-vertical-item-marginbottom;
+						float: none;
+						display: $block;
+				}
+
+				//滑过 选中
+				& .#{$eui}-listbox-item:hover,
+				& .#{$eui}-listbox-item-check {
+
+						// 基础listbox不提供选中后样式，选中后样式内置在eui-link-box内
+						& .#{$eui}-link-box {
+								box-shadow: none;
+								background-color: $elistbox-group-link-bg-check;
+						}
+				}
+
+				//分组标题
+				& .#{$eui}-listbox-caption {
+						float: none;
+						width: 100%;
+						display: $block;
+						height: $elistbox-vertical-title-y;
+						line-height: $elistbox-vertical-title-y;
+						text-align: center;
+						padding: 0;
+						margin-bottom: $elistbox-title-marginbottom;
+						border-bottom: 0;
+						background: $elistbox-vertical-title-bgcolor;
+						font-size: $font-size;
+						font-weight: 700;
+						color: $elistbox-vertical-title-color;
+				}
+				& .#{$eui}-link-box{
+						//未开发未购买
+						& .#{$eui}-develop,
+						& .#{$eui}-nomay{
+								background-color: #e1e1e1;
+								color: #777;
+								transform: scale(0.8);
+								margin-left: 5px;
+						}
+						& .#{$eui}-develop:after,
+						& .#{$eui}-nomay:after{
+								border-color: transparent #e1e1e1 transparent transparent;
+						}
+						//未开发
+						&.#{$eui}-link-nodevelop{
+								cursor: not-allowed;
+								& .#{$eui}-icon{
+										opacity: 0.5;
+								}
+								& > span{
+										color: $elistbox-nolink-btn-textcolor;
+								}
+								& .#{$eui}-develop{
+										display: $inline-block;
+								}
+								& .#{$eui}-nomay{
+
+								}
+								&,
+								&:hover{
+										background: #fff;
+								}
+						}
+						//未购买
+						&.#{$eui}-link-nomay{
+								cursor: not-allowed;
+								& .#{$eui}-icon{
+										opacity: 0.5;
+								}
+								& > span{
+										color: $elistbox-nolink-btn-textcolor;
+								}
+								& .#{$eui}-develop{
+
+								}
+								& .#{$eui}-nomay{
+										display: $inline-block;
+								}
+								&,
+								&:hover{
+										background: #fff;
+								}
+						}
+				}
+		}
+
+		//列表内容
+		& .#{$eui}-link-box {
+				width: 100%;
+				padding: $vertical-link-box-padding;
+				line-height: $line-height24;
+
+				& .#{$eui}-icon {
+						width: $vertical-link-box-icon-xy;
+						height: $vertical-link-box-icon-xy;
+						line-height: $vertical-link-box-icon-xy;
+						font-size: $font-size24;
+						vertical-align: middle;
+				}
+
+				& span {
+						display: $block;
+						margin-top: 0;
+						font-weight: normal;
+				}
+		}
+}
+
+//列表容器 横排小图标，无分组，完全自适应排列
+.#{$eui}-listbox-horizontal {
+		width: 100%;
+		outline: 0;
+		padding: 0;
+		//列表分组
+		& .#{$eui}-listbox-group {
+				@include clear-zoom;
+				margin: 0;
+				//清除浮动
+				&:after {
+						@include clear-both;
+				}
+
+				//列表容器间距
+				& > li {
+						padding: 0;
+				}
+
+				//列表容器
+				& > li,
+				& .#{$eui}-listbox-item {
+						height: $elistbox-horizontal-item-y;
+						margin-bottom: $elistbox-vertical-item-marginbottom;
+						float: left;
+						display: $block;
+				}
+
+				//滑过 选中
+				& .#{$eui}-listbox-item:hover,
+				& .#{$eui}-listbox-item-check {
+
+						// 基础listbox不提供选中后样式，选中后样式内置在eui-link-box内
+						& .#{$eui}-link-box {
+								box-shadow: none;
+								background-color: $elistbox-group-link-bg-check;
+						}
+				}
+
+		}
+
+		//列表内容
+		& .#{$eui}-link-box {
+				width: 100%;
+				padding: 0 5px;
+				line-height: $line-height;
+				font-size: $font-size;
+
+				& .#{$eui}-icon {
+						width: $horizontal-link-box-icon-xy;
+						height: $horizontal-link-box-icon-xy;
+						line-height: $line-height;
+						font-size: $font-size16;
+						vertical-align: middle;
+				}
+
+				& span {
+						display: $block;
+						margin-top: 0;
+						font-weight: normal;
+				}
+		}
+}
+
+//列表容器 竖排小图标 无间距
+.#{$eui}-listbox-vertical-nopadding {
+		width: 100%;
+		outline: 0;
+		padding: 0;
+		//列表分组
+		& .#{$eui}-listbox-group {
+				margin: 0 0 $elistbox-group-marginbottom 0;
+				//清除浮动
+				&:after {
+
+				}
+
+				//列表容器间距
+				& > li {
+						padding: 0;
+				}
+
+				//列表容器
+				& > li,
+				& .#{$eui}-listbox-item {
+						height: $elistbox-vertical-item-y;
+						margin-bottom: $elistbox-vertical-item-marginbottom;
+						float: none;
+						display: $block;
+				}
+
+				//滑过 选中
+				& .#{$eui}-listbox-item:hover,
+				& .#{$eui}-listbox-item-check {
+
+						// 基础listbox不提供选中后样式，选中后样式内置在eui-link-box内
+						& .#{$eui}-link-box {
+								box-shadow: none;
+								background-color: $elistbox-group-link-bg-check;
+						}
+				}
+
+				//分组标题
+				& .#{$eui}-listbox-caption {
+						float: none;
+						width: 100%;
+						display: $block;
+						height: $elistbox-vertical-title-y;
+						line-height: $elistbox-vertical-title-y;
+						text-align: center;
+						padding: 0;
+						margin-bottom: $elistbox-title-marginbottom;
+						border-bottom: 0;
+						background: $elistbox-vertical-title-bgcolor;
+						font-size: $font-size;
+						font-weight: 700;
+						color: $elistbox-vertical-title-color;
+				}
+		}
+
+		//列表内容
+		& .#{$eui}-link-box {
+				width: 100%;
+				padding: 5px 5px 5px 5px;
+				line-height: 24px;
+
+				& .#{$eui}-icon {
+						width: 24px;
+						height: 24px;
+						line-height: 24px;
+						font-size: 24px;
+						vertical-align: middle;
+				}
+
+				& span {
+						display: block;
+						margin-top: 0;
+						font-weight: normal;
+				}
+		}
+}
+
+//列表容器 数据分析-首页 块块带滑过动画
+.#{$eui}-listbox-adimbox {
+		width: 100%;
+		outline: 0;
+		padding: 10px;
+		//列表分组
+		& .#{$eui}-listbox-group {
+				@include clear-zoom;
+				margin: 0px -5px 20px -5px;
+				//清除浮动
+				&:after {
+						@include clear-both;
+				}
+
+				//列表容器间距
+				& > li {
+						padding: 0;
+				}
+
+				//列表容器
+				& > li,
+				& .#{$eui}-listbox-item {
+						margin-bottom: 15px;
+						margin-right: 15px;
+						padding-left: 5px;
+						padding-right: 5px;
+						vertical-align: top;
+				}
+
+				//滑过 选中
+				& .#{$eui}-listbox-item:hover,
+				& .#{$eui}-listbox-item-check {
+
+						// 基础listbox不提供选中后样式，选中后样式内置在eui-link-box内
+						& .#{$eui}-link-box {
+								box-shadow: none;
+								background-color: transparent;
+						}
+				}
+
+				//分组标题
+				& .#{$eui}-listbox-caption {
+						float: left;
+						width: $elistbox-adimbox-title-x;
+						display: $inline-block;
+						line-height: $elistbox-adimbox-title-x;
+						text-align: center;
+						padding: 0;
+						margin-bottom: 0;
+						border-bottom: 0;
+						border-radius: 6px;
+						background: $elistbox-adimbox-title-bg;
+						font-size: $font-size;
+						font-weight: normal;
+						white-space: normal;
+						color: $elistbox-adimbox-title-color;
+
+						& span {
+								display: $inline-block;
+								vertical-align: middle;
+								height: 100%;
+								margin: 0;
+								letter-spacing: 4px;
+								writing-mode: tb-rl;
+								-webkit-writing-mode: vertical-rl;
+								writing-mode: vertical-rl;
+						}
+				}
+		}
+
+		//列表内容
+		& .#{$eui}-link-box {
+				width: 226px;
+				height: 144px;
+				padding: 0;
+				line-height: 24px;
+				border: 1px solid $elistbox-adimbox-link-box-bordercolor;
+				border-radius: 4px;
+				background-size: 100% auto;
+				background-repeat: no-repeat;
+				background-position: center bottom;
+
+				&:hover {
+						& .sub {
+								height: 115px;
+								padding-top: 10px;
+								padding-bottom: 10px;
+						}
+				}
+
+				& .#{$eui}-icon {
+						position: absolute;
+						left: 5px;
+						top: 50%;
+						margin-top: -12px;
+						width: 24px;
+						height: 24px;
+						line-height: 24px;
+						font-size: 24px;
+						vertical-align: middle;
+				}
+
+				& > span {
+						display: $block;
+						height: $elistbox-adimbox-content-title-y;
+						line-height: $elistbox-adimbox-content-title-y;
+						padding-left: 15px;
+						padding-right: 15px;
+						margin: -1px;
+						font-weight: normal;
+						font-size: $font-size14;
+						color: #fff;
+						background: $elistbox-adimbox-content-title-bg;
+						border-radius: 4px 4px 0px 0px;
+				}
+
+				& .sub {
+						height: 0;
+						left: 1px;
+						top: $elistbox-adimbox-content-title-y;
+						right: 1px;
+						padding-top: 0;
+						padding-bottom: 0;
+						padding-left: 12px;
+						padding-right: 12px;
+						white-space: normal;
+						line-height: 18px;
+						background-color: $elistbox-adimbox-linkbg-hover;
+						color: #fff;
+						border-radius: 0 0 4px 4px;
+						@include transition(all 0.3s ease);
+				}
+		}
+}
+
+//新数据分析-首页 2018.12.12 by wuych
+.#{$eui}-listbox-responseBox {
+		width: 100%;
+		outline: 0;
+		padding: 5px 20px 0;
+		position: relative;
+		z-index: 1;
+		margin: 0;
+		//清除浮动
+		&:after {
+				@extend %eui-clear;
+		}
+		//列表分组
+		& .#{$eui}-listbox-group {
+				position: relative;
+				display: $block;
+				float:left;
+				width: calc(50% - 10px);
+				height: 190px;
+				padding:10px 20px;
+				margin: 5px;
+				clear: none;
+				border:1px solid $elistbox-responseBox-bordercolor;
+				background-color: $elistbox-responseBox-bgcolor;
+				@include transition(all 0.5s ease);
+				overflow: hidden;
+				&:hover {
+						border: 1px solid $elistbox-responseBox-hover-bordercolor;
+						box-shadow: 0 5px 10px rgba(0,0,0,.23);
+						background-color: #fff;
+						&:before {
+								width: 240px;
+								height:240px;
+						}
+						&:after {
+								width: 300px;
+								height:300px;
+						}
+						& .#{$eui}-listbox-caption{
+								&:after{
+										width: 280px;
+										opacity: 1;
+								}
+								&:before{
+										height: 0;
+								}
+						}
+				}
+				//划过状态
+				&.hoverState{
+						width: calc(70% - 10px);
+				}
+				//划过状态-相邻元素宽度
+				&.hoverStateAdjoin{
+						width: calc(30% - 10px);
+				}
+				//装饰条
+				&:before,
+				&:after {
+						content: "";
+						position: absolute;
+						pointer-events: auto;
+				}
+				//划过气泡左下角
+				&:before {
+						left:-30px;
+						bottom:-160px;
+						width: 0;
+						height: 0;
+						border-radius: 100%;
+						background-color: $elistbox-responseBox-bubble-left;
+						transform-origin: left bottom;
+						//z-index: 1;
+						@include transition(all 0.5s ease 0.1s);
+				}
+				//划过气泡右上角
+				&:after {
+						right:-150px;
+						top:-150px;
+						width: 0;
+						height: 0;
+						border-radius: 100%;
+						background-color: $elistbox-responseBox-bubble-right;
+						transform-origin: right top;
+						//z-index: 1;
+						@include transition(all 0.5s ease 0.2s);
+				}
+
+				//列表容器间距
+				& > li {
+						padding: 0;
+						margin-bottom: 0;
+						margin-right: 0;
+				}
+
+				//列表容器
+				& .#{$eui}-listbox-item {
+						width: 126px;
+						height: 32px;
+						display: $inline-block;
+						margin-bottom: 5px;
+						margin-right: 10px;
+						padding-left: 0;
+						padding-right: 0;
+						vertical-align: top;
+						//第三个按钮转行
+						&:nth-child(2n+2){
+								clear: both;
+						}
+						&:nth-child(2){
+								& .sub {
+										display: $block;
+								}
+						}
+				}
+
+				//滑过 选中
+				& .#{$eui}-listbox-item:hover,
+				& .#{$eui}-listbox-item-check {
+
+						// 基础listbox不提供选中后样式，选中后样式内置在eui-link-box内
+						& .#{$eui}-link-box {
+								box-shadow: none;
+								background-color: transparent;
+						}
+				}
+
+				//分组标题
+				& .#{$eui}-listbox-caption {
+						float: none;
+						width: $elistbox-responseBox-title-x;
+						height: $elistbox-responseBox-title-y;
+						line-height: $elistbox-responseBox-title-y;
+						display: $block;
+						text-align: left;
+						padding: 0;
+						margin-bottom: 5px;
+						border-bottom: 0;
+						font-size: $font-size14;
+						font-weight: bold;
+						white-space: normal;
+						color: $elistbox-responseBox-title-color;
+
+						& span {
+								display: $inline-block;
+								vertical-align: middle;
+								height: 100%;
+								margin: 0;
+						}
+						//装饰条
+						&:before,
+						&:after {
+								content: "";
+								position: absolute;
+								@include transition(all 0.5s);
+						}
+						&:before{
+								left:0;
+								top:0;
+								width: 6px;
+								height:66px;
+								background-image: url($elistbox-responseBox-bgimg-title);
+								background-repeat: no-repeat;
+								background-position: right bottom;
+						}
+						&:after{
+								width: 0;
+								height:9px;
+								position: absolute;
+								top: 0;
+								left:0;
+								opacity: 0;
+								background: url($elistbox-responseBox-bgimg-hover-title) no-repeat 0 0;
+								@include transition(all 0.5s cubic-bezier(0.42, 0, 0.58, 1) 0.1s);
+						}
+				}
+		}
+
+		//列表内容
+		& .#{$eui}-link-box {
+				position: static;
+				width: 100%;
+				height: 100%;
+				padding: 0;
+
+				& .#{$eui}-icon {
+						position: absolute;
+						left: 5px;
+						top: 50%;
+						margin-top: -12px;
+						width: 24px;
+						height: 24px;
+						line-height: 24px;
+						font-size: 24px;
+						vertical-align: middle;
+				}
+
+				& > span {
+						margin-top: 0;
+						font-weight: normal;
+
+				}
+				& .#{$eui}-link-box-title{
+						position: relative;
+						color: $elistbox-link-box-btn-color;
+						cursor: pointer;
+						transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+						border: 1px solid $elistbox-link-box-btn-bordercolor;
+						border-radius: 2px;
+						box-shadow: 4px 4px 4px rgba(0,0,0,.06);
+						display: $inline-block;
+						width: 100%;
+						height: 100%;
+						font-size: $font-size14;
+						vertical-align: middle;
+						line-height: 30px;
+						text-align: center;
+						z-index: 2;
+						overflow: hidden;
+						&:before{
+								content: "";
+								position: absolute;
+								display: block;
+								top: 50%;
+								left: 50%;
+								height: 0;
+								width: 0;
+								z-index: -1;
+								color: #fff;
+								background: $elistbox-link-box-btn-bgcolor;
+								transform: translate(-50%,-50%);
+								opacity: 0;
+								border-radius: 100%;
+								transition: all 0.6s cubic-bezier(0.42, 0, 0.58, 1);
+						}
+						&:hover,
+						&.current{
+								color: #fff;
+								background-color: transparent;
+								border-color: $elistbox-link-box-btn-hover-bordercolor;
+								box-shadow: 4px 4px 4px $elistbox-link-box-btn-hover-shadowcolor;
+								&:before{
+										width: 300px;
+										height:300px;
+										transform: translate(-50%,-50%);
+										opacity:1;
+								}
+						}
+				}
+
+				//未开发与未购买
+				&.#{$eui}-link-nodevelop,
+				&.#{$eui}-link-nomay{
+						& .#{$eui}-link-box-title{
+								color: $elistbox-nolink-btn-textcolor;
+								cursor: pointer;
+								border: 1px solid $elistbox-nolink-btn-bgcolor;
+								background: $elistbox-nolink-btn-bgcolor;
+								box-shadow: none;
+								&:before{
+										background: transparent;
+								}
+								&:hover,
+								&.current{
+										border: 1px solid $elistbox-nolink-btn-hover-bgcolor;
+										background: $elistbox-nolink-btn-hover-bgcolor;
+										cursor: not-allowed;
+										color: $elistbox-nolink-btn-hover-color;
+										box-shadow: 4px 4px 4px $elistbox-nolink-btn-hover-shadowcolor;
+
+								}
+						}
+				}
+				//未开发
+				&.#{$eui}-link-nodevelop{
+						& .sub{
+								& .sub-info{
+										& .#{$eui}-develop{
+												display: $inline-block;
+										}
+										& .#{$eui}-nomay{
+
+										}
+								}
+						}
+				}
+				//未购买
+				&.#{$eui}-link-nomay{
+						& .sub{
+								& .sub-info{
+										& .#{$eui}-develop{
+
+										}
+										& .#{$eui}-nomay{
+												display: $inline-block;
+										}
+								}
+						}
+				}
+
+				& .sub {
+						display: none;
+						position: absolute;
+						z-index: 2;
+						left: 310px;
+						top: 0;
+						right: 0;
+						bottom: 0;
+						padding-top: 0;
+						padding-bottom: 0;
+						padding-left: 0;
+						padding-right: 0;
+						white-space: normal;
+						line-height: 18px;
+						color: #fff;
+						@include transition(all 0.3s ease);
+						& .sub-img {
+								display: $block;
+								width: 170px;
+								height:100%;
+								background-repeat: no-repeat;
+								background-position: center center;
+						}
+						& .sub-info{
+								display: $block;
+								position: absolute;
+								top: 30px;
+								left: 210px;
+								right: 10px;
+								color: $elistbox-link-subinfo-title-color;
+								font-size: $font-size14;
+								line-height: 24px;
+								& > span {
+										display: $block;
+										color: $elistbox-link-subinfo-color;
+										font-size: $font-size18;
+										font-weight: bold;
+										margin: 0 0 5px 0;
+										white-space: nowrap;
+								}
+
+						}
+				}
+		}
+}
+@media screen and (max-width: 1560px) {
+		.#{$eui}-listbox-responseBox {
+				& .#{$eui}-link-box {
+						& .sub {
+								& .sub-info{
+										display: none;
+								}
+						}
+				}
+				& .#{$eui}-listbox-group {
+						&:hover {
+								& .#{$eui}-link-box {
+										& .sub {
+												& .sub-info{
+														display: block;
+												}
+										}
+								}
+						}
+				}
+		}
+}
+
+
+//列表容器 门户、地图管理、3D模型 带滑过动画
+.#{$eui}-listbox-portalbox {
+		width: 100%;
+		outline: 0;
+		padding: 10px;
+		//列表分组
+		& .#{$eui}-listbox-group {
+				@include clear-zoom;
+				margin: 0px -5px 20px -5px;
+				//清除浮动
+				&:after {
+						@include clear-both;
+				}
+
+				//列表容器间距
+				& > li {
+						padding: 0;
+				}
+
+				//列表容器
+				& > li,
+				& .#{$eui}-listbox-item {
+						margin-bottom: 15px;
+						margin-right: 15px;
+						padding-left: 5px;
+						padding-right: 5px;
+						vertical-align: top;
+				}
+
+				//滑过 选中
+				& .#{$eui}-listbox-item:hover,
+				& .#{$eui}-listbox-item-check {
+
+						// 基础listbox不提供选中后样式，选中后样式内置在eui-link-box内
+						& .#{$eui}-link-box {
+								box-shadow: 0 0 10px 3px #{$elistbox-adimbox-link-box-bordercolor}c7;
+								background-color: transparent;
+						}
+				}
+
+				//分组标题
+				& .#{$eui}-listbox-caption {
+
+						& span {
+
+						}
+				}
+		}
+
+		//列表内容
+		& .#{$eui}-link-box {
+				width: 226px;
+				height: 144px;
+				padding: 0;
+				line-height: 24px;
+				border: 1px solid $elistbox-adimbox-link-box-bordercolor;
+				border-radius: 4px;
+				background-size: 100% 115px;
+				background-repeat: no-repeat;
+				background-position: center bottom;
+
+				&:hover {
+						& .sub {
+								height: 115px;
+								padding-top: 10px;
+								padding-bottom: 10px;
+						}
+				}
+
+				& > span {
+						display: $block;
+						height: $elistbox-adimbox-content-title-y;
+						line-height: $elistbox-adimbox-content-title-y;
+						padding-left: 15px;
+						padding-right: 50px;
+						margin-top: -1px;
+						font-weight: normal;
+						font-size: $font-size14;
+						color: #fff;
+						background: $elistbox-adimbox-content-title-bg;
+						border-radius: 4px 4px 0px 0px;
+						//选中登录页
+						& .#{$eui}-icon {
+								position: absolute;
+								right: 5px;
+								top: 6px;
+								width: 16px;
+								height: 16px;
+								font-size: 16px;
+								line-height: 100%;
+								float: none;
+								margin-right: 0;
+						}
+
+						//默认
+						& .#{$eui}-form-checkbox {
+								background-color: $elistbox-adimbox-checkcolor;
+								color: $elistbox-adimbox-checkcolor;
+						}
+
+						//选中
+						& .#{$eui}-form-checked {
+								&:before {
+										color: #fff;
+								}
+						}
+				}
+
+				& .sub {
+						height: 0;
+						left: 0;
+						top: $elistbox-adimbox-content-title-y;
+						right: 0;
+						padding-top: 0;
+						padding-bottom: 0;
+						padding-left: 12px;
+						padding-right: 12px;
+						white-space: normal;
+						line-height: 18px;
+						background-color: rgba(0, 0, 0, 0.5);
+						color: #fff;
+						border-radius: 0 0 4px 4px;
+						@include transition(all 0.3s ease);
+
+						& > span {
+								display: $block;
+								font-size: $font-size;
+								line-height: $line-height;
+						}
+
+						& .#{$eui}-btn-container {
+								position: absolute;
+								bottom: 0;
+								left: 12px;
+								right: 12px;
+
+								& .#{$eui}-btn {
+										width: 28%;
+										margin-right: 16px;
+
+										&:last-child {
+												margin-right: 0;
+										}
+								}
+						}
+				}
+		}
+
+		//特殊处理 添加
+		& .#{$eui}-link-box-add {
+				background-size: auto;
+				background-position: center -20px;
+
+				&:hover {
+						& .sub {
+
+						}
+				}
+
+				& > span {
+						//选中登录页
+						& .#{$eui}-icon {
+
+						}
+
+						//默认
+						& .#{$eui}-form-checkbox {
+
+						}
+
+						//选中
+						& .#{$eui}-form-checked {
+								&:before {
+
+								}
+						}
+				}
+
+				& .sub {
+						height: 115px;
+						background-color: transparent;
+
+						& > span {
+
+						}
+
+						& .#{$eui}-btn-container {
+								& .#{$eui}-btn {
+										width: 100%;
+
+										&:last-child {
+
+										}
+								}
+						}
+				}
+		}
+}
+
+//默认列表，自带划过选中
+.#{$eui}-elistbox-custom {
+		outline: 0;
+		padding: 0;
+		//列表分组
+		& .#{$eui}-listbox-group {
+				@include clear-zoom;
+				margin: 0;
+				//清除浮动
+				&:after {
+						@include clear-both;
+				}
+
+				//列表容器间距
+				& > li {
+						padding: 5px;
+						margin: 1px;
+				}
+
+				//列表容器
+				& > li,
+				& .#{$eui}-listbox-item {
+						border: 1px solid transparent;
+				}
+
+				//滑过 选中
+				& .#{$eui}-listbox-item:hover,
+				& .#{$eui}-listbox-item-check {
+						box-shadow: none;
+						border: 1px solid $elistbox-group-link-border-check;
+						background-color: $elistbox-group-link-bg-check;
+						// 基础listbox不提供选中后样式，选中后样式内置在eui-link-box内
+						& .#{$eui}-link-box {
+
+						}
+				}
+
+				//分组标题
+				& .#{$eui}-listbox-caption {
+
+				}
+		}
+}
+
+
+//列表容器 上下结构 图片在上 文字在下
+.#{$eui}-listbox-box {
+		outline: 0;
+		padding: 0;
+		//列表分组
+		& .#{$eui}-listbox-group {
+				@include clear-zoom;
+				margin: 0;
+				//清除浮动
+				&:after {
+						@include clear-both;
+				}
+
+				//列表容器间距
+				& > li {
+						padding: 5px;
+				}
+
+				//列表容器
+				& > li,
+				& .#{$eui}-listbox-item {
+						float: left;
+
+						& .#{$eui}-link-box {
+								width: 100px;
+								height: 100px;
+								//图片区域
+								& > div {
+										display: $block;
+										margin: 0 auto;
+										height: 76px;
+										max-height: 76px;
+										text-align: center;
+										overflow: hidden;
+										//使用图片时 创建<img class="eui-link-box-img">
+										& .#{$eui}-link-box-img {
+												vertical-align: middle;
+												max-width: 100%;
+												max-height: 100%;
+										}
+
+										//使用字体图标时 创建<i class="eui-icon"></i>
+										& .#{$eui}-icon {
+												float: none;
+												margin-right: 0;
+												vertical-align: middle;
+										}
+								}
+
+								//文字区域
+								& > span {
+										display: $block;
+										position: absolute;
+										bottom: 3px;
+										left: 2px;
+										right: 2px;
+										font-size: $font-size;
+										font-weight: normal;
+										height: 18px;
+										line-height: 18px;
+										text-align: center;
+								}
+						}
+				}
+
+				//滑过 选中
+				& .#{$eui}-listbox-item:hover,
+				& .#{$eui}-listbox-item-check {
+
+						// 基础listbox不提供选中后样式，选中后样式内置在eui-link-box内
+						& .#{$eui}-link-box {
+								box-shadow: 0 0 0 1px $elistbox-group-link-border-check;
+								background-color: $elistbox-group-link-bg-check;
+						}
+				}
+
+				//分组标题
+				& .#{$eui}-listbox-caption {
+
+				}
+		}
+}
+
+//picker下拉 （线宽、线风格）
+.#{$eui}-listbox-linestyle {
+		width: 100%;
+		outline: 0;
+		padding: 10px;
+		//列表分组
+		& .#{$eui}-listbox-group {
+				@include clear-zoom;
+				margin: 0 0 20px 0;
+				//清除浮动
+				&:after {
+						@include clear-both;
+				}
+
+				//列表容器间距
+				& > li {
+						padding: 0;
+				}
+
+				//列表容器
+				& > li,
+				& .#{$eui}-listbox-item {
+						height: 32px;
+						margin-bottom: 2px;
+						float: none;
+						display: $block;
+				}
+
+				//滑过 选中
+				& .#{$eui}-listbox-item:hover,
+				& .#{$eui}-listbox-item-check {
+
+						// 基础listbox不提供选中后样式，选中后样式内置在eui-link-box内
+						& .#{$eui}-link-box {
+								box-shadow: none;
+								background-color: $elistbox-group-link-bg-check;
+						}
+				}
+
+				//分组标题
+				& .#{$eui}-listbox-caption {
+
+				}
+		}
+
+		//列表内容
+		& .#{$eui}-link-box {
+				width: 100%;
+				padding: 5px 5px 5px 36px;
+				line-height: 24px;
+
+				& .#{$eui}-icon {
+						position: absolute;
+						left: 0;
+						right: 0;
+						top: 50%;
+						margin-top: -12px;
+						width: auto;
+						height: 24px;
+						line-height: 24px;
+						font-size: 24px;
+						vertical-align: middle;
+				}
+
+				& .#{$eui}-icon-img {
+						margin-right: 0;
+						background-size: auto;
+				}
+
+				& span {
+						display: block;
+						margin-top: 0;
+						font-weight: normal;
+				}
+		}
+}

@@ -1,0 +1,261 @@
+@charset "utf-8";
+
+//文本对齐方法
+.#{$eui}-align {
+		//居左对齐
+		&-left {
+				text-align: left;
+		}
+		//居中对齐
+		&-center {
+				text-align: center;
+		}
+		//居右对齐
+		&-right {
+				text-align: right;
+		}
+}
+
+//文本垂直对齐
+.#{$eui}-vertical {
+		&-top {
+				vertical-align: top;
+		}
+		&-middle {
+				vertical-align: middle;
+		}
+		&-bottom {
+				vertical-align: bottom;
+		}
+}
+
+//文字不换行
+.#{$eui}-nowrap {
+		white-space: nowrap;
+}
+
+//英文换行规则
+.#{$eui}-breakword {
+		white-space: normal;
+		word-wrap: break-word;
+}
+
+//弱化
+.#{$eui}-weaken {
+		color: $text-weaken !important;
+}
+
+//深度弱化
+.#{$eui}-depth-weaken {
+		color: $text-disabled !important;
+}
+
+//强化
+.#{$eui}-strong {
+		font-weight: 700 !important;
+}
+
+//链接
+a,
+.#{$eui}-link {
+		color:           $text-link;
+		text-decoration: none;
+		cursor:          pointer;
+		&:hover{
+
+		}
+}
+
+.#{$eui}-link {
+		color: $text-link !important;
+}
+
+//错误
+.#{$eui}-error {
+		color: $text-error !important;
+}
+
+//提示蓝色
+.#{$eui}-tips-blue {
+		color: $text-tips-blue !important;
+}
+
+//提示绿色
+.#{$eui}-tips-green {
+		color: $text-tips-green !important;
+}
+
+//提示橙色
+.#{$eui}-tips-orange {
+		color: $text-tips-orange !important;
+}
+
+//帮助
+.#{$eui}-help {
+		cursor: help !important;
+}
+
+//禁用状态
+.#{$eui}-disabled{
+		&,
+		&:hover{
+				color:  $text-disabled !important;
+				cursor: not-allowed    !important;
+		}
+}
+
+//提示小灯泡布局
+//<div class="eui-tips-container">
+//  <i class="eui-icon"></i>********
+//</div>
+.#{$eui}-tips-container {
+		margin-bottom: 10px;
+		& .#{$eui}-icon {
+				vertical-align: middle;
+				margin-right:   3px;
+		}
+}
+//h1
+.#{$eui}-h1{
+	font-weight: normal;
+	font-size: $font-size32;
+	line-height: $line-height48;
+}
+//h2
+.#{$eui}-h2{
+	font-weight: normal;
+	font-size: $font-size24;
+	line-height: $line-height36;
+}
+//h3
+.#{$eui}-h3{
+	font-weight: normal;
+	font-size: $font-size18;
+	line-height: $line-height30;
+}
+//h4
+.#{$eui}-h4{
+	font-weight: normal;
+	font-size: $font-size16;
+	line-height: $line-height26;
+}
+//h5
+.#{$eui}-h5{
+	font-weight: normal;
+	font-size: $font-size14;
+	line-height: $line-height24;
+}
+//h6
+.#{$eui}-h6{
+	font-weight: normal;
+	font-size: $font-size;
+}
+
+//注册页面用
+.#{$eui}-regtitle{
+		position: relative;
+		width: 170px;
+		display: inline-block;
+		text-align: left;
+		margin: 0 13px;
+		height: 50px;
+		font-weight: 600;
+		font-style: italic;
+		font-size: 16px;
+		color: $text-weaken;
+		line-height: 50px;
+		padding-left: 35px;
+		padding-top: 5px;
+		overflow: hidden;
+		text-overflow:ellipsis;
+		white-space: nowrap;
+		& i.#{$eui}-num{
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				background-color: $text-weaken;
+				color: #ffffff;
+				font-size: 14px;
+				border-radius: 100%;
+				display: inline-block;
+				padding-right: 4px;
+				margin-right: 10px;
+				width: 24px;
+				height: 24px;
+				line-height: 24px;
+				line-height: 28px\0;
+				text-align: center;
+				font-family: "Hiragino Sans GB W3", "STHeiti", "Microsoft YaHei", Arial, Verdana;
+		}
+		&:before{
+				content: "";
+				position: absolute;
+				bottom: 3px;
+				left: 10px;
+				right: 10px;
+				height: 3px;
+				background-color: $text-weaken;
+		}
+		& i.#{$eui}-reg-arrow{
+				position: absolute;
+				right: 0;
+				bottom: 3px;
+				width: 20px;
+				height: 10px;
+				overflow: hidden;
+				&:after{
+						content: "";
+						position: absolute;
+						bottom: -10px;
+						right: -10px;
+						width: 30px;
+						height: 20px;
+						border-width: 10px;
+						border-left-width: 20px;
+						border-style: solid;
+						border-color: transparent transparent transparent $text-weaken;
+				}
+		}
+		&.#{$eui}-regtitle-active{
+				color: $btn-regtitle-text-active;
+				font-weight: normal;
+				& i.#{$eui}-num{
+						background-color: $btn-regtitle-active;
+				}
+				&:before{
+						background-color: $btn-regtitle-active;
+				}
+				& i.#{$eui}-reg-arrow{
+						&:after{
+								border-color: transparent transparent transparent $btn-regtitle-active;
+						}
+				}
+		}
+		&.#{$eui}-regtitle-current{
+				color: $btn-regtitle-current;
+				font-style: normal;
+				padding-left: 45px;
+				& i.#{$eui}-num{
+						background-color: $btn-regtitle-current;
+						font-size: 16px;
+						width: 34px;
+						height: 34px;
+						line-height: 34px;
+						line-height: 38px\0;
+				}
+				&:before{
+						background-color: $btn-regtitle-current;
+				}
+				& i.#{$eui}-reg-arrow{
+						&:after{
+								border-color: transparent transparent transparent $btn-regtitle-current;
+						}
+				}
+		}
+}
+
+//公共行间距
+@while $lineheight <= 26 {
+		.#{$eui}-line-height-#{$lineheight}  { line-height: $lineheight#{px}; }
+		$lineheight: $lineheight + 2;
+}

@@ -1,0 +1,358 @@
+@charset "utf-8";
+//****************横排显示****************//
+.#{$eui}-ethumbnail-container {
+		width:    100%;
+		height:   100%;
+		position: relative;
+}
+//左箭头
+.#{$eui}-ethumbnail-container
+.#{$eui}-ethumbnail-left {
+		width:            $ethumbnail-arrow-x;
+		height:           $ethumbnail-arrow-y;
+		border:           $ethumbnail-bordercolor;
+		background-color: $ethumbnail-arrow-bgcolor;
+		float:            left;
+		text-align:       center;
+		//插入字体图标
+		& i:before {
+				content:     "\ef80";
+				display:     $inline-block;
+				font-size:   $ethumbnail-arrow-fontsize8;
+				color:       $ethumbnail-arrow-textcolor;
+				line-height: $ethumbnail-box-y;
+		}
+		//滑过
+		&:hover{
+				cursor: pointer;
+				//插入字体图标
+				& i:before {
+						color: $ethumbnail-arrow-textcolor-hover;
+				}
+		}
+}
+//图片显示区域
+.#{$eui}-ethumbnail-container
+.#{$eui}-ethumbnail-center{
+		height:   $ethumbnail-box-y;
+		position: absolute;
+		left:     $ethumbnail-box-left;
+		right:    $ethumbnail-box-right;
+		overflow: hidden;
+		& ul {
+				white-space: nowrap;
+				overflow:    hidden;
+				display:     $block;
+				width:       100%;
+				height:      100%;
+		}
+}
+//图片li
+.#{$eui}-ethumbnail-container {
+		//默认状态
+		& .#{$eui}-ethumbnail-box {
+				width:   $ethumbnail-box-x;
+				height:  $ethumbnail-box-y;
+				margin-left: $ethumbnail-box-margin;
+				border:  $ethumbnail-bordercolor;
+				padding: $ethumbnail-box-padding;
+				display: $inline-block;
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+				//滑过
+				&:hover{
+						border:  $ethumbnail-bordercolor-hover;
+						opacity: .8;
+						filter:  alpha(opacity=80);
+				}
+		}
+		//选中状态
+		& .#{$eui}-ethumbnail-box-selected {
+				border:  $ethumbnail-bordercolor-hover;
+		}
+}
+
+.#{$eui}-ethumbnail-container
+.#{$eui}-ethumbnail-text {
+		display: none;
+}
+//右箭头
+.#{$eui}-ethumbnail-container
+.#{$eui}-ethumbnail-right{
+		width:            $ethumbnail-arrow-x;
+		height:           $ethumbnail-arrow-y;
+		border:           $ethumbnail-bordercolor;
+		background-color: $ethumbnail-arrow-bgcolor;
+		float:            right;
+		text-align:       center;
+		//插入字体图标
+		& i:before {
+				content:     "\ef81";
+				line-height: $ethumbnail-box-y;
+				font-size:   $ethumbnail-arrow-fontsize8;
+				color:       $ethumbnail-arrow-textcolor;
+		}
+		//滑过
+		&:hover{
+				cursor: pointer;
+				//插入字体图标
+				& i:before {
+						color: $ethumbnail-arrow-textcolor-hover;
+				}
+		}
+}
+.#{$eui}-ethumbnail-container
+.#{$eui}-ethumbnail-clear {
+		clear: $clear;
+}
+
+
+
+
+//****************竖排显示****************//
+.#{$eui}-ethumbnail-align-vertical {
+		width:  100%;
+		height: 100%;
+}
+//上箭头
+.#{$eui}-ethumbnail-align-vertical
+.#{$eui}-ethumbnail-left {
+		width:            $ethumbnail-vertical-arrow-x;
+		height:           $ethumbnail-vertical-arrow-y;
+		border:           $ethumbnail-vertical-bordercolor;
+		background-color: $ethumbnail-vertical-arrow-bgcolor;
+		text-align:       center;
+		//插入字体图标
+		& i:before {
+				content:     "\ef7e";
+				display:     $inline-block;
+				font-size:   $ethumbnail-vertical-arrow-fontsize8;
+				color:       $ethumbnail-vertical-arrow-textcolor;
+				line-height: $ethumbnail-vertical-arrow-y;
+		}
+		//滑过
+		&:hover{
+				cursor: pointer;
+				//插入字体图标
+				& i:before {
+						color: $ethumbnail-vertical-arrow-textcolor-hover;
+				}
+		}
+}
+//图片显示区域
+.#{$eui}-ethumbnail-align-vertical
+.#{$eui}-ethumbnail-center{
+		position: absolute;
+		left:     0;
+		top:      $ethumbnail-vertical-box-top;
+		bottom:   $ethumbnail-vertical-box-bottom;
+		right:    0;
+		height:   auto;
+		overflow: hidden;
+}
+//图片li
+.#{$eui}-ethumbnail-align-vertical {
+		.#{$eui}-ethumbnail-box {
+				width:   $ethumbnail-vertical-box-x;
+				height:  $ethumbnail-vertical-box-y;
+				margin:  $ethumbnail-vertical-box-margin 0 0 0;
+				border:  $ethumbnail-vertical-bordercolor;
+				padding: $ethumbnail-vertical-box-padding;
+				float:   left;
+				//滑过
+				&:hover{
+						border:  $ethumbnail-vertical-bordercolor-hover;
+						opacity: .8;
+						filter:  alpha(opacity=80);
+				}
+		}
+		//选中状态
+		& .#{$eui}-ethumbnail-box-selected {
+				border:  $ethumbnail-bordercolor-hover;
+		}
+}
+
+
+.#{$eui}-ethumbnail-align-vertical
+.#{$eui}-ethumbnail-text {
+		display: none;
+}
+//下箭头
+.#{$eui}-ethumbnail-align-vertical
+.#{$eui}-ethumbnail-right{
+		width:            $ethumbnail-vertical-arrow-x;
+		height:           $ethumbnail-vertical-arrow-y;
+		border:           $ethumbnail-vertical-bordercolor;
+		background-color: $ethumbnail-vertical-arrow-bgcolor;
+		position:         absolute;
+		bottom:           0;
+		//插入字体图标
+		& i:before {
+				content:    "\ef7f";
+				line-height: $ethumbnail-vertical-arrow-y;
+				font-size:   $ethumbnail-vertical-arrow-fontsize8;
+				color:       $ethumbnail-vertical-arrow-textcolor;
+		}
+		//滑过
+		&:hover{
+				cursor: pointer;
+				//插入字体图标
+				& i:before {
+						color: $ethumbnail-vertical-arrow-textcolor-hover;
+				}
+		}
+}
+.#{$eui}-ethumbnail-align-vertical
+.#{$eui}-ethumbnail-clear {
+		clear: $clear;
+}
+
+
+
+// 轮换组件
+.#{$eui}-carousel-container {
+	position: relative;
+	width:    100%;
+	height:   100%;
+	& .#{$eui}-carousel-items{
+		position: relative;
+    width: 100%;
+    height: 100%;
+		overflow: hidden;
+		& .#{$eui}-carousel-item{
+			display: none;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			transition-duration: .3s;
+		}
+	}
+	& .#{$eui}-carousel-leftright.#{$eui}-carousel-items{
+		& .#{$eui}-carousel-item-active{
+			display: block;
+			left:0;
+		}
+		& .#{$eui}-carousel-item-active.#{$eui}-carousel-left {
+			left:-100%;
+		}
+		& .#{$eui}-carousel-item-active.#{$eui}-carousel-right {
+			left:100%;
+		}
+		& .#{$eui}-carousel-item-next{
+			left:100%;
+			display: block;
+		}
+		& .#{$eui}-carousel-item-next.#{$eui}-carousel-left{
+			left:0;
+		}
+		& .#{$eui}-carousel-item-prev{
+			left:-100%;
+			display: block;
+		}
+		& .#{$eui}-carousel-item-prev.#{$eui}-carousel-right{
+			left:0;
+		}
+	}
+	& .#{$eui}-carousel-updown.#{$eui}-carousel-items{
+		& .#{$eui}-carousel-item-active{
+			display: block;
+			top:0;
+		}
+		& .#{$eui}-carousel-item-active.#{$eui}-carousel-right {
+			top:100%;
+		}
+		& .#{$eui}-carousel-item-active.#{$eui}-carousel-left{
+			top:-100%;
+		}
+		& .#{$eui}-carousel-item-next{
+			top:100%;
+			display: block;
+		}
+		& .#{$eui}-carousel-item-next.#{$eui}-carousel-left{
+			top:0;
+		}
+		& .#{$eui}-carousel-item-prev{
+			top:-100%;
+			display: block;
+		}
+		& .#{$eui}-carousel-item-prev.#{$eui}-carousel-right{
+			top:0;
+		}
+	}
+	& .#{$eui}-carousel-indicator{
+		position: relative;
+		top: -35px;
+		width: 100%;
+		line-height: 0!important;
+		text-align: center;
+		font-size: 0;
+		& .#{$eui}-carousel-indicator-ul{
+			display: inline-block;
+			padding: 5px;
+			border-radius: 10px;
+			background-color: #000000;
+			opacity: .5;
+			transition-duration: .3s;
+		}
+		& .#{$eui}-carousel-indicator-li{
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			margin: 0 3px;
+			font-size: 14px;
+			opacity: .5;
+			background-color: #ffffff;
+			border-radius: 50%;
+			transition-duration: .3s;
+			cursor: pointer;
+		}
+		& .#{$eui}-carousel-indicator-li:hover,
+		& .#{$eui}-carousel-indicator-active{
+			opacity: 1;
+			background-color: #e2e2e2;
+		}
+
+	}
+	& .#{$eui}-carousel-indicator-outside{
+		top:0px;
+	}
+	& .#{$eui}-carousel-pre,
+	& .#{$eui}-carousel-next{
+    position: absolute;
+    top: 50%;
+    width: 36px;
+    height: 36px;
+    margin-top: -18px;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 50%;
+		opacity: .5;
+		background-color: #000000;
+    color: #fff;
+    transition-duration: .3s;
+    cursor: pointer;
+	}
+	& .#{$eui}-carousel-pre{
+		left: 20px;
+	}
+	& .#{$eui}-carousel-next{
+		right: 20px;
+	}
+	& .#{$eui}-carousel-pre:hover,
+	& .#{$eui}-carousel-next:hover{
+		opacity: .8;
+	}
+	& .#{$eui}-carousel-hover{
+		opacity: 0;
+	}
+}
+.#{$eui}-carousel-container:hover{
+
+	& .#{$eui}-carousel-hover{
+		opacity: .5;
+	}
+}
+

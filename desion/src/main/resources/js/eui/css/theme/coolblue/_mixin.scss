@@ -1,0 +1,84 @@
+@charset "utf-8";
+
+//变形
+@mixin transform($rotate...) {
+		        transform: $rotate;
+		-webkit-transform: $rotate;
+		   -moz-transform: $rotate;
+		    -ms-transform: $rotate;
+		     -o-transform: $rotate;
+}
+
+//过度
+@mixin transition($all...) {
+		        transition: $all;
+		-webkit-transition: $all;
+		   -moz-transition: $all;
+		     -o-transition: $all;
+}
+
+//文字不被选择
+@mixin user-select($user:none) {
+		-webkit-user-select: $user;
+		   -moz-user-select: $user;
+		    -ms-user-select: $user;
+		     -o-user-select: $user;
+		        user-select: $user;
+}
+
+//动画
+@mixin animation($animation) {
+		-webkit-animation: $animation;
+		        animation: $animation;
+}
+
+//媒体查询 支持屏幕尺寸（1024、1366、1440以上）
+@mixin responsive($width) {
+		@if $width == $screens-l {
+				@media only screen and (max-width: $screens-l) {
+						@content;
+				}
+		}
+		@else if $width == $screens-m {
+				@media only screen and (max-width: $screens-m) {
+						@content;
+				}
+		}
+		@else if $width == $screens-s {
+				@media only screen and (max-width: $screens-s) {
+						@content;
+				}
+		}
+}
+
+//线性渐变色
+@mixin gradient($gradient...) {
+		background-image: -webkit-linear-gradient($gradient);
+		background-image: -moz-linear-gradient($gradient);
+		background-image: linear-gradient($gradient);
+		background-image: none\0;
+}
+
+//去掉渐变色
+%gradient-none {
+		background-image: linear-gradient(to top,transparent,transparent);
+}
+
+//共用after清除浮动
+%eui-clear {
+		content: "\0020";
+		display: $block;
+		height:  0;
+		clear:   $clear;
+		*zoom:   1;
+}
+
+%hover {
+		opacity:     $hover-opacity;
+		filter:      alpha(opacity=$hover-opacity-ie);
+}
+
+%active {
+		opacity:     1;
+		filter:      alpha(opacity=100);
+}

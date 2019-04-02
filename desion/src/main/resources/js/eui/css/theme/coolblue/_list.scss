@@ -1,0 +1,71 @@
+@charset "utf-8";
+
+//搜索结果列表-两行文字-列表高度和下边框
+.#{$eui}-list-container {
+		height:70px;
+		padding: 10px 5px;
+		border-bottom:1px solid $elist-bordercolor;
+		//搜索结果列表-前面文字图标大小
+		& .#{$eui}-list-left-x{
+				width: 50px;
+				line-height: 1.5;
+				& .#{$eui}-icon{
+						font-size: 34px;
+				}
+		}
+		& .#{$eui}-list-block{
+				display: $block;
+				min-height: 22px;
+				& .#{$eui}-elip{
+						padding-right: 10px;
+				}
+		}
+		//搜索结果页面宽度（超过规定宽度..代替的宽度）
+		& .#{$eui}-list-item{
+				padding-top: 4px;
+				& > span{
+						max-width: 130px;
+						margin-right: 10px;
+						display: $inline-block;
+				}
+		}
+		& .#{$eui}-twoline-height{
+				line-height: 50px;
+				& > a{
+						padding: 0 5px;
+				}
+		}
+}
+
+.#{$eui}-list-leftcontainer{
+		&  > span{
+				display: $block;
+				line-height: 40px;
+				padding: 0 5px;
+				font-size: $font-size14;
+				cursor: pointer;
+				&.active{
+						border-bottom: 1px solid $text-link;
+						color: $text-link;
+				}
+		}
+}
+
+//搜索页面
+.#{$eui}-list-esearch {
+		& .eui-search-layout-left {
+				position: absolute;
+				left: 10%;
+				width: 110px;
+				height: 100%;
+				overflow: auto;
+		}
+		& .eui-search-layout-right {
+				position: absolute;
+				left: calc(10% + 140px);
+				right: 0;
+				padding-right: 10%;
+				height: 100%;
+				overflow: auto;
+		}
+}

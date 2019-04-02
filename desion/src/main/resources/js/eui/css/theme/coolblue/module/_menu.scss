@@ -1,0 +1,308 @@
+@charset "utf-8";
+
+//***************** 默认菜单 *****************//
+%menu-icon {
+		position:    absolute;
+		display:     block;
+		top:         $menu-icon-top;
+		width:       $menu-iconsize;
+		height:      $menu-iconsize;
+		font-size:   $menu-iconsize;
+		line-height: $menu-iconsize;
+}
+
+%menu-arrow {
+		height:     20px;
+		text-align: center;
+		cursor:     pointer;
+		&:before {
+				display:     $inline-block;
+				font-family: $icon-font;
+				@include     transform(scale(0.75));
+		}
+		&:hover {
+				background-color: $bg-hover;
+				color:            $menu-icon-hover;
+		}
+}
+
+.#{$eui}-menu-container {
+		position:   absolute;
+		z-index:    9;
+		min-width:  $menu-container-minwidth;
+		max-width:  $menu-container-maxwidth;
+		padding:    $menu-container-padding;
+		background: $menu-container-bg;
+		box-shadow: $menu-container-shadow;
+		.#{$eui}-menu-group {
+				overflow: hidden;
+				& > li {
+
+				}
+				& .#{$eui}-menu-item {
+						cursor:      pointer;
+				}
+				//需要分组时出现的分割线
+				& .#{$eui}-menu-line {
+						border-top: $menu-line;
+				}
+		}
+		//超出屏幕高度时候出现
+		//向上箭头
+		.#{$eui}-menu-uparrow {
+				@extend %menu-arrow;
+				&:before {
+						content: "\ef8c";
+				}
+		}
+		//向下箭头
+		.#{$eui}-menu-downarrow {
+				@extend %menu-arrow;
+				&:before {
+						content: "\ef8d";
+				}
+		}
+}
+
+.#{$eui}-menu-container {
+		//默认菜单li
+		.#{$eui}-menu-item {
+				position: relative;
+				padding:     $menu-container-item-padding;
+				line-height: $line-height24;
+				color:       $menu-fontcolor;
+				& .#{$eui}-icon {
+						@extend %menu-icon;
+						left: $menu-container-item-icon-left;
+						&:before {
+
+						}
+				}
+				& span {
+						vertical-align: middle;
+						display:        $block;
+						margin-left:    $menu-container-item-span-margin;
+						margin-right:   $menu-container-item-span-margin;
+						text-overflow:  ellipsis;
+						white-space:    nowrap;
+						overflow:       hidden;
+				}
+				//有子级菜单时出现的箭头
+				& .#{$eui}-menu-more {
+						@extend %menu-icon;
+						right:  0;
+						left:   auto;
+						margin: 0;
+						color: $font-icon-grayblueIE;
+						&:before {
+								content:     "\ef81";
+								display:     $inline-block;
+								font-size:   $font-size;
+								line-height: 100%;
+								@include     transform(scale(0.75));
+						}
+				}
+				//滑过 选中
+				&:hover,
+				&-active {
+						color:      $menu-icon-hover;
+						background: $menu-bg-hover;
+				}
+		}
+}
+
+//***************** 系统菜单 透明蓝色 *****************//
+.#{$eui}-menu-nav {
+		background: $menu-nav-bg;
+		box-shadow: none;
+		.#{$eui}-menu-group {
+				& > li {
+
+				}
+				& .#{$eui}-menu-item {
+
+				}
+				//需要分组时出现的分割线
+				& .#{$eui}-menu-line {
+						border-top: $menu-nav-line;
+				}
+		}
+		//超出屏幕高度时候出现
+		//向上箭头
+		.#{$eui}-menu-uparrow {
+
+		}
+		//向下箭头
+		.#{$eui}-menu-downarrow {}
+}
+
+.#{$eui}-menu-nav {
+		//默认菜单li
+		.#{$eui}-menu-item {
+				color:      $menu-nav-fontcolor;
+				& .#{$eui}-icon {
+						color:  $menu-nav-fontcolor;
+						&:before {
+
+						}
+				}
+				& span {
+
+				}
+				//有子级菜单时出现的箭头
+				& .#{$eui}-menu-more {
+						&:before {
+
+						}
+				}
+				//滑过 选中
+				&:hover,
+				&-active {
+						color:      $menu-nav-fontcolor;
+						background: $menu-nav-line-active;
+				}
+		}
+}
+
+
+//***************** 系统菜单 透明蓝色 主导航菜单 *****************//
+.#{$eui}-menu-navmain {
+		max-width: none;
+		width: 430px;
+		background: $menu-navmain-bgcolor;
+		box-shadow: $menu-container-shadow;
+		padding: 10px 0;
+		.#{$eui}-menu-group {
+				& > li {
+
+				}
+				& .#{$eui}-menu-item {
+						padding: 15px 20px;
+						position: relative;
+						&:after{
+								content: "";
+								position: absolute;
+								z-index: -2;
+								top: 0;
+								bottom: 0;
+								left: 20px;
+								right: 20px;
+								border-bottom: 1px solid rgba(255,255,255,0.5);
+						}
+						&:last-child:after{
+								border-bottom: 1px solid transparent;
+						}
+						& span{
+								margin-left: 0;
+								margin-right: 0;
+								color: #ffffff;
+								font-size: 14px;
+								&.#{$eui}-menu-desc{
+										color: rgba(255, 255, 255, 0.6);
+										padding-top: 5px;
+										font-size: 12px;
+										white-space: normal;
+								}
+						}
+						//滑过 选中
+						&:hover,
+						&-active {
+								color:      $menu-nav-fontcolor;
+								background: transparent;
+								&:before{
+										content: "";
+										position: absolute;
+										z-index: -1;
+										top: -1px;
+										bottom: -1px;
+										left: 0;
+										right: 0;
+										background-color: $menu-item-bg-hover;
+								}
+								& span{
+										&.#{$eui}-menu-desc{
+												color: rgba(255, 255, 255, 1);
+										}
+								}
+						}
+				}
+				//需要分组时出现的分割线
+				& .#{$eui}-menu-line {
+						border-top: $menu-nav-line;
+				}
+
+		}
+		//超出屏幕高度时候出现
+		//向上箭头
+		.#{$eui}-menu-uparrow {
+
+		}
+		//向下箭头
+		.#{$eui}-menu-downarrow {}
+}
+
+//***************** 带二级菜单 系统菜单 透明蓝色 *****************//
+.#{$eui}-menu-vert {
+		width: 150px;
+		padding: 0;
+		background-color: rgba(60, 73, 94, 0.9);
+		.#{$eui}-menu-group {
+				& > li {
+
+				}
+				& > .#{$eui}-menu-item {
+						padding: 0;
+						line-height: $line-height24 + 10;
+						& .#{$eui}-menu-sub-group{
+								& .#{$eui}-menu-vert{
+										background: $menu-nav-bg;
+										& .#{$eui}-menu-item{
+												padding:0 15px;
+										}
+								}
+						}
+				}
+				//需要分组时出现的分割线
+				& .#{$eui}-menu-line {
+				}
+		}
+		//超出屏幕高度时候出现
+		//向上箭头
+		.#{$eui}-menu-uparrow {
+
+		}
+		//向下箭头
+		.#{$eui}-menu-downarrow {}
+}
+
+.#{$eui}-menu-vert {
+		//默认菜单li
+		.#{$eui}-menu-item {
+				& .#{$eui}-icon {
+						&:before {
+
+						}
+				}
+				& span {
+
+				}
+				//有子级菜单时出现的箭头
+				& .#{$eui}-menu-more {
+						text-align: center;
+						right: 5px;
+						&:before {
+								content: "\ef8f";
+						}
+						transform: rotate(0deg);
+						transition: all 0.5s;
+				}
+				//子级菜单展开时出现的箭头
+				& .#{$eui}-menu-expanded{
+						transform: rotate(90deg);
+				}
+				//滑过 选中
+				&:hover,
+				&-active {
+				}
+		}
+}

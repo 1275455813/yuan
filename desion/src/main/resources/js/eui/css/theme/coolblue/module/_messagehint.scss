@@ -1,0 +1,171 @@
+@charset "utf-8";
+
+//<div class="eui-messagehint-container">
+//  <div class="eui-messagehint-arrow-left"></div>
+//  <div class="eui-messagehint-head">
+//    <i title="固定" class="eui-icon eui-icon-fixed"></i>
+//    <i title="关闭" class="eui-icon eui-icon-close"></i>
+//  </div>
+//  <div class="eui-messagehint-body"></div>
+//</div>
+//*****悬浮时更换图标将eui-icon-fixed样式替换为eui-icon-unfold
+//*****三角箭头默认向左，样式名为 eui-messagehint-arrow-left
+//*****三角箭头向上时，将默认样式替换为 eui-messagehint-arrow-top
+//*****三角箭头向右时，将默认样式替换为 eui-messagehint-arrow-right
+//*****三角箭头向下时，将默认样式替换为 eui-messagehint-arrow-bottom
+//*****第二种风格提示操作时使用，样式名 eui-messagehint-code
+
+
+
+
+//右侧图标浮动
+%messagehint-icon{
+		display:   $inline-block;
+		width:     $font-size16;
+    font-size: $font-size;
+		color:     $form-select-icon-color;
+		cursor:    pointer;
+}
+//三角箭头上面一层
+%messagehint-arrow-up{
+    content: "";
+    position: absolute;
+    z-index: 1;
+    border-width: $messagehint-arrow-border-x;
+    border-style: $messagehint-arrow-border-style;
+}
+//三角箭头下面一层
+%messagehint-arrow-down{
+    content: "";
+    position: absolute;
+    z-index: 2;
+    border-width: $messagehint-arrow-border-x;
+    border-style: $messagehint-arrow-border-style;
+}
+//三角外边一层定位
+%messagehint-arrow{
+    width: $messagehint-arrow-x;
+    height: $messagehint-arrow-y;
+    position: absolute;
+}
+
+
+//外面框架样式
+.#{$eui}-messagehint-container{
+    padding:     $messagehint-padding;
+    min-width:   $messagehint-min-x;
+    min-height:  $messagehint-min-y;
+    background:  $messagehint-bgcolor;
+    box-shadow:  $messagehint-box-shadow;
+    position:    absolute;
+		z-index:     2;
+    margin-left: $messagehint-arrow-border-x;
+    //三角箭头向左
+    & .#{$eui}-messagehint-arrow-left {
+        @extend %messagehint-arrow;
+        top: $messagehint-arrow-top;
+        left: -$messagehint-arrow-border-x;
+        //margin-left: -$messagehint-arrow-border-x;
+        margin-left: 0;
+        overflow: hidden;
+        &:before{
+            @extend %messagehint-arrow-up;
+            top: 0;
+            left: -8px;
+            border-color: transparent $messagehint-arrow-border-color transparent transparent;
+        }
+
+        &:after{
+            @extend %messagehint-arrow-down;
+            top: 0;
+            left: -7px;
+            border-color: transparent $messagehint-bgcolor transparent transparent;
+        }
+    }
+    //三角箭头向右
+    & .#{$eui}-messagehint-arrow-right {
+        @extend %messagehint-arrow;
+        top: $messagehint-arrow-top;
+        right: -$messagehint-arrow-border-x;
+        margin-right: -$messagehint-arrow-border-x;
+        &:before{
+            @extend %messagehint-arrow-up;
+            top: 0;
+            right: 0;
+            border-color: transparent transparent transparent $messagehint-arrow-border-color;
+        }
+
+        &:after{
+            @extend %messagehint-arrow-down;
+            top: 0;
+            right: 1px;
+            border-color: transparent transparent transparent $messagehint-bgcolor;
+        }
+    }
+    //三角箭头向上
+    & .#{$eui}-messagehint-arrow-top{
+        @extend %messagehint-arrow;
+        left: $messagehint-arrow-top;
+        top: -$messagehint-arrow-border-x;
+        margin-top: -$messagehint-arrow-border-x;
+        &:before{
+            @extend %messagehint-arrow-up;
+            left: 0;
+            top: 0;
+            border-color: transparent transparent $messagehint-arrow-border-color transparent;
+        }
+
+        &:after{
+            @extend %messagehint-arrow-down;
+            left: 0;
+            top: 1px;
+            border-color: transparent transparent $messagehint-bgcolor transparent;
+        }
+    }
+    //三角箭头向下
+    & .#{$eui}-messagehint-arrow-bottom{
+        @extend %messagehint-arrow;
+        left: $messagehint-arrow-top;
+        bottom: -$messagehint-arrow-border-x;
+        margin-bottom: -$messagehint-arrow-border-x;
+        &:before{
+            @extend %messagehint-arrow-up;
+            left: 0;
+            bottom: 0;
+            border-color: $messagehint-arrow-border-color transparent transparent transparent;
+        }
+
+        &:after{
+            @extend %messagehint-arrow-down;
+            left: 0;
+            bottom: 1px;
+            border-color: $messagehint-bgcolor transparent transparent transparent;
+        }
+    }
+}
+
+.#{$eui}-messagehint-container{
+    & .#{$eui}-messagehint-head{
+        text-align: right;
+        //关闭图标
+        & .#{$eui}-icon-close{
+            @extend %messagehint-icon;
+            &:before{
+                display: $inline-block;
+                @include  transition(all 0.4s ease);
+            }
+        }
+        //固定图标
+        & .#{$eui}-icon-fixed{
+            @extend %messagehint-icon;
+        }
+        //悬浮图标
+        & .#{$eui}-icon-unfixed{
+            @extend %messagehint-icon;
+        }
+    }
+		& .#{$eui}-messagehint-body {
+				word-wrap: break-word;
+				word-break: break-all;
+		}
+}

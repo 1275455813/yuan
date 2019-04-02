@@ -1,0 +1,141 @@
+@charset "utf-8";
+
+//<div class="eui-tabset-container">
+//翻页的按钮
+//  <div class="eui-tabset-icon">
+//     <i class="eui-icon eui-tabset-first" title="第一页"></i>
+//     <i class="eui-icon eui-tabset-pre" title="前一页"></i>
+//     <i class="eui-icon eui-tabset-next" title="下一页"></i>
+//     <i class="eui-icon eui-tabset-last" title="最后一页"></i>
+//  </div>
+//sheet标签页部分
+//  <ul class="eui-tabset-item">
+//     <li class="eui-tabset-text eui-tabset-text-active">sheet1</li>
+//     <li class="eui-tabset-text">sheet2</li>
+//  </ul>
+//标签页显示不下出现剩余数字
+//  <span class="class="eui-tabset-more"">显示隐藏sheet的剩余数字 </span>
+//</div>
+
+//****************tabset组件默认*****************//
+.#{$eui}-tabset-container {
+		position:         relative;
+		width:            100%;
+		height:           $tabset-height;
+		background-color: $tabset-bgcolor;
+		//翻页的图标按钮
+		& .#{$eui}-tabset-icon {
+				position:     absolute;
+				width:        $tabset-icon-x;
+				padding:      $tabset-icon-padding;
+				height:       100%;
+				left:         0;
+        top:          0;
+				border-right: $tabset-icon-border-right;
+				& i {
+						padding:     $tabset-icon-i-pdding;
+						height:      100%;
+						display:     $inline-block;
+						cursor:      pointer;
+						color:       $tabset-icon-i-color;
+						line-height: $tabset-icon-i-lineheight;
+						font-size:   $font-size;
+						&:hover {
+								background-color: $tabset-icon-i-hover-bg;
+						}
+				}
+				//第一页图标
+				& .#{$eui}-tabset-first {
+						&:before {
+								content:    "\ef82";
+						}
+				}
+				//前一页图标
+				& .#{$eui}-tabset-pre {
+						&:before {
+								content:    "\ef80";
+						}
+				}
+				//后一页图标
+				& .#{$eui}-tabset-next {
+						&:before {
+								content:    "\ef81";
+						}
+				}
+				//最后一页图标
+				& .#{$eui}-tabset-last {
+						&:before {
+								content:    "\ef83";
+						}
+				}
+		}
+		//sheet标签页外层部分
+		& .#{$eui}-tabset-item {
+				white-space:  nowrap;
+				overflow:     hidden;
+				display:      $block;
+				margin-left:  $tabset-item-margin-left;
+				height:       100%;
+				position:     relative;
+				//sheet标签页ul部分
+				& .#{$eui}-tabset-label {
+					  position: absolute;
+						top:      0;
+						left:     0;
+						height:   100%;
+				}
+				//清除浮动
+				&:after {
+						@extend %eui-clear;
+				}
+				//li标签页
+				& .#{$eui}-tabset-text {
+						display:      $inline-block;
+						padding:      $tabset-item-paddig;
+						border-right: $tabset-item-border-right;
+						line-height: $tabset-icon-i-lineheight;
+						cursor:       pointer;
+						}
+				}
+		//标签页显示不下出现更多，暂时没有这个功能
+		.#{$eui}-tabset-more{}
+}
+
+//标签页当前被选中的状态
+.#{$eui}-tabset-container {
+		& .#{$eui}-tabset-text-active {
+				background-color: $tabset-active-bgcolor;
+				height:           $tabset-active-height;
+				color:            $tabset-active-color;
+				font-weight:      $tabset-active-weight;
+		}
+}
+
+//****************tabset组件 (组合页面，类似tab标签页)*****************//
+.#{$eui}-etabnotes-container{
+		position: relative;
+		width:    100%;
+		height:   100%;
+		//页面容器
+		& .#{$eui}-etabnotes-notes {
+				position: absolute;
+				width:    100%;
+				top:      0;
+				bottom:   $etabnotes-notes-bottom;
+				& .#{$eui}-etabnotes-note {
+						position: relative;
+						width:    100%;
+						height:   100%;
+						overflow: hidden;
+				}
+		}
+		//标签页
+		& .#{$eui}-etabnotes-tabset{
+				position: absolute;
+				width:    100%;
+				height:   $etabnotes-tabset-y;
+				bottom:   0;
+		}
+}
+
+

@@ -1,0 +1,1055 @@
+@charset "utf-8";
+
+//全局变量
+$eui:          eui          !default;
+$box:          content-box  !default;
+$block:        block        !default;
+$inline:       inline       !default;
+$inline-block: inline-block !default;
+$clear:        both         !default;
+
+//尺寸
+$xs: xs   !default; //小小号
+$s:  s    !default; //小号
+$m:  m    !default; //中号
+$l:  l    !default; //大号
+$xl: xl   !default; //加大号（PC端）
+$xxl: xxl !default; //加大号
+
+//屏幕尺寸
+$screens-s: 1024px;
+$screens-m: 1366px;
+$screens-l: 1440px;
+
+
+//栅格数量
+$columns:   12 !default;
+//栅格间距
+$space-num: 30 !default;
+//padding间距
+$padding:   35 !default;
+//margin间距 不需要间距时使用
+$margin:    35 !default;
+//line-height距离
+$lineheight: 22 !default;
+
+//*************** 文字 ***************//
+//默认字体
+$font-family:   Microsoft Yahei, simsun, Arial !default;
+$font-size:     12px                           !default; //默认大小
+$font-size14:   14px                           !default; //14号字体
+$font-size16:   16px                           !default; //16号字体
+$font-size18:   18px                           !default; //18号字体
+$font-size24:   24px                           !default; //24号字体
+$font-size32:   32px                           !default; //32号字体
+$font-size36:   36px                           !default; //36号字体
+$font-size40:   40px                           !default; //40号字体
+$line-height:   22px                           !default; //默认行间距
+$line-height24: 24px                           !default; //24行间距
+$line-height26: 26px                           !default; //26行间距
+$line-height30: 30px                           !default; //30行间距
+$line-height36: 36px                           !default; //36行间距
+$line-height48: 48px                           !default; //48行间距
+$icon-font:     eui-icon                       !default; //默认图标字体
+
+$text-color:       #333     !default; //默认
+$text-weaken:      #8a8a8a  !default; //弱化
+$text-strong:      700      !default; //强化
+$text-link:        #238efe  !default; //链接
+$text-error:       #fc4735  !default; //报错
+$text-disabled:    #c9c9c9  !default; //禁用
+$text-tips-blue:   #727D95  !default; //提示蓝色
+$text-tips-green:  #3fbda3  !default; //提示绿色
+$text-tips-orange: #ff8400  !default; //提示橙色
+
+//*************** 背景颜色 ***************//
+$bg-hover:         #ebf7ff  !default; //全局滑过背景色
+$bg-search:        #fff0c9  !default; //搜索后在表格中凸显结果的背景色
+
+//*************** 字体图标 ***************//
+$font-icon-color:       132deg, #59aaff 21%, #1e8cff 75% !default; //主题蓝渐变
+$font-icon-colorIE:     #238efe      !default;   //主题蓝颜色
+$font-icon-primary:     #238efe      !default;   //推荐
+$font-icon-sub:         #3bc5ba      !default;   //二级推荐
+$font-icon-warn:        #f5a024      !default;   //提醒注意
+$font-icon-danger:      #ff5722      !default;   //警告危险
+$font-icon-grayblue:    132deg, #6684a2 21%, #4e6a88 75% !default; //灰蓝色渐变
+$font-icon-grayblueIE:  #557290      !default;  //灰蓝色IE
+$font-icon-xs:          $font-size   !default; //字体图标小小号
+$font-icon-s:           $font-size14 !default; //字体图标小号
+$font-icon-m:           20px         !default; //字体图标中号
+$font-icon-l:           $font-size24 !default; //字体图标大号
+$font-icon-xl:          $font-size32 !default; //字体图标加大号
+$font-icon-xxl:         $font-size40 !default; //字体图标加大大号
+
+//*************** 框架 ***************//
+$container-right-bgcolor: #fff !default; //右边内容部分背景色
+
+//*************** 框架 ***************//
+$layout-header:         50px   !default; //顶部高度
+$layout-logo-x:         220px  !default;
+$layout-header-right-x: 0      !default; //距离右侧边距
+$layout-left-tab-x:     50px   !default; //左侧工具栏宽度
+$layout-left-tree-x:    220px  !default; //左侧树形宽度
+$layout-left-navbar-y:  40px   !default; //左侧导航栏高度
+$layout-left-seize:     20px   !default; //左侧导航栏收起状态
+
+//最小高度栅格
+$layout-grid-minheight: 50px   !default;
+
+//框架颜色
+$layout-header-bg-color:        #00173b !default;
+$layout-left-navbar-bg-color:   #0b2245 !default;
+$layout-left-navbar-iconcolor:  rgba(255,255,255,.3) !default;
+$layout-left-tree-border-color: #203554 !default;
+$layout-left-tree-seize-bg:     #132a4f !default;
+
+
+//*************** 按钮 ***************//
+//默认
+$btn-border:            #b5bdca           !default;  //边框
+$btn-bg:                #fff              !default;  //背景
+$btn-color:             $text-color       !default;  //文字色
+//推荐
+$btn-primary-border:    #238efe           !default; //边框
+$btn-primary-bg:        #238efe           !default; //背景
+$btn-primary-color:     #fff              !default; //状态文字色
+//二级推荐
+$btn-subprimary-border: #3bc5ba           !default; //边框
+$btn-subprimary-bg:     #3bc5ba           !default; //背景
+//提醒注意
+$btn-warn-border:       #ffb800           !default; //边框
+$btn-warn-bg:           #ffb800           !default; //背景
+//警告危险
+$btn-danger-border:     #ff5722           !default;//边框
+$btn-danger-bg:         #ff5722           !default;//背景
+//禁用
+$btn-disabled-border:   #e6e6e6           !default; //边框
+$btn-disabled-bg:       #fbfbfb           !default; //背景
+$btn-disabled-color:    #c9c9c9           !default; //文字色
+//尺寸
+//迷你
+$btn-s-y:               22px              !default;
+$btn-s-fontsize:        $font-size        !default;
+$btn-s-padding-x:       8px               !default;
+//中
+$btn-m-y:               26px              !default;
+$btn-m-fontsize:        $font-size        !default;
+$btn-m-padding-x:       10px              !default;
+//默认大小
+$btn-l-y:               32px              !default;
+$btn-l-fontsize:        $font-size14      !default;
+$btn-l-padding-x:       14px              !default;
+//文字按钮
+$btn-text-padding-x:    5px               !default; //间距
+$hover-opacity:         0.8               !default; //按钮滑过透明度
+$hover-opacity-ie:      80                !default; //按钮滑过透明度IE
+
+
+//*************** 表单布局 ***************//
+$form-label-x:            110px   !default; //表单标题宽度
+$form-input-x:            260px   !default; //表单元素宽度
+$form-textarea-x:         400px   !default; //默认文本域宽度
+$form-input-y:            26px    !default; //表单元素高度
+$form-inline-input-x:     200px   !default; //内联表单元素宽度
+$form-item-margin:        10px    !default; //表单间距
+//超小号
+$form-xs-label-x:         60px    !default; //超小间距表单标题宽度
+//小号（小间距表单布局）
+$form-s-label-x:          80px    !default; //小间距表单标题宽度
+$form-s-input-x:          180px   !default; //表单元素宽度
+$form-s-textarea-x:       300px   !default; //文本域宽度
+$form-s-input-y:          22px    !default; //表单元素高度
+$form-s-item-margin:      5px     !default; //表单间距
+//大号
+$form-l-label-x:          160px   !default; //大号表单标题宽度
+
+//输入框、下拉框、文本域
+$form-input-color:        $text-color !default; //表单元素字体颜色
+$form-input-border-color: #b5bdca     !default; //表单元素边框颜色
+$form-input-bg-color:     #fff        !default; //表单元素背景颜色
+$form-input-padding-left: 5px         !default; //表单默认左间距
+
+//带行号的文本域
+$form-texteditor-border-color: #ececec !default; //右边框
+$form-texteditor-bg:           #fbfbfc !default; //行号列表背景
+
+//表单状态
+$form-input-focus:           #238efe;        //表单焦点后边框颜色
+$form-input-bg-disabled:     #f3f3f3;        //禁用后背景
+$form-input-border-disabled: #e6e6e6;        //禁用后边框
+$form-input-text-disabled:   $text-disabled; //禁用后文字
+
+//下拉框、数字输入框
+$form-select-icon-x:        24px    !default; //下拉框箭头区域大小
+$form-select-icon-arrow-xy: 12px    !default; //下拉框下拉箭头大小
+$form-select-icon-color:    #557290 !default; //下拉箭头颜色
+
+//开关
+$form-onswitch-bgcolor: #6eb5ff  !default; //开关背景色
+
+//单选、复选
+$form-radio-icon-color:             #b5bdca !default; //默认状态
+$form-radio-icon-partial-color:     #b5bdca !default; //半选状态
+$form-radio-icon-on-color:          #ff5722 !default; //反选状态 选中
+
+//搜索框（带搜索条目）
+$form-datasearch-tip-x:             70px !default;
+
+//搜索框（圆角搜索框，适用于列表页面）
+$form-search-radius-y:  28px    !default; //搜索框高度
+$form-search-radius-bg: #f2f4f5 !default; //背景
+$form-search-radius-input-padding-left: 10px !default;
+$form-search-radius-icon-x: 24px !default;
+
+//搜索框 （大型的搜索框，适用于像百度首页）
+$form-search-big-y:      36px !default; //搜索框高度
+$form-search-big-icon-x: 72px !default; //搜索按钮宽度
+
+//滑块
+$form-range-bg:                      #dfdfdf                           !default; //滑块背景色
+$form-range-bg-arae:                 #24a4ff                           !default; //滑块背景色
+$form-range-border:                  #b3b3b4                           !default; //滑块边框色
+$form-range-shadow:                  inset 0 2px 5px rgba(0, 0, 0, .1) !default; //滑块内层投影
+$form-range-operating-bg:            #eeeeed                           !default; //滑块拖拽区域背景色
+$form-range-operating-border:        #777777                           !default; //滑块拖拽区域边框色
+$form-range-operating-active-bg:     #238efe                           !default; //滑块拖拽区域选中背景色
+$form-range-operating-active-border: #238efe                           !default; //滑块拖拽区域选中边框色
+$form-range-operating-shadow:        0 0px 10px transparent            !default; //滑块内层投影
+
+//下拉控件 颜色拾取框
+$picker-x:                           60px !default;  //下拉控件宽度
+$picker-mini-x:                      45px !default;  //下拉控件mini 宽度
+$picker-padding:                     2px  !default;  //下拉控件内边距
+$picker-select-icon-gap:             -1px !default;  //右侧下拉箭头 上下右 间隙
+$picker-select-icon-x:               14px !default;  //右侧下拉箭头 宽度
+$picker-colorpicker-marginright: $picker-select-icon-x !default; //左侧内容部分右边距
+$picker-colorpicker-icon-lineheight: 20px !default;  //图标下拉框 图标行高
+$picker-tool-icon-lineheight: $line-height24 !default;  //工具栏使用时 图标下拉框 图标行高
+
+//锁定宽高
+$locking-x:            20px                  !default; //宽度
+$locking-right:        10px                  !default; //距离右边距离
+$locking-icon-x:       20px                  !default; //图标宽度
+$locking-icon-y:       18px                  !default; //图标高度
+$locking-icon-border:  1px solid #d1d1d1     !default; //图标边框
+$locking-icon-bg:      #f3f3f3               !default; //图标背景
+$locking-icon-outline: 5px solid #fff        !default; //图标遮罩边框
+$locking-border:       1px solid #999        !default; //连接线
+$locking-off-border:   1px solid transparent !default; //未锁定时边框
+$locking-off-bg:       transparent           !default; //未锁定时背景
+$locking-off-outline:  none                  !default; //未锁定时遮罩边框
+
+//*************** 链接块 ***************//
+$link-padding:      5px           !default;
+$link-bg:           transparent   !default;
+$link-fontsize:     $font-size14  !default;
+$link-color:        #333          !default;
+$link-sub-fontsize: $font-size    !default;
+$link-sub-color:    #666          !default;
+$link-iconsize:     40px          !default;
+$link-icon-xy:      50px          !default;
+$link-iconcolor:    #4ca3ff       !default;
+
+//*************** 链接块 新建数据库连接池***************//
+$sqlbox-link-iconsize:     50px;
+
+//小型连接块
+
+//*************** 链接块 新建规则***************//
+$rulebox-link-iconsize:     70px;
+
+//****************************** 组件 ******************************//
+//*************** 工具栏 ***************//
+$coolbar-y:                      50px            !default;
+$coolbar-textsize:               $font-size14    !default; //默认文字大小
+$coolbar-icon-xy:                24px            !default; //默认图标大小
+$coolbar-icon-marignright:       4px             !default; //图标距离右边文字右边距
+$coolbar-more-marignleft:        5px             !default; //有二级菜单 小三角离左边文字距离
+$coolbar-item-padding-x:         15px            !default; //菜单间距
+$coolbar-hover-bg:               #238efe         !default; //滑过选中背景色
+$coolbar-hover-bg-ie:            #238efe         !default; //滑过选中背景色ie
+$coolbar-textcolor:              #fff            !default; //默认文字颜色
+$coolbar-textcolor-hover:        #fff            !default; //滑过选中文字颜色
+$coolbar-min-textcolor:          #afb0b3         !default; //顶部导航栏右侧风格
+$coolbar-mail-icon-color:        #e6e6e6         !default; //右侧扩展风格-论坛 图标颜色
+$coolbar-about-icon-color:       #419eff         !default; //右侧扩展风格-关于 图标颜色
+$coolbar-line-marginright:       5px             !default; //分组-分割线
+
+//工具栏-系统左侧垂直
+$coolbar-verticaltab-x:                 50px          !default;
+$coolbar-verticaltab-textsize:          $font-size    !default; //默认文字大小
+$coolbar-verticaltab-icon-xy:           20px          !default; //默认图标大小
+$coolbar-verticaltab-bg:                #132a4f       !default; //背景色
+$coolbar-verticaltab-hover-bg:          #0d4292       !default; //滑过选中背景色
+$coolbar-verticaltab-textcolor:         #dee0e3       !default; //默认文字颜色
+$coolbar-verticaltab-iconcolor:         rgba(255,255,255,.5)    !default; //默认图标颜色
+$coolbar-verticaltab-textcolor-hover:   #fff          !default; //滑过选中文字颜色
+$coolbar-verticaltab-more-marigntop:    5px           !default; //有二级菜单 小三角离上边内容距离
+$coolbar-verticaltab-item-paddingx:     2px           !default; //li左右边距
+$coolbar-verticaltab-item-paddingy:     10px          !default; //li上下边距
+$coolbar-verticaltab-item-lineheight:   14px          !default; //li行高
+$coolbar-verticaltab-icon-marginbottom: 6px           !default; //工具栏图标离下边文字距离
+
+//工具栏-按钮状态（用于界面中）
+$coolbar-btn-y:                 48px          !default; //高度
+$coolbar-btn-padding-top:       10px          !default; //默认工具栏上下间距
+$coolbar-btn-padding-left:      20px          !default; //默认工具栏左右间距
+$coolbar-btn-item-padding-x:    10px          !default; //菜单间距
+$coolbar-btn-textsize:          $font-size    !default; //默认文字大小
+$coolbar-btn-icon-xy:           16px          !default; //默认图标大小
+$coolbar-btn-bordercolor:       #238efe       !default; //默认边框色
+$coolbar-btn-bordercolor-hover: #238efe       !default; //滑过边框色
+$coolbar-btn-bg:                #fff          !default; //默认背景色
+$coolbar-btn-hover-bg:          #238efe       !default; //滑过选中背景色
+$coolbar-btn-textcolor:         #238efe       !default; //默认文字颜色
+$coolbar-btn-textcolor-hover:   #fff          !default; //滑过选中文字颜色
+
+//工具栏-按钮状态(小号用于弹窗中)
+$coolbar-btngray-y:              46px          !default; //高度
+$coolbar-btngray-padding-left:   0          !default; //默认工具栏左右间距
+
+//工具栏-传统小图标
+$coolbar-tradition-y:                 40px          !default; //工具栏总高度
+$coolbar-tradition-item-y:            26px          !default; //菜单高度
+$coolbar-tradition-textsize:          $font-size    !default; //默认文字大小
+$coolbar-tradition-icon-xy:           16px          !default; //默认图标大小
+$coolbar-tradition-item-padding-x:    4px           !default; //菜单间距
+$coolbar-tradition-bg:                transparent   !default; //默认背景色
+$coolbar-tradition-hover-bg:          transparent   !default; //滑过背景色
+$coolbar-tradition-active-bg:         #ccebf8       !default; //选中背景色
+$coolbar-tradition-active-border:     #199ed8       !default; //选中边框色
+$coolbar-tradition-textcolor:         #333          !default; //默认文字颜色
+$coolbar-tradition-textcolor-hover:   #238efe       !default; //滑过选中文字颜色
+$coolbar-tradition-icon-color:        #66b3fb       !default;
+$coolbar-tradition-more-color:        #576172       !default; //2级下拉颜色
+
+//工具栏-传统小图标-黑色（悬浮工具条）
+$coolbar-traditionblack-y:                 40px          !default; //工具栏总高度
+$coolbar-traditionblack-item-y:            26px          !default; //菜单高度
+$coolbar-traditionblack-textsize:          $font-size    !default; //默认文字大小
+$coolbar-traditionblack-icon-xy:           16px          !default; //默认图标大小
+$coolbar-traditionblack-item-padding-x:    2px           !default; //菜单间距
+$coolbar-traditionblack-bg:                transparent   !default; //默认背景色
+$coolbar-traditionblack-hover-bg:          transparent   !default; //滑过背景色
+$coolbar-traditionblack-active-bg:         #ccebf8       !default; //选中背景色
+$coolbar-traditionblack-active-border:     #199ed8       !default; //选中边框色
+$coolbar-traditionblack-textcolor:         #333333       !default; //默认文字颜色
+$coolbar-traditionblack-textcolor-hover:   #238efe       !default; //滑过选中文字颜色
+$coolbar-traditionblack-icon-color:        #333333       !default;
+$coolbar-traditionblack-more-color:        #333333       !default; //2级下拉颜色
+
+//工具栏-传统小图标-黑色（公式定义向导）
+$coolbar-traditionblackmini-y:                 40px          !default; //工具栏总高度
+$coolbar-traditionblackmini-padding-x:         5px           !default; //工具栏外间距
+$coolbar-traditionblackmini-item-y:            22px          !default; //菜单高度
+$coolbar-traditionblackmini-textsize:          $font-size    !default; //默认文字大小
+$coolbar-traditionblackmini-font-family:       Verdana       !default; //默认字体
+$coolbar-traditionblackmini-icon-xy:           16px          !default; //默认图标大小
+$coolbar-traditionblackmini-item-padding-x:    4px           !default; //菜单间距
+$coolbar-traditionblackmini-bg:                transparent   !default; //默认背景色
+$coolbar-traditionblackmini-hover-bg:          transparent   !default; //滑过背景色
+$coolbar-traditionblackmini-active-bg:         #ccebf8       !default; //选中背景色
+$coolbar-traditionblackmini-border:            1px solid transparent       !default; //边框
+$coolbar-traditionblackmini-hover-border:      1px solid #199ed8       !default; //滑过边框
+$coolbar-traditionblackmini-active-border:     1px solid #199ed8       !default; //选中边框
+$coolbar-traditionblackmini-textcolor:         #333333       !default; //默认文字颜色
+$coolbar-traditionblackmini-textcolor-hover:   #238efe       !default; //滑过选中文字颜色
+$coolbar-traditionblackmini-icon-color:        #333333       !default;
+$coolbar-traditionblackmini-more-color:        #333333       !default; //2级下拉颜色
+
+//工具栏-传统黑色(ppt)小图标
+$coolbar-traditionppt-y:                 40px          !default; //工具栏总高度
+$coolbar-traditionppt-item-y:            26px          !default; //菜单高度
+$coolbar-traditionppt-textsize:          $font-size    !default; //默认文字大小
+$coolbar-traditionppt-icon-xy:           16px          !default; //默认图标大小
+$coolbar-traditionppt-item-padding-x:    4px           !default; //菜单间距
+$coolbar-traditionppt-bg:                transparent   !default; //默认背景色
+//$coolbar-traditionppt-hover-bg:          transparent   !default; //滑过背景色
+$coolbar-traditionppt-hover-bg:          #f5f5f5       !default;
+$coolbar-traditionppt-active-bg:         #f5f5f5       !default; //选中背景色
+$coolbar-traditionppt-active-border:     #e3e3e3       !default; //选中边框色
+$coolbar-traditionppt-textcolor:         #000000       !default; //默认文字颜色
+$coolbar-traditionppt-textcolor-hover:   #238efe       !default; //滑过选中文字颜色
+$coolbar-traditionppt-icon-color:        #5f5f5f       !default;
+$coolbar-traditionppt-more-color:        #576172       !default; //2级下拉颜色
+
+//工具栏-属性面板超小图标
+$coolbar-iconmini-y:                 20px                           !default; //工具栏总高度
+$coolbar-iconmini-item-y:            20px                           !default; //菜单高度
+$coolbar-iconmini-textsize:          $font-size                     !default; //默认文字大小
+$coolbar-iconmini-icon-xy:           12px                           !default; //默认图标大小
+$coolbar-iconmini-item-padding-x:    2px                            !default; //菜单间距
+$coolbar-iconmini-border:            1px solid #b9b9b9              !default; //默认边框色
+$coolbar-iconmini-bg:                #f4f4f4                        !default; //默认背景色
+$coolbar-iconmini-hover-bg:          rgba(25,158,216,.5)            !default; //滑过背景色
+$coolbar-iconmini-hover-border:      1px solid #199ed8              !default; //滑过边框色
+$coolbar-iconmini-active-bg:         rgba(25,158,216,.2)            !default; //选中背景色
+$coolbar-iconmini-active-border:     $coolbar-iconmini-hover-border !default; //选中边框色
+$coolbar-iconmini-textcolor:         #666666                        !default; //默认文字颜色
+$coolbar-iconmini-textcolor-hover:   #666666                        !default; //滑过选中文字颜色
+$coolbar-iconmini-icon-color:        #666666                        !default; //默认图标颜色
+$coolbar-iconmini-more-color:        #576172                        !default; //2级下拉颜色
+
+
+//工具栏-组按钮
+$coolbar-group-bordercolor:                 #b5bdca          !default; //高度
+$coolbar-group-bg:                 #b5bdca          !default; //高度
+$coolbar-group-hover-bg:                 #ccebf8          !default; //高度
+$coolbar-group-bordercolor-hover: #199ed8          !default; //高度
+
+
+
+//*************** 菜单 ***************//
+$menu-iconsize:           16px                         !default; //默认字体大小
+$menu-icon-top:           6px                          !default; //默认字体上间隙
+$menu-fontcolor:          #333                         !default; //默认字体颜色
+$menu-container-bg:       #ffffff                      !default; //默认背景色
+$menu-container-shadow:   0 0 20px rgba(0, 0, 0, 0.34) !default; //默认投影
+$menu-bg-hover:           #c7e2ff                      !default; //默认滑过背景色
+$menu-icon-hover:         #238efe                      !default; //默认滑过图标颜色
+
+//菜单
+$menu-nav-frist-bg:       rgba(60, 73, 94, 0.9)              !default; //一级菜单背景色
+$menu-nav-bg:             rgba(31, 48, 74, 0.8)              !default; //背景色
+$menu-nav-fontcolor:      #ffffff                            !default; //字体颜色
+$menu-nav-bg-hover:       rgba(99,115,141,1)                 !default; //滑过背景色
+$menu-item-bg-hover:      #0b6bce                            !default; //滑过背景色
+//默认菜单
+$menu-container-minwidth:         150px    !default;  //菜单最小宽
+$menu-container-maxwidth:         300px    !default;  //菜单最大宽
+$menu-container-padding:          5px 10px !default;  //菜单内边距
+$menu-container-item-padding:     2px      !default;  //默认菜单li 内边距
+$menu-container-item-icon-left:   3px      !default;  //默认菜单li 内图标左间隙
+$menu-container-item-span-margin: 24px     !default;  //
+$menu-line:               1px solid #e2e2e2                  !default; //需要分组时出现的分割线
+//系统菜单 透明蓝色
+$menu-nav-line:           1px solid rgba(177, 177, 177, 0.8) !default; //需要分组时出现的分割线
+$menu-nav-line-active:    rgba(99,115,141,1)                 !default; ////滑过 选中 背景色
+//系统菜单二
+$menu-navmain-bgcolor: rgba(25, 53, 95, 0.9) !default; //顶部下拉背景色
+
+//*************** 弹窗 ***************//
+$dialog-container-bg:               #fff                         !default;
+$dialog-container-shadow:           0 0 10px rgba(0, 0, 0, 0.2)  !default;
+$dialog-shadow:                     0 0 30px rgba(0, 0, 0, 0.4)  !default; //非模态阴影
+$dialog-border:                     1px solid #1883d7            !default; //非模态边框
+$dialog-border-radius:              2px                          !default; //对话框圆角
+$dialog-container-padding-x:        10px                         !default;
+$dialog-container-padding-y:        5px                          !default;
+$dialog-container-mx:               380px                        !default;  //对话框默认最小宽度 380
+$dialog-container-my:               180px                        !default;  //对话框默认最小高度
+$dialog-header-y:                   40px                         !default;  //对话框头部高度
+$dialog-header-padding-bottom:      0                            !default;  //对话框头部内边距下
+$dialog-header-border:              #e0e0e0                      !default;
+$dialog-header-bg:                  #f2f2f2                      !default;
+$dialog-header-fontsize:            $font-size14                 !default;
+$dialog-header-fontweight:          bold                         !default;
+$dialog-header-icon-x:              $dialog-header-y             !default;
+$dialog-header-icon-y:              $dialog-header-y             !default;
+$dialog-header-iconsize:            $font-size                   !default;
+$dialog-header-iconcolor:           #52585c                      !default;
+$dialog-header-icon-hover-bg:       #e0e0e0                      !default;
+$dialog-header-text-margin-right:   120px                        !default;  //对话框头部文字右边距
+$dialog-header-colse-hover-bg:      #f45454                      !default;
+$dialog-header-colse-hover-color:   #fff                         !default;
+$dialog-footer-y:                   42px                         !default;
+$dialog-footer-padding-y:           8px                          !default;
+$dialog-footer-border:              #eeeeee                      !default;
+$dialog-details-bgcolor:            #f1f2f7                      !default;
+$dialog-details-border-bottom:      1px solid #e0e0e0            !default;
+
+$dialog-s-mx:                       250px    !default;  //对话框超小尺寸宽250px
+$dialog-m-mx:                       650px    !default;  //对话框中尺寸宽650px
+$dialog-l-mx:                       900px    !default;  //对话框大尺寸宽900px
+$dialog-operationtips-mx:           200px    !default;  //保存成功后提示对话框宽度
+$dialog-operationtips-my:           50px     !default;  //保存成功后提示对话框高度
+$dialog-body-lineheight:            $dialog-operationtips-my     !default;  //弹窗 内容区域
+$dialog-loading-mx:                 200px    !default;  //正在加载对话框 宽度
+$dialog-loading-my:                 50px     !default;  //正在加载对话框 高度
+$dialog-text-lineheight:            $dialog-operationtips-my     !default;  //正在加载对话框 文字行高
+$dialog-icon-bottom:                3px      !default;  //正在加载对话框图标下边距
+$dialog-icon-arrow-right:           14px     !default;  //正在加载对话框 加载详情 箭头图标 右边距
+
+//*************** 表格 ***************//
+$elist-header-y:               40px          !default; //表头高度
+$elist-header-fontsize:        $font-size14  !default; //表头文字大小
+$elist-header-fontcolor:       #8796a8       !default; //表头文字颜色
+$elist-header-icon-marginleft: 5px           !default; //表头图标左边距
+$elist-header-bg:              #f8f7fc       !default; //表头背景
+$elist-header-bordercolor:     #ebeff5       !default; //表头边框颜色
+$elist-header-bordertop-y:     1px           !default; //表头上边框
+$elist-header-borderbottom-y:  1px           !default; //表头下边框
+$elist-header-sort-active:     #238efe       !default; //排序箭头选中颜色
+$elist-td-y:                   40px          !default; //表体行高度
+$elist-td-paddingtb:           2px           !default; //表元上下间距
+$elist-td-paddinglr:           7px           !default; //表元左右间距
+$elist-td-checkbox-x:          32px          !default; //表格带勾选列宽度
+$elist-td-number-x:            45px          !default; //表格序号列宽度
+$elist-bordercolor:            #ebeff5       !default; //表体边框色
+$elist-fontcolor:              #333          !default; //表体文字颜色
+$elist-btn-fontcolor:          #238efe       !default; //表体按钮文字颜色
+$elist-icon-color:             #438dda       !default; //表格图标默认颜色
+$elist-hover-bg:               #f6faff       !default; //滑过背景
+$elist-active-bg:              #c4e7ff       !default; //选中背景
+$elist-tips-margin-top:        30px          !default; //无数据提示
+$elist-tips-font-color:        #a0a0a0       !default; //无数据文字颜色
+
+//小间距表格
+$elist-minheight-header-y:        26px          !default; //表头高度
+$elist-minheight-td-y:            26px          !default; //表体行高度
+
+//奇偶行
+$elist-parity-odd-bg:      #ffffff !default; //奇行背景色
+$elist-parity-even-bg:     #f8f8f8 !default; //偶行背景色
+
+//流式表格
+$elist-flow-header-bg:   #fafafa !default; //表头背景色
+$elist-flow-bordercolor: #efefef !default; //表格边框
+$elist-flow-even-bg:     #fafafa !default; //偶行背景色
+
+//边框表格
+$elist-border-header-bg:   #e7e7e7 !default; //表头背景色
+$elist-border-bordercolor: #dadada !default; //表格边框
+$elist-border-odd-bg:      #ffffff !default; //奇行背景色
+$elist-border-even-bg:     #f4f4f4 !default; //偶行背景色
+
+
+
+//*************** 可编辑列表 ***************//
+$datalist-header-border-top:        1px solid #ebeff5    !default;   //表头顶部的边框线
+$datalist-header-border-bottom:     1px solid #ebeff5    !default;   //表头底部的边框线
+$datalist-header-height:            40px                 !default;   //表头的高度
+$datalist-header-font-size:         $font-size14         !default;   //表头文字大小
+$datalist-header-font-weight:       normal               !default;   //表头文字加粗
+$datalist-header-color:             #8796a8              !default;   //表头文字颜色
+$datalist-header-bgcolor:           #f8f7fc              !default;   //表头背景颜色
+$datalist-header-padding:           0 1px                !default;   //表头内边距
+$datalist-header-col-padding:       0 5px                !default;   //表头列内边距
+$datalist-body-top:                 $datalist-header-height  !default;   //表体定位
+$datalist-body-padding:             1px                  !default;   //表体内边距
+$datalist-body-row-odd:             #fff                 !default;   //表格奇行颜色
+$datalist-body-row-even:            #fafafa              !default;   //表格偶行颜色
+$datalist-body-row-hover:           #f6faff              !default;   //划过行背景颜色
+$datalist-body-row-select:          #c4e7ff              !default;   //选中行
+$datalist-body-col-height:          40px                 !default;   //表体列的高度
+$datalist-body-col-paddingtb:       7px                  !default;   //表元上下间距
+$datalist-body-col-check-x:         16px                 !default;   //表checkbox宽度
+$datalist-body-col-paddinglr:       5px                  !default;   //表元左右间距
+$datalist-body-col-border-bottom:   1px solid #ebeff5    !default;   //表体列的底部边框
+$datalist-body-red-padding-left:    4px                  !default;   //标红样式 左内边距
+$datalist-body-red-margin-left:     -5px                 !default;   //标红样式 左边距
+$datalist-body-red-margin-top:      -5px                 !default;   //标红样式 上边距
+$datalist-selectbg-current:         #ffce51              !default;   //搜索后凸显结果的背景，当前选中的背景颜色
+$datalist-select-disable-color:     $text-weaken         !default;   //选中列禁用文字颜色
+$datalist-edit-padding:             0 4px                !default;   //默认编辑框编辑器、默认下拉框编辑器 内边距
+$datalist-edit-bgcolor:             #ffffff              !default;   //默认编辑框编辑器、默认下拉框编辑器 背景色
+$datalist-null-tips-padding:        1px                  !default;   //空的提示内边距
+$datalist-null-tips-margin-top:     36px                 !default;   //空的提示距上边距
+$datalist-null-tips-margin-bottom:  17px                 !default;   //空的提示距下边距
+$datalist-null-tips-textcolor:      #666666              !default;   //空的提示文字颜色
+
+
+//可编辑列表（紧凑风格）
+$datalist-mini-header-font-size:    $font-size !default; //表头文字大小
+$datalist-mini-header-col-y:        26px       !default; //表头行高
+$datalist-mini-body-col-y:          26px       !default; //表体行高
+
+
+//*************** 列表树listview ***************//
+$liseview-head-bgcolor: #f8f7fc  !default;  //列头背景色
+$liseview-icon-x:       20px     !default;  //占位图标宽度，即缩进值
+$liseview-icon-y:       20px     !default;  //占位图标高度
+$liseview-icon-top:     2px      !default;  //图标定位 上面距离
+$liseview-icon-color:   #666     !default;  //箭头默认颜色
+
+
+//*************** 列表listbox ***************//
+$elistbox-title-bg-check:     #c7e2ff             !default; //列表内置链接滑过、点击 背景色
+$elistbox-title-border-check: #238efe             !default;//列表内置链接滑过、点击 边框
+
+//默认横排
+$elistbox-padding:                 15px 20px           !default; //容器内边距
+$elistbox-group-margin:            -5px -5px 10px -5px !default; //列表分组容器外边距
+$elistbox-group-li-padding:        5px                 !default; //列表 列容器内间距
+$elistbox-group-link-bg-check:     #c7e2ff             !default; //列表内置链接滑过、点击 背景色
+$elistbox-group-link-border-check: #238efe             !default;//列表内置链接滑过、点击 边框
+//分组标题
+$elistbox-title-y:            36px               !default;//高度
+$elistbox-title-marginbottom: 5px                !default; //下边距
+$elistbox-title-borderbottom: 1px solid #dfe3e8  !default; //下边框
+$elistbox-title-color:        #238efe            !default; //标题文字颜色
+
+//列表竖排 列表容器 竖排小图标
+$elistbox-vertical-title-y:           28px       !default;
+$elistbox-vertical-title-bg:          #238efe    !default;
+$elistbox-vertical-padding:           15px 10px  !default; //列表竖排 内间距
+$elistbox-vertical-group-margin:      0 0 20px 0 !default; //列表分组 列间距
+$elistbox-vertical-item-y:            32px       !default; //列表容器高度
+$elistbox-vertical-item-marginbottom: 5px        !default; //列表容器 下边距
+//分组标题
+$elistbox-vertical-title-color:   #fff       !default;
+$elistbox-vertical-title-bgcolor: #238efe    !default; //分组标题 背景色
+
+//列表内容 列表容器 竖排小图标 中使用
+$vertical-link-box-padding:         5px                           !default; //列内容内边距
+$vertical-link-box-icon-xy:         24px                          !default; //图标 大小
+
+//列表横排 横排小图标，无分组，完全自适应排列
+$elistbox-horizontal-item-y:  22px     !default; //列表容器高度
+$horizontal-link-box-icon-xy: 16px     !default; //图标 大小
+
+
+//列表容器 数据分析首页列表
+//分组标题
+$elistbox-adimbox-title-x:          36px    !default;
+$elistbox-adimbox-title-y:          22px    !default;
+$elistbox-adimbox-title-bg:         #238efe !default;
+$elistbox-adimbox-title-color:      #fff    !default;
+$elistbox-adimbox-content-title-y:  28px    !default;
+$elistbox-adimbox-content-title-bg: #445f89 !default;
+$elistbox-adimbox-link-box-bordercolor: #3cbfff !default;
+$elistbox-adimbox-linkbg-hover: rgba(35, 143, 254, 0.8) !default;
+$elistbox-adimbox-checkcolor: #4ca3ff !default;
+
+//列表容器 数据分析首页列表（新版2018.12.12）
+//分组标题
+$elistbox-responseBox-title-x:            100%       !default;
+$elistbox-responseBox-title-y:            22px       !default;
+$elistbox-responseBox-title-color:        #0064ff    !default;
+$elistbox-responseBox-bordercolor:        #bad3ff !default;               //容器边框色
+$elistbox-responseBox-bgcolor:            rgba(242,249,255,.6) !default;  //容器背景色
+$elistbox-responseBox-hover-bordercolor:  #0064ff !default;               //鼠标移上去容器边框色
+$elistbox-responseBox-bubble-left:        rgba(#d1e2ff,.22) !default;     //划过气泡左下角
+$elistbox-responseBox-bubble-right:       rgba(183,210,255,.52) !default; //划过气泡右上角
+$elistbox-responseBox-bgimg-title:        "../../../images/coolblue/responseBox-lt.png"       !default; //标题背景图
+$elistbox-responseBox-bgimg-hover-title:  "../../../images/coolblue/responseBox-lt-hover.png" !default; //划过背景图
+$elistbox-link-box-btn-color:             #414c6a !default; //按钮文字颜色
+$elistbox-link-box-btn-bgcolor:           #0064ff !default; //按钮背景颜色
+$elistbox-link-box-btn-bordercolor:       #CEDCFF !default; //按钮边框颜色
+$elistbox-link-box-btn-hover-bordercolor: #0064ff !default; //鼠标移上去按钮边框颜色
+$elistbox-link-box-btn-hover-shadowcolor: rgba(0,80,203,.26) !default; //鼠标移上去按钮发光颜色
+$elistbox-link-subinfo-title-color:       #606372 !default; //图片说明文字标题色
+$elistbox-link-subinfo-color:             #414c6a !default; //图片说明详细文字色
+$elistbox-nolink-btn-textcolor:           #747d8c !default; //未开发未购买按钮文字颜色
+$elistbox-nolink-btn-bgcolor:             #e0e7ef !default; //未开发未购买按钮背景颜色
+$elistbox-nolink-btn-hover-color:         #3e4756 !default;                   //未开发未购买按钮 滑过文字颜色
+$elistbox-nolink-btn-hover-bgcolor:       #b9c9da !default;                   //未开发未购买按钮 滑过背景颜色
+$elistbox-nolink-btn-hover-shadowcolor:   rgba(142, 186, 166, 0.2) !default;  //未开发未购买按钮 滑过边框颜色
+$elistbox-nolink-developcolor:    #ffb800 !default; //开发中按钮颜色
+$elistbox-nolink-nomaycolor:      #fe4251 !default; //未购买按钮颜色
+
+$analysis-bgcolor: #f7fbfe  !default; //大背景色
+$analysis-bg-left: "../../../images/coolblue/analysis-bg-lb.png"  !default; //左边形状背景
+$analysis-bg-right: "../../../images/coolblue/analysis-bg-rt.png"  !default; //右边形状背景
+
+//新建连接池 上下结构 图片在上 文字在下
+$elistbox-sqlbox-li-margin-left:  10px !default; //列表容器 列左间距
+$elistbox-sqlbox-li-margin-right: 10px !default; //列表容器 列右间距
+
+//新建规则
+$elistbox-rulebox-li-margin-left:  10px !default; //列表容器 列左间距
+$elistbox-rulebox-li-margin-right: 10px !default; //列表容器 列右间距
+$elistbox-rulebox-li-margin-bottom: 20px !default; //列表容器 列下间距
+
+//列表内容 新建连接池中使用
+$sqlbox-link-box-x:                90px !default; //内容列表宽
+$sqlbox-link-box-y:                90px !default; //内容列表高
+$sqlbox-link-box-title-margintop:  3px  !default;  //列表内容标题上边距
+$sqlbox-link-box-sub-top:          26px !default;
+$sqlbox-link-box-sub-right:        5px  !default;
+$sqlbox-link-box-marginleft:       10px !default; //列表内容 列左间距
+$sqlbox-link-box-icon-fontsize:    40px !default;
+$sqlbox-link-icon-bordercolor:     #238efe  !default;  //图标边框色
+
+//列表容器 竖排小图标 无间距
+$elistbox-group-marginbottom: 20px !default; //列表分组 容器下边间隙
+
+//*************** 分割面板panelsplitter ***************//
+$panelsplitter-splitbar-bg:              #c7e2ff     !default;  //拖拽时出现的分割条
+$panelsplitter-splitbar-btn-x:           30px        !default;  //拖拽按钮左右
+$panelsplitter-splitbar-btn-y:           30px        !default;  //拖拽按钮上下
+$panelsplitter-splitbar-btn-bg:          transparent !default;  //拖拽区背景
+$panelsplitter-splitbar-btn-marginleft:  -9px        !default;  //拖拽按钮 左边距
+$panelsplitter-splitbar-btnvertical-top: -9px        !default;  //上下分割拖拽按钮 上边距
+
+
+//*************** 标签页组件默认 ***************//
+$tabctrl-header-y:                  41px              !default; //头部高度
+$tabctrl-header-li-lineheight:      37px              !default; //选项卡lineheight的高度
+$tabctrl-header-border-bottom:      1px solid #eeeeee !default; //头部底部边框
+$tabctrl-header-paddingleft:        20px              !default; //整个选项卡距离左边距的空隙
+$tabctrl-header-li-padding-left:    8px               !default; //单个选项卡的距左padding
+$tabctrl-header-li-padding-right:   8px               !default; //单个选项卡的距右padding
+$tabctrl-header-li-margin-right:    15px              !default; //单个选项卡的距右margin
+$tabctrl-header-more-paddingleft:   12px              !default; //标签页 更多 距右边空隙
+$tabctrl-header-icon-img-x:         16px              !default; //选项卡标签页图标宽度
+$tabctrl-header-li-border-color:    transparent       !default; //单个选项卡边框的颜色
+$tabctrl-header-li-border-width:    0 0 2px           !default; //单个选项卡边框的宽度
+$tabctrl-font-color:                #5e6d7d           !default; //头部默认文字颜色
+$tabctrl-active-border-bottom:      3px solid #3bc5ba !default; //选项卡选中状态下的边框颜色
+$tabctrl-active-color:              #3bc5ba           !default; //选项卡选中状态下的文字颜色
+$tabctrl-active-font-weight:        normal            !default; //选项卡选中状态下的文字粗体
+$tabctrl-body-padding:              5px               !default; //标签页主体内容区 内边距
+$tabctrl-icon-close-margin-top:     0                 !default; //关闭按钮居顶margin
+$tabctrl-icon-close-margin-left:    3px               !default; //关闭按钮居左margin
+$tabctrl-icon-close-fontsize:       $font-size        !default; //关闭按钮字体图标的大小
+
+//一级标签页小号
+$tabctrl-level1mini-header-y:                  33px              !default; //头部高度
+$tabctrl-level1mini-header-li-lineheight:      28px              !default; //选项卡lineheight的高度
+$tabctrl-level1mini-header-bg-color:           transparent       !default; //头部背景颜色
+$tabctrl-level1mini-header-active-color:       #3bc5ba           !default; //选中头部文字颜色
+$tabctrl-level1mini-header-border-bottom:      1px solid #eeeeee !default; //头部底部边框
+$tabctrl-level1mini-header-paddingleft:        0                 !default; //整个选项卡距离左边距的空隙
+$tabctrl-level1mini-header-item-paddingleft:   9px              !default; //每个选项卡左边距
+$tabctrl-level1mini-header-item-paddingright:  9px              !default; //每个选项卡右边距
+$tabctrl-level1mini-active-border-bottom:      3px solid #3bc5ba !default; //选项卡选中状态下的边框颜色
+
+//二级标签页
+$tabctrl-level2-header-y:                  32px              !default; //头部高度
+$tabctrl-level2-header-li-lineheight:      29px              !default; //选项卡lineheight的高度
+$tabctrl-level2-header-bg-color:           transparent       !default; //头部背景颜色
+$tabctrl-level2-header-paddingleft:        0                 !default; //整个选项卡距离左边距的空隙
+$tabctrl-level2-header-li-min-width:       60px              !default; //默认最小宽度
+$tabctrl-level2-font-color:                #333333           !default; //头部默认文字颜色
+$tabctrl-level2-active-color:              #238efe           !default; //选项卡选中状态下的文字颜色
+$tabctrl-level2-body-border-color:         #d2d3d7           !default; //内容区的边框颜色
+$tabctrl-level2-body-border-width:         1px               !default; //内容区的边框宽度
+$tabctrl-level2-header-li-border-width:    1px 1px 0 1px     !default; //单个选项卡边框的宽度
+$tabctrl-level2-active-border-color:       #d2d3d7           !default; //选项卡选中状态下的边框颜色
+$tabctrl-level2-active-bg-color:           #ffffff           !default; //选中背景色
+
+//设计器专用标签页
+$tabctrl-level3-header-y:                  32px              !default; //头部高度
+$tabctrl-level3-header-li-lineheight:      28px              !default; //选项卡lineheight的高度
+$tabctrl-level3-header-bg-color:           #efeeef           !default; //头部背景颜色
+$tabctrl-level3-header-border-bottom:      1px solid #d9d9d9 !default; //头部底部边框
+$tabctrl-level3-header-paddingleft:        5px                 !default; //整个选项卡距离左边距的空隙
+$tabctrl-level3-header-li-padding-left:    10px              !default; //每个选项卡左边距
+$tabctrl-level3-header-li-padding-right:   10px              !default; //每个选项卡右边距
+$tabctrl-level3-header-paddingtop:         3px               !default; //整个选项卡距离上边距的空隙
+$tabctrl-level3-header-li-border-color:    transparent       !default; //单个选项卡边框的颜色
+$tabctrl-level3-header-li-border-width:    1px 1px 0         !default; //单个选项卡边框的宽度
+$tabctrl-level3-font-color:                #333333           !default; //头部默认文字颜色
+$tabctrl-level3-active-background-color:   #fff              !default; //选项卡选中状态下的背景色
+$tabctrl-level3-active-border-color:       #c9d2e1           !default; //选项卡选中状态下的边框颜色
+$tabctrl-level3-active-color:              #238efe           !default; //选项卡选中状态下的文字颜色
+$tabctrl-level3-active-font-weight:        bold              !default; //选项卡选中状态下的文字粗体
+$tabctrl-level3-icon-close-margin-top:     -5px              !default; //关闭按钮居顶margin
+$tabctrl-level3-icon-close-margin-left:    3px               !default; //关闭按钮居左margin
+$tabctrl-level3-icon-close-fontsize:       $font-size        !default; //关闭按钮字体图标的大小
+$tabctrl-level3-header-margintop:          1px               !default; //整个选项卡列表距离上边距的外空隙
+$tabctrl-level3-header-more-paddingleft:   12px              !default; //标签页 更多 距右边空隙
+$tabctrl-level3-header-icon-img-x:         16px              !default; //选项卡标签页图标宽度
+
+
+//三级标签页
+$tabctrl-level4-header-y:                  25px              !default; //头部高度
+$tabctrl-level4-header-li-lineheight:      25px              !default; //选项卡lineheight的高度
+$tabctrl-level4-header-bg-color:           #e4e4e4           !default; //头部背景颜色
+$tabctrl-level4-font-color:                #333333           !default; //头部默认文字颜色
+$tabctrl-level4-header-active-bg-color:    #3bc5ba           !default; //选中头部背景颜色
+$tabctrl-level4-header-active-color:       #ffffff           !default; //选中头部文字颜色
+$tabctrl-level4-header-border-bottom:      none              !default; //头部底部边框
+$tabctrl-level4-header-paddingleft:        0                 !default; //整个选项卡距离左边距的空隙
+$tabctrl-level4-header-item-paddingleft:   4px               !default; //每个选项卡左边距
+$tabctrl-level4-header-item-paddingright:  4px               !default; //每个选项卡右边距
+$tabctrl-level4-body-paddingtop:           5px               !default; //标签页主体内容区 内边距
+
+
+//*************** 分页条组件默认 ***************//
+$pagebar-marginleft:        3px     !default; //各部分间距
+$pagebar-marginright:       3px     !default; //各部分间距
+$pagebar-input-x:           40px    !default; //输入框宽度
+$pagebar-input-y:           20px    !default; //输入框高度
+$pagebar-main-marginleft:   4px     !default; //主体部分左间距
+$pagebar-main-marginright:  4px     !default; //主体部分右间距
+$pagebar-list-num-x:        30px    !default; //数字分页 数字框宽度
+
+
+//*************** 折叠面板组件默认 ***************//
+$accordionpanel-head-y:              32px              !default; //标题栏高度
+$accordionpanel-head-paddingleft:    5px               !default; //标题栏左边距
+$accordionpanel-head-paddingright:   5px               !default; //标题栏右边距
+$accordionpanel-head-bgcolor:        #efeeef           !default; //标题栏背景色
+$accordionpanel-head-bordertop:      1px solid #c9d2e1 !default; //标题栏上边框
+$accordionpanel-head-borderbottom:   1px solid #c9d2e1 !default; //标题栏下边框
+$accordionpanel-head-textcolor:      #333              !default; //标题栏默认文字颜色
+
+
+//折叠面板组件无边框风格
+$accordionpanel-level2-head-bordertop:      none !default; //标题栏上边框
+$accordionpanel-level2-head-borderbottom:   none !default; //标题栏下边框
+$accordionpanel-level2-head-y:              26px !default; //标题栏下边框
+
+
+//折叠面板组件直线分隔风格
+$accordionpanel-level3-line-bg:             #ccc !default; //分隔线颜色
+$accordionpanel-level3-line-top:            13px !default; //分隔线居上距离
+$accordionpanel-level3-text-bg:             #fff !default; //标题栏白背景
+$accordionpanel-level3-text-padding-right:  5px  !default; //标题距离线的距离
+
+//深色风格折叠面板
+$accordionpanel-dark-bgcolor: #132a4f   !default; //面板整体背景色
+$accordionpanel-dark-title-bgcolor: #053070   !default; //面板属性标题背景色背景色
+
+//*************** 面板 ***************//
+$panel-container-bg:      #fff                        !default;
+$panel-container-graybg:  #f5f5f5                     !default;
+$panel-container-shadow:  0 0 10px rgba(0, 0, 0, 0.2) !default;
+$panel-container-shadow-bottom:  0 5px 10px rgba(0, 0, 0, 0.2) !default;
+
+//下拉面板
+$panel-selectlist-container-border:             1px solid #d2d2d2   !default;
+$panel-selectlist-check-y:                      36px                !default; //全选、搜索区域 高度
+$panel-selectlist-check-bgcolor:                #f5f6f9             !default; //全选、搜索区域 背景色
+$panel-selectlist-check-borderbottom:           1px solid #d7dce3   !default; //全选、搜索区域 下边框
+$panel-selectlist-check-left-marginleft:        5px                 !default; //全选checkbox 左边距
+$panel-selectlist-check-left-marginright:       4px                 !default; //全选checkbox 右边距
+$panel-selectlist-check-right-marginleft:       55px                !default; //筛选 左边距
+$panel-selectlist-check-right-marginright:      2px                 !default; //筛选 右边距
+$panel-selectlist-check-right-paddingleft:      4px                 !default; //筛选 左内边距
+$panel-selectlist-check-form-search-marginleft: 30px                !default; //筛选 搜索框左边距
+$panel-selectlist-check-form-search-top:        5px                 !default; //筛选 搜索框上间隙
+
+$panel-selectlist-content-top: $panel-selectlist-check-y !default;  //内容区域上间隙
+$panel-selectlist-content-padding:              5px !default;  //内容区域 内边距
+
+//选择配色方案面板（内容放置在dialog中）
+$panel-colorlist-padding:                10px 2px       !default; //配色方案面板 内边距
+$panel-colorlist-marginbottom:           10px           !default; //配色方案面板 列表 下边距
+$panel-colorlist-outline:                1px solid #777 !default; //配色方案面板 列表 轮廓线
+$panel-colorlist-outline-active:         2px solid #333 !default; //配色方案面板 列表 点击轮廓线
+$panel-colorlist-lineheight:             $line-height   !default; //配色方案面板 列表 行高
+$panel-colorlist-gradient-del-x:         25px           !default; //配色方案面板 列表 右边删除按钮宽
+$panel-colorlist-gradient-del-textcolor: #333           !default; //配色方案面板 列表 右边删除按钮颜色
+$panel-colorlist-gradient-marginright: $panel-colorlist-gradient-del-x !default; //配色方案面板 列表 左边颜色（方块/渐变）右边距
+
+//配色方案选择颜色（内容放置在dialog中）
+$panel-customcolor-padding:             10px !default;  //配色方案选择颜色 内边距
+$panel-customcolor-top-marginbottom:    10px !default;  //填充颜色选择 下边距
+$panel-customcolor-center-y:            54px !default;  //中间色块 高度
+$panel-customcolor-center-marginbottom: 25px !default;  //中间色块 下边距
+$panel-customcolor-item-xy:             26px !default;  //小色块 大小
+$panel-customcolor-item-margin:         1px !default;   //小色块外边距
+$panel-customcolor-item-add-x:$panel-customcolor-item-xy !default;  //小色块 添加按钮宽度
+$panel-customcolor-bottom-y:            30px !default;  //按钮区域 高度
+
+//边框显示面板
+$panel-border-container-bg:                #F4F4F4                 !default; //外层背景色
+$panel-border-container-padding:           20%                     !default; //外层间距
+$panel-border-content-border:              2px solid #777777       !default; //内容边框
+$panel-border-content-bg:                  #ffffff                 !default; //内容背景色
+$panel-border-content-item-outline:        1px solid #b9b9b9       !default; //选择项 外边框
+$panel-border-content-item-border:         1px solid #f4f4f4       !default; //选择项 内边框
+$panel-border-content-item-hover-outline:  1px solid #199ed8       !default; //滑过 选择项 外边框
+$panel-border-content-item-hover-bg:       rgba(25, 158, 216, 0.5) !default; //滑过 选择项 背景
+$panel-border-content-item-active-outline: $panel-border-content-item-hover-outline !default; //选中 选择项 外边框
+$panel-border-content-item-active-bg:      rgba(25, 158, 216, 0.2) !default; //选中 选择项 背景
+$panel-border-content-item-x:              20px                    !default; //选择项 宽度
+$panel-border-content-item-y:              20px                    !default; //选择项 高度
+
+//圆角显示面板
+$panel-borderradius-content-item-x:        60% !default;
+
+//*************** hint提示框组件默认 ***************//
+$messagehint-padding:            5px 10px                    !default;//最外层间距
+$messagehint-min-x:              60px                        !default;//最外层最小宽度
+$messagehint-min-y:              32px                        !default;//最外层最小高度
+$messagehint-bgcolor:            #fff                        !default;//最外层背景色
+$messagehint-box-shadow:         0 0 10px rgba(0, 0, 0, 0.2) !default;//最外层阴影
+$messagehint-arrow-border-x:     8px                         !default;//三角大小
+$messagehint-arrow-border-style: solid                       !default;//三角样式
+$messagehint-arrow-border-color: rgba(0, 0, 0, 0.09)         !default;//三角颜色
+$messagehint-arrow-top:          10px                        !default;//三角默认间距
+$messagehint-arrow-x:            16px                        !default;//三角宽度
+$messagehint-arrow-y:            16px                        !default;//三角宽度
+
+
+//*************** tabset多标签页 ***************//
+$tabset-height:                    25px                 !default;   //整体高度
+$tabset-bgcolor:                   #e0e0e0              !default;   //背景颜色
+$tabset-icon-border-right:         1px solid #cdcdcd    !default;   //翻页图标区域距右的分隔线
+$tabset-icon-i-color:              #238efe              !default;   //翻页字体图标的默认颜色
+$tabset-icon-i-lineheight:         $tabset-height       !default;   //翻页字体图标的行高
+$tabset-icon-i-hover-bg:           #c4e6ff              !default;   //划过翻页字体图标的背景颜色
+$tabset-item-paddig:               0 10px               !default;   //标签页距离四周的padding
+$tabset-item-border-right:         1px solid #cdcdcd    !default;   //标签页右边的分隔线
+$tabset-active-bgcolor:            #fff                 !default;   //标签页当前选中状态的背景颜色
+$tabset-active-height:             $tabset-height       !default;   //标签页当前选中状态的整体高度
+$tabset-active-color:              #238efe              !default;   //标签页当前选中状态的文字颜色
+$tabset-active-weight:             bold                 !default;   //标签页当前选中状态的文字加粗
+
+$tabset-icon-x:           96px                !default; //翻页的图标按钮 集 宽度
+$tabset-icon-padding:     0px 7px             !default; //翻页的图标按钮 集 内边距
+$tabset-icon-i-pdding:    0px 4px             !default; //翻页的图标按钮 单个按钮 内边距
+$tabset-item-margin-left: 96px                !default; //sheet标签页 文字标签部分左边距
+$etabnotes-tabset-y:      25px                !default; //标签页高度
+$etabnotes-notes-bottom:  $etabnotes-tabset-y !default; //标签页内容部分距下距离
+
+
+
+//*************** 日历 ***************//
+$calendar-x:                      274px              !default;
+$calendar-y:                      338px              !default;
+$calendar-radius:                 4px                !default;
+$calendar-bg:                     #fff               !default;
+$calendar-hover:                  #c4e7ff            !default;  //滑过
+$calendar-active:                 #238efe            !default;  //选中
+$calendar-active-cell:            rgba(35, 142, 254, 0.5) !default;  //选中-中间色
+$calendar-border:                 1px solid #D2D2D2  !default;  //日历容器边框
+$calendar-bgcolor:                #ffffff            !default;  //日历容器背景色
+$calendar-content-padding:        10px               !default;  //选择具体 年月 内边距
+$calendar-content-y:              244px              !default;  //选择具体 年月 高度
+$calendar-active-fontcolor:       #ffffff            !default;  //选中文字颜色
+$calendar-header-padding:         10px 70px 5px      !default;  //前后，年月 区域内边距
+$calendar-header-lineheight:      $line-height30     !default;  //前后，年月 区域行高
+$calendar-header-bottomboder:     1px solid #e2e2e2  !default;  //前后，年月 区域行高
+//日历头部
+$calendar-header-icon-top:        10px     !default;  //箭头字体图标上边距
+$calendar-header-icon-hover:      #238EFE  !default;  //箭头字体图标鼠标画上去颜色
+$calendar-prev-y-left:            15px     !default;  //上一年左边距
+$calendar-prev-m-left:            45px     !default;  //上一月左边距
+$calendar-next-y-right:           15px     !default;  //下一年右边距
+$calendar-next-m-right:           45px     !default;  //下一月右边距
+$calendar-set-ym-padding:         0px 5px !default;  //选择年月-文字 内边距
+$calendar-set-ym-textcolor-hover: #238EFE  !default;  //选择年月-文字 鼠标滑上去文字颜色
+//日期选择区
+//日期型
+$calendar-main-td-x:              36px   !default;  //日期小空格宽
+$calendar-main-td-y:              30px   !default;  //日期小空格高
+$calendar-main-td-padding:        5px    !default;  //日期小空格内边距
+$calendar-main-th-fontweight:     400    !default;  //星期文字加粗值
+//年 型
+$calendar-year-padding:           10px       !default; //年容器内边距
+$calendar-year-bgcolor:           #ffffff    !default; //年容器背景色
+$calendar-year-li-x:              33.3333%   !default; //每一年宽度
+$calendar-year-li-y:              36px       !default; //每一年高度
+$calendar-year-li-margin:         3px 0      !default; //每一年外边距
+//月 型
+$calendar-month-li-x:             25%       !default; //每一月宽度
+$calendar-month-li-margin:        17px 0    !default; //每一月外边距
+//季度 型
+$calendar-quarter-li-x:           50%     !default; //每一季度宽度
+$calendar-quarter-li-margin:      40px 0  !default; //每一季度外边距
+//时分秒 型
+$calendar-time-ol-y:               181px             !default;  //时间框高度
+$calendar-time-ol-border:          1px solid #e2e2e2 !default;  //时间框高度
+$calendar-time-ol-li-x:            130%              !default;  //时间列表每一行宽度
+$calendar-time-ol-li-padding-left: 33px              !default;  //时间列表每一行左内边距
+$calendar-time-ol-li-lineheight:   $line-height30    !default;  //时间列表每一行 行高
+$calendar-time-title-padding-top:  -4px              !default;  //列表标题文字上边距
+$calendar-time-title-lineheight:   29px              !default;  //列表标题文字行高
+//按钮区域
+$calendar-footer-height:               46px              !default;  //按钮区域高度
+$calendar-footer-padding:              10px              !default;  //按钮区域内边距
+$calendar-footer-topboder:             1px solid #e2e2e2 !default;  //按钮区域上边框
+$calendar-footer-rightbtn-margin-left: 5px               !default;  //按钮区域右边按钮左边距
+//起始日期框-2倍的日期框大小
+$calendar-range-x:                 546px             !default;  //两倍大小宽度
+$calendar-range-main-border-right: 1px solid #e2e2e2 !default;  //选择第一个main后，添加一个右侧分割边框
+
+
+
+//*************** 树 ***************//
+$tree-line-height:        $line-height26    !default; //树 每一行的高度
+$tree-focus-bg-color:     #2b93ff           !default; //选中背景色
+$tree-focus-text-color:   #fff              !default; //选中文字颜色
+$tree-empty-x-default:    5px               !default; //初始化间距
+$tree-empty-x:            22px              !default; //初始化每一级间隔距离
+$tree-empty-icon-x:       16px              !default; //图标、展开收起、勾选 占位符
+$tree-i-margin-right:     3px               !default; //展开收起箭头、勾选、图表 右边距
+$tree-icon-margin-right:  4px               !default; //树形结点图标右边距
+$tree-icon-color:         #438dda           !default; //树形默认图标颜色
+$tree-icon-arrow-color:   #666              !default; //展开收起箭头默认颜色
+
+
+//树形 手风琴风格
+$tree-accordion-bgcolor:            #132a4f              !default; //面板背景色
+$tree-accordion-line-height:        36px                 !default; //树 每一行的高度
+$tree-accordion-expandcolor:        rgba(255,255,255,.4) !default; //默认展开收起颜色
+$tree-accordion-fontsize:           $font-size           !default; //默认文字大小
+$tree-accordion-fontcolor:          rgba(255,255,255,.7) !default; //默认文字颜色
+$tree-accordion-iconcolor:          rgba(255,255,255,.5)  !default; //默认图标颜色
+$tree-accordion-tree-iconcolor:     $tree-accordion-fontcolor  !default; //默认树上图标颜色
+$tree-accordion-levelone-fontsize:  $font-size14         !default; //第一级文字
+$tree-accordion-levelone-fontcolor: rgba(255,255,255,.8) !default; //第一级文字颜色
+$tree-accordion-levelone-y:         36px                 !default; //第一级高度
+$tree-accordion-levelone-padding:   0                    !default; //第一级间距
+$tree-accordion-focus-bg-color:     #0d4292              !default; //选中,滑过背景色
+$tree-accordion-focus-fontcolor:    #fff                 !default; //选中文字、图标颜色
+$tree-accordion-i-margin-right:     7px                  !default; //展开收起箭头、勾选 右边距
+$tree-accordion-icon-margin-right:  10px                 !default; //图标右边距离
+$tree-accordion-empty-x-default:    10px                 !default; //初始化间距
+$tree-accordion-empty-x:            22px                 !default; //初始化每一级间隔距离
+
+
+//*************** 图片切换EThumbnail ***************//
+$ethumbnail-box-x:                 50px              !default; //图片li宽度
+$ethumbnail-box-y:                 50px              !default; //图片li高度
+$ethumbnail-box-margin:            5px               !default; //图片li间距
+$ethumbnail-box-padding:           1px               !default; //图片li内边距
+$ethumbnail-box-left:              20px              !default; //图片显示区域左边距
+$ethumbnail-box-right:             20px              !default; //图片显示区域右边距
+$ethumbnail-arrow-x:               20px              !default; //横向左右箭头宽度
+$ethumbnail-arrow-y:               50px              !default; //横向左右箭头高度
+$ethumbnail-arrow-bgcolor:         #e9e9e9           !default; //横向左右箭头背景色
+$ethumbnail-arrow-textcolor:       #666666           !default; //横向左右箭头图标颜色
+$ethumbnail-arrow-textcolor-hover: #5599ff           !default; //横向左右箭头图标颜色
+$ethumbnail-arrow-fontsize8:       8px               !default; //箭头字体大小
+$ethumbnail-bordercolor:           1px solid #cccccc !default; //图片li 箭头 边框色
+$ethumbnail-bordercolor-hover:     2px solid #5599ff !default; //图片li滑过边框颜色
+
+
+//*************** 图片切换EThumbnail-vertical 竖排 ***************//
+$ethumbnail-vertical-box-x:                 50px              !default; //图片li宽度
+$ethumbnail-vertical-box-y:                 50px              !default; //图片li高度
+$ethumbnail-vertical-box-margin:            5px               !default; //图片li间距
+$ethumbnail-vertical-box-padding:           1px               !default; //图片li内边距
+$ethumbnail-vertical-box-top:               20px              !default; //图片显示区域上边距
+$ethumbnail-vertical-box-bottom:            20px              !default; //图片显示区域下边距
+$ethumbnail-vertical-arrow-x:               50px              !default; //横向左右箭头宽度
+$ethumbnail-vertical-arrow-y:               20px              !default; //横向左右箭头高度
+$ethumbnail-vertical-arrow-bgcolor:         #e9e9e9           !default; //横向左右箭头背景色
+$ethumbnail-vertical-arrow-textcolor:       #666666           !default; //横向左右箭头图标颜色
+$ethumbnail-vertical-arrow-textcolor-hover: #5599ff           !default; //横向左右箭头图标颜色
+$ethumbnail-vertical-arrow-fontsize8:       8px               !default; //箭头字体大小
+$ethumbnail-vertical-bordercolor:           1px solid #cccccc !default; //图片li 箭头 边框色
+$ethumbnail-vertical-bordercolor-hover:     2px solid #5599ff !default; //图片li滑过边框颜色
+
+
+//****************  progress 进度条组件  *****************//
+$progress-title-y:                            46px              !default; //进度条标题高度color
+//$progress-title-textcolor:                  #707070           !default; //进度条标题颜色
+$progress-box-y:                              50px              !default; //进度条容器高度
+$progress-box-top:                            $progress-title-y + 10 !default; //进度条离上边空隙
+$progress-barpanel-border:                    1px solid #6EB5FF !default; //进度条边框
+$progress-barpanel-y:                         14px              !default; //进度条高度
+$progress-barpanel-padding:                   2px 4px           !default; //进度条内边距
+$progress-barpanel-radius:                    30px              !default; //进度条圆角
+$progress-barpanel-bar-from:                  #238EFE           !default;//进度条起始色
+$progress-barpanel-bar-to:                    #27BFD7           !default;//进度条结束色
+$progress-box-barinfo-textcolor:              #238efe           !default; //进度条 显示百分比 文字颜色
+$progress-box-barinfo-x:                      60px              !default; //进度条 显示百分比 宽度
+$progress-box-barinfo-padding:                0 6px             !default; //进度条 显示百分比 内边距
+$progress-logpanel-top:                       $progress-box-top + $progress-box-y !default; //进度条详情 距上间隙
+$progress-logpanel-bordertop:                 1px solid #e2e2e2 !default; //进度条详情 距上间隙
+$progress-logpanel-detailbtn-y:               20px              !default; //展开收起按钮 行内容器高度
+$progress-logpanel-detailbtn-margin:          5px               !default; //展开收起按钮 行内容器 边距(上下各为5)
+$progress-logpanel-detailbtn-icon-marginleft: 5px               !default; //展开收起按钮 图标右边距
+$progress-logpanel-loginfo-top:               $progress-logpanel-detailbtn-y + $progress-logpanel-detailbtn-margin * 2 !default;//详情内容 容器距上间隙
+$progress-logpanel-loginfo-pading:            5px 0             !default; //详情内容 容器距内边距
+$progress-logpanel-loginfo-textcolor:         #707070           !default; //详情内容 容器 内 文字颜色
+
+//****************  nodate 空页面  *****************//
+$nodate-bg:          #f2f2f2 !default;  //页面背景色
+$nodate-container-x: 210px   !default;  //上下左右居中 内容部分 宽度
+$nodate-container-y: 120px   !default;  //上下左右居中 内容部分 高度
+$nodate-text-color:  #a0a0a0 !default;  //文字颜色
+$nodate-text-top:    10px    !default;  //文字和图片之间的距离
+
+//****************  注册页  *****************//
+$btn-regtitle-active:       $btn-subprimary-bg !default;
+$btn-regtitle-text-active:  $btn-subprimary-bg !default;
+$btn-regtitle-current:      $btn-primary-bg    !default;

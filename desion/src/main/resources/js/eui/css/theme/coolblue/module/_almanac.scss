@@ -1,0 +1,413 @@
+@charset "utf-8";
+//日期选择框
+//<div class="eui-calendar-container">
+//  <div class="eui-calendar-main">
+//      <div class="eui-calendar-header">
+//          <i class="eui-icon eui-calendar-prev-y"></i>
+//          <i class="eui-icon eui-calendar-prev-m"></i>
+//          <div class="eui-calendar-set-ym">
+//              <span>2018年</span>
+//              <span>5月</span>
+//          </div>
+//          <i class="eui-icon eui-calendar-next-m"></i>
+//          <i class="eui-icon eui-calendar-next-y"></i>
+//      </div>
+//      <div class="eui-calendar-content">
+//          <table>
+//              <thead>
+//                  <tr>
+//                      <th>日</th>
+//                      <th>一</th>
+//                      <th>二</th>
+//                      <th>三</th>
+//                      <th>四</th>
+//                      <th>五</th>
+//                      <th>六</th>
+//                  </tr>
+//              </thead>
+//              <tbody>
+//                  <tr>
+//                      <td class="eui-calendar-out">29</td>
+//                      <td class="eui-calendar-out">30</td>
+//                      <td class="eui-calendar-checked">1</td>
+//                      <td class="eui-disabled">2</td>
+//                      <td class="">3</td>
+//                      <td class="">4</td>
+//                      <td class="">5</td>
+//                  </tr>
+//              </tbody>
+//          </table>
+//      </div>
+//  </div>
+//  <div class="eui-calendar-footer">
+//      <div class="eui-btn-container">
+//          <button class="eui-btn eui-btn-m">清除</button>
+//          <button class="eui-btn eui-btn-m eui-btn-primary">确定</button>
+//      </div>
+//  </div>
+//</div>
+
+//选中
+%calendar-checked {
+		background-color: $calendar-active;
+		color:            $calendar-active-fontcolor;
+}
+
+//滑过
+%calendar-hover {
+		background-color: $calendar-hover;
+}
+
+//禁用
+%calendar-disabled {
+		color:            $text-disabled !important;
+		background-color: transparent;
+		cursor:           not-allowed    !important;
+}
+
+%calendar-select-align {
+		display:        $inline-block;
+		vertical-align: bottom;
+		cursor:         pointer;
+}
+
+//日期框放在面板中时候
+.#{$eui}-panel {
+		&-almanac,
+		&-quarter,
+		&-month,
+		&-date,
+		&-timer {
+				width:         $calendar-x !important;
+				height:        $calendar-y !important;
+				border-radius: $calendar-radius;
+		}
+}
+
+
+//日历容器
+.#{$eui}-calendar-container {
+		display:       $inline-block;
+		width:         $calendar-x;
+		background:    $calendar-bgcolor;
+		border:        $calendar-border;
+		border-radius: $calendar-radius;
+		& * {
+				@include transition(all 0.4s ease-out);
+		}
+		//内容区域（起始日期时会有2个main dom节点）
+		& .#{$eui}-calendar-main {
+				width: $calendar-x - 2;
+				//两个时间控件并列情况下
+				& .#{$eui}-calendar-rowlist{
+						display: $inline-block;
+						& > .#{$eui}-calendar-container{
+								border: 1px solid transparent;
+						}
+				}
+				& .#{$eui}-calendar-rowlist:last-child{
+						& > .#{$eui}-calendar-container{
+								border-top-left-radius: 0;
+								border-bottom-left-radius: 0;
+								border-left: $calendar-footer-topboder;
+								border-right: $calendar-border;
+						}
+				}
+
+				//选择前后，年月 区域
+				& .#{$eui}-calendar-header {
+						position: relative;
+						line-height:   $calendar-header-lineheight;
+						padding:       $calendar-header-padding;
+						border-bottom: $calendar-header-bottomboder;
+				}
+				//选择具体 年月
+				& .#{$eui}-calendar-content {
+						position: relative;
+						padding:  $calendar-content-padding;
+						height:   $calendar-content-y;
+						&:after {
+								@extend %eui-clear;
+						}
+				}
+		}
+		//按钮区域
+		& .#{$eui}-calendar-footer {
+				position:   relative;
+				height:     $calendar-footer-height;
+				padding:    $calendar-footer-padding;
+				text-align: right;
+				border-top: $calendar-footer-topboder;
+				& .#{$eui}-btn-container {}
+		}
+}
+
+//头部选择区域
+.#{$eui}-calendar-container {
+		//选择前后，年月 区域
+		& .#{$eui}-calendar-header {
+				& * {
+						@extend %calendar-select-align;
+				}
+				& .#{$eui}-icon {
+						position: absolute;
+						top:      $calendar-header-icon-top;
+						&:hover {
+							color: $calendar-header-icon-hover;
+						}
+				}
+				//上一年
+				& .#{$eui}-calendar-prev-y {
+						left: $calendar-prev-y-left;
+						&:before {
+								content: "\ef92";
+						}
+				}
+				//上一月
+				& .#{$eui}-calendar-prev-m {
+						left: $calendar-prev-m-left;
+						&:before {
+								content: "\ef8e";
+						}
+				}
+				//下一年
+				& .#{$eui}-calendar-next-y {
+						right: $calendar-next-y-right;
+						&:before {
+								content: "\ef93";
+						}
+				}
+				//下一月
+				& .#{$eui}-calendar-next-m {
+						right: $calendar-next-m-right;
+						&:before {
+								content: "\ef8f";
+						}
+				}
+				//选择年月-文字
+				& .#{$eui}-calendar-set-ym {
+						width:      100%;
+						text-align: center;
+						@extend     %elip;
+						& span {
+								padding:   $calendar-set-ym-padding;
+								font-size: $font-size14;
+								&:hover {
+										color: $calendar-set-ym-textcolor-hover;
+								}
+						}
+				}
+		}
+}
+
+//日期选择区
+.#{$eui}-calendar-container {
+		//日期型
+		& table {
+				border-collapse: collapse;
+				border-spacing: 0;
+				//日期大小
+				& th,
+				& td {
+						width:      $calendar-main-td-x;
+						height:     $calendar-main-td-y;
+						padding:    $calendar-main-td-padding;
+						text-align: center;
+				}
+				//星期
+				& th {
+						font-weight: $calendar-main-th-fontweight;
+				}
+				//日期
+				& td {
+						position: relative;
+						cursor:   pointer;
+						//滑过
+						&:hover {
+								@extend %calendar-hover;
+						}
+				}
+				//上月或者下月日期-灰色
+				& .#{$eui}-calendar-out {
+						color: $text-disabled;
+				}
+				//选中
+				& .#{$eui}-calendar-checked {
+						&,
+						&:hover {
+								@extend %calendar-checked;
+						}
+				}
+				//禁用 （超出选择范围）
+				& .#{$eui}-calendar-cell-disabled {
+						&,
+						&:hover {
+								@extend %calendar-disabled;
+						}
+				}
+		}
+		//年
+		& .#{$eui}-calendar-list {
+				position:         absolute;
+				left:             0;
+				top:              0;
+				width:            100%;
+				height:           100%;
+				padding:          $calendar-year-padding;
+				background-color: $calendar-year-bgcolor;
+				clear:            $clear;
+				& > li {
+						@extend      %calendar-select-align;
+						float:       left;
+						position:    relative;
+						width:       $calendar-year-li-x;
+						height:      $calendar-year-li-y;
+						line-height: $calendar-year-li-y;
+						margin:      $calendar-year-li-margin;
+						padding:     0;
+						text-align:  center;
+						//滑过
+						&:hover {
+								@extend %calendar-hover;
+						}
+				}
+				//选中
+				& .#{$eui}-calendar-checked {
+						&,
+						&:hover {
+								@extend %calendar-checked;
+						}
+				}
+				//禁用 （超出选择范围）
+				& .#{$eui}-calendar-cell-disabled {
+						&,
+						&:hover {
+								@extend %calendar-disabled;
+						}
+				}
+		}
+		//月
+		& .#{$eui}-calendar-list-month {
+				& > li {
+						width:  $calendar-month-li-x;
+						margin: $calendar-month-li-margin;
+						//滑过
+						&:hover {
+
+						}
+				}
+				//选中
+				& .#{$eui}-calendar-checked {
+
+				}
+		}
+		//季度
+		& .#{$eui}-calendar-list-quarter {
+				& > li {
+						width:  $calendar-quarter-li-x;
+						margin: $calendar-quarter-li-margin;
+						//滑过
+						&:hover {
+
+						}
+				}
+				//选中
+				& .#{$eui}-calendar-checked {
+
+				}
+		}
+		//时分秒
+		& .#{$eui}-calendar-list-time {
+				& > li {
+						height:      100%;
+						margin:      0;
+						line-height: normal;
+						cursor:      default;
+						//滑过
+						&:hover {
+								background-color: transparent;
+								//滑过后显示列表 滚动条
+								& ol {
+										overflow-x: hidden;
+										overflow-y: auto;
+								}
+						}
+						//时间高度
+						& ol {
+								height:            $calendar-time-ol-y;
+								overflow:          hidden;
+								margin:            0;
+								padding:           0;
+								border:            $calendar-time-ol-border;
+								border-left-width: 0;
+						}
+						//时间列表每一行
+						& ol li {
+								width:        $calendar-time-ol-li-x;
+								padding-left: $calendar-time-ol-li-padding-left;
+								line-height:  $calendar-time-ol-li-lineheight;
+								text-align:   left;
+								cursor:       pointer;
+								&:hover {
+										@extend %calendar-hover;
+								}
+						}
+				}
+				//列表第一列
+				& > li:first-child ol {
+						border-left-width: 1px;
+				}
+				//列表标题文字
+				& span {
+						position:    relative;
+						top:         $calendar-time-title-padding-top;
+						line-height: $calendar-time-title-lineheight;
+						font-size:   $font-size14;
+				}
+				//选中
+				& .#{$eui}-calendar-checked {
+
+				}
+				//禁用 （超出选择范围）
+				& .#{$eui}-calendar-cell-disabled {
+						&,
+						&:hover {
+								@extend %calendar-disabled;
+						}
+				}
+		}
+}
+
+//按钮区域
+.#{$eui}-calendar-container {
+		& .#{$eui}-calendar-footer {
+				& .#{eui}-btn {
+						margin-right:  0;
+						margin-bottom: 0;
+				}
+				& .#{eui}-btn + .#{eui}-btn{
+						margin-left:   $calendar-footer-rightbtn-margin-left;
+				}
+		}
+}
+
+//起始日期框-2倍的日期框大小
+.#{$eui}-calendar-range {
+		width: $calendar-range-x;
+		& .#{$eui}-calendar-main {
+				float: left;
+				//选择第一个main后，添加一个右侧分割边框
+				&:first-child {
+						& .#{$eui}-calendar-content {
+								border-right:$calendar-range-main-border-right;
+						}
+				}
+		}
+		& .#{$eui}-calendar-footer {
+				clear: $clear;
+		}
+}
+
+
+
+

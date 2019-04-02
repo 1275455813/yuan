@@ -1,0 +1,59 @@
+@charset "utf-8";
+
+//新建数据源 链接块
+.#{$eui}-link-box {
+		position:         relative;
+		display:          $inline-block;
+		width:            200px;
+		height:           100%;
+		padding:          $link-padding;
+		background-color: $link-bg;
+		color:            $link-color;
+		white-space:      nowrap;
+		font-size:        $link-fontsize;
+		cursor:           pointer;
+		clear:            $clear;
+		@include          transition(all 0.3s ease);
+		& > span {
+				display:       $inline-block;
+				margin-top:    3px;
+				text-overflow: ellipsis;
+				overflow:      hidden;
+				font-weight:   700;
+		}
+		& .sub {
+				position:    absolute;
+				top:         26px;
+				right:       5px;
+				left:        $link-icon-xy + 10;
+				display:     $block;
+				font-size:   $link-sub-fontsize;
+				font-weight: normal;
+				color:       $link-sub-color;
+		}
+		//滑过
+		&:hover {
+				box-shadow:       0 0 0 1px $elistbox-title-border-check;
+				background-color: $elistbox-title-bg-check;
+		}
+		//按下
+		&:active {
+
+		}
+		//间距
+		& + & {
+				margin-left: 10px
+		}
+		//图标
+		& .#{$eui}-icon {
+				float:          left;
+				margin-right:   5px;
+				color:          $link-iconcolor;
+				font-size:      $link-iconsize;
+				width:          $link-icon-xy;
+				height:         $link-icon-xy;
+				line-height:    $link-icon-xy;
+				vertical-align: bottom;
+				vertical-align: middle #{"\\9"}
+		}
+}

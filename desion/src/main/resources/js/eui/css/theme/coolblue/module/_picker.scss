@@ -1,0 +1,458 @@
+@charset "utf-8";
+
+/*颜色面板*/
+.#{$eui}-colorPanel-col {
+		float:     left;
+		font-size: 1px;
+		width:     10px;
+		height:    10px;
+		cursor:    pointer;
+		border:    1px solid #000000;
+		margin:    2px;
+		*margin:   0;
+}
+
+//小型的下拉控件，dom结构于下拉框是一样的
+.#{$eui}-picker {
+		width:        $picker-x;
+		border-width: 1px;
+		padding:      $picker-padding;
+		position:     relative;
+		& > div {
+				height:       100%;
+				margin-right: $form-select-icon-x;
+				position:     relative;
+				background-size: 100% 100% ;
+				& .#{$eui}-icon {
+						position:    absolute;
+						width:       100%;
+						text-align:  center;
+						top:         0;
+						bottom:      0;
+						line-height: $picker-colorpicker-icon-lineheight;
+				}
+				& .#{$eui}-icon-img {
+						height:          100%;
+						background-size: auto 100%;
+				}
+		}
+		& > input:first-child {
+
+				//下拉框获取焦点
+				&:focus {
+
+				}
+				//获取input焦点后 下拉三角的样式
+				&:focus + .#{$eui}-form-select-icon {
+
+				}
+		}
+		//下拉框-箭头
+		& .#{$eui}-form-select-icon {
+				height: auto !important;
+				top:    $picker-select-icon-gap;
+				bottom: $picker-select-icon-gap;
+				right:  $picker-select-icon-gap;
+				&:before {
+
+				}
+				//下拉箭头区域滑过、选中
+				&:hover,
+				&:active {
+
+						&:before {
+
+						}
+				}
+				&:hover {
+
+				}
+				&:active {
+
+				}
+		}
+		//picker选择状态
+		&.#{$eui}-form-select-focus {
+				@extend %form-focus;
+		}
+}
+
+//紧凑型
+.#{$eui}-picker-mini {
+		width:        $picker-mini-x;
+		border-width: 1px;
+		padding:      $picker-padding;
+		position:     relative;
+		& > div {
+				height:       100%;
+				margin-right: $picker-colorpicker-marginright;
+		}
+		& > input:first-child {
+
+				//下拉框获取焦点
+				&:focus {
+
+				}
+				//获取input焦点后 下拉三角的样式
+				&:focus + .#{$eui}-form-select-icon {
+
+				}
+		}
+		//下拉框-箭头
+		& .#{$eui}-form-select-icon {
+				width: $picker-select-icon-x;
+				&:before {
+
+				}
+				//下拉箭头区域滑过、选中
+				&:hover,
+				&:active {
+
+						&:before {
+
+						}
+				}
+				&:hover {
+
+				}
+				&:active {
+
+				}
+		}
+		//picker选择状态
+		&.#{$eui}-form-select-focus {
+
+		}
+}
+
+//在工具栏上使用状态
+.#{$eui}-picker-tool {
+		width:            $picker-mini-x;
+		border-width:     1px;
+		border-color:     transparent;
+		background-color: transparent;
+		padding:          0;
+		position:         relative;
+		& > div {
+				height:       100%;
+				margin-right: $picker-colorpicker-marginright;
+				& .#{$eui}-icon {
+						line-height: $picker-tool-icon-lineheight;
+				}
+		}
+		& > input:first-child {
+
+				//下拉框获取焦点
+				&:focus {
+
+				}
+				//获取input焦点后 下拉三角的样式
+				&:focus + .#{$eui}-form-select-icon {
+
+				}
+		}
+		//下拉框-箭头
+		& .#{$eui}-form-select-icon {
+				width:             $picker-select-icon-x !important;
+				border-color:      transparent;
+				&:before {
+
+				}
+				//下拉箭头区域滑过、选中
+				&:hover,
+				&:active {
+
+						&:before {
+
+						}
+				}
+				&:hover {
+
+				}
+				&:active {
+
+				}
+		}
+		//picker选择状态
+		&.#{$eui}-form-select-focus {
+				border-color: transparent;
+		}
+}
+
+//颜色组件在属性面板上使用（type:tool,class:eui-picker-toolborder）
+//选择字体颜色只改变图标的颜色，不改变背景色
+.#{$eui}-picker-toolborder {
+		position:         relative;
+		width:            $picker-mini-x;
+		border-width:     1px;
+		border-color:     $form-input-border-color;
+		background-color: $form-input-bg-color;
+		padding:          0;
+		& > div {
+				height:       100%;
+				margin-right: $form-select-icon-x;
+				& .#{$eui}-icon {
+						line-height: $picker-tool-icon-lineheight;
+				}
+		}
+		& > input:first-child {
+
+				//下拉框获取焦点
+				&:focus {
+
+				}
+				//获取input焦点后 下拉三角的样式
+				&:focus + .#{$eui}-form-select-icon {
+
+				}
+		}
+		//下拉框-箭头
+		& .#{$eui}-form-select-icon {
+				width:             $form-select-icon-arrow-xy !important;
+				border-left-color: $form-input-border-color;
+				&:before {
+
+				}
+				//下拉箭头区域滑过、选中
+				&:hover,
+				&:active {
+
+						&:before {
+
+						}
+				}
+				&:hover {
+
+				}
+				&:active {
+
+				}
+		}
+}
+
+//颜色
+.#{$eui}-picker-color {
+
+		& > div {
+				& .#{$eui}-picker-color-content{
+						position: absolute;
+						left: 0;
+						right: 0px;
+						top: 2px;
+						bottom: 0;
+						background-repeat: no-repeat;
+						background-position: center;
+						& .#{$eui}-picker-color-show{
+								position: absolute;
+								bottom: 0;
+								left: 3px;
+								right: 3px;
+								height: 2px;
+						}
+				}
+		}
+		& > input:first-child {
+
+				//下拉框获取焦点
+				&:focus {
+
+				}
+				//获取input焦点后 下拉三角的样式
+				&:focus + .#{$eui}-form-select-icon {
+
+				}
+		}
+		//下拉框-箭头
+		& .#{$eui}-form-select-icon {
+				&:before {
+
+				}
+				//下拉箭头区域滑过、选中
+				&:hover,
+				&:active {
+
+						&:before {
+
+						}
+				}
+				&:hover {
+
+				}
+				&:active {
+
+				}
+		}
+}
+
+//线性
+.#{$eui}-picker-linestyle {
+
+		& > div {
+				& .#{$eui}-icon-img {
+						background-size: auto;
+				}
+		}
+		& > input:first-child {
+
+				//下拉框获取焦点
+				&:focus {
+
+				}
+				//获取input焦点后 下拉三角的样式
+				&:focus + .#{$eui}-form-select-icon {
+
+				}
+		}
+		//下拉框-箭头
+		& .#{$eui}-form-select-icon {
+				&:before {
+
+				}
+				//下拉箭头区域滑过、选中
+				&:hover,
+				&:active {
+
+						&:before {
+
+						}
+				}
+				&:hover {
+
+				}
+				&:active {
+
+				}
+		}
+}
+
+//显示边框
+.#{$eui}-picker-borderstyle {
+
+		& > div {
+				& .#{$eui}-icon-img {
+
+				}
+		}
+		& > input:first-child {
+
+				//下拉框获取焦点
+				&:focus {
+
+				}
+				//获取input焦点后 下拉三角的样式
+				&:focus + .#{$eui}-form-select-icon {
+
+				}
+		}
+		//下拉框-箭头
+		& .#{$eui}-form-select-icon {
+				&:before {
+
+				}
+				//下拉箭头区域滑过、选中
+				&:hover,
+				&:active {
+
+						&:before {
+
+						}
+				}
+				&:hover {
+
+				}
+				&:active {
+
+				}
+		}
+}
+
+//显示圆角
+.#{$eui}-picker-borderradius {
+
+		& > div {
+				& .#{$eui}-icon-img {
+
+				}
+		}
+		& > input:first-child {
+
+				//下拉框获取焦点
+				&:focus {
+
+				}
+				//获取input焦点后 下拉三角的样式
+				&:focus + .#{$eui}-form-select-icon {
+
+				}
+		}
+		//下拉框-箭头
+		& .#{$eui}-form-select-icon {
+				&:before {
+
+				}
+				//下拉箭头区域滑过、选中
+				&:hover,
+				&:active {
+
+						&:before {
+
+						}
+				}
+				&:hover {
+
+				}
+				&:active {
+
+				}
+		}
+}
+
+//统计图配色列表
+.#{$eui}-picker-colorlist {
+
+		& > div {
+				overflow: hidden;
+				& .#{$eui}-icon-img {
+
+				}
+				& canvas {
+						width: 100%;
+						height:100%;
+				}
+				& .#{$eui}-colorlist-item {
+						display: $inline-block;
+						height:  100%;
+				}
+		}
+		& > input:first-child {
+
+				//下拉框获取焦点
+				&:focus {
+
+				}
+				//获取input焦点后 下拉三角的样式
+				&:focus + .#{$eui}-form-select-icon {
+
+				}
+		}
+		//下拉框-箭头
+		& .#{$eui}-form-select-icon {
+				&:before {
+
+				}
+				//下拉箭头区域滑过、选中
+				&:hover,
+				&:active {
+
+						&:before {
+
+						}
+				}
+				&:hover {
+
+				}
+				&:active {
+
+				}
+		}
+}

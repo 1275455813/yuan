@@ -1,0 +1,195 @@
+@charset "UTF-8";
+
+%listview-text {
+    display:        $inline-block;
+    overflow:       hidden;
+    text-overflow:  ellipsis;
+    white-space:    nowrap;
+    vertical-align: middle;
+    word-wrap:      break-word;
+    word-break:     break-all;
+}
+
+//展开收起图标 缩小图标 鼠标移上去成手
+%listview-treefold-updown{
+    transform:         scale(0.75);
+    -webkit-transform: scale(0.75);
+    display:           $inline-block;
+}
+
+//图标大小及居中
+%listview-icon{
+    font-size:  $font-size;
+    width:      $liseview-icon-x;
+    height:     $liseview-icon-y;
+    text-align: center;
+    display:    $inline-block;
+    position:   relative;
+    top:        $liseview-icon-top;
+    cursor:     pointer;
+		color:      $liseview-icon-color;
+}
+
+
+//****************列表树组件 默认形式*****************//
+.#{$eui}-listview-container{
+    position:   relative;
+    width:      100%;
+    height:     100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    & td{
+        padding:       $elist-td-paddingtb $elist-td-paddinglr;
+        border-bottom: 1px solid $elist-bordercolor;
+        color:         $elist-fontcolor;
+        //height:        $elist-td-y;
+        //text-overflow: ellipsis;
+        overflow:      hidden;
+    }
+    //表头
+    & .#{$eui}-listview-header {
+        & .#{$eui}-listview-headertable {
+            table-layout: fixed;
+            width: 1px;
+        }
+        & td {
+            height: $elist-header-y;
+            background: $elist-header-bg;
+            border-top: $elist-header-bordertop-y solid $elist-header-bordercolor;
+            border-bottom: $elist-header-borderbottom-y solid $elist-header-bordercolor;
+        }
+    }
+    //表头文字
+    & .#{$eui}-listview-caption {
+        @extend %listview-text;
+        font-weight: normal;
+        font-size:   $elist-header-fontsize;
+        color:       $elist-header-fontcolor;
+        height:      $elist-header-y - ($elist-td-paddingtb * 2) - ($elist-header-bordertop-y * 2);
+        line-height: $elist-header-y - ($elist-td-paddingtb * 2) - ($elist-header-bordertop-y * 2);
+    }
+    //表体
+    & .#{$eui}-listview-data {
+        position:   absolute;
+        top:        $elist-header-y + 1;
+        bottom:     0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        & .eui-listview-datatable {
+            table-layout: fixed;
+            width: 1px;
+        }
+        & td{
+
+        }
+        & tr:hover td{
+            background: $elist-hover-bg;
+        }
+        //展开图标
+        & .#{$eui}-listview-icon-treeunfold{
+            @extend %listview-icon;
+            &:before{
+                content: "\ef7f";
+                @extend  %listview-treefold-updown;
+            }
+        }
+        //收起图标
+        & .#{$eui}-listview-icon-treefold{
+            @extend %listview-icon;
+            &:before{
+                content: "\ef81";
+                @extend  %listview-treefold-updown;
+            }
+        }
+        & .#{$eui}-listview-icon-place{
+            @extend %listview-icon;
+        }
+        //第一列的图标
+        & .#{$eui}-listview-icon{
+            @extend %listview-icon;
+        }
+		    //默认无数据提示
+		    & .#{$eui}-listview-tips {
+				    position:    relative;
+				    margin-top:  $elist-tips-margin-top;
+				    text-align:  center;
+				    & span {
+						    position:         relative;
+						    display:          $inline-block;
+						    padding-left:     10px;
+						    padding-right:    10px;
+						    color:            $elist-tips-font-color;
+						    &:before {
+								    content:        "\efa8";
+								    font-family:    $icon-font;
+								    font-size:      $font-icon-m;
+								    vertical-align: middle;
+								    margin-right:   5px;
+						    }
+				    }
+		    }
+    }
+    //选中状态
+    & .#{$eui}-listview-active {
+		    &,
+		    &:hover {
+				    & td {
+						    background: $elist-active-bg;
+				    }
+		    }
+    }
+    //表体文字
+    & .#{$eui}-listview-text {
+        @extend %listview-text;
+        display:       $block;
+        height:        $elist-header-y - ($elist-td-paddingtb * 2);
+        line-height:   $elist-header-y - ($elist-td-paddingtb * 2);
+    }
+    //表体文字-自动换行
+    & .#{$eui}-listview-text-break {
+        display: $inline-block;
+        span{
+            display: inline-block;
+        }
+    }
+    //表格带勾选时 列宽度
+    & .#{$eui}-listview-checkbox {
+        width: $elist-td-checkbox-x;
+    }
+    //表格序号 列宽度
+    & .#{$eui}-listview-number {
+        width: $elist-td-number-x;
+    }
+    & .#{$eui}-listview-index {
+        width: $elist-td-number-x;
+    }
+}
+
+//移动标识块
+.#{$eui}-listview-container{
+    &.#{$eui}-listview-dragdropFlagdv{
+        position: absolute;
+        font-size: 1px;
+        background-color: #000000;
+        border: none;
+        cursor: default;
+        overflow: hidden;
+        width: 100%;
+        height: 1px;
+        z-index: 99999;
+    }
+    .#{$eui}-listview-_resizepanel{
+        position: absolute;
+        width: 1px;
+        height: 100%;
+        z-index: 9999;
+        background-color: #cccccc;
+        /* display: none; */
+        overflow: hidden;
+        cursor: col-resize;
+    }
+}
+
+
+
+

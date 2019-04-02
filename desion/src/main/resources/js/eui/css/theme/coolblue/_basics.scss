@@ -1,0 +1,312 @@
+@charset "utf-8";
+
+//宽度高度100%
+%width-height100 {
+		width: 100%;
+		height: 100%;
+}
+
+%width100 {
+		width: 100%;
+}
+
+%height100 {
+		height: 100%;
+}
+
+//将元素定义为内联
+%inline {
+		display: $inline;
+}
+
+//将元素定义为块级
+%block {
+		display: $block;
+}
+
+//清除浮动
+%clear {
+		clear: $clear;
+		*zoom: 1;
+}
+
+//文本超出隐藏打点
+%elip {
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+}
+
+//元素左浮动
+%float-left {
+		float: left !important;
+}
+
+//元素右浮动
+%float-right {
+		float: right !important;
+}
+
+%unselect {
+		-webkit-user-select: none;
+		   -moz-user-select: none;
+		    -ms-user-select: none;
+}
+
+//定义html盒子模型为border-box
+html {
+		box-sizing: border-box;
+		-ms-overflow-style: scrollbar;
+		@extend %width-height100;
+}
+
+//其他所有元素继承html盒子模型
+*{
+		&,
+		&:before,
+		&:after {
+				box-sizing: inherit;
+		}
+}
+
+//默认字体
+body {
+		@extend %width-height100;
+		line-height: $line-height;
+		font-size:   $font-size;
+		font-family: $font-family;
+		color:       $text-color;
+}
+
+blockquote, body, button, dd, div, dl, dt, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
+		margin: 0;
+		padding: 0;
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+a:active, a:hover {
+		outline: 0;
+}
+
+img {
+		@extend %inline;
+		border: none;
+}
+
+li {
+		list-style: none;
+}
+
+table {
+		border-collapse: collapse;
+		border-spacing: 0;
+}
+
+
+//盒子模型转换为content-box
+.#{$eui}-box {
+		-webkit-box-sizing: $box;
+						box-sizing: $box;
+}
+
+//将元素定义为块级
+.#{$eui}-block {
+		@extend %block;
+}
+
+//将元素定义为内联
+.#{$eui}-inline {
+		@extend %inline;
+		vertical-align: middle;
+}
+
+//将元素定义为内联块级
+.#{$eui}-inline-block {
+		display: $inline-block;
+		vertical-align: middle;
+}
+
+//屏蔽选中文字
+.#{$eui} {
+		&-btn,
+		&-disabled,
+		&-icon,
+		&-unselect {
+				@extend %unselect;
+		}
+}
+
+//单行文本超出打点
+.#{$eui}-elip {
+		@extend %elip;
+}
+
+//显示
+.#{$eui}-show {
+		display: block !important;
+}
+
+//隐藏
+.#{$eui}-hide {
+		display: none !important;
+}
+
+//浮动左
+.#{$eui}-float-left{
+		@extend %float-left;
+}
+
+//浮动右
+.#{$eui}-float-right{
+		@extend %float-right;
+}
+
+//清楚浮动
+.#{$eui}-clear {
+		@extend %clear;
+		&:after{
+				content: '\0020';
+				@extend %clear;
+				@extend %block;
+				height: 0;
+		}
+}
+
+//系统中我们将body的滚动条禁用后，你需要自己创建一个滚动区域
+.#{$eui}-scroll-auto {
+		overflow: auto !important;
+}
+
+.#{$eui}-scroll-hide {
+		overflow: hidden !important;
+}
+
+//拖拽时需要的遮罩层
+.#{$eui}-shade{
+		position: absolute;
+		top:      0;
+		right:    0;
+		bottom:   0;
+		left:     0;
+		overflow: hidden;
+		display:  $block;
+}
+
+//公共padding 5-15 上下左右 5-15
+@while ($padding > 0) {
+		.#{$eui}-padding-#{$padding}        { padding:        $padding#{px}; }
+		.#{$eui}-padding-top-#{$padding}    { padding-top:    $padding#{px}; }
+		.#{$eui}-padding-right-#{$padding}  { padding-right:  $padding#{px}; }
+		.#{$eui}-padding-bottom-#{$padding} { padding-bottom: $padding#{px}; }
+		.#{$eui}-padding-left-#{$padding}   { padding-left:   $padding#{px}; }
+		$padding: $padding - 5;
+}
+
+//公共margin 5-15 上下左右 5-15
+//当不需要间距时使用
+@while $margin > 0 {
+		.#{$eui}-margin-#{$margin}        { margin:        -$margin#{px}; }
+		.#{$eui}-margin-top-#{$margin}    { margin-top:    -$margin#{px}; }
+		.#{$eui}-margin-right-#{$margin}  { margin-right:  -$margin#{px}; }
+		.#{$eui}-margin-bottom-#{$margin} { margin-bottom: -$margin#{px}; }
+		.#{$eui}-margin-left-#{$margin}   { margin-left:   -$margin#{px}; }
+		//公共outer-margin 5-15 上下左右 5-15
+		//当需要外间距时使用
+		.#{$eui}-outer-margin-#{$margin}        { margin:        $margin#{px}; }
+		.#{$eui}-outer-margin-top-#{$margin}    { margin-top:    $margin#{px}; }
+		.#{$eui}-outer-margin-right-#{$margin}  { margin-right:  $margin#{px}; }
+		.#{$eui}-outer-margin-bottom-#{$margin} { margin-bottom: $margin#{px}; }
+		.#{$eui}-outer-margin-left-#{$margin}   { margin-left:   $margin#{px}; }
+		$margin: $margin - 5;
+}
+
+
+.#{$eui}-height-max {
+		@extend %height100;
+}
+
+//用img标签垫在底部，来达到内容垂直居中
+.#{$eui}-verticalalign-middle {
+		width:          0;
+		height:         100%;
+		display:        $inline-block;
+		vertical-align: middle;
+}
+
+//**************滚动条样式**************/
+//chrome
+//滚动条整体部分
+::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+}
+// 滚动条两端的按钮
+::-webkit-scrollbar-button{
+		display: none;
+}
+// 外层轨道
+::-webkit-scrollbar-track     {
+		background-color: transparent;
+}
+//内层轨道
+::-webkit-scrollbar-track-piece {
+		background-color: transparent;
+}
+//滚动条里面可以拖动的那部分
+::-webkit-scrollbar-thumb{
+		background-color: #c5c5c5;
+		border-radius: 6px;
+}
+//边角
+::-webkit-scrollbar-corner {
+		background-color: transparent;
+}
+//定义右下角拖动块的样式
+::-webkit-scrollbar-resizer  {
+		background-color: transparent;
+}
+//划过出现滚动条
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece,
+::-webkit-scrollbar-thumb {
+		visibility: hidden;
+}
+
+:hover::-webkit-scrollbar-track,
+:hover::-webkit-scrollbar-track-piece,
+:hover::-webkit-scrollbar-thumb {
+		visibility: visible;
+}
+
+//IE
+:root {
+		// 滑动条的颜色
+		scrollbar-face-color: #c5c5c5;
+		scrollbar-base-color: #c5c5c5;
+		// 滑动条边框的颜色
+		scrollbar-shadow-color: #c5c5c5;
+		// IE11下没效果
+		scrollbar-3dlight-color:  #f2f2f2;
+		scrollbar-darkshadow-color: #f2f2f2;
+		// 槽的颜色
+		scrollbar-highlight-color: #f2f2f2;
+		scrollbar-track-color: #f2f2f2;
+		// 箭头的颜色
+		scrollbar-arrow-color: #c5c5c5;
+}
+
+//默认显示滚动条
+.#{$eui}-scroll-show {
+		// 外层轨道
+		&::-webkit-scrollbar-track,
+		& ::-webkit-scrollbar-track {
+				background-color: transparent;
+		}
+		&::-webkit-scrollbar-track-piece,
+		& ::-webkit-scrollbar-track-piece,
+		&::-webkit-scrollbar-thumb,
+		& ::-webkit-scrollbar-thumb {
+				visibility: visible;
+		}
+}

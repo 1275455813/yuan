@@ -1,0 +1,123 @@
+@charset "utf-8";
+
+%panelsplitter {
+		position: absolute;
+		overflow: hidden;
+}
+
+//**************** 分割面板容器(默认) ****************//
+.#{$eui}-panelsplitter-container {
+		position: relative;
+		overflow: hidden;
+		cursor:   e-resize; //水平鼠标指针
+		//面板
+		& .#{$eui}-panelsplitter-panel {
+				@extend         %panelsplitter;
+				text-align:     left;
+				vertical-align: top;
+				cursor:         default;
+				@include        transition(all 0.4s ease);
+				//左右
+				&-left,
+				&-right {
+						height:100%;
+				}
+				&-left {
+						top:0;
+						left:0;
+				}
+				&-right {
+						top:0;
+						right:0;
+				}
+				//上下
+				&-top,
+				&-bottom {
+						width: 100%;
+				}
+				&-top {
+						top:0;
+						left:0;
+				}
+				&-bottom {
+						bottom:0;
+						left:0;
+				}
+		}
+		//操作按钮-默认
+		& .#{$eui}-panelsplitter {
+				&-btn,
+				&-btn-left,
+				&-btn-right,
+				&-btnvertical,
+				&-btnvertical-top,
+				&-btnvertical-bottom {
+						position:         absolute;
+						background-color: $panelsplitter-splitbar-btn-bg;
+						overflow:         hidden;
+						cursor:           pointer;
+						@include          transition(all 0.4s ease);
+						&:before {
+								position:    absolute;
+								display:     $inline-block;
+								font-family: $icon-font;
+								font-size:   $font-size18;
+								color:       $text-weaken;
+								text-align:  center;
+						}
+				}
+				//左右分割时按钮位置
+				&-btn,
+				&-btn-left,
+				&-btn-right {
+						top:        0;
+						height:     100%;
+						&:before {
+								content:     "\efa2";
+								top:         50%;
+								height:      $panelsplitter-splitbar-btn-y;
+								line-height: $panelsplitter-splitbar-btn-y;
+								margin-top:  -($panelsplitter-splitbar-btn-y / 2);
+								margin-left: $panelsplitter-splitbar-btn-marginleft;
+						}
+				}
+				&-btn-left {
+				}
+				&-btn-right {
+				}
+				//上下分割时按钮位置
+				&-btnvertical,
+				&-btnvertical-top,
+				&-btnvertical-bottom {
+						left:        0;
+						width:       100%;
+						text-align:  center;
+						&:before {
+								content:    "\efa3";
+								top:        50%;
+								width:      $panelsplitter-splitbar-btn-x;
+								margin-top: $panelsplitter-splitbar-btnvertical-top;
+						}
+				}
+				&-btnvertical{
+						left: #{50%}\0;
+				}
+				&-btnvertical-top {
+				}
+				&-btnvertical-bottom {
+				}
+		}
+
+		//推拽分割条
+		& .#{$eui}-panelsplitter-splitbar {
+				position:   absolute;
+				z-index:    99999;
+				font-size:  1px;
+				background: $panelsplitter-splitbar-bg;
+				@extend     %unselect;
+		}
+}
+
+
+
+

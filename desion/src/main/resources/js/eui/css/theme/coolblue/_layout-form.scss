@@ -1,0 +1,317 @@
+@charset "utf-8";
+//表单标签
+button, input, optgroup, option, select, textarea {
+		font-family: inherit;
+		font-size: inherit;
+		font-style: inherit;
+		font-weight: inherit;
+		outline: 0
+}
+
+//IE隐藏 输入框后面的XX和眼睛
+::-ms-clear,
+::-ms-reveal {
+		display: none;
+}
+
+//表单布局dom
+//<div class="eui-form-container">
+//  <div class="eui-form-item">
+//      <div class="eui-form-label"></div>
+//      <div class="eui-input-block"><input class="eui-input"></div>
+//  </div>
+//  <div class="eui-form-item">
+//      <div class="eui-inline">
+//          <div class="eui-form-label"></div>
+//          <div class="eui-input-inline"><input class="eui-input"></div>
+//      </div>
+//      <div class="eui-inline">
+//          <div class="eui-form-label"></div>
+//          <div class="eui-input-inline"><input class="eui-input"></div>
+//          <div class="eui-form-mid">-</div>
+//          <div class="eui-input-inline"><input class="eui-input"></div>
+//      </div>
+//  </div>
+//</div>
+
+//表单容器
+.#{$eui}-form-container {}
+
+//表单行
+.#{$eui}-form-item {
+		margin-bottom: $form-item-margin;
+		clear:         $clear;
+		//表单块内联
+		& .#{$eui}-inline {
+				 position:      relative;
+				 display:       $inline-block;
+				 margin-bottom: $form-item-margin;
+				//内联表单时 输入框大小
+				& .#{$eui}-input-inline {
+						width: $form-inline-input-x;
+						& .#{$eui}-form-input,
+						& .#{$eui}-form-password,
+						& .#{$eui}-form-select,
+						& .#{$eui}-form-spinner,
+						& .#{$eui}-form-search,
+						& .#{$eui}-form-upload {
+								width: 100%;
+						}
+				}
+		}
+		//表单内容-内联
+		& .#{$eui}-input-inline {
+				float:        left;
+				margin-right: $form-item-margin;
+				& .#{$eui}-form-input,
+				& .#{$eui}-form-password,
+				& .#{$eui}-form-select,
+				& .#{$eui}-form-spinner,
+				& .#{$eui}-form-search,
+				& .#{$eui}-form-upload {
+						width: $form-input-x;
+				}
+				//文本域默认宽度400px
+				& .#{$eui}-form-textarea {
+					width: $form-textarea-x;
+				}
+		}
+		//表单块级时 表单元素框大小
+		& .#{$eui}-input-block {
+				& .#{$eui}-form-input,
+				& .#{$eui}-form-password,
+				& .#{$eui}-form-select,
+				& .#{$eui}-form-spinner,
+				& .#{$eui}-form-search,
+				& .#{$eui}-form-upload {
+						width: $form-input-x;
+				}
+				//文本域默认宽度400px
+				& .#{$eui}-form-textarea {
+						width: $form-textarea-x;
+				}
+		}
+		//清除表单项目浮动
+		&:after {
+				content: "\20";
+				height:  0;
+				clear:   $clear;
+				display: $block;
+				*zoom:   1;
+		}
+		//表单提示
+		& .#{$eui}-tips-container {
+				margin-bottom: 0;
+				& .#{$eui}-icon {
+						vertical-align: top;
+				}
+		}
+}
+
+//对话框里用到的表单元素框200宽
+.#{$eui}-form-iframe, //对话框中套iframe页面，单独处理表单宽度
+.#{$eui}-dialog-container {
+		.#{$eui}-form-item {
+				& .#{$eui}-input-inline {
+						width: $form-inline-input-x;
+				}
+		}
+		& .#{$eui}-input-inline,
+		& .#{$eui}-input-block {
+				& .#{$eui}-form-input,
+				& .#{$eui}-form-password,
+				& .#{$eui}-form-select,
+				& .#{$eui}-form-spinner,
+				& .#{$eui}-form-search,
+				& .#{$eui}-form-upload {
+						width: $form-inline-input-x;
+				}
+				& .#{$eui}-form-textarea {
+						width: $form-s-textarea-x;
+				}
+		}
+}
+
+//表单标题
+.#{$eui}-form-label {
+		width:       $form-label-x;
+		float:       left;
+		display:     block;
+		font-weight: 400;
+		line-height: $form-input-y;
+		text-align:  right;
+		@extend      %elip;
+}
+
+//表单内容-连接部分
+.#{$eui}-form-mid {
+		position:     relative;
+		float:        left;
+		display:      $block;
+		line-height:  $form-input-y;
+		margin-right: $form-item-margin;
+}
+
+//表单内容-块级
+.#{$eui}-input-block {
+		position:    relative;
+		margin-left: $form-label-x;
+		min-height:  $form-input-y;
+		line-height: $form-input-y;
+}
+
+//表单内容-内联
+.#{$eui}-input-inline {
+		position:       relative;
+		display:        $inline-block;
+		vertical-align: middle;
+}
+
+//表单内联时 表单元素
+.#{$eui}-inline {
+		& .#{$eui}-input-inline {
+       & .#{$eui} {
+						//输入框 文本域 下拉框
+						&-input,
+						&-select,
+						&-textarea {
+								width: 100%;
+						}
+				}
+		}
+}
+
+//表单-小号
+.#{$eui}-form-layout-#{$s} {
+		& .#{$eui}-form-item {
+				margin-bottom: 0;
+		}
+		& .#{$eui}-form-label {
+				line-height: $form-s-input-y;
+				margin-bottom: $form-s-item-margin;
+		}
+		& .#{$eui}-form-mid {
+				line-height: $form-s-input-y;
+		}
+		//表单块内联
+		& .#{$eui}-inline {
+				margin-bottom: 0;
+				//内联表单时 输入框大小
+				& .#{$eui}-input-inline {
+				}
+		}
+		//表单内容-内联
+		& .#{$eui}-input-inline {
+
+		}
+		& .#{$eui}-input-block {
+				min-height:  $form-s-input-y;
+				line-height: $form-s-input-y;
+				& > [class*="eui-form-"] {
+						margin-bottom: $form-s-item-margin;
+				}
+		}
+		//锁定宽高
+		& .#{$eui}-form-locking-container {
+				//默认锁定
+				& .#{$eui}-form-locking {
+						height:         ($form-s-input-y * 2) + $form-s-item-margin;
+						&:before {
+								height:     ($form-s-input-y * 2) - $form-s-item-margin;
+								margin-top: -(($form-s-input-y * 2) - $form-s-item-margin) / 2;
+						}
+						& .#{$eui}-icon {
+
+						}
+				}
+		}
+		//各种表单小号
+		& .#{$eui}-form-input,
+		& .#{$eui}-form-password,
+		& .#{$eui}-form-select,
+		& .#{$eui}-form-textarea
+		& .#{$eui}-form-almanac,
+		& .#{$eui}-form-quarter,
+		& .#{$eui}-form-month,
+		& .#{$eui}-form-date,
+		& .#{$eui}-form-timer,
+		& .#{$eui}-form-spinner,
+		& .#{$eui}-form-search,
+		& .#{$eui}-form-upload,
+		& .#{$eui}-form-range {
+				height:      $form-s-input-y;
+				line-height: $form-s-input-y;
+				line-height: #{$form-s-input-y - 2}\0;
+		}
+		& .#{$eui}-form-search {
+				& > input,
+				& > textarea {
+						line-height: $form-s-input-y;
+				}
+		}
+		& .#{$eui}-form-search-textarea.eui-form-nosearch-focus {
+				& > textarea {
+						line-height: $form-s-input-y - 2;
+				}
+		}
+		& .#{$eui}-form-range {
+				& > input {
+						height: $form-s-input-y;
+				}
+		}
+		& .#{$eui}-picker {
+				& > div {
+						& .#{$eui}-icon {
+								line-height: $form-s-input-y - 4;
+								font-size: $font-size;
+						}
+				}
+		}
+		& .#{$eui}-picker-linestyle,
+		& .#{$eui}-picker-borderstyle,
+		& .#{$eui}-picker-borderradius {
+				& > div {
+						& .#{$eui}-icon {
+								line-height: $form-s-input-y - 6;
+						}
+				}
+		}
+}
+
+//表单标题文字-小号（label宽度为80）
+.#{$eui}-form-label-#{$xs} {
+		& .#{$eui}-form-label {
+				width: $form-xs-label-x;
+		}
+		& .#{$eui}-input-block {
+				margin-left: $form-xs-label-x;
+		}
+}
+
+//表单标题文字-小号（label宽度为80）
+.#{$eui}-form-label-#{$s} {
+		& .#{$eui}-form-label {
+				width: $form-s-label-x;
+		}
+		& .#{$eui}-input-block {
+				margin-left: $form-s-label-x;
+		}
+}
+
+//表单标题文字-大号（label宽度为140）
+.#{$eui}-form-label-#{$l} {
+		& .#{$eui}-form-label {
+				width: $form-l-label-x;
+		}
+		& .#{$eui}-input-block {
+				margin-left: $form-l-label-x;
+		}
+}
+
+//表单状态-必填
+.eui-form-required {
+		&:before {
+				content: "*";
+				color: red;
+		}
+}

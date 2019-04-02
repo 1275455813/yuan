@@ -2,9 +2,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>社区首页</title>
+<link href="/eui/css/theme/coolblue/eui.css" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+		body,html
+		{
+			width:100%;
+			margin:0;
+		}
+	</style>
 </head>
 <body>
-<h5>hello!</h5>
+<div id="parent" style="width:100%; height:100%;">
+	<div id="topbar" style="width:100%; height:50px;background:#24292e;"></div>
+</div>
 </body>
+<script src="/basejs/require.js" data-main="/main"></script>
+<script src="/eui/third/jquery-1.9.1.min.js"></script>
+<script src="/eui/core/i18n.js"></script>
+<script src="/eui/eui.js"></script>
+<script src="/eui/core/sys.js"></script>
+<script src="/eui/core/ajax.js"></script>
+<script src="/eui/core/objs.js"></script>
+<script src="/eui/core/dom.js"></script>
+<script>
+	require(["myjs/body"], function(body){
+	    var Body = body.Body;
+	    var pdom = document.getElementById("parent");
+	    
+	    var mybody = new Body(pdom);
+	});
+</script>
 </html>

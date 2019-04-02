@@ -1,0 +1,1193 @@
+@charset "utf-8";
+
+//公共样式
+//表元
+%col {
+		border-top-width:  0;
+		border-left-width: 0;
+		border-right:      1px solid #CCC;
+		border-bottom:     1px solid #CCC;
+		padding:           0 4px 0 4px;
+		background-color:  #FFF;
+		vertical-align:    top;
+		overflow:          hidden;
+		white-space:       normal;
+		word-wrap:         break-word;
+		word-break:        break-all;
+		text-overflow:     ellipsis;
+}
+
+//左边框
+%border-left {
+		border-left: 1px solid #CCC;
+}
+
+//上边框
+%border-top {
+		border-top: 1px solid #CCC;
+}
+
+//拖拽背景
+%Resizer-bg {
+		background-color: #AAB;
+}
+
+//拖拽时虚线
+%Resizer-active {
+		display: $block;
+		z-index: 4;
+}
+
+//超出隐藏
+%overflow-hidden {
+		overflow: hidden;
+}
+
+//隐藏
+%visibility-hidden {
+		visibility: hidden;
+}
+
+//
+%manualColumnMove {
+		position: absolute;
+		height: 100%;
+		display: none;
+}
+
+%manualRowMove {
+		position: absolute;
+		width: 100%;
+		display: none;
+}
+
+
+//****************数据表格组件默认*****************//
+.#{$eui}-datatable-container {
+		position: relative;
+		width: 100%;
+		height:100%;
+		font-size: 12px;
+		&.htAutoSize {
+				position: absolute;
+				visibility: hidden;
+				top: -99000px;
+				left: -99000px;
+		}
+		& .hide {
+				display: none;
+		}
+		//表头文字
+		.relative {
+				position: relative;
+		}
+
+		& .#{$eui}-edatatable-wtHider {
+				width: 0;
+		}
+		& .#{$eui}-edatatable-wtSpreader {
+				position: relative;
+				width: 0; /*must be 0, otherwise blank space appears in scroll demo after scrolling max to the right */
+				height: auto;
+		}
+		& input,
+		& textarea {
+				min-height: initial;
+		}
+		& table.#{$eui}-edatatable-htCore {
+				border-collapse: separate;
+				border-spacing: 0;
+				margin: 0;
+				border-width: 0;
+				table-layout: fixed;
+				width: 0;
+				outline-width: 0;
+				max-width: none;
+				max-height: none;
+		}
+		& col {
+				width: 50px;
+				&.rowHeader {
+						width: 50px;
+				}
+				&.hidden {
+						width: 0 !important;
+				}
+		}
+		& thead {
+				& th {
+						padding: 0;
+						& .relative {
+								padding: 2px 4px;
+						}
+				}
+		}
+		& tr {
+				&:first-child {
+						& th,
+						& td {
+								@extend %border-top;
+						}
+				}
+				&.hidden {
+						&,
+						& td,
+						& th {
+								display: none;
+						}
+
+				}
+		}
+		& th {
+				@extend %col;
+				background-color: #f3f3f3;
+				color: #222;
+				text-align: center;
+				font-weight: normal;
+				white-space: nowrap;
+				&:first-child {
+						@extend %border-left;
+				}
+				&:nth-child(2) {
+						@extend %border-left;
+				}
+				&:last-child {
+						/*Foundation framework fix*/
+						border-right: 1px solid #CCC;
+						border-bottom: 1px solid #CCC;
+				}
+				&.active {
+						background-color: #CCC;
+				}
+		}
+		& td {
+				@extend %col;
+				&:first-of-type {
+						@extend %border-left;
+				}
+				&.htInvalid {
+						background-color: #ff4c42 !important; /*gives priority over td.area selection background*/
+				}
+        &.htNoWrap {
+		        white-space: nowrap;
+        }
+				&.htSearchResult {
+						background: #fcedd9;
+						color: #583707;
+				}
+		}
+		//表体文字
+		& .#{$eui}-edatatable-text {
+				height: 24px;
+				line-height: 24px;
+				white-space: nowrap;
+				word-wrap: break-word;
+				word-break: break-all;
+				text-overflow: ellipsis;
+				overflow: hidden;
+		}
+		//表元上的红色小三角，与text 在同一个dom上
+		& .#{$eui}-edatatable-red-tips{
+			position: relative;
+			margin-left: -4px;
+			&:after {
+				content: "";
+				position:     absolute;
+				top:          -5px;
+				left:         -5px;
+				border-width: 5px;
+				border-style: solid;
+				border-color: transparent red transparent transparent;
+				@include      transform(rotate(45deg));
+			}
+		}
+		//*********主体表 （内容）
+		& .#{$eui}-edatatable-hot-master {
+				width: 100%;
+				height: 100%;
+				@extend %overflow-hidden;
+				&:not(.innerBorderLeft):not(.emptyColumns) {
+						& ~ .#{$eui}-datatable-container tbody tr th,
+						& ~ .#{$eui}-datatable-container:not(.#{$eui}-edatatable-hot-top) thead tr th:first-child {
+								border-right-width: 0;
+						}
+				}
+				&:not(.innerBorderTop) {
+						& thead tr:last-child th,
+            & thead tr.lastChild th,
+						& ~ .#{$eui}-datatable-container thead tr:last-child th,
+						& ~ .#{$eui}-datatable-container thead tr.lastChild th {
+								border-bottom-width: 0;
+						}
+				}
+				& .#{$eui}-edatatable-wtHolder {
+						overflow: auto;
+				}
+				& thead {
+						@extend %visibility-hidden;
+				}
+				& tr {
+						& th {
+								@extend %visibility-hidden;
+						}
+				}
+				//第一行 上边框
+				& tbody {
+						& tr:first-child {
+								& th,
+								& td {
+										border-top: 0;
+								}
+						}
+				}
+		}
+		//*********表头 （列）
+		& .#{$eui}-edatatable-hot-top {
+				@extend %overflow-hidden;
+				z-index: 2;
+				& .eui-edatatable-wtHolder {
+						@extend %overflow-hidden;
+				}
+		}
+		//*********表头 （行号）
+		& .#{$eui}-edatatable-hot-left {
+				@extend %overflow-hidden;
+				z-index: 2;
+				& thead {
+						@extend %visibility-hidden;
+				}
+				& .eui-edatatable-wtHolder {
+						@extend %overflow-hidden;
+				}
+				//
+				& tbody {
+						& > tr {
+								&:first-child th {
+										border-top: 0;
+								}
+						}
+				}
+		}
+		& .#{$eui}-edatatable-hot-top_left_corner,
+		& .#{$eui}-edatatable-hot_bottom_left_corner {
+				z-index: 3;
+		}
+		& .#{$eui}-edatatable-hot_debug {
+				z-index: 3;
+		}
+
+		//*********表头拖拽区
+		//列拖拽
+		& .manualColumnResizer {
+				position: fixed;
+				top: 0;
+				cursor: col-resize;
+				z-index: 9;
+				width: 5px;
+				height: 25px;
+				&:hover {
+						@extend %Resizer-bg;
+				}
+				&.active {
+						@extend %Resizer-bg;
+				}
+
+		}
+		//拖拽列的虚线
+		& .manualColumnResizerGuide {
+				display: none;
+				position: fixed;
+				width: 0;
+				right: 0;
+				top: 0;
+				background-color: #AAB;
+				border-right: 1px dashed #777;
+				margin-left: 5px;
+				&.active {
+						@extend %Resizer-active;
+				}
+		}
+		//行拖拽
+		& .manualRowResizer {
+				position: fixed;
+				left: 0;
+				cursor: row-resize;
+				z-index: 9;
+				height: 5px;
+				width: 50px;
+				&:hover {
+						@extend %Resizer-bg;
+				}
+				&.active {
+						@extend %Resizer-bg;
+				}
+		}
+		//拖拽行的虚线
+		& .manualRowResizerGuide {
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				background-color: #AAB;
+				display: none;
+				height: 0;
+				border-bottom: 1px dashed #777;
+				margin-top: 5px;
+				&.active {
+						@extend %Resizer-active;
+				}
+		}
+		//*********选择列、行框选区域
+		& .#{$eui}-edatatable-wtBorder {
+				position: absolute;
+				font-size: 0;
+				display: block;
+				background-color:#4b89ff;
+				&.hidden {
+						display:none !important;
+		    }
+				&.fill{
+						background-color:#ff0000;
+				}
+				//复制区域拖拽右下角点
+				&.#{$eui}-edatatable-wtBorder-corner {
+						font-size: 0;
+						cursor: crosshair;
+						border: 1px solid #ffffff;
+				}
+		}
+		& td.area {
+				&,
+				&-1,
+				&-2,
+				&-3,
+				&-4,
+				&-5,
+				&-6,
+				&-7 {
+						position: relative;
+						&:before {
+								content: '';
+								position: absolute;
+								top: 0;
+								left: 0;
+								right: 0;
+								bottom: 0;
+								bottom: -100%#{"\\9"}; /* Fix for IE9 to spread the ":before" pseudo element to 100% height of the parent element */
+								background: #005eff;
+								// Fix for IE10 and IE11 to spread the ":before" pseudo element to 100% height of the parent element */
+								@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+										bottom: -100%;
+								}
+						}
+				}
+				&:before {
+						opacity: 0.1;
+				}
+				&-1:before {
+						opacity: 0.2;
+				}
+				&-2:before {
+						opacity: 0.27;
+				}
+				&-3:before {
+						opacity: 0.35;
+				}
+				&-4:before {
+						opacity: 0.41;
+				}
+				&-5:before {
+						opacity: 0.47;
+				}
+				&-6:before {
+						opacity: 0.54;
+				}
+				&-7:before {
+						opacity: 0.58;
+				}
+		}
+		& thead,
+		& tbody {
+				& th {
+						//选择区域后 行列表头样式
+						&.eui-edatatable-head-hl {
+								background-color: #dcdcdc;
+						}
+						//选择区域后 行列表头选中样式
+						&.eui-edatatable-head-active-hl {
+								background-color: #8eb0e7;
+								color: #000;
+						}
+				}
+		}
+		& .htBorder.htFillBorder {
+				background: red;
+				width: 1px;
+				height: 1px;
+		}
+		//*********编辑表元内容容器
+		& .handsontableInputHolder {
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 4;
+		}
+		//编辑表元内容textarea
+		& .handsontableInput {
+				border: none;
+				outline-width: 0;
+				margin: 0;
+				padding: 1px 5px 0 5px;
+				font-family: inherit;
+				line-height: 21px;
+				font-size: inherit;
+				box-shadow: 0 0 0 2px #5292F7 inset;
+				resize: none;
+				/*below are needed to overwrite stuff added by jQuery UI Bootstrap theme*/
+				display: block;
+				color: #000;
+				border-radius: 0;
+				background-color: #FFF;
+				/*overwrite styles potentionally made by a framework*/
+		}
+		//********* 只读模式
+		& .eui-edatatable-readonly {
+				color: #777;
+		}
+		& .#{$eui}-edatatable-wtHider {
+				position: relative;
+		}
+		&.ht__manualRowMove.after-selection--rows {
+				&,
+				& tbody {
+						& th {
+								&.#{$eui}-edatatable-head-hl {
+										cursor: move;
+										cursor: -moz-grab;
+										cursor: -webkit-grab;
+										cursor: grab;
+								}
+						}
+				}
+		}
+		&.ht__manualColumnMove.after-selection--columns {
+				&,
+				& thead {
+						& th {
+								&.#{$eui}-edatatable-head-hl {
+										cursor: move;
+										cursor: -moz-grab;
+										cursor: -webkit-grab;
+										cursor: grab;
+								}
+						}
+				}
+		}
+		&.ht__manualRowMove.on-moving--rows {
+				&,
+				& tbody {
+						& th {
+								&.#{$eui}-edatatable-head-hl {
+										cursor: move;
+										cursor: -moz-grabbing;
+										cursor: -webkit-grabbing;
+										cursor: grabbing;
+								}
+						}
+				}
+				& .manualRowResizer {
+						display: none;
+				}
+		}
+		&.ht__manualColumnMove.on-moving--columns {
+				&,
+				& thead {
+						& th {
+								&.#{$eui}-edatatable-head-hl {
+										cursor: move;
+										cursor: -moz-grabbing;
+										cursor: -webkit-grabbing;
+										cursor: grabbing;
+								}
+						}
+				}
+				& .manualColumnResizer {
+						display: none;
+				}
+		}
+		& .ht__manualRowMove--guideline {
+				@extend %manualRowMove;
+				z-index: 5;
+				left: 0;
+				height: 2px;
+				margin-top: -1px;
+				background: #757575;
+		}
+		& .ht__manualRowMove--backlight {
+				@extend %manualRowMove;
+				display: none;
+				z-index: 5;
+				background: #343434;
+				background: rgba(52, 52, 52, 0.25);
+				pointer-events: none;
+		}
+		&.on-moving--rows.show-ui .ht__manualRowMove--guideline,
+		&.on-moving--rows .ht__manualRowMove--backlight {
+				display: block;
+		}
+
+		& .ht__manualColumnMove--guideline {
+				@extend %manualColumnMove;
+				z-index: 5;
+				top: 0;
+				width: 2px;
+				margin-left: -1px;
+				background: #757575;
+		}
+		& .ht__manualColumnMove--backlight {
+				@extend %manualColumnMove;
+				display: none;
+				z-index: 5;
+				background: #343434;
+				background: rgba(52, 52, 52, 0.25);
+				pointer-events: none;
+		}
+		&.on-moving--columns.show-ui .ht__manualColumnMove--guideline,
+		&.on-moving--columns .ht__manualColumnMove--backlight {
+				display: block;
+		}
+
+}
+
+//******  移动端 ******//
+.topLeftSelectionHandle:not(.eui-edatatable-hot-master .topLeftSelectionHandle),
+.topLeftSelectionHandle-HitArea:not(.eui-edatatable-hot-master .topLeftSelectionHandle-HitArea) {
+		z-index: 4;
+}
+
+/* Initial left/top coordinates - overwritten when actual position is set */
+.topLeftSelectionHandle,
+.topLeftSelectionHandle-HitArea,
+.bottomRightSelectionHandle,
+.bottomRightSelectionHandle-HitArea {
+		left: -10000px;
+		top: -10000px;
+}
+
+.htCommentCell {
+		position: relative;
+}
+
+.htCommentCell:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		border-left: 6px solid transparent;
+		border-top: 6px solid black;
+}
+
+#hot-display-license-info {
+		font-size: 9px;
+		color: #323232 ;
+		padding: 5px 0 3px 0;
+		font-family: Helvetica, Arial, sans-serif;
+		text-align: left;
+}
+
+
+//****************数据表格组件elist 风格*****************//
+//表元
+%list-col {
+		border-top-width:  0;
+		border-left-width: 0;
+		border-right:      1px solid transparent;
+		border-bottom:     1px solid #ebeff5;
+		color:             #333;
+		padding:           0 4px 0 4px;
+		background-color:  #FFF;
+		vertical-align:    top;
+		overflow:          hidden;
+		white-space:       normal;
+		word-wrap:         break-word;
+		word-break:        break-all;
+		text-overflow:     ellipsis;
+}
+
+//左边框
+%list-border-left {
+		border-left: 1px solid transparent;
+}
+
+//上边框
+%list-border-top {
+		border-top: 1px solid #ebeff5;
+}
+
+//拖拽背景
+%list-Resizer-bg {
+		background-color: #AAB;
+}
+
+//拖拽时虚线
+%list-Resizer-active {
+		display: $block;
+		z-index: 4;
+}
+
+//超出隐藏
+%list-overflow-hidden {
+		overflow: hidden;
+}
+
+//隐藏
+%list-visibility-hidden {
+		visibility: hidden;
+}
+
+//
+%list-manualColumnMove {
+		position: absolute;
+		height: 100%;
+		display: none;
+}
+
+%list-manualRowMove {
+		position: absolute;
+		width: 100%;
+		display: none;
+}
+
+
+//****************数据表格组件elist 风格*****************//
+.#{$eui}-datatable-list {
+		position: relative;
+		&.htAutoSize {
+				position: absolute;
+				visibility: hidden;
+				top: -99000px;
+				left: -99000px;
+		}
+		& .hide {
+				display: none;
+		}
+		//表头文字
+		.relative {
+				position: relative;
+		}
+
+		& .#{$eui}-edatatable-wtHider {
+				width: 0;
+		}
+		& .#{$eui}-edatatable-wtSpreader {
+				position: relative;
+				width: 0; /*must be 0, otherwise blank space appears in scroll demo after scrolling max to the right */
+				height: auto;
+		}
+		& input,
+		& textarea {
+				min-height: initial;
+		}
+		& table.#{$eui}-edatatable-htCore {
+				border-collapse: separate;
+				border-spacing: 0;
+				margin: 0;
+				border-width: 0;
+				table-layout: fixed;
+				width: 0;
+				outline-width: 0;
+				max-width: none;
+				max-height: none;
+		}
+		& col {
+				width: 50px;
+				&.rowHeader {
+						width: 50px;
+				}
+				&.hidden {
+						width: 0 !important;
+				}
+		}
+		& thead {
+				& th {
+						padding: 0;
+						& .relative {
+								padding: 2px 4px;
+						}
+				}
+		}
+		& tr {
+				&:first-child {
+						& th,
+						& td {
+								@extend %list-border-top;
+						}
+				}
+				&.hidden {
+						&,
+						& td,
+						& th {
+								display: none;
+						}
+
+				}
+		}
+		& th {
+				@extend %list-col;
+				background-color: #f8f7fc;
+				color: #333;
+				text-align: left;
+				font-weight: normal;
+				white-space: nowrap;
+				&:first-child {
+						@extend %list-border-left;
+				}
+				&:nth-child(2) {
+						@extend %list-border-left;
+				}
+				&:last-child {
+						/*Foundation framework fix*/
+						border-right: 1px solid transparent;
+						border-bottom: 1px solid #ebeff5;
+				}
+				&.active {
+						background-color: #CCC;
+				}
+		}
+		& td {
+				@extend %list-col;
+				&:first-of-type {
+						@extend %list-border-left;
+				}
+				&.htInvalid {
+						background-color: #ff4c42 !important; /*gives priority over td.area selection background*/
+				}
+				&.htNoWrap {
+						white-space: nowrap;
+				}
+				&.htSearchResult {
+						background: #fcedd9;
+						color: #583707;
+				}
+		}
+		& .#{$eui}-edatatable-red-tips{
+
+			&:after {
+
+			}
+		}
+		//表体文字
+		& .#{$eui}-edatatable-text {
+				height: 40px;
+				line-height: 40px;
+				white-space: nowrap;
+				word-wrap: break-word;
+				word-break: break-all;
+				text-overflow: ellipsis;
+				overflow: hidden;
+		}
+		//*********主体表 （内容）
+		& .#{$eui}-edatatable-hot-master {
+				width: 100%;
+				height:100%;
+				@extend %list-overflow-hidden;
+				&:not(.innerBorderLeft):not(.emptyColumns) {
+						& ~ .#{$eui}-datatable-list tbody tr th,
+						& ~ .#{$eui}-datatable-list:not(.#{$eui}-edatatable-hot-top) thead tr th:first-child {
+								border-right-width: 0;
+						}
+				}
+				&:not(.innerBorderTop) {
+						& thead tr:last-child th,
+						& thead tr.lastChild th,
+						& ~ .#{$eui}-datatable-list thead tr:last-child th,
+						& ~ .#{$eui}-datatable-list thead tr.lastChild th {
+								border-bottom-width: 0;
+						}
+				}
+				& .#{$eui}-edatatable-wtHolder {
+						overflow: auto;
+				}
+				& thead {
+						@extend %list-visibility-hidden;
+				}
+				& tr {
+						& th {
+								@extend %list-visibility-hidden;
+						}
+				}
+				//第一行 上边框
+				& tbody {
+						& tr:first-child {
+								& th,
+								& td {
+										border-top: 0;
+								}
+						}
+				}
+		}
+		//*********表头 （列）
+		& .#{$eui}-edatatable-hot-top {
+				@extend %list-overflow-hidden;
+				z-index: 2;
+				& .eui-edatatable-wtHolder {
+						@extend %list-overflow-hidden;
+				}
+				& th {
+						color: #8796a8;
+						font-size: $font-size14;
+				}
+		}
+		//*********表头 （行）
+		& .#{$eui}-edatatable-hot-left {
+				@extend %list-overflow-hidden;
+				z-index: 2;
+				& thead {
+						@extend %list-visibility-hidden;
+				}
+				& .eui-edatatable-wtHolder {
+						@extend %list-overflow-hidden;
+				}
+				& th {
+						color: #8796a8;
+						text-align: center;
+				}
+		}
+		//左上角
+		& .#{$eui}-edatatable-hot-top_left_corner {
+				& th {
+						color: #8796a8;
+						font-size: $font-size14;
+						text-align: center;
+				}
+		}
+		& .#{$eui}-edatatable-hot-top_left_corner,
+		& .#{$eui}-edatatable-hot_bottom_left_corner {
+				z-index: 3;
+		}
+		& .#{$eui}-edatatable-hot_debug {
+				z-index: 3;
+		}
+
+		//*********表头拖拽区
+		//列拖拽
+		& .manualColumnResizer {
+				position: fixed;
+				top: 0;
+				cursor: col-resize;
+				z-index: 9;
+				width: 5px;
+				height: 40px;
+				&:hover {
+						@extend %list-Resizer-bg;
+				}
+				&.active {
+						@extend %list-Resizer-bg;
+				}
+
+		}
+		//拖拽列的虚线
+		& .manualColumnResizerGuide {
+				display: none;
+				position: fixed;
+				width: 0;
+				right: 0;
+				top: 0;
+				background-color: #AAB;
+				border-right: 1px dashed #777;
+				margin-left: 5px;
+				&.active {
+						@extend %list-Resizer-active;
+				}
+		}
+		//行拖拽
+		& .manualRowResizer {
+				position: fixed;
+				left: 0;
+				cursor: row-resize;
+				z-index: 9;
+				height: 5px;
+				width: 50px;
+				&:hover {
+						@extend %list-Resizer-bg;
+				}
+				&.active {
+						@extend %list-Resizer-bg;
+				}
+		}
+		//拖拽行的虚线
+		& .manualRowResizerGuide {
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				background-color: #AAB;
+				display: none;
+				height: 0;
+				border-bottom: 1px dashed #777;
+				margin-top: 5px;
+				&.active {
+						@extend %list-Resizer-active;
+				}
+		}
+		//*********选择列、行框选区域
+		& .#{$eui}-edatatable-wtBorder {
+				position: absolute;
+				font-size: 0;
+				display: block;
+				background-color:#4b89ff;
+				&.hidden {
+						display:none !important;
+				}
+				&.fill{
+						background-color:#ff0000;
+				}
+				//复制区域拖拽右下角点
+				&.#{$eui}-edatatable-wtBorder-corner {
+						font-size: 0;
+						cursor: crosshair;
+						border: 1px solid #ffffff;
+				}
+		}
+		& td.area {
+				&,
+				&-1,
+				&-2,
+				&-3,
+				&-4,
+				&-5,
+				&-6,
+				&-7 {
+						position: relative;
+						&:before {
+								content: '';
+								position: absolute;
+								top: 0;
+								left: 0;
+								right: 0;
+								bottom: 0;
+								bottom: -100%#{"\\9"}; /* Fix for IE9 to spread the ":before" pseudo element to 100% height of the parent element */
+								background: #9abfff;
+								// Fix for IE10 and IE11 to spread the ":before" pseudo element to 100% height of the parent element */
+								@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+										bottom: -100%;
+								}
+						}
+				}
+				&:before {
+						opacity: 0.1;
+				}
+				&-1:before {
+						opacity: 0.2;
+				}
+				&-2:before {
+						opacity: 0.27;
+				}
+				&-3:before {
+						opacity: 0.35;
+				}
+				&-4:before {
+						opacity: 0.41;
+				}
+				&-5:before {
+						opacity: 0.47;
+				}
+				&-6:before {
+						opacity: 0.54;
+				}
+				&-7:before {
+						opacity: 0.58;
+				}
+		}
+		& thead,
+		& tbody {
+				& th {
+						//选择区域后 行列表头样式
+						&.eui-edatatable-head-hl {
+								background-color: #dcdcdc;
+						}
+						//选择区域后 行列表头选中样式
+						&.eui-edatatable-head-active-hl {
+								background-color: #8eb0e7;
+								color: #333;
+						}
+				}
+		}
+		& .htBorder.htFillBorder {
+				background: red;
+				width: 1px;
+				height: 1px;
+		}
+		//*********编辑表元内容容器
+		& .handsontableInputHolder {
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 4;
+		}
+		//编辑表元内容textarea
+		& .handsontableInput {
+				border: none;
+				outline-width: 0;
+				margin: 0;
+				padding: 1px 5px 0 5px;
+				font-family: inherit;
+				line-height: 21px;
+				font-size: inherit;
+				box-shadow: 0 0 0 2px #5292F7 inset;
+				resize: none;
+				/*below are needed to overwrite stuff added by jQuery UI Bootstrap theme*/
+				display: block;
+				color: #000;
+				border-radius: 0;
+				background-color: #FFF;
+				/*overwrite styles potentionally made by a framework*/
+		}
+		//********* 只读模式
+		& .eui-edatatable-readonly {
+				color: #a8a8a8;
+		}
+		& .#{$eui}-edatatable-wtHider {
+				position: relative;
+		}
+		&.ht__manualRowMove.after-selection--rows {
+				&,
+				& tbody {
+						& th {
+								&.#{$eui}-edatatable-head-hl {
+										cursor: move;
+										cursor: -moz-grab;
+										cursor: -webkit-grab;
+										cursor: grab;
+								}
+						}
+				}
+		}
+		&.ht__manualColumnMove.after-selection--columns {
+				&,
+				& thead {
+						& th {
+								&.#{$eui}-edatatable-head-hl {
+										cursor: move;
+										cursor: -moz-grab;
+										cursor: -webkit-grab;
+										cursor: grab;
+								}
+						}
+				}
+		}
+		&.ht__manualRowMove.on-moving--rows {
+				&,
+				& tbody {
+						& th {
+								&.#{$eui}-edatatable-head-hl {
+										cursor: move;
+										cursor: -moz-grabbing;
+										cursor: -webkit-grabbing;
+										cursor: grabbing;
+								}
+						}
+				}
+				& .manualRowResizer {
+						display: none;
+				}
+		}
+		&.ht__manualColumnMove.on-moving--columns {
+				&,
+				& thead {
+						& th {
+								&.#{$eui}-edatatable-head-hl {
+										cursor: move;
+										cursor: -moz-grabbing;
+										cursor: -webkit-grabbing;
+										cursor: grabbing;
+								}
+						}
+				}
+				& .manualColumnResizer {
+						display: none;
+				}
+		}
+		& .ht__manualRowMove--guideline {
+				@extend %list-manualRowMove;
+				z-index: 5;
+				left: 0;
+				height: 2px;
+				margin-top: -1px;
+				background: #757575;
+		}
+		& .ht__manualRowMove--backlight {
+				@extend %list-manualRowMove;
+				display: none;
+				z-index: 5;
+				background: #343434;
+				background: rgba(52, 52, 52, 0.25);
+				pointer-events: none;
+		}
+		&.on-moving--rows.show-ui .ht__manualRowMove--guideline,
+		&.on-moving--rows .ht__manualRowMove--backlight {
+				display: block;
+		}
+
+		& .ht__manualColumnMove--guideline {
+				@extend %list-manualColumnMove;
+				z-index: 5;
+				top: 0;
+				width: 2px;
+				margin-left: -1px;
+				background: #757575;
+		}
+		& .ht__manualColumnMove--backlight {
+				@extend %list-manualColumnMove;
+				display: none;
+				z-index: 5;
+				background: #343434;
+				background: rgba(52, 52, 52, 0.25);
+				pointer-events: none;
+		}
+		&.on-moving--columns.show-ui .ht__manualColumnMove--guideline,
+		&.on-moving--columns .ht__manualColumnMove--backlight {
+				display: block;
+		}
+
+}
+
+//******  移动端 ******//
+.topLeftSelectionHandle:not(.eui-edatatable-hot-master .topLeftSelectionHandle),
+.topLeftSelectionHandle-HitArea:not(.eui-edatatable-hot-master .topLeftSelectionHandle-HitArea) {
+		z-index: 4;
+}
+
+/* Initial left/top coordinates - overwritten when actual position is set */
+.topLeftSelectionHandle,
+.topLeftSelectionHandle-HitArea,
+.bottomRightSelectionHandle,
+.bottomRightSelectionHandle-HitArea {
+		left: -10000px;
+		top: -10000px;
+}
+
+.htCommentCell {
+		position: relative;
+}
+
+.htCommentCell:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		border-left: 6px solid transparent;
+		border-top: 6px solid black;
+}
+
+
+#hot-display-license-info {
+		font-size: 9px;
+		color: #323232 ;
+		padding: 5px 0 3px 0;
+		font-family: Helvetica, Arial, sans-serif;
+		text-align: left;
+}
+
+
+
+
+

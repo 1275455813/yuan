@@ -1,0 +1,569 @@
+@charset "utf-8";
+
+//********************office工具栏样式
+
+
+.#{$eui}-ribbonpanel-container {
+		//图标按钮颜色
+		& .#{$eui}-icon {
+				@include gradient($font-icon-grayblue);
+				-webkit-background-clip: text;
+				color: #{$font-icon-grayblueIE}\0;
+		}
+}
+
+//顶部工具栏 tab页
+.#{$eui}-ribbonpanel-band {
+		&.#{$eui}-bg-designer-top{
+				border-bottom: none;
+		}
+		& .#{$eui}-ribbonpanel-tabtogglebtn {
+				width: 16px;
+				height: 16px;
+				cursor: pointer;
+				background-image: url("eui/images/dbl_arrow.png");
+				background-repeat: no-repeat;
+				background-position: 1px center;
+				border: 1px solid transparent;
+				display: $inline-block;
+				*display: $inline;
+				*zoom: 1;
+		}
+		& .#{$eui}-ribbonband{
+				background: none !important;
+		}
+		& .#{$eui}-ribbonband-item:nth-child(-n+4) {
+				& ul.#{$eui}-ribbonitem{
+						padding:0 10px;
+				}
+		}
+		& .#{$eui}-ribbonband-item:nth-child(1) {
+				padding-left: 5px;
+		}
+}
+
+//功能区组件 工具栏样式 - ul
+.#{$eui}-ribbonband {
+		height: 33px;
+		margin: 0;
+		padding: 0;
+		font-size: 12px;
+		border-bottom: 1px solid #c8c8c8;
+		background: #f8f8f8;
+
+		//功能区组件 工具栏按钮父节点样式 - li
+		& .#{$eui}-ribbonband-item {
+				vertical-align: middle;
+				display: $inline-block;
+				margin: 0;
+				/*IE7*/
+				*display: $inline;
+				*zoom: 1;
+		}
+}
+
+//功能区组件 按钮容器样式 - ul
+.#{$eui}-ribbonitem {
+		height: 100%;
+		margin: 0px;
+		padding: 0px;
+		text-align: left;
+		cursor: pointer;
+		border: 1px solid #f8f8f8;
+		vertical-align: top;
+		margin-top: -2px;
+
+		&-hover {
+				background: #ceeaf7;
+				border: 1px solid #62b8e0;
+				/*padding-bottom: 10px;*/
+		}
+		& li {
+				display: $inline-block;
+				vertical-align: middle;
+				*display: $inline;
+				*zoom: 1;
+				font-size: $font-size;
+		}
+}
+
+
+// 分割线
+.#{$eui}-ribbon-itemspace {
+		background-color: #dadada;
+		width: 1px;
+		height: 16px;
+		vertical-align: middle;
+		margin: 0px 2px !important;
+		display: $inline-block;
+		/* IE7 */
+		*display: $inline;
+		*zoom: 1;
+}
+
+.#{$eui}-ribbontab {
+		background: #f8f8f8;
+		border-bottom: 1px solid #c8c8c8;
+		white-space: nowrap;
+		overflow: hidden;
+		& .#{$eui}-ribbongroup:nth-child(2){
+				& .#{$eui}-ribbonitem {
+						padding: 0px 2px;
+				}
+		}
+}
+
+//功能区组件 按钮禁用时容器样式 - ul
+.#{$eui}-ribbonitem-disabled {
+		cursor: default;
+		-webkit-filter: grayscale(100%); /* 使用CSS3滤镜使文字和图片全部变灰、火狐使用svg来实现变灰 */
+		-moz-filter: grayscale(100%);
+		-ms-filter: grayscale(100%);
+		-o-filter: grayscale(100%);
+		filter: grayscale(100%);
+		filter: gray(); /* ie */
+		opacity: 0.5;
+		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=50)"; /* IE8 */
+		filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50); /* IE6-7 */
+		filter: alpha(opacity=50); /* IE */
+}
+
+//功能区组件 按钮文本样式 - li
+.#{$eui}-ribbonitem{
+		//功能区组件 按钮选中时容器样式 - ul
+		&-checked,
+		&-hover{
+				background: #ceeaf7;
+				border: 1px solid #62b8e0;
+		}
+		//功能区组件 按钮图标样式 - li
+		& &-icon {
+				padding: 0px;
+				& img {
+						width: 16px;
+						height: 16px;
+						vertical-align: middle;
+				}
+		}
+		& .#{$eui}-ribbonitem-content{
+				& .eui-gallery-btn{
+						& .eui-icon{
+								top: -4px;
+								position:  relative;
+								font-size: 12px;
+								transform: scale(0.75);
+								-webkit-transform: scale(0.75);
+								display: inline-block;
+						}
+				}
+		}
+		//功能区组件 按钮箭头样式 - li
+		& .#{$eui}-ribbonitem-arrow {
+				width: 12px;
+				height: 18px;
+				vertical-align: top;
+				background: url("eui/images/downarrow.gif") center center no-repeat;
+				margin-left: 2px;
+				display: $inline-block;
+				/* IE7 */
+				*display: $inline;
+				*zoom: 1;
+				&-hover {
+						background-color: #CCC;
+				}
+		}
+}
+
+.#{$eui}-ribbonpanel-itemtabbtn {
+		height: 27px;
+		line-height: 22px;
+		padding: 0 15px;
+		margin-top: 0px;
+		&-hover {
+				//background: #f8f8f8;
+				//border: 1px solid #c8c8c8 !important;
+				//border-bottom: 0px !important;
+		}
+		&-checked {
+				color: #3bc5ba!important;
+				border-bottom: 2px solid #3bc5ba!important;
+
+				background: transparent;
+				font-weight: bold;
+				color: #238efe;
+				height: 33px;
+				line-height: 28px;
+				padding: 0 15px;
+				margin-top: 0px;
+		}
+}
+
+.#{$eui}-ribbonband-itemimagelist {
+		border: 1px solid #CCC;
+}
+
+//*************************功能区组 样式   - ul
+.#{$eui}-ribbongroup {
+		margin: 0px;
+		padding: 0px;
+		padding-right: 3px;
+		border-right: 1px solid #dadada;
+		background: #f8f8f8;
+		vertical-align: top;
+		display: $inline-block;
+		white-space: normal;
+		/* IE7 */
+		*display: $inline;
+		*zoom: 1;
+
+		& ul {
+				margin: 0px;
+				padding: 0px;
+				height: 100%;
+		}
+		& .#{$eui}-ribbonband-item {
+				margin: 0px;
+		}
+
+		//功能区组 按钮区域容器样式   - li
+		&-content {
+				height: 65px;
+				padding: 0px 2px;
+		}
+
+		//功能区组 按钮区域样式   - ul
+		&-bands {
+				vertical-align: top;
+		}
+
+		//功能区组 标题样式   - li
+		&-caption {
+				text-align: center;
+				color: #b7b7b7;
+				margin: 2px;
+		}
+
+		// 功能区组 列容器样式   - li
+		&-col {
+				vertical-align: top;
+				display: $inline-block;
+				margin: 2px 2px 0px;
+				/* IE7 */
+				*display: $inline;
+				*zoom: 1;
+		}
+}
+
+//功能区组 列样式   - ul
+.#{$eui}-ribbongroup-colpanel {
+		& .#{$eui}-icon {
+				@include gradient($font-icon-color);
+				-webkit-background-clip: text;
+				//-webkit-text-fill-color: transparent;
+				color: transparent;
+				color: #{$font-icon-colorIE}\0;
+		}
+}
+
+//功能区组 行样式
+.#{$eui}-ribbongroup-row {
+		& .#{$eui}-ribbonitem {
+				padding: 0px;
+		}
+		// 三行间距
+		& .#{$eui}-ribbonband {
+				border: none;
+				margin: 0px;
+				& .#{$eui}-ribbonitem-icon {
+						padding: 0px 2px;
+				}
+		}
+		&-one {
+				& .#{$eui}-ribbonband {
+
+				}
+				& .#{$eui}-ribbonitem {
+						height: 58px;
+						text-align: center;
+						padding-top: 3px;
+						& li {
+								display: $block;
+								text-align: center;
+						}
+						& .#{$eui}-ribbonitem-icon {
+								padding: 2px 3px 0px;
+								& img {
+										width: 20px;
+										height: 20px;
+										vertical-align: top;
+								}
+						}
+						// 功能区组件 按钮文本样式 - li
+						& .#{$eui}-ribbonitem-content {
+								margin: 0;
+								padding: 0px 5px;
+								margin-top: -2px;
+						}
+						overflow: hidden;
+						// 功能区组件 按钮箭头样式 - li
+						& .#{$eui}-eribbonpanel-arrow {
+								position: relative;
+								width: 100%;
+								margin: 0;
+								height: 10px;
+								*width: 26px;
+								margin-top: -2px;
+								color: #666666;
+								@include transform(scale(1.5));
+								&.#{$eui}-ribbonitem-arrow-hover{
+										background: rgba(255,255,255,0.5);
+								}
+						}
+				}
+		}
+}
+
+// 二行间距
+.#{$eui}-ribbongroup-row-two {
+		& .#{$eui}-ribbonband{
+				margin: 4px 0 0;
+				& .#{$eui}-ribbonband-item{
+						margin: 0px 2px;
+						& .#{$eui}-icon{
+								font-size: 16px !important;
+						}
+						& .#{$eui}-ribbonitem-content{
+								& .#{$eui}-form-select{
+										top:-3px;
+										& > div{
+												& .#{$eui}-icon{
+														font-size: 12px !important;
+														line-height: 22px !important;
+												}
+										}
+										& .#{$eui}-icon{
+												color: #666666;
+										}
+								}
+						}
+
+				}
+		}
+		& .#{$eui}-form-select{
+				height: 22px;
+				line-height: 22px;
+		}
+}
+
+
+.#{$eui}-ribbonpanel-tab .#{$eui}-ribbontab:last-child{
+		& .#{$eui}-ribbongroup:first-child .#{$eui}-ribbongroup-content .eui-ribbongroup-colpanel{
+				& .#{$eui}-ribbongroup-row-two {
+						& .#{$eui}-ribbonband{
+								& .#{$eui}-ribbonband-item{
+										& .#{$eui}-ribbonitem-hover{
+												background: transparent;
+												border: 1px solid transparent;
+										}
+
+								}
+						}
+				}
+				& .#{$eui}-ribbongroup-row-two:nth-of-type(2) .#{$eui}-ribbonband{
+						margin: 2px 0 0;
+						& .#{$eui}-ribbonband-item:nth-child(-n+4){
+								& .#{$eui}-ribbonitem-hover{
+										background: #ceeaf7;
+										border: 1px solid #62b8e0;
+								}
+						}
+				}
+		}
+}
+
+//##################################################################################
+.#{$eui}-ribbonpanel {
+		& .#{$eui}-ribbonband {
+				background: transparent;
+		}
+		//头部第二级div
+		&-band {
+				//头部ul下的li
+				& .#{$eui}-ribbonitem {
+						border: 1px solid transparent;
+						&-hover {
+								background: #ceeaf7;
+								border: 1px solid #62b8e0;
+								border-radius: 2px;
+						}
+				}
+		}
+		//内容区
+		&-tab {
+				background: #f8f8f8;
+		}
+		&-tabtogglebtn-hover {
+				background-color: #f3f3f3;
+				border: 1px solid #dadada;
+		}
+		&-tabbtn-expand {
+				background-position: -23px center;
+		}
+		&-tabbtn-pin {
+				background-position: -47px center;
+		}
+}
+
+//###################################################################################
+.#{$eui}-ribbongroup-row-one{
+		& .#{$eui}-ribbonitem{
+				& .#{$eui}-ribbonitem-content{
+						& .#{$eui}-gallery {
+								margin: -1px 0px 0px 0px;
+						}
+				}
+		}
+}
+//**********************样式标签下的缩略图框架
+.#{$eui}-gallery {
+		background: #FFF;
+		padding-right: 20px;
+		position: relative;
+		border: 1px solid #dcdcdc;
+		height: 100%;
+		&-hover {
+
+		}
+		//二级左边缩略图部分
+		&-itemcontainer {
+				height: 100%;
+		}
+		//三级
+		& &-list {
+				margin: 0;
+				padding: 0;
+				text-align: left;
+				& li {
+						display: $inline-block;
+						margin: 0px 4px;
+						padding: 2px;
+						border: 1px solid transparent;
+						*display: $inline;
+						*zoom: 1;
+				}
+				& .#{$eui}-galerry-item {
+						//四级
+						& img {
+								vertical-align: middle;
+						}
+				}
+		}
+		//缩略图
+		&-hover{
+				background: #fff;
+				& .#{$eui}-galerry-item {
+						border: 1px solid transparent;
+				}
+				//缩略图右边翻页箭头部分的划过效果
+				& .#{$eui}-gallery-btncontainer {
+						background: #fff;
+				}
+		}
+		//缩略图的划过效果
+		& &-item-hover {
+				background: #fefbe2;
+				border: 1px solid #ddb47a;
+		}
+		//缩略图被选中的效果
+		& &-itemselected {
+				background: #fcf0be;
+				border: 1px solid #f4d14f;
+		}
+		//缩略图右边翻页箭头部分
+		& &-btncontainer {
+				top: 0;
+				right: 0;
+				position: absolute;
+				background: #FFF;
+				width: 20px;
+				height: 100%;
+		}
+		//翻页按钮统一样式
+		&-btn {
+				border: 1px solid #dcdcdc;
+				& a {
+						display: block;
+						width: 100%;
+						height: 100%;
+				}
+		}
+		//向上翻页按钮
+		&-btnlast {
+				border-right: 0px;
+				border-top: 0px;
+				border-bottom: 0px;
+				cursor: pointer;
+				& a {
+						background: url("eui/images/up-arrow.png") center center no-repeat;
+				}
+		}
+		//向下翻页按钮
+		&-btnnext {
+				border-right: 0px;
+				& a {
+						background: url("eui/images/down-arrow.png") center center no-repeat;
+						border-right: 0px;
+				}
+		}
+		//显示全部缩略图按钮
+		&-btnpopup {
+				border-top: 0px;
+				border-bottom: 0px;
+				border-right: 0px;
+				& a{
+						background: url("eui/images/expansion.png") center center no-repeat;
+						border-top: 0px;
+						border-bottom: 0px;
+						border-right: 0px;
+				}
+		}
+		//按钮禁用
+		&-btn-disable {
+				cursor: default;
+				-webkit-filter: grayscale(100%); /* 使用CSS3滤镜使文字和图片全部变灰、火狐使用svg来实现变灰 */
+				-moz-filter: grayscale(100%);
+				-ms-filter: grayscale(100%);
+				-o-filter: grayscale(100%);
+				filter: grayscale(100%);
+				filter: gray(); /* ie */
+				opacity: 0.5;
+				filter: alpha(opacity =     50); /* IE */
+				filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50 );
+				/* IE6-7 */
+				-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=50)";
+				/* IE8 */
+		}
+		//按钮划过
+		&-btn-hover {
+				background: url("eui/images/xgallery_btn_hover_bg.png") left top repeat;
+		}
+
+		&-floatcontainer {
+				background: #FFF;
+				border: 1px solid blue;
+				overflow: auto;
+		}
+}
+
+//下拉箭头
+.#{$eui}-eribbonpanel-arrow {
+		&:before {
+				display:  $inline-block;
+				position: absolute;
+				top:      -5px;
+				left:     50%;
+				margin-left: -8px;
+				content: "\ef7f";
+				@include transform(scale(0.5));
+		}
+}

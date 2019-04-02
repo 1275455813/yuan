@@ -1,0 +1,254 @@
+@charset "utf-8";
+
+//动画基础类
+.#{$eui}-anim {
+		-webkit-animation-duration: .3s;
+		animation-duration: .3s;
+		-webkit-animation-fill-mode: both;
+		animation-fill-mode: both;
+		//2018.8.1 by wuych
+		//windows 10 中IE 渲染动画会变得模糊，所以将IE动画全面禁用
+		@include transform(translate3d(0, 0, 0)); //开启硬件加速来解决IE卡顿
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		backface-visibility: hidden;
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		perspective: 1000;
+		//延迟动画0.4秒
+		&.#{$eui}-anim-delay-04s {
+				-webkit-animation-delay: 0.4s;
+				animation-delay: 0.4s;
+		}
+}
+//循环动画
+.#{$eui}-anim-loop {
+		-webkit-animation-iteration-count: infinite;
+		animation-iteration-count: infinite
+}
+
+//旋转360
+@-webkit-keyframes #{$eui}-rotate {
+		from {
+				-webkit-transform: rotate(0)
+		}
+		to {
+				-webkit-transform: rotate(360deg)
+		}
+}
+
+@keyframes #{$eui}-rotate {
+		from {
+				transform: rotate(0)
+		}
+		to {
+				transform: rotate(360deg)
+		}
+}
+
+.#{$eui}-anim-rotate {
+		-webkit-animation-name: #{$eui}-rotate;
+		animation-name: #{$eui}-rotate;
+		-webkit-animation-duration: 1s;
+		animation-duration: 1s;
+		-webkit-animation-timing-function: linear;
+		animation-timing-function: linear;
+}
+
+//从最底部往上滑入
+@-webkit-keyframes #{$eui}-up {
+		from {
+				-webkit-transform: translate3d(0, 100%, 0);
+				opacity: .3
+		}
+		to {
+				-webkit-transform: translate3d(0, 0, 0);
+				opacity: 1
+		}
+}
+
+@keyframes #{$eui}-up {
+		from {
+				transform: translate3d(0, 100%, 0);
+				opacity: .3
+		}
+		to {
+				transform: translate3d(0, 0, 0);
+				opacity: 1
+		}
+}
+
+.#{$eui}-anim-up {
+		-webkit-animation-name: #{$eui}-up;
+		animation-name: #{$eui}-up
+}
+
+//微微往上滑入
+@-webkit-keyframes #{$eui}-upbit {
+		from {
+				-webkit-transform: translate3d(0, 30px, 0);
+				opacity: .3
+		}
+		to {
+				-webkit-transform: translate3d(0, 0, 0);
+				opacity: 1
+		}
+}
+
+@keyframes #{$eui}-upbit {
+		from {
+				transform: translate3d(0, 30px, 0);
+				opacity: .3
+		}
+		to {
+				transform: translate3d(0, 0, 0);
+				opacity: 1
+		}
+}
+
+.#{$eui}-anim-upbit {
+		-webkit-animation-name: #{$eui}-upbit;
+		animation-name: #{$eui}-upbit
+}
+
+@-webkit-keyframes #{$eui}-scale {
+		0% {
+				opacity: .3;
+				-webkit-transform: scale(.5)
+		}
+		100% {
+				opacity: 1;
+				-webkit-transform: scale(1)
+		}
+}
+
+@keyframes #{$eui}-scale {
+		0% {
+				opacity: .3;
+				-ms-transform: scale(.5);
+				transform: scale(.5)
+		}
+		100% {
+				opacity: 1;
+				-ms-transform: scale(1);
+				transform: scale(1)
+		}
+}
+
+.#{$eui}-anim-scale {
+		-webkit-animation-name: #{$eui}-scale;
+		animation-name: #{$eui}-scale;
+}
+
+@-webkit-keyframes #{$eui}-scale-spring {
+		0% {
+				opacity: .5;
+				-webkit-transform: scale(.5)
+		}
+		80% {
+				opacity: .8;
+				-webkit-transform: scale(1.1)
+		}
+		100% {
+				opacity: 1;
+				-webkit-transform: scale(1)
+		}
+}
+
+@keyframes #{$eui}-scale-spring {
+		0% {
+				opacity: .5;
+				transform: scale(.5)
+		}
+		80% {
+				opacity: .8;
+				transform: scale(1.1)
+		}
+		100% {
+				opacity: 1;
+				transform: scale(1)
+		}
+}
+
+.#{$eui}-anim-scalespring {
+		-webkit-animation-name: #{$eui}-scale-spring;
+		animation-name: #{$eui}-scale-spring
+}
+
+@-webkit-keyframes #{$eui}-fadein {
+		0% {
+				opacity: 0
+		}
+		100% {
+				opacity: 1
+		}
+}
+
+@keyframes #{$eui}-fadein {
+		0% {
+				opacity: 0
+		}
+		100% {
+				opacity: 1
+		}
+}
+
+.#{$eui}-anim-fadein {
+		-webkit-animation-name: #{$eui}-fadein;
+		animation-name: #{$eui}-fadein
+}
+
+@-webkit-keyframes #{$eui}-fadeout {
+		0% {
+				opacity: 1
+		}
+		100% {
+				opacity: 0
+		}
+}
+
+@keyframes #{$eui}-fadeout {
+		0% {
+				opacity: 1
+		}
+		100% {
+				opacity: 0
+		}
+}
+
+.#{$eui}-anim-fadeout {
+		-webkit-animation-name: #{$eui}-fadeout;
+		animation-name: #{$eui}-fadeout
+}
+
+@-webkit-keyframes #{$eui}-zoomIn {
+		from {
+				opacity: 0;
+				-webkit-transform: scale3d(0.3, 0.3, 0.3);
+				transform: scale3d(0.3, 0.3, 0.3);
+		}
+
+		50% {
+				opacity: 1;
+		}
+}
+
+@keyframes #{$eui}-zoomIn {
+		from {
+				opacity: 0;
+				-webkit-transform: scale3d(0.3, 0.3, 0.3);
+				transform: scale3d(0.3, 0.3, 0.3);
+		}
+
+		50% {
+				opacity: 1;
+		}
+}
+
+.#{$eui}-anim-zoomIn {
+		-webkit-animation-name: #{$eui}-zoomIn;
+		animation-name: #{$eui}-zoomIn;
+}
+

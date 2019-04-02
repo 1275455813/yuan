@@ -1,0 +1,223 @@
+@charset "utf-8";
+
+//<div class="eui-card-container">
+//  <div class="eui-card-head">
+//      <span class="eui-card-head-title"></span>
+//  </div>
+//  <div class="eui-card-body"></div>
+//</div>
+
+//基础容器 带标题 默认定位来实现高度100%
+.#{$eui}-card-container {
+		position: relative;
+		@extend   %width-height100;
+		& .#{$eui}-card-head {
+				position: relative;
+				z-index: 1;
+				clear: $clear;
+				&:after {
+						content: "\20";
+						display: $block;
+						clear:   $clear;
+						*zoom:   1;
+				}
+		}
+		& .#{$eui}-card-body {
+				position:         absolute;
+				top:              31px;
+				right:            0;
+				bottom:           0;
+				left:             0;
+				padding:          5px;
+				border:           1px solid #d2d3d7;
+				background-color: #fff;
+		}
+}
+
+
+//带标题分隔栏容器 默认定位来实现高度100%
+.#{$eui}-card-container-area {
+		position: relative;
+		@extend   %width-height100;
+		& .#{$eui}-card-head {
+				padding-left: 5px;
+				padding-right: 5px;
+				height: 32px;
+				line-height: 30px;
+				background-color: #efeeef;
+				& .#{$eui}-icon{
+						float: left;
+						font-size: 12px;
+						width: 16px;
+						color: #333;
+						background-image: none;
+				}
+				& .#{$eui}-icon-arrow-right:before {
+						transform: rotate(90deg);
+						-webkit-transform: rotate(90deg);
+						-moz-transform: rotate(90deg);
+						-ms-transform: rotate(90deg);
+						-o-transform: rotate(90deg);
+				}
+				& .#{$eui}-card-head-title{
+						font-size: $font-size14;
+						font-weight: 700;
+						border: 0;
+						padding-left: 0;
+						background-color: transparent;
+						text-align: left;
+				}
+		}
+		& .#{$eui}-card-body {
+				position:  absolute;
+				top:              31px;
+				right:            0;
+				bottom:           0;
+				left:             0;
+				padding:          5px;
+				border:           1px solid transparent;
+				background-color: #fff;
+		}
+}
+//不带标题时可以不创建
+.#{$eui}-card-head {
+		line-height:          32px;
+		&-title {
+				display:          $inline-block;
+				min-width:        60px;
+				height:           32px;
+				line-height:      32px;
+				padding-left:     5px;
+				padding-right:    5px;
+				margin-bottom:    -1px;
+				text-align:       center;
+				border:           1px solid #d2d3d7;
+				border-bottom:    0;
+				background-color: #fff;
+		}
+}
+
+//没有标题
+.#{$eui}-card-notitle {
+		& .#{$eui}-card-body {
+				top:0;
+		}
+}
+
+//流式容器(取消内容部分的定位，来实现内容撑大容器)
+.#{$eui}-card-liquid {
+		height: auto;
+		& .#{$eui}-card-body {
+				position: static;
+		}
+}
+
+//<fieldset class="eui-area-h1"><legend>不带标题的容器</legend></fieldset>
+//分割区域 带背景
+.#{$eui}-area-h1 {
+		position: relative;
+		height:40px;
+		line-height: 40px;
+		padding: 0;
+		border: 0;
+		margin: 0;
+		& > legend {
+				position:     absolute;  //不同浏览器中<fieldset>会呈现不同溢出，用绝对定位的来让<fieldset><legend>脱离文档流解决
+				padding-left: 50px;
+				font-size:    16px;
+				font-weight:  normal;
+				color:        #fff;
+				z-index:      1;
+				&:before {
+						content: "\ef7d";
+						position:   absolute;
+						top:        50%;
+						left:       20px;
+						width:      20px;
+						height:     20px;
+						line-height: 20px;
+						margin-top: -10px;
+				  	font-family: '#{$icon-font}';
+					  font-size:   $font-icon-m
+				}
+		}
+		&:after {
+				content: "";
+				position:         absolute;
+				top:              0;
+				left:             0;
+				background-color: $layout-header-bg-color;
+				height:           40px;
+				width:            100%;
+		}
+}
+
+//分割区域 不带背景
+.#{$eui}-area-h2 {
+		position: relative;
+		margin-bottom: 10px;
+		margin-left: 0;
+		margin-right: 0;
+		white-space: nowrap;
+		border: none;
+		padding: 0;
+		border-top: 1px solid #ccc;
+		& > legend {
+				font-weight: 700;
+				line-height: 24px;
+				padding-left: 14px;
+				padding-right: 10px;
+				&:before {
+						content: "";
+						position: absolute;
+						left: 0px;
+						width: 6px;
+						height: 6px;
+						background: #a5a5a5;
+						margin-top: 10px;
+				}
+		}
+}
+
+//分割区域 带图标
+.#{$eui}-area-h3 {
+	position: relative;
+	margin-bottom: 10px;
+	margin-left: 0;
+	margin-right: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	border: none;
+	padding: 0;
+	border-top: 1px solid #ccc;
+	& > legend {
+		line-height: 24px;
+		padding-right: 10px;
+		& i {
+			line-height: 24px;
+			padding-right: 8px;
+			vertical-align: middle;
+		}
+	}
+
+}
+
+//分割线
+.#{$eui}-hr {
+		border: 0;
+		background-color: #d7d7d7;
+		height: 1px;
+		margin: 5px 0;
+		padding: 0;
+		clear: both;
+}
+
+//分割线 虚线
+.#{$eui}-dashed-hr {
+		border: 0;
+		height: 1px;
+		border-top: 1px dashed #d7d7d7;
+		margin: 5px 0;
+		padding: 0;
+		clear: both;
+}

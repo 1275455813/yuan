@@ -1,0 +1,564 @@
+@charset "utf-8";
+
+//小尺寸宽380px高200px-----默认
+//中尺寸宽650px   eui-dialog-middle
+//大尺寸宽900px   eui-dialog-large
+//保存成功
+
+
+//保存成功后提示对话框-----eui-dialog-operationtips
+//带进度信息的对话框-----eui-dialog-progress
+//单行输入对话框----------eui-dialog-onelineinput
+//确认对话框--------------eui-dialog-confirm
+
+//提示信息对话框-------------eui-dialog-info
+//带详情的提示信息对话框------eui-dialog-info-details
+
+@mixin clear-both {
+    content: "\20";
+    display: block;
+    clear:   $clear;
+    *zoom:   1;
+}
+
+//@include  clear-both;
+
+//***********默认对话框**************//
+//默认对话框 宽380px高200px
+.#{$eui}-dialog-container {
+    position:      absolute;
+		z-index:       10;
+    padding:       $dialog-container-padding-y $dialog-container-padding-x;
+    min-width:     $dialog-container-mx;
+    min-height:    $dialog-container-my;
+    background:    $dialog-container-bg;
+		border-radius: $dialog-border-radius;
+    border:        1px solid transparent;
+    box-shadow:    $dialog-container-shadow;
+    //弹窗头部
+    & .#{$eui}-dialog-header {
+        position:         absolute;
+		    top:              0;
+		    left:             0;
+		    right:            0;
+        height:           $dialog-header-y;
+		    padding-left:     $dialog-container-padding-x;
+		    padding-right:    $dialog-container-padding-x;
+        padding-bottom:   $dialog-header-padding-bottom;
+        line-height:      $dialog-header-y;
+        font-size:        $dialog-header-fontsize;
+        font-weight:      $dialog-header-fontweight;
+        border-bottom:    1px solid $dialog-header-border;
+		    border-radius:    $dialog-border-radius $dialog-border-radius 0 0;
+		    background-color: $dialog-header-bg;
+        cursor:           move;
+		    white-space:      nowrap;
+        //标题前的图标
+        & i:first-child {
+            float: left;
+        }
+        & > span {
+		        max-width:      calc(100% - #{$dialog-header-text-margin-right});
+            display:        $inline-block;
+            text-overflow:  ellipsis;
+            overflow:       hidden;
+            white-space:    nowrap;
+        }
+        //操作按钮
+        & .#{$eui}-icon {
+		        //添加
+		        float:       right;
+		        width:       $dialog-header-icon-x;
+		        height:      $dialog-header-icon-y;
+		        font-size:   $dialog-header-iconsize;
+		        line-height: $dialog-header-icon-y;
+		        color:       $dialog-header-iconcolor;
+		        text-align:  center;
+		        cursor:      pointer;
+		        -webkit-background-clip: border-box;
+		        background-image: none;
+		        &:hover {
+				        background-color: $dialog-header-icon-hover-bg;
+		        }
+            &-close,
+            &-max,
+            &-min {
+
+            }
+            &-close{
+		            margin-right: -$dialog-container-padding-x;
+		            &:hover {
+				            background-color: $dialog-header-colse-hover-bg;
+				            color:            $dialog-header-colse-hover-color;
+		            }
+            }
+            &-max,
+            &-min {
+
+            }
+        }
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+    }
+    //弹窗 内容区域
+    & .#{$eui}-dialog-body{
+        position: absolute;
+        top:      $dialog-header-y;
+        right:    $dialog-container-padding-x;
+        bottom:   $dialog-footer-y;
+        left:     $dialog-container-padding-x;
+        & .#{$eui}-dialog-details{
+            //height: 200px;
+            background-color: #f1f2f7;
+		        bottom:           1px;
+        }
+    }
+    //弹窗按钮区域
+    & .#{$eui}-dialog-footer{
+        position:      absolute;
+        right:         0;
+        bottom:        0;
+        left:          0;
+        height:        $dialog-footer-y;
+        padding-top:   $dialog-footer-padding-y;
+		    padding-left:  $dialog-container-padding-x;
+		    padding-right: $dialog-container-padding-x;
+        border-top:    1px solid $dialog-footer-border;
+        text-align:    right;
+        font-size:     0;  //清除inline-block 间距
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+        & .#{$eui}-btn {
+            //color: #333;
+        }
+		    //处理当弹窗里面出现 左侧按钮时候清除左侧间距
+		    & .#{$eui}-btn.#{$eui}-float-left {
+				    margin-left: 0;
+		    }
+		    & .#{$eui}-btn.#{$eui}-float-left + .#{$eui}-btn.#{$eui}-float-left {
+				    margin-left: 10px;
+		    }
+    }
+    &.#{$eui}-dialog-nopadding{
+        padding-left: 0;
+        padding-right: 0;
+        & .#{$eui}-dialog-body{
+            right: 0;
+            & .#{$eui}-scroll-auto{
+                & .#{$eui}-breakword{
+                    padding-right: 15px;
+                }
+            }
+        }
+    }
+}
+
+//非模态对话框 阴影
+.#{$eui}-dialog-shadow {
+		border:        $dialog-border;
+		box-shadow:    $dialog-shadow;
+}
+
+//***********对话框超小尺寸宽250px**************//
+.#{$eui}-dialog-#{$s} {
+		min-width:  $dialog-s-mx;
+		//弹窗头部
+		& .#{$eui}-dialog-header {
+				//标题前的图标
+				& i:first-child {
+				}
+				& > span {
+				}
+				//操作按钮
+				& .#{$eui}-icon {
+						&-close,
+						&-max,
+						&-min {
+						}
+						&-close{
+						}
+						&-max,
+						&-min {
+						}
+				}
+				//清除浮动
+				&:after {
+
+				}
+		}
+		//弹窗 内容区域
+		& .#{$eui}-dialog-body{
+		}
+		//弹窗按钮区域
+		& .#{$eui}-dialog-footer{
+				//清除浮动
+				&:after {
+
+				}
+				& .#{$eui}-btn {
+
+				}
+				//处理当弹窗里面出现 左侧按钮时候清除左侧间距
+				& .#{$eui}-btn.#{$eui}-float-left {
+				}
+		}
+}
+//***********对话框中尺寸宽650px**************//
+.#{$eui}-dialog-#{$m} {
+    min-width:  $dialog-m-mx;
+    //弹窗头部
+    & .#{$eui}-dialog-header {
+        //标题前的图标
+        & i:first-child {
+        }
+        & > span {
+        }
+        //操作按钮
+        & .#{$eui}-icon {
+            &-close,
+            &-max,
+            &-min {
+            }
+            &-close{
+            }
+            &-max,
+            &-min {
+            }
+        }
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+    }
+    //弹窗 内容区域
+    & .#{$eui}-dialog-body{
+    }
+    //弹窗按钮区域
+    & .#{$eui}-dialog-footer{
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+        & .#{$eui}-btn {
+            //color: #333;
+        }
+        //处理当弹窗里面出现 左侧按钮时候清除左侧间距
+        & .#{$eui}-btn.#{$eui}-float-left {
+        }
+    }
+}
+//***********对话框大尺寸宽900px**************//
+.#{$eui}-dialog-#{$l} {
+    min-width:  $dialog-l-mx;
+    //弹窗头部
+    & .#{$eui}-dialog-header {
+        //标题前的图标
+        & i:first-child {
+        }
+        & > span {
+        }
+        //操作按钮
+        & .#{$eui}-icon {
+            &-close,
+            &-max,
+            &-min {
+            }
+            &-close{
+            }
+            &-max,
+            &-min {
+            }
+        }
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+    }
+    //弹窗 内容区域
+    & .#{$eui}-dialog-body{
+    }
+    //弹窗按钮区域
+    & .#{$eui}-dialog-footer{
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+        & .#{$eui}-btn {
+            //color: #333;
+        }
+        //处理当弹窗里面出现 左侧按钮时候清除左侧间距
+        & .#{$eui}-btn.#{$eui}-float-left {
+        }
+    }
+}
+//***********提示信息对话框**************//
+.#{$eui}-dialog-info {
+    //弹窗头部
+    & .#{$eui}-dialog-header {
+        //标题前的图标
+        & i:first-child {
+        }
+        & > span {
+        }
+        //操作按钮
+        & .#{$eui}-icon {
+            &-close,
+            &-max,
+            &-min {
+            }
+            &-close{
+            }
+            &-max,
+            &-min {
+            }
+        }
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+    }
+    //弹窗 内容区域
+    & .#{$eui}-dialog-body{
+        & .#{$eui}-dialog-details{
+            //height: 200px;
+            background-color: $dialog-details-bgcolor;
+            bottom:           -1px;
+            z-index:          2;
+            border-bottom:    $dialog-details-border-bottom;
+        }
+    }
+    //弹窗按钮区域
+    & .#{$eui}-dialog-footer{
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+        & .#{$eui}-btn {
+            //color: #333;
+        }
+        //处理当弹窗里面出现 左侧按钮时候清除左侧间距
+        & .#{$eui}-btn.#{$eui}-float-left {
+        }
+    }
+}
+//***********确认对话框**************//
+.#{$eui}-dialog-confirm {
+    //弹窗头部
+    & .#{$eui}-dialog-header {
+        //标题前的图标
+        & i:first-child {
+        }
+        & > span {
+        }
+        //操作按钮
+        & .#{$eui}-icon {
+            &-close,
+            &-max,
+            &-min {
+            }
+            &-close{
+            }
+            &-max,
+            &-min {
+            }
+        }
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+    }
+    //弹窗 内容区域
+    & .#{$eui}-dialog-body{
+    }
+    //弹窗按钮区域
+    & .#{$eui}-dialog-footer{
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+        & .#{$eui}-btn {
+            //color: #333;
+        }
+        //处理当弹窗里面出现 左侧按钮时候清除左侧间距
+        & .#{$eui}-btn.#{$eui}-float-left {
+        }
+    }
+}
+//***********单行输入框对话框**************//
+.#{$eui}-dialog-onelineinput {
+    //弹窗头部
+    & .#{$eui}-dialog-header {
+        //标题前的图标
+        & i:first-child {
+        }
+        & > span {
+        }
+        //操作按钮
+        & .#{$eui}-icon {
+            &-close,
+            &-max,
+            &-min {
+            }
+            &-close{
+            }
+            &-max,
+            &-min {
+            }
+        }
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+    }
+    //弹窗 内容区域
+    & .#{$eui}-dialog-body{
+    }
+    //弹窗按钮区域
+    & .#{$eui}-dialog-footer{
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+        & .#{$eui}-btn {
+            //color: #333;
+        }
+        //处理当弹窗里面出现 左侧按钮时候清除左侧间距
+        & .#{$eui}-btn.#{$eui}-float-left {
+        }
+    }
+}
+//***********保存成功后提示对话框**************//
+.#{$eui}-dialog-operationtips {
+    min-width:  $dialog-operationtips-mx;
+    min-height: $dialog-operationtips-my;
+    //弹窗头部
+    & .#{$eui}-dialog-header {
+        //标题前的图标
+        & i:first-child {
+        }
+        & > span {
+        }
+        //操作按钮
+        & .#{$eui}-icon {
+            &-close,
+            &-max,
+            &-min {
+            }
+            &-close{
+            }
+            &-max,
+            &-min {
+            }
+        }
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+    }
+    //弹窗 内容区域
+    & .#{$eui}-dialog-body{
+        text-align:  center;
+        line-height: $dialog-body-lineheight;
+        //对号图标
+        & .#{$eui}-icon-dialogsave{
+            font-size:      $font-size24;
+            vertical-align: middle;
+            &:before{
+                content: "\ef16";
+            }
+        }
+    }
+    //弹窗按钮区域
+    & .#{$eui}-dialog-footer{
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+        & .#{$eui}-btn {
+            //color: #333;
+        }
+        //处理当弹窗里面出现 左侧按钮时候清除左侧间距
+        & .#{$eui}-btn.#{$eui}-float-left {
+        }
+    }
+}
+//***********正在加载对话框**************//
+.#{$eui}-dialog-loading {
+    min-width: $dialog-loading-mx;
+    min-height: $dialog-loading-my;
+    //弹窗头部
+    & .#{$eui}-dialog-header {
+        //标题前的图标
+        & i:first-child {
+        }
+        & > span {
+        }
+        //操作按钮
+        & .#{$eui}-icon {
+            &-close,
+            &-max,
+            &-min {
+            }
+            &-close{
+            }
+            &-max,
+            &-min {
+            }
+        }
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+    }
+    //弹窗 内容区域
+    & .#{$eui}-dialog-body {
+    }
+    //弹窗按钮区域
+    & .#{$eui}-dialog-footer{
+        //清除浮动
+        &:after {
+            @include  clear-both;
+        }
+        & .#{$eui}-btn {
+            //color: #333;
+        }
+        //处理当弹窗里面出现 左侧按钮时候清除左侧间距
+        & .#{$eui}-btn.#{$eui}-float-left {
+        }
+    }
+}
+//正在加载对话框图标
+.#{$eui}-dialog-text{
+    position:    relative;
+    line-height: $dialog-text-lineheight;
+    text-align:  center;
+    & .#{$eui}-icon{
+        &-close,
+        &-arrow-down,
+        &-arrow-up {
+            position:    absolute;
+            top:         50%;
+            margin-top:  -($dialog-header-iconsize / 2);
+            width:       $dialog-header-iconsize;
+            height:      $dialog-header-iconsize;
+            font-size:   $font-size;
+            line-height: $dialog-header-iconsize;
+            cursor:      pointer;
+        }
+        &-close{
+            right: 0px;
+        }
+        &-arrow-down,
+        &-arrow-up {
+            right: $dialog-icon-arrow-right + 5;
+            &:before{
+                display: $inline-block;
+            }
+        }
+    }
+}
+

@@ -1,0 +1,566 @@
+@charset "utf-8";
+
+//表单行高
+$mobile-list-height: 50px !default;
+//页面内容左右边距
+$mobile-padding: 10px !default;
+//所有下边框颜色
+$mobile-borderbottom: #f3f3f3 !default;
+//过滤面板行高/底部高度
+$panel-select-height: 40px !default;
+//链接文字颜色
+$link-textcolor: #238efe !default;
+
+.#{$eui}-mobile {
+		font-size: $font-size14;
+		//表单样式
+		& .#{$eui}-form-item {
+				margin: 0 !important;
+				padding: 0 $mobile-padding;
+				& .#{$eui}-form-label {
+						text-align: left;
+						height: 100%;
+						line-height: $mobile-list-height;
+				}
+				& .#{$eui}-input-block {
+						height: 100%;
+						text-align: right;
+						& .#{$eui}-form {
+								&-select {
+										height: 100%;
+										& .#{$eui}-form-select-icon {
+												border: 1px solid transparent;
+												width: 100%;
+												&:before {
+														content: "\ef8f";
+														transform: scale(1.15);
+														-webkit-transform: scale(1.15);
+														-moz-transform: scale(1.15);
+														-ms-transform: scale(1.15);
+														-o-transform: scale(1.15);
+														left: auto;
+														right: 0;
+														margin-top: -8px;
+														color: rgba(51, 51, 51, 0.5);
+												}
+												&:hover,
+												&:active {
+														background: transparent;
+												}
+										}
+								}
+								//日期框(年、月，季度，日期，时分秒, 起止日期)
+								&-almanac,
+								&-quarter,
+								&-month,
+								&-date,
+								&-timer,
+								&-sedate {
+										& .#{$eui}-form-select-icon {
+												&:before {
+														transform: scale(1);
+														-webkit-transform: scale(1);
+														-moz-transform: scale(1);
+														-ms-transform: scale(1);
+														-o-transform: scale(1);
+												}
+												&:hover,
+												&:active {
+														background: transparent;
+												}
+										}
+								}
+								//单选框按钮
+								&-radio {
+										margin-top: ($mobile-list-height - 28) / 2;
+								}
+						}
+
+						& > .#{$eui}-form-input,
+						& .#{$eui}-form-select > .#{$eui}-input {
+								width: 100%;
+								height: $mobile-list-height;
+								line-height: $mobile-list-height;
+								border-color: transparent;
+								text-align: right;
+								user-select: none;
+
+								color: $form-input-text-disabled;
+								&:focus {
+										background-color: transparent;
+										border-color: transparent;
+										@extend %form-disabled;
+								}
+						}
+
+				}
+				&:before {
+						content: "";
+						position: absolute;
+						bottom: 0;
+						left: $mobile-padding;
+						right: 0;
+						height: 0;
+						z-index: 9;
+						border-bottom: 1px solid $mobile-borderbottom;
+				}
+				//多行结构
+				&-multiline {
+						padding: ($mobile-list-height - 20)/2 $mobile-padding;
+						& .#{$eui}-form-label {
+								line-height: 20px;
+								float: none;
+						}
+						& .#{$eui}-input-block {
+								margin-left: 0;
+
+								//滑块
+								& .#{$eui}-form-range {
+										margin-top: 5px;
+										& .#{$eui}-form-range-path {
+												margin-top: -1px;
+												height: 2px;
+												border: 1px solid transparent;
+												background-color: #b3b3b3;
+												box-shadow: none;
+												& i {
+														background-color: #ffffff;
+														border: 1px solid #cecece;
+														top: -10px;
+														&:before {
+																width: 0;
+																overflow: hidden;
+														}
+												}
+										}
+										&-value {
+												& .#{$eui}-form-range-path {
+														margin-right: 30px;
+												}
+										}
+										& > input {
+												border-color: transparent;
+										}
+										//滑块蓝色线条
+										& .#{$eui}-form-range-area {
+												height: 2px;
+												margin-top: -1px;
+										}
+								}
+						}
+				}
+		}
+
+		& .#{$eui}-form-select > input:first-child {
+				font-size: $font-size14;
+		}
+
+		//过滤面板-面板样式
+		& .#{$eui}-panel-container {
+				& .#{$eui}-panel-selectlist-check {
+						background-color: #e6e6e6;
+						border: 0;
+						& .#{$eui}-panel-selectlist-check-right {
+								padding-right: 5px;
+								& > label {
+										display: none;
+								}
+								& .#{$eui}-form-search {
+										padding: 0;
+										& > input {
+												padding: 0 5px;
+												border: 1px solid transparent;
+												background-color: #ffffff;
+												border-radius: 5px;
+												text-align: center;
+										}
+										& i:last-child {
+												border: 1px solid transparent;
+												left: 50%;
+												margin-left: -65px;
+										}
+										& .#{$eui}-icon-cleartext {
+												border: 0;
+												font-size: 12px;
+												background-color: #afafaf;
+												color: #ffffff;
+												border-radius: 50%;
+												height: 24px !important;
+												width: 24px;
+												top: 1px;
+												right: 1px;
+												transform: scale(0.8);
+										}
+										&-focus,
+										&-value {
+												& > input {
+														text-align: left;
+														padding-left: 30px;
+												}
+												& i:last-child {
+														left: 0;
+														margin-left: 0;
+												}
+										}
+								}
+						}
+				}
+
+				& .#{$eui}-panel-selectlist-content {
+						bottom: $panel-select-height;
+						& .#{$eui}-elist-mini {
+								& .#{$eui}-elist-text {
+										line-height: $panel-select-height;
+										height: $panel-select-height;
+								}
+								& .#{$eui}-elist-active {
+										& td:last-child {
+												&:before {
+														content: "\ef16";
+														position: absolute;
+														right: 0;
+														width: $panel-select-height;
+														line-height: $panel-select-height;
+														text-align: center;
+														font-size: $font-size16;
+														color: #3399fe;
+														font-family: eui-icon;
+												}
+										}
+								}
+								& .#{$eui}-elist-datatable td {
+										border-bottom: 1px solid $mobile-borderbottom;
+								}
+						}
+				}
+
+				& .#{$eui}-panel-selectlist-footer {
+						width: 100%;
+						height: $panel-select-height;
+						position: absolute;
+						border-top: 1px solid #d7dce3;
+						bottom: 0;
+						& .#{$eui}-panel-selectlist-check-right {
+								line-height: $panel-select-height;
+								padding-right: 5px;
+								padding-left: 10px;
+								& .#{$eui}-btn-s {
+										height: 28px;
+										padding: 0 15px;
+										margin-top: 5px;
+										&:nth-child(2) {
+												margin-left: 10px;
+										}
+								}
+								& #selected {
+										border: 1px solid #238efe;
+										color: #238efe;
+								}
+						}
+						& .#{$eui}-form-checkbox {
+								line-height: $panel-select-height;
+								& i.#{$eui}-form-checkbox {
+										&:before {
+												//position: relative;
+												//top: 2px;
+										}
+								}
+								& > span {
+										font-size: 14px;
+										color: #333;
+										padding-left: 0px;
+										display: $inline-block;
+								}
+						}
+				}
+		}
+		//树控件
+		& .#{$eui}-panel-tree {
+				padding: 0;
+				& .#{$eui}-tree-container {
+						overflow: hidden;
+						& .#{$eui}-tree-nav {
+								border-top: 1px solid #dadada;
+								border-bottom: 1px solid #dadada;
+								background-color: #f0f0f0;
+								&-ul {
+										height: $panel-select-height;
+										& .#{$eui}-tree-nav-li {
+												float: left;
+												position: relative;
+												height: 100%;
+												line-height: $panel-select-height;
+												padding-left: 10px;
+												padding-right: 15px;
+												max-width: 120px;
+												overflow: hidden;
+												text-overflow: ellipsis;
+												white-space: nowrap;
+												&:before,
+												&:after {
+														content: "";
+														position: absolute;
+														right: 6px;
+														width: 1px;
+														height: $panel-select-height / 2 + 4;
+														background-color: #dadada;
+												}
+												&:before {
+														top: -2px;
+														transform: rotate(-30deg);
+												}
+												&:after {
+														bottom: -2px;
+														transform: rotate(30deg);
+												}
+										}
+										& .#{$eui}-tree-nav-active {
+												color: $link-textcolor;
+										}
+								}
+						}
+						& .#{$eui}-tree-pcontent {
+								position: absolute;
+								top: $panel-select-height + 2;
+								bottom: 0;
+								width: 100%;
+								& .#{$eui}-tree-content {
+										position: relative;
+										height: 100%;
+
+								}
+								& .#{$eui}-tree-item {
+										position: static;
+								}
+								& .#{$eui}-tree-active-group {
+										& .#{$eui}-tree-group {
+												position: absolute;
+												top: 0;
+												z-index: 9;
+												background-color: #fff;
+												overflow: auto;
+												& .#{$eui}-tree-item {
+														border-bottom: 1px solid $mobile-borderbottom;
+												}
+										}
+										& .#{$eui}-tree-node {
+												padding-left: 10px;
+												height: $panel-select-height;
+												line-height: $panel-select-height;
+												& .#{$eui}-tree-expand {
+														float: right;
+														margin-right: 10px;
+														width: $panel-select-height;
+														height: 100%;
+														line-height: $panel-select-height;
+														&:before {
+																content: "\ef8f";
+																position: absolute;
+																transform: scale(1.25);
+																right: 5px;
+																color: rgba(51, 51, 51, 0.5);
+														}
+												}
+												& .#{$eui}-tree-text {
+														font-size: $font-size14;
+												}
+												& .#{$eui}-tree-empty {
+														display: none;
+												}
+										}
+										& .#{$eui}-tree-focus {
+												background-color: #c4e7ff;
+												& .#{$eui}-tree-expand {
+														&:before {
+																color: rgba(51, 51, 51, 0.5) !important;
+														}
+												}
+												& .#{$eui}-tree-text {
+														color: #333;
+												}
+												& .#{$eui}-form-checkbox:before {
+														color: #b5bdca !important;
+												}
+												& .#{$eui}-form-checked:before {
+														color: #238efe !important;
+												}
+										}
+								}
+						}
+				}
+		}
+
+		//对话框
+		& .#{$eui}-dialog-header{
+				border-bottom: none;
+				background-color: transparent;
+				& > span{
+						display: block;
+						max-width: 100%;
+						text-align: center;
+						font-size: 18px;
+				}
+				& .#{$eui}-icon{
+						display: none;
+				}
+		}
+		& .#{$eui}-dialog-body{
+				& .#{$eui}-layout-container{
+						padding-left: 0 !important;
+						padding-top: 5px !important ;
+				}
+				& .#{$eui}-row{
+						& > div:first-child{
+								display: none !important;
+						}
+						& .#{$eui}-breakword{
+								left: 0 !important;
+								top: 10px !important;
+								text-align: center;
+						}
+				}
+		}
+		& .#{$eui}-dialog-footer{
+				display: flex !important;
+				text-align: center;
+				padding-top: 0px !important;
+				& .#{$eui}-btn{
+						background: transparent !important;
+						border: none;
+						width: 100% !important;
+						height: 100% !important;
+						& > span{
+								color: #238efe;
+								font-size: 16px;
+						}
+						& + .#{$eui}-btn {
+								margin-left: 0 !important;
+								border-left: 1px solid #eeeeee;
+						}
+				}
+		}
+		&.#{$eui}-dialog-loading{
+				& .#{$eui}-dialog-footer{
+						border-top: transparent;
+				}
+		}
+		//起止日期控件
+		.#{$eui}-calendar-container .#{$eui}-calendar-content {
+				& table tr td:first-child{
+						&.#{$eui}-calendar-cell-checked {
+								&:before {
+										left: 0;
+								}
+						}
+				}
+				& table tr td:last-child{
+						&.#{$eui}-calendar-cell-checked {
+								&:before {
+										right: 0;
+								}
+						}
+				}
+				& table td {
+						z-index: 0;
+						&.#{$eui}-calendar-checked-start,
+						&.#{$eui}-calendar-cell-checked,
+						&.#{$eui}-calendar-checked-end {
+								color: #fff;
+								&:hover {
+										background-color: transparent;
+								}
+								&:before{
+										position: absolute;
+										content: "";
+										top: 0;
+										z-index: -1;
+								}
+						}
+						&.#{$eui}-calendar-checked-start,
+						&.#{$eui}-calendar-checked-end {
+								&:before {
+										width: $calendar-main-td-y;
+										height: $calendar-main-td-y;
+										background: $calendar-active;
+										left: 6px;
+										border-radius: 50%;
+								}
+						}
+						&.#{$eui}-calendar-cell-checked {
+								&:before {
+										background: $calendar-active-cell;
+										left: 0;
+										right: 0;
+										height: $calendar-main-td-y;
+								}
+						}
+						//选中情况下
+						&.#{$eui}-calendar-checked-startcell,
+						&.#{$eui}-calendar-checked-end{
+								&:after{
+										position: absolute;
+										content: "";
+										top: 0;
+										z-index: -2;
+										width: 50%;
+										height: $calendar-main-td-y;
+										background: $calendar-active-cell;
+								}
+						}
+						&.#{$eui}-calendar-checked-startcell{
+								&:after{
+										right: 0;
+								}
+						}
+						&.#{$eui}-calendar-checked-end{
+								&:after{
+										left: 0;
+								}
+						}
+				}
+
+
+		}
+}
+
+.#{$eui}-dialog-container.#{$eui}-mobile{
+		width: auto !important;
+		left: 30px !important;
+		right: 30px !important;
+		top: 50% !important;
+		margin-top: -75px !important;
+		min-width: auto;
+		z-index: 9999 !important;
+}
+
+.#{$eui}-panel-mobile-seselectlist-header{
+		position: absolute;
+		width: 100%;
+		height: 40px;
+		bottom: 0;
+		padding: 5px 10px;
+		border-top: 1px solid #d7dce3;
+}
+.#{$eui}-panel-mobile-selectlist-content{
+		position: absolute;
+		width: 100%;
+		top: 0;
+		bottom: $panel-select-height + 1;
+		font-size: 14px;
+		padding: 0 5px;
+		& .#{$eui}-elist-container{
+				& .#{$eui}-elist-datatable{
+						& td{
+								line-height: 40px;
+								border-bottom: 1px solid $mobile-borderbottom;
+						}
+				}
+		}
+}
+
+.#{$eui}-panel.#{$eui}-mobile{
+		position: absolute;
+		z-index: 99999;
+		width: 100%;
+		background: #fff;
+}

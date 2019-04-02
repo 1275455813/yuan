@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+//面包屑
+.#{$eui}-nav-container {
+		height:        30px;
+		padding-top:   15px;
+		padding-left:  20px;
+		padding-right: 20px;
+		line-height:   12px;
+		//下面超出部分...由研发按需添加
+		//overflow: hidden;
+		//text-overflow: ellipsis;
+		//white-space: nowrap;
+		//清除浮动
+		&:after {
+				@extend %eui-clear;
+		}
+		//每一个链接
+		& > .#{$eui}-nav-item {
+				position: relative;
+				display:  $inline-block;
+				color:    $elist-header-fontcolor;
+				//默认样式
+				& .#{$eui}-link {
+						color: $elist-header-fontcolor !important;
+						&:hover {
+								color: $text-link !important;
+						}
+				}
+				& .#{$eui}-nav-separate{
+						padding-left: 7px;
+						padding-right: 7px;
+				}
+		}
+}
+
