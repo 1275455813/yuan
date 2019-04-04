@@ -198,9 +198,12 @@ public class MyJDBC<T> {
 	
 	// 把一个字符串的第一个字母大写、效率是最高的、
 	 private static String getMethodName(String fildeName) throws Exception{
-	  byte[] items = fildeName.getBytes();
-	  items[0] = (byte) ((char) items[0] - 'a' + 'A');
-	  return new String(items);
+		 if(!fildeName.startsWith("_")) {
+			 	byte[] items = fildeName.getBytes();
+			 	items[0] = (byte) ((char) items[0] - 'a' + 'A');
+			 	return new String(items);
+		 }
+		 return fildeName;
 	 }
 	 
 	 private String getTable() {

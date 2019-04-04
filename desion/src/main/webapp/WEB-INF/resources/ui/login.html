@@ -12,10 +12,19 @@
 		}
 	</style>
 </head>
-<body>
-<div id="parent" style="width:100%; height:100%;">
-	<div id="topbar" style="width:100%; height:50px;background:#24292e;"></div>
+<body class="eui-layout-body">
+	<div class="eui-layout-container">
+    <div class="eui-layout-header" style="background-color: #24292e;">
+        <div class="eui-layout-logo" style="width: 200px;top: 14px;left: 30px;color:#ffffff;"><h1>后台管理</h1></div>
+        <div id="topbar" class="eui-layout-header-left" style="margin-left: 200px;color:green;"></div>
+    </div>
+	<div id="base" class="eui-layout-main">
+        
+    </div>
 </div>
+	<!--  <div id="topbar" style="width:100%; height:50px;background:#24292e;"></div>
+	<div id="base" style="width:100%; height:93%; top:50px;"></div>  -->
+
 </body>
 <script src="/basejs/require.js" data-main="/main"></script>
 <script src="/eui/third/jquery-1.9.1.min.js"></script>
@@ -28,9 +37,7 @@
 <script>
 	require(["myjs/body"], function(body){
 	    var Body = body.Body;
-	    var pdom = document.getElementById("parent");
-	    
-	    var mybody = new Body(pdom);
+	    var mybody = new Body();
 	});
 </script>
 </html>

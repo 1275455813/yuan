@@ -5,4 +5,9 @@
 		<table>login</table>
 		<pk>username</pk>
 	</mapper>
+	<mapper>
+		<class>Mark</class>
+		<table>mark</table>
+		<pk>id</pk>
+	</mapper>
 </mappers>
