@@ -33,4 +33,9 @@ public class Login {
 	public String toIndex() {
 		return "login";
 	}
+	@RequestMapping("desion/image")
+	public String image() {
+		
+		return "image";
+	}
 }
