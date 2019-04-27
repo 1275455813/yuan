@@ -29,6 +29,13 @@ public class Login {
 		return lu;
 	}
 	
+	@ResponseBody
+	@RequestMapping("desion/adduser")
+	public int addUser(User u) {
+		int a = ud.insert(u);
+		return a;
+	}
+	
 	@RequestMapping("desion/index")
 	public String toIndex() {
 		return "login";

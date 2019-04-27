@@ -1,10 +1,13 @@
-define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree", "eui/modules/elist","eui/modules/eform"],
-	function(ecoolbar, epanelsplitter, etree, elist,eform) {
+define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree", "eui/modules/elist","eui/modules/eform",
+    "eui/modules/etabctrl"],
+    function(ecoolbar, epanelsplitter, etree, elist,eform,etabctrl) {
     
     var ECoolBar = ecoolbar.ECoolBar;
     var Eps = epanelsplitter.EPanelSplitter;
     var ETree = etree.ETree;
     var list = elist.EList;
+    var ETabCtrl = etabctrl.ETabCtrl;
+    
     /**
      * 主界面
      */
@@ -13,6 +16,8 @@ define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree
 	// this.initSplitPanel();
 	this.createPanel();
 	this.initLeftTree();
+	debugger
+	this.initTab();
 	this.initList();
     }
     
@@ -23,13 +28,14 @@ define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree
 	var coolbar = new ECoolBar({wnd: window, width: "100%", height:"100%", parentElement: document.getElementById("topbar")});
 	var band = coolbar.addBand("band_name1", true, false);
 	// band.addSpace();
-	var btn1 = band.addButton("", "信息库", "");
-	var btn2 = band.addButton("", "数据库","");
+	var btn1 = band.addButton("", "事件列表", "");
+	var btn2 = band.addButton("", "维修人员","");
+	var btn3 = band.addButton("", "用户信息","");
 	var rb = band.addButton("", "个人中心","");
 	var rbDom = rb.getContainer();
 	rbDom.style.float = "right";
 	
-	band.addCheckAbleButtonGroups([btn1, btn2], false);
+	band.addCheckAbleButtonGroups([btn1, btn2, btn3], false);
     }
     
     Body.prototype.initSplitPanel = function(){
@@ -50,10 +56,19 @@ define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree
         this.rightcontainer = this.panel.getRightComponentContainer();
     }
     
+    Body.prototype.initTab = function(){
+	this.tabctrl = new ETabCtrl({
+	    wnd : window,
+	    parentElement : this.rightcontainer
+	});
+    }
+    
     Body.prototype.initLeftTree = function(){
 	var treedata = [
-	        {id:"level11", caption:"第1级1", level: 1},
-	        {id:"level12", caption:"第1级2", level: 1}
+	        {id:"level11", caption:"待解决事件", level: 1},
+	        {id:"level12", caption:"已解决事件", level: 1},
+	        {id:"level12", caption:"无效事件", level: 1},
+	        {id:"level12", caption:"全部事件", level: 1}
 	        ];
 	this.tree = new ETree({
 	    wnd: window,
@@ -63,34 +78,32 @@ define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree
 	    baseCss : "eui-tree-accordion"
 	});
 	var rootitem = this.tree.getRootItem();
-	rootitem.loadFrom(treedata);
+	rootitem.loadFrom(treedata, function(item){
+	    item.setHasChildren(true);
+	    item.setOnClick(function(ETreeItem,event){
+		if(ETreeItem.isExpanded()){
+		    ETreeItem.setExpanded(false);
+		}
+		else{
+		    ETreeItem.setExpanded(true);
+		}
+	    });
+	});
     }
     
     Body.prototype.initList = function(){
+	var index = this.tabctrl.add("事件");
+	var sheet = this.tabctrl.getBodyDom(index);
 	var self = this;
-	var datasobj = [
-	    {name:"AAA",resid:"ES$11$AAA",jdbcpool:"缺省链接池",tablename:"DIM_AAA", isslowgrow:"否", isiscache:"否"},
-	    {name:"",resid:"ES$11$报表户类型",jdbcpool:"ds1",tablename:"Q_DIM_BTYPE", isslowgrow:"否", isiscache:"否"},
-            {name:"",resid:"ES$11$报表户类型",jdbcpool:"ds1",tablename:"Q_DIM_BTYPE", isslowgrow:"否", isiscache:"否"},
-            {name:"",resid:"ES$11$报表户类型",jdbcpool:"ds1",tablename:"Q_DIM_BTYPE", isslowgrow:"否", isiscache:"否"},
-            {name:"",resid:"ES$11$报表户类型",jdbcpool:"ds1",tablename:"Q_DIM_BTYPE", isslowgrow:"否", isiscache:"否"},
-            {name:"",resid:"ES$11$报表户类型",jdbcpool:"ds1",tablename:"Q_DIM_BTYPE", isslowgrow:"否", isiscache:"否"},
-            {name:"",resid:"ES$11$报表户类型",jdbcpool:"ds1",tablename:"Q_DIM_BTYPE", isslowgrow:"否", isiscache:"否"},
-            {name:"",resid:"ES$11$报表户类型",jdbcpool:"ds1",tablename:"Q_DIM_BTYPE", isslowgrow:"否", isiscache:"否"},
-            {name:"",resid:"ES$11$报表户类型",jdbcpool:"ds1",tablename:"Q_DIM_BTYPE", isslowgrow:"否", isiscache:"否"},
-            {name:"",resid:"ES$11$报表户类型",jdbcpool:"ds1",tablename:"Q_DIM_BTYPE", isslowgrow:"否", isiscache:"否"},
-            {name:"",resid:"ES$11$报表户类型",jdbcpool:"ds1",tablename:"Q_DIM_BTYPE", isslowgrow:"否", isiscache:"否"},
-            {name:"",resid:"ES$11$报表户类型",jdbcpool:"ds1",tablename:"Q_DIM_BTYPE", isslowgrow:"否", isiscache:"否"},
-            ];
 	var btnsconfig = [{caption: "添加", id: "add"},
-	    {caption: "删除selectRow", id: "del"},
-	    {caption: "删除CheckRow", id: "multdel"},
+	    {caption: "删除选中的记录", id: "del"},
+	    {caption: "分配选中的记录", id: "multdel"},
 	    {caption: "插入", id: "insert"},
 	    {caption: "上移", id: "moveup"},
 	    {caption: "下移", id: "movedown"},
 	    ];
 	var coolbarobj = new ECoolBar({
-	    parentElement: this.rightcontainer,
+	    parentElement: sheet,
 	    width : "100%",
 	    height : "100%",
 	    baseCss : "eui-coolbar-btn"
@@ -117,7 +130,7 @@ define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree
 	    }
 	});
 	this.list = new list({
-	    parentElement: this.rightcontainer,
+	    parentElement: sheet,
 	    width: "100%",
 	    height: "100%",
 	    columnResize: true,
@@ -125,9 +138,9 @@ define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree
 	    columns: [{
 		checkbox: true
 		},{
-	  	    caption: "资源ID",
+	  	    caption: "事件编号",
 	  	    width: "15%",
-	  	    id: "resid",
+	  	    id: "id",
 	            hint: true,
 	            dataRener: function(span, data){
 	                data = data || "";
@@ -135,24 +148,26 @@ define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree
 	                EUI.addClassName(span,"eui-link");
 	            }
 	  	},{
-	  	    caption: "数据库链接池",
+	  	    caption: "备注",
 	  	    width: "15%",
-	  	    id: "jdbcpool",
+	  	    id: "note",
 	  	    hint: true
 	  	},{
-	  	    caption: "表名",
+	  	    caption: "图片",
 	  	    width: "15%",
-	  	    id: "tablename"
+	  	    id: "pic"
 	  	},{
-	  	    caption: "是否缓慢增长维",
+	  	    caption: "位置",
 	  	    width: "15%",
-	  	    id: "isslowgrow",
-	  	    align: "center"
+	  	    id: "place",
 	  	},{
-	  	    caption: "是否缓存到内存",
+	  	    caption: "用户名",
 	  	    width: "15%",
-	  	    id: "isiscache",
-	  	    align: "center"
+	  	    id: "userId"
+	  	},{
+	  	    caption: "时间",
+	  	    width: "15%",
+	  	    id: "_time"
 	  	},{
 	  	    caption: "操作",
 	  	    width: "100%",
@@ -170,9 +185,24 @@ define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree
 	  			alert(target.innerHTML)
 	  			}
 	  		    }
-	  	}],
-	  datas: datasobj
+	  	}]
 	});
+	//this.list.setDatas(datas);
+	this.ajaxPost({},"mark/getAllMarks",function(jd){
+	    console.log(jd);
+	    self.list.setDatas(jd);
+	});
+    }
+    
+    Body.prototype.ajaxPost= function(data,url,func){
+	EUI.post({
+		url:url,
+	 data: data,
+	 callback: function(queryObj){
+	     var jd = queryObj.getResponseJSON();
+			func(jd);
+	 }
+	})
     }
     
     return {

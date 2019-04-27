@@ -142,7 +142,7 @@
                 if (errormsg) {
                     EUI.hideWaitDialogWithComplete(1000, errormsg);
                 } else {
-                    EUI.hideWaitDialog();
+                    //EUI.hideWaitDialog();
                 }
                 if (EUI.isFunction(this.isOnError)) {
                     this.isOnError(e, this, this.userdata);

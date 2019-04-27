@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.my.dao.MarkDao;
 import com.my.po.Mark;
+import com.my.tools.StaticMethod;
 
 @Controller
 @RequestMapping("desion/mark")
@@ -29,5 +30,13 @@ public class MarkAction {
 	public int addMark(Mark po) {
 		int count = md.insert(po);
 		return count;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/test")
+	public void test(String jd, String wd) {
+		System.out.println(jd + wd);
+		String l = StaticMethod.getLocation(wd, jd);
+		System.out.println(l);
 	}
 }
