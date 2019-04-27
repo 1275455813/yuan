@@ -28,7 +28,7 @@ public class Login {
 		//List<User> lu = ud.query(1, 2);
 		return lu;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("desion/adduser")
 	public int addUser(User u) {
@@ -39,5 +39,11 @@ public class Login {
 	@RequestMapping("desion/index")
 	public String toIndex() {
 		return "login";
+	}
+	
+	@RequestMapping("desion/image")
+	public String image() {
+		
+		return "image";
 	}
 }
