@@ -1,12 +1,13 @@
 define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree", "eui/modules/elist","eui/modules/eform",
-    "eui/modules/etabctrl"],
-    function(ecoolbar, epanelsplitter, etree, elist,eform,etabctrl) {
+    "eui/modules/etabctrl","eui/modules/edialog"],
+    function(ecoolbar, epanelsplitter, etree, elist,eform,etabctrl,edialog) {
     
     var ECoolBar = ecoolbar.ECoolBar;
     var Eps = epanelsplitter.EPanelSplitter;
     var ETree = etree.ETree;
     var list = elist.EList;
     var ETabCtrl = etabctrl.ETabCtrl;
+    var EDialog = edialog.EDialog;
     
     /**
      * 主界面
@@ -16,7 +17,6 @@ define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree
 	// this.initSplitPanel();
 	this.createPanel();
 	this.initLeftTree();
-	debugger
 	this.initTab();
 	this.initList();
     }
@@ -155,7 +155,17 @@ define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree
 	  	},{
 	  	    caption: "图片",
 	  	    width: "15%",
-	  	    id: "pic"
+	  	    dataRener: function(cell){
+	  		cell.innerHTML = '<a class="eui-btn eui-btn-m" name="pic">点击查看图片</a>';
+	  	    },
+	  	    onCellClick: function(rowdata, td, evt){
+	  		var target = evt.target;
+	  		if(target.name === "pic"){
+	  		    var arr = self.list.getSelectDatas();
+	  		    self.showPic(arr[0].id);
+	  		    //console.log(self.list.getSelectDatas());
+	  		}
+	  	    }
 	  	},{
 	  	    caption: "位置",
 	  	    width: "15%",
@@ -173,35 +183,64 @@ define(["eui/modules/ecoolbar", "eui/modules/epanelsplitter", "eui/modules/etree
 	  	    width: "100%",
 	  	    dataRener: function(cell){
 	  		var strhtml = '<a class="eui-btn eui-btn-m">编辑</a>';
-	  		strhtml += '<a class="eui-btn eui-btn-m">设置结构</a>';
+	  		strhtml += '<a class="eui-btn eui-btn-m">分配</a>';
 	  		strhtml += '<a class="eui-btn eui-btn-m" name="del">删除</a>';
 	  		cell.innerHTML = strhtml;
-	  		},
-	  		onCellClick: function(rowdata, td, evt){
-	  		    debugger
-	  		    var target = evt.target;
-	  		    if(target.name === "del"){
-	  			self.list.deleteRow(td.parentNode.rowIndex);
-	  			alert(target.innerHTML)
-	  			}
-	  		    }
+	  	    },
+	  	    onCellClick: function(rowdata, td, evt){
+	  		//debugger
+	  		var target = evt.target;
+	  		if(target.name === "del"){
+	  		self.list.deleteRow(td.parentNode.rowIndex);
+	  		//alert(target.innerHTML)
+	  		}
+	  	    }
 	  	}]
 	});
 	//this.list.setDatas(datas);
 	this.ajaxPost({},"mark/getAllMarks",function(jd){
-	    console.log(jd);
 	    self.list.setDatas(jd);
 	});
     }
     
+    Body.prototype.showPic = function(id){
+	var self = this;
+	EUI.post({
+	    url:"mark/getPic",
+	    data: {"id" : id},
+	    callback: function(queryObj){
+	    var jd = queryObj.getResponseText();
+	    	self.showImageDlg(jd);
+	    }
+	})
+    }
+    
+    Body.prototype.showImageDlg = function(image){
+	debugger
+	if(!this.imageDlg){
+	    this.imageDlg = new EDialog({
+		wnd: EUI.getRootWindow(),
+		height: 400,
+		width: 800,
+		caption: "事件信息"
+	    });
+	    //this.imageDlg.isMaxButtonVisible(true);
+	    var content = this.imageDlg.getContent();
+	    this.imageDlg.img = document.createElement("img");
+	    content.appendChild(this.imageDlg.img);
+	}
+	this.imageDlg.img.src = "data:image/jpeg;base64," + image;
+	this.imageDlg.showModal();
+    }
+    
     Body.prototype.ajaxPost= function(data,url,func){
 	EUI.post({
-		url:url,
-	 data: data,
-	 callback: function(queryObj){
-	     var jd = queryObj.getResponseJSON();
-			func(jd);
-	 }
+	    url:url,
+	    data: data,
+	    callback: function(queryObj){
+	    var jd = queryObj.getResponseJSON();
+		func(jd);
+	    }
 	})
     }
     

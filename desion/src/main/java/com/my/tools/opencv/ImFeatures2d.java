@@ -39,9 +39,9 @@ public class ImFeatures2d {
 		//Mat gray_test = Imgcodecs.imread(image1, Imgcodecs.IMREAD_GRAYSCALE);
 		//Imgproc.cvtColor(src_base, gray_base, Imgproc.COLOR_RGB2GRAY);
 		//ORB orb = ORB.create();//运行很快，特征点少，不准
-		//BRISK orb = BRISK.create();//运行速度适中，相对准确
+		BRISK orb = BRISK.create();//运行速度适中，相对准确
 		//AKAZE orb = AKAZE.create();
-		KAZE orb = KAZE.create();//运行慢，特征点多，准确
+		//KAZE orb = KAZE.create();//运行慢，特征点多，准确
 		// 关键点及特征描述矩阵声明
 		MatOfKeyPoint keyPoint1 = new MatOfKeyPoint(), keyPoint2 = new MatOfKeyPoint();
 		Mat descriptorMat1 = new Mat(), descriptorMat2 = new Mat();
@@ -85,12 +85,15 @@ public class ImFeatures2d {
 				x += p.x;
 				y += p.y;
 			    }
+			if(goodDM.size() < 8) {
+				return new Point(-1, goodDM.size());
+			}
 			x = x/goodDM.size();
 			y = y/goodDM.size();
 			//System.out.println(x + "," + y);
 			return new Point(x, y);
 		}
-		return null;
+		return new Point(-1, -1);
 	}
 	
 	public static void DrawPoint(MatOfKeyPoint kp, Mat src, Image a) {

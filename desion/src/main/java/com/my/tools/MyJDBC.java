@@ -62,6 +62,20 @@ public class MyJDBC<T> {
 	}
 	
 	/**
+	 * 条件查询
+	 * 
+	 * @param where
+	 * @param args
+	 * @return
+	 */
+	public List<T> query(String select, String where, Object[] args, Integer page, Integer size){
+		RowMapper<T> rowMapper=new BeanPropertyRowMapper<T>(_c);
+		String  sql = "select " + select + " from " + table + " where " + where;
+		List<T> data = jdbcTemplate.query(addLimit(sql, page, size), args, rowMapper);
+		return data;
+	}
+	
+	/**
 	 * 分页条件查询
 	 * @param where
 	 * @param args 

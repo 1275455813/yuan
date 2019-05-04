@@ -18,15 +18,20 @@ public class Login {
 	
 	@ResponseBody
 	@RequestMapping("desion/login")
-	public List<User> getUsers() {
-		User u = new User();
-		u.setUsername("yuan");
-		u.setPassword("123456");
-		//ud.updata(u);
-		//ud.insert(u);
-		List<User> lu = ud.query("username = ?", new String[] {"wang"},1,2);
-		//List<User> lu = ud.query(1, 2);
-		return lu;
+	public int getUsers(String username, String password) {
+		List<User> lu = ud.query("username = ?", new String[] {username},1,2);
+		if(lu.size() == 0) {
+			return 0;
+		}
+		else {
+			User u = lu.get(0);
+			if(u.getPassword().equals(password)) {
+				return 1;
+			}
+			else {
+				return 0;
+			}
+		}
 	}
 
 	@ResponseBody
