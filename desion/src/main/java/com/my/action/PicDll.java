@@ -1,8 +1,6 @@
 package com.my.action;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Base64;
@@ -20,6 +18,13 @@ import com.my.tools.opencv.ImFeatures2d;
 @RequestMapping("desion/picdll")
 public class PicDll {
 	
+	/**
+	 * 2d特征找图
+	 * 
+	 * @param small
+	 * @param big
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/featuresfind")
 	public Point FeaturesFind(String small, String big) {
@@ -33,6 +38,7 @@ public class PicDll {
 		}
 	}
 	
+	//图片的base64码转Mat
 	private Mat base64ToMat(String picStr) throws IOException{
 		String url = "C://Users//qf//Pictures//test//zhuanhuan.png";
 		picStr = picStr.replaceAll(" ","+");
@@ -43,7 +49,6 @@ public class PicDll {
 			fileOutputStream.write(sm);
 		} catch (IOException e) {
 			e.printStackTrace();
-			return null;
 		}finally {
 			fileOutputStream.close();
 		}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>文件管理系统</title>
+<style type="text/css">
+    body,html
+    {
+        width:100%;
+        height:100%;
+        margin:0;
+    }
+</style>
+</head>
+<body>
+    <div id="top" style="width:100%;height:10%;background: #3399ff;color: white;line-height:350%;text-indent:20px;">Succez文件管理系统</div>
+    <div id="left" style="width: 20%;height:90%;background:none;border-right:2px solid grey;"></div>
+</body>
+<script type="text/javascript" data-main="/main" src="/basejs/require.js"></script>
+<script type="text/javascript">
+    require(["ts/tree"], function(tree){
+        var pdom = document.getElementById("left");
+        var Tree = new tree.Tree(pdom);
+        var root = Tree.createRootItem();
+        var a = root.addItem("根节点");
+        Tree.setExpendFunc(function(item){
+        });
+        Tree.setCloseFunc(function(item){
+            item.clear();
+        });
+        Tree.ajaxGetData();
+    })
+</script>
+</html>

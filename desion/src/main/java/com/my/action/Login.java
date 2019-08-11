@@ -51,4 +51,10 @@ public class Login {
 		
 		return "image";
 	}
+	
+	@ResponseBody
+	@RequestMapping("desion/test")
+	public String test() {
+		return "test";
+	}
 }
